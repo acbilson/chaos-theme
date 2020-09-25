@@ -1,0 +1,7 @@
+{{ if or (not (eq .Description "")) (not (eq .Title "")) -}}
+<header class="list-header">
+  {{ with .Title }}
+  <h1 class="list-header-title">{{ . }}</h1>
+  {{ end }}
+</header>
+{{- end }}

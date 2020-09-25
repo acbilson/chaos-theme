@@ -1,0 +1,28 @@
+<header class="post-header">
+
+  <!-- Post Title -->
+  <h1 class="p-name post-title">{{ .Title }}</h1>
+  <a class="u-url" href=" {{ .Permalink }}"></a>
+
+  <!-- Post Attributes -->
+  <div class="post-attributes muted-text">
+
+    <p>By <a rel="author" class="p-author" style="color: #7a7b7c;">Alex Bilson</a></p>
+    <img class="u-photo" style="display: none;" src="{{ "img/selfie.jpg" | absURL | safeCSS }}" />
+    {{ if isset .Params "date" }}
+    <p>Posted <time class="dt-published"
+        datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time></p>
+    {{ end }}
+    <!-- Adds tags to the post if they exist -->
+    {{ $taxo := "tags" }}
+    {{ if isset .Params $taxo }}
+    <p>Tags:
+      {{ range $name := .Param $taxo }}
+      {{ with $.Site.GetPage (printf "/%s/%s" $taxo ( $name | urlize)) }}
+      <span><a class="p-category post-link" href="{{ .Permalink }}">{{ $name }}</a></span>
+      {{ end }}
+      {{ end }}
+    </p>
+    {{ end }}
+  </div>
+</header>

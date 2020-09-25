@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}" dir="ltr">
+{{ partial "head.html" . }}
+
+<body>
+  <div class="page-content">
+    {{ partial "nav-bar.html" . }}
+
+    <!-- Content Body -->
+    <article class="post-body h-entry {{ if ne .Params.dropcap false }}dropcase{{ end }}">
+      {{ partial "post-header.html" . }}
+      {{ partial "post-content.html" . }}
+      {{ partial "post-footer.html" . }}
+    </article>
+
+    <!-- Next Post Card & Home Card -->
+    <nav>
+      {{ with .PrevInSection }}
+      {{ .Render "li-next" }}
+      {{ end }}
+
+      {{ partial "home-card.html" . }}
+    </nav>
+
+    {{ partial "business-card.html" . }}
+    {{ partial "foot.html" . }}
+
+  </div>
+  {{ partial "scripts.html" . }}
+</body>
+
+</html>

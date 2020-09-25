@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}" dir="ltr">
+{{ partial "head.html" . }}
+
+<body>
+  <div class="page-content">
+    {{ partial "nav-bar.html" . }}
+
+    <!-- Content Body -->
+
+    <article class="comment-body h-entry">
+      <div class="comment-content">
+        {{ .Content }}
+      </div>
+
+    <div class="card-subtext muted-text">
+      <div>
+        <p>Posted <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time></p>
+      </div>
+        {{ if (isset .Params "categories") }}
+      <div>
+        <p>{{ range .Params.categories }}#{{ . | urlize | title }} {{ end }}</p>
+      </div>
+      {{ end }}
+   </div>
+
+    </article>
+
+    <!-- Next Post Card & Home Card -->
+    <nav>
+      {{ partial "home-card.html" . }}
+    </nav>
+
+    {{ partial "business-card.html" . }}
+    {{ partial "foot.html" . }}
+
+  </div>
+  {{ partial "scripts.html" . }}
+</body>
+
+</html>

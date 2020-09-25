@@ -1,0 +1,10 @@
+<a ontouchstart="cardPressed.call(this)" ontouchend="cardReleased.call(this)" ontouchmove="cardReleased.call(this)" 
+  href="{{ .Permalink }}" class="card" rel="bookmark" >
+  
+  <article class="card-body">
+    <h2 class="card-title">{{ .Title }}</h2>
+    <div class="card-subtext muted-text">
+      <p>Last Post <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time></p>
+    </div>
+  </article>
+</a>

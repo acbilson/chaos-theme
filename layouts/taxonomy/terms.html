@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}" dir="ltr">
+  <!-- BEGIN head.html -->
+  <!-- END head.html -->
+  <body class="list-body">
+  <!-- BEGIN nav-bar.html -->
+  <!-- END nav-bar.html -->
+    <main class="card-container side-gutter">
+      {{ if or (not (eq .Description "")) (not (eq .Title "")) -}}
+      <header class="list-header">
+        {{ with .Title }}<h1 class="list-header-title">{{ . }}</h1>{{ end }}
+        {{ with .Description }}<p class="list-header-subtext">{{ . }}</p>{{ end }}
+      </header>
+      {{- end }}
+
+      <!-- The anchor for the tag cloud diagram -->
+        <svg class="diagram-svg" viewbox="0 0 600 800"></svg>
+      {{ with .Content -}}
+      <section class="list-header-content">
+        {{ . }}
+      </section>
+      {{- end }}
+      <div class="tag-card">
+      <!-- retrieves every tag, ordered by count -->
+      {{ range $term := .Data.Terms.ByCount }}
+      <!-- retrieves every tag page for simple links -->
+        {{ with $.Site.GetPage (printf "/tags/%s" .Term) }}
+          <!-- renders card here. Could extract if I could learn how to pass args to .Render -->
+          <a ontouchstart="cardPressed.call(this)" ontouchend="cardReleased.call(this)" ontouchmove="cardReleased.call(this)" href="{{ .Permalink }}" class="card" rel="bookmark" >
+          <article class="card-body">
+            <h2 class="card-title">{{ .Title }}<sup>({{ $term.Count }})</sup></h2>
+            <div class="card-subtext muted-text">
+              <p>Last Post <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time></p>
+            </div>
+          </article>
+        </a>
+        {{- end }}
+      {{- end }}
+      </div>
+
+    </main>
+    {{ partial "foot.html" . }}
+    {{ partial "scripts.html" . }}
+
+    <!-- this displays the tags cloud diagram after other scripts load. I've done it this way so that I can use Hugo
+    to pass along the path to the JSON file. -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        display_diagram("/posts/data/diagram.json");
+      });
+    </script>
+
+    <h1>{{ .Site.Data.Permalink }}</h1>
+  </body>
+</html>

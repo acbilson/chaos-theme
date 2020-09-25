@@ -1,0 +1,196 @@
+/*
+ * Primary & Shared CSS
+ */
+
+body {
+    align-items: center;
+    box-sizing: border-box;
+    color: #141823;
+    display: flex;
+    flex-direction: column;
+    font-family: Georgia, serif;
+    font-size: 1.125em;
+    line-height: 1.575em;
+    width: 100%;
+    word-break: break-word;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: Verdana, Geneva, sans-serif;
+    margin: 1.5em 0 -0.5em 0;
+    padding-bottom: 0.125em;
+    clear: both;
+    color: black;
+}
+
+p {
+    margin: 1.5em 0;
+    line-height: 1.575em;
+    text-align: justify;
+}
+
+sup {
+    color: black;
+    padding-left: .12em;
+    padding-right: .12em;
+}
+
+sup>a {
+    text-decoration: none;
+    color: blue;
+}
+
+img {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 1.5em 0;
+}
+
+blockquote {
+    border-left: 0.3em solid gray;
+    margin: 0.8em 0.8em 0em 0.8em;
+    padding: 0.5em 0.5em;
+    font-style: italic;
+}
+
+blockquote p {
+    display: inline;
+}
+
+ul, ol {
+    padding-left: 1.6em;
+}
+
+li ul, li ol {
+    padding-left: 1em;
+}
+
+li>p {
+    padding-top: .5em;
+    margin: 0;
+}
+
+code {
+    font-family: monospace;
+    padding: .2em .5em;
+    line-height: 1.5;
+    border-radius: 0.3rem;
+    background-color: #f5f6f7;
+}
+
+pre>code {
+    margin: 1.5em 0;
+    display: block;
+    padding: 0.5em;
+    word-break: normal;
+    overflow-x: auto;
+    color: black;
+}
+
+hr {
+    border: 0;
+    border-bottom: thin solid #D1D1D1;
+    margin: 3em 0;
+    clear: both;
+}
+
+a {
+    color: #141823;
+}
+
+table {
+    color: #141823;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin: 1.5em 0;
+}
+
+td, th {
+    padding: 0.5em 1em;
+    border: thin solid #D1D1D1
+}
+
+th {
+    font-weight: normal;
+}
+
+tr:nth-child(even) td {
+    background: #f5f6f7;
+}
+
+header {
+    padding-top: 0.4em;
+}
+
+.page-content {
+    max-width: 50rem;
+    width: 100%;
+}
+
+.post-body {
+    padding: 1.2rem;
+    box-sizing: border-box;
+    transition: transform 0.2s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 0.7rem 1.4rem 0 rgba(0, 0, 0, 0.25), 0 0.5rem 0.5rem 0 rgba(0, 0, 0, 0.22);
+}
+
+.comment-body {
+  padding: 0em 1em 0em 1em;
+  box-sizing: border-box;
+  box-shadow: 0 0.7rem 1.4rem 0 rgba(0, 0, 0, 0.25), 0 0.5rem 0.5rem 0 rgba(0, 0, 0, 0.22);
+}
+
+.muted-text {
+    color: #7a7b7c;
+    font-size: 0.8em;
+}
+
+.card-subtext {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-subtext>div {
+    margin: 0;
+}
+
+.card-subtext>div+div {
+    margin-left: 1em;
+    padding-left: 1em;
+    border-left: thin solid #7a7b7c;
+}
+
+.card-subtext>div>p {
+  margin: 0;
+}
+
+@media screen and (min-width: 40.063em) {
+    .card-subtext {
+        display: flex;
+        justify-content: flex-end;
+    }
+}
+
+/*
+ * Small Screen CSS
+ */
+
+@media screen and (pointer: coarse) {
+    .card-hover {
+        transform: scale(0.95);
+        box-shadow: 0 0.15rem 0.3rem 0 rgba(0, 0, 0, 0.16), 0 0.15rem 0.3rem -0.04rem rgba(0, 0, 0, 0.23);
+    }
+}
+
+@media not screen and (pointer: coarse) {
+    .card:hover {
+        transform: scale(0.97);
+        box-shadow: 0 0.15rem 0.3rem 0 rgba(0, 0, 0, 0.16), 0 0.15rem 0.3rem -0.04rem rgba(0, 0, 0, 0.23);
+    }
+    .card:active {
+        transform: scale(1);
+    }
+}

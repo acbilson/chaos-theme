@@ -1,0 +1,32 @@
+{{ with .Content -}}
+      <section class="post-body">
+        {{ . }}
+      </section>
+      {{- end }}
+
+<!-- Gets regular pages for the site -->
+{{ if .IsHome }}
+  {{ $pages := .Site.RegularPages }}
+  {{ $paginator := .Paginate (where $pages "Params.displayinlist" "!=" false) -}}
+
+  <!-- Renders home page comments cards -->
+  <h2>Recent Comments</h2>
+  {{- range first 10 (where $pages "Type" "comments") -}}
+  {{ .Render "li" }}
+  {{- end }}
+
+  <!-- Renders home page post cards -->
+  <h2>Recent Posts</h2>
+  {{- range first 5 (where $pages "Type" "posts") -}}
+  {{ .Render "li" }}
+  {{- end }}
+
+{{ else }}
+  {{ $pages := .Pages }}
+  {{ $paginator := .Paginate (where $pages "Params.displayinlist" "!=" false) -}}
+
+  <!-- Renders all page cards -->
+  {{- range $paginator.Pages -}}
+  {{ .Render "li" }}
+  {{- end }}
+{{ end }}

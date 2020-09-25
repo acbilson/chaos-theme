@@ -1,0 +1,22 @@
+<div class="comment-body next-card">
+    <!-- Card Text -->
+    <div class="comment-content">
+      {{ .Content }}
+    </div>
+
+  <div class="card-subtext muted-text">
+    <div>
+      <p>Posted <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time></p>
+    </div>
+      {{ if (isset .Params "categories") }}
+    <div>
+      <p>{{ range .Params.categories }}#{{ . | urlize | title }} {{ end }}</p>
+    </div>
+      {{ end }}
+    <div>
+      <a href="{{ .Permalink }}" rel="bookmark">
+        <img src="{{ "/svg/link.svg" | absURL }}" style="margin: 0;" />
+     </a>
+   </div>
+ </div>
+</div>

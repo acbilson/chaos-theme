@@ -1,0 +1,19 @@
+<div class="e-content post-content">
+  <!-- Post Image -->
+  {{ with .Params.featuredImage -}}
+  <picture>
+    <img src="{{ .large }}" alt="{{ .alt }}">
+  </picture>
+  {{- end }}
+
+  <!-- Post Table of Contents -->
+  {{ if .Params.toc -}}
+  <div class="post-toc">
+    <h2>Contents</h2>
+    {{ .TableOfContents }}
+  </div>
+  {{- end }}
+
+  <!-- Post Content -->
+  {{ .Content }}
+</div>

@@ -1,0 +1,12 @@
+name = "chaos"
+license = "GNU"
+licenselink = "https://github.com/acbilson/chaos-theme/blob/master/LICENSE"
+description = "Chaos is a Hugo theme built special for Alex Bilson at https://alexbilson.dev/."
+homepage = "https://alexbilson.dev/"
+tags = ["Blog", "Personal", "Minimal", "Simple", "Clean", "Modern", "Technical"]
+features = ["Responsive"]
+min_version = "0.41"
+
+[author]
+name = "Alex Bilson"
+homepage = "https://alexbilson.dev"

@@ -1,0 +1,27 @@
+<div class="post-body next-card">
+  <a ontouchstart="cardPressed.call(this)" ontouchend="cardReleased.call(this)" ontouchmove="cardReleased.call(this)"
+    href="{{ .Permalink }}" class="card-display" rel="bookmark">
+
+    <!-- Card Image -->
+    {{ with .Params.featuredImage -}}
+    <div class="card-img-container">
+      <p class="card-img-overlay">Next Article</p>
+      <picture>
+        <img class="card-img" src="{{ .small }}" alt="{{ .alt }}">
+      </picture>
+    </div>
+    {{ end }}
+
+    <!-- Card Text -->
+    <article class="card-text-container">
+      <h2 class="card-title">{{ .Title }}</h2>
+      <p class="card-summary">
+        {{ if (isset .Params "description") }}{{ index .Params "description" }}{{ else }}{{ .Summary }}{{ end }}</p>
+      <div class="card-subtext muted-text">
+        <p>Posted <time
+            datetime="{{ .PublishDate.Format "2006-01-02 12:00" }}">{{ .PublishDate.Format "Jan 2, 2006" }}</time></p>
+        {{ if (isset .Params "categories") }}<p>{{ range .Params.categories }}#{{ . }} {{ end }}</p>{{ end }}
+      </div>
+    </article>
+  </a>
+</div>
