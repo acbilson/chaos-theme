@@ -131,7 +131,7 @@ header {
 .link-body {
     padding: 1.2rem;
     box-sizing: border-box;
-    margin-left: 15%;
+    margin-left: 0;
 }
 
 .post-body {
@@ -159,6 +159,10 @@ header {
 @media screen and (min-width: 40.063em) {
     .card-subtext {
         display: flex;
+    }
+
+    .link-body {
+      margin-left: 15%;
     }
 }
 
