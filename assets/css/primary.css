@@ -128,9 +128,10 @@ header {
     width: 100%;
 }
 
-.links-body {
+.link-body {
     padding: 1.2rem;
     box-sizing: border-box;
+    margin-left: 15%;
 }
 
 .post-body {
