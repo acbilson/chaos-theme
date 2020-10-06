@@ -338,40 +338,6 @@ h1.list-header-title {
 /* PAGE SPECIFIC CSS */
 
 /*
-* Title Page CSS
-*/
-
-.title-img-container {
-    position: relative;
-    width: 50%;
-    height: auto;
-    margin: auto;
-}
-
-.title-img {
-    border-radius: 50%;
-    box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.19), 0 0.3rem 0.3rem -0.1rem rgba(0, 0, 0, 0.23);
-    z-index: 0
-}
-
-.title-img-overlay {
-    padding: 0 0.7em;
-    position: absolute;
-    left: 0;
-    right: 0;
-    margin-left: auto;
-    margin-right: auto;
-    width: 100px;
-    text-align: center;
-    background-color: #ecedef;
-    z-index: 1;
-    border-radius: 50%;
-    box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.19), 0 0.3rem 0.3rem -0.1rem rgba(0, 0, 0, 0.23) inset;
-}
-
-/* END Title Page CSS */
-
-/*
 * Accordion CSS
 */
 

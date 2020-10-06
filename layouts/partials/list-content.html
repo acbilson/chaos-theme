@@ -6,20 +6,22 @@
 
 <!-- Gets regular pages for the site -->
 {{ if .IsHome }}
-  {{ $pages := .Site.RegularPages }}
-  {{ $paginator := .Paginate (where $pages "Params.displayinlist" "!=" false) -}}
 
-  <!-- Renders home page comments cards -->
-  <h2>Recent Comments</h2>
-  {{- range first 10 (where $pages "Type" "comments") -}}
-  {{ .Render "li" }}
-  {{- end }}
-
-  <!-- Renders home page post cards -->
-  <h2>Recent Posts</h2>
-  {{- range first 5 (where $pages "Type" "posts") -}}
-  {{ .Render "li" }}
-  {{- end }}
+  {{ $pages := where .Data.Pages ".Params.category" "!=" nil}}
+  {{ $groups := $pages.GroupByParam "category" }}
+  <section class="link-body">
+  {{ range $groups}}
+    <h2>{{ .Key | upper }}</h2>
+    <ol style="list-style: none;">
+    {{ range .Pages }}
+    <li>
+      <span style="display: inline-block; width: 125px">{{ .Date.Format "2006-01-02" }}</span>
+      <a href="{{ .Permalink }}">{{ .Params.title }}</a>
+    </li>
+    {{ end }}
+    </ol>
+  {{ end }}
+  </section>
 
 {{ else }}
   {{ $pages := .Pages }}
