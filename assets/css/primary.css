@@ -152,28 +152,13 @@ header {
 .card-subtext {
     display: flex;
     flex-flow: row wrap;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
-}
-
-.card-subtext>div {
-    margin: 0;
-}
-
-.card-subtext>div+div {
-    margin-left: 1em;
-    padding-left: 1em;
-    border-left: thin solid #7a7b7c;
-}
-
-.card-subtext>div>p {
-  margin: 0;
 }
 
 @media screen and (min-width: 40.063em) {
     .card-subtext {
         display: flex;
-        justify-content: flex-end;
     }
 }
 
