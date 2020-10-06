@@ -3,20 +3,11 @@
     <div class="comment-content">
       {{ .Content }}
     </div>
-
-  <div class="card-subtext muted-text">
-    <div>
-      <p>Posted <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time></p>
+    <div style="margin-left: 1%; font-size: 12px; color: grey;">
+      <span><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time></span>
+      <span>{{ range .Params.categories }}#{{ . | urlize | lower }} {{ end }}</span>
+      <span><a href="{{ .Permalink }}" rel="bookmark">
+        <img src="{{ "/svg/link.svg" | absURL }}" style="display: inline-block; width: 16px; margin: 0;" />
+        </a></span>
     </div>
-      {{ if (isset .Params "categories") }}
-    <div>
-      <p>{{ range .Params.categories }}#{{ . | urlize | title }} {{ end }}</p>
-    </div>
-      {{ end }}
-    <div>
-      <a href="{{ .Permalink }}" rel="bookmark">
-        <img src="{{ "/svg/link.svg" | absURL }}" style="margin: 0;" />
-     </a>
-   </div>
- </div>
 </div>
