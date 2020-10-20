@@ -3,12 +3,12 @@
  */
 
 body {
+    font-family: 'Ubuntu', Georgia, serif;
     align-items: center;
     box-sizing: border-box;
     color: #141823;
     display: flex;
     flex-direction: column;
-    font-family: Georgia, serif;
     font-size: 1.125em;
     line-height: 1.575em;
     width: 100%;
@@ -16,11 +16,23 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: Verdana, Geneva, sans-serif;
+    font-family: 'Ubuntu Condensed', Verdana, Geneva, sans-serif;
     margin: 1.5em 0 -0.5em 0;
     padding-bottom: 0.125em;
     clear: both;
     color: black;
+}
+
+pre {
+    font-family: 'Ubuntu Mono', monospace !important;
+  }
+
+code {
+    font-family: 'Ubuntu Mono', monospace !important;
+    padding: .2em .5em;
+    line-height: 1.5;
+    border-radius: 0.3rem;
+    background-color: #f5f6f7;
 }
 
 p {
@@ -69,14 +81,6 @@ li ul, li ol {
 li>p {
     padding-top: .5em;
     margin: 0;
-}
-
-code {
-    font-family: monospace;
-    padding: .2em .5em;
-    line-height: 1.5;
-    border-radius: 0.3rem;
-    background-color: #f5f6f7;
 }
 
 pre>code {
