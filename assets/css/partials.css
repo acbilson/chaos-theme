@@ -159,6 +159,15 @@ to sidebar when screen is maximized */
   margin: 0;
 }
 
+.comment-content-single {
+  margin-top: 4%;
+}
+
+.comment-subtext {
+  list-style-type: none;
+
+}
+
 /* end comment-specific */
 
 .card-img-container {

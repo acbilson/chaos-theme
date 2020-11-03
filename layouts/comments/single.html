@@ -9,33 +9,33 @@
     <!-- Content Body -->
 
     <article class="comment-body h-entry">
-      <div class="comment-content">
+      <div class="comment-content-single">
         {{ .Content }}
       </div>
 
-    <div class="card-subtext muted-text">
-      <div>
+    <ul class="comment-subtext muted-text">
+      <li>
         <p>Posted <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time></p>
-      </div>
+      </li>
         {{ if (isset .Params "categories") }}
-      <div>
-        <p>{{ range .Params.categories }}#{{ . | urlize | title }} {{ end }}</p>
-      </div>
+      <li>
+        <p>Category: {{ range .Params.categories }}#{{ . | urlize | title }} {{ end }}</p>
+      </li>
       {{ end }}
-   </div>
+
+        {{ if (isset .Params "tags") }}
+      <li>
+        <p>Tags: {{ range .Params.tags }}#{{ . | urlize | title }} {{ end }}</p>
+      </li>
+      {{ end }}
+   </ul>
 
     </article>
 
     <!-- Next Post Card & Home Card -->
-    <nav>
-      {{ partial "home-card.html" . }}
-    </nav>
-
-    {{ partial "business-card.html" . }}
     {{ partial "foot.html" . }}
 
   </div>
-  {{ partial "scripts.html" . }}
 </body>
 
 </html>
