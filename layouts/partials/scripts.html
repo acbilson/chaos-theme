@@ -1,8 +1,10 @@
 {{ $diagramjs := resources.Get "js/tag-diagram.js" }}
 {{ $hamburgerjs := resources.Get "js/hamburger.js" }}
 {{ $accordionjs := resources.Get "js/accordion.js" }}
+{{ $datasettejs := resources.Get "js/datasette.js" }}
 {{ $sitejs := slice $hamburgerjs $accordionjs | resources.Concat "js/concated.js" | minify }}
 
+<script src="{{ $datasettejs.Permalink }}"></script>
 <script src="{{ $sitejs.Permalink }}"></script>
 <script src="{{ $diagramjs.Permalink }}"></script>
 <script src="https://d3js.org/d3.v5.min.js"></script>
