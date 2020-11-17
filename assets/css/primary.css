@@ -23,16 +23,16 @@ h1, h2, h3, h4, h5, h6 {
     color: black;
 }
 
-pre {
+pre>code {
     font-family: 'Ubuntu Mono', monospace !important;
-  }
-
-code {
-    font-family: 'Ubuntu Mono', monospace !important;
-    padding: .2em .5em;
+    padding: 1em;
     line-height: 1.5;
+    border: grey 3px solid;
     border-radius: 0.3rem;
-    background-color: #f5f6f7;
+    margin: 1.5em 0;
+    display: block;
+    word-break: normal;
+    overflow-x: auto;
 }
 
 p {
@@ -81,15 +81,6 @@ li ul, li ol {
 li>p {
     padding-top: .5em;
     margin: 0;
-}
-
-pre>code {
-    margin: 1.5em 0;
-    display: block;
-    padding: 0.5em;
-    word-break: normal;
-    overflow-x: auto;
-    color: black;
 }
 
 hr {

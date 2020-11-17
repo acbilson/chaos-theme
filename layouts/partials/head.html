@@ -21,7 +21,8 @@
   {{ $partialsStyle := resources.Get "css/partials.css" }}
   {{ $fontsStyle := resources.Get "css/fonts.css" }}
   {{ $normalizeStyle := resources.Get "css/normalize.css" }}
-  {{ $style := slice $primaryStyle $partialsStyle $fontsStyle $normalizeStyle | resources.Concat "css/concated.css" | minify }}
+  {{ $syntaxStyle := resources.Get "css/syntax.css" }}
+  {{ $style := slice $primaryStyle $partialsStyle $fontsStyle $normalizeStyle $syntaxStyle | resources.Concat "css/concated.css" | minify }}
   <link href="{{ $style.Permalink }}" rel="stylesheet">
 
   <!-- favicon.ico -->
