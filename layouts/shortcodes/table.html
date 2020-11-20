@@ -1,0 +1,47 @@
+{{ $title := .Get "title" }}
+{{ $headers := .Get "headers" }}
+{{ $rows := .Get "rows" }}
+{{ $examples := .Get "examples" }}
+
+<div class="table">
+<h2>{{ $title }}</h2>
+<!-- creates a table
+
+     the header format is:
+     "name|date|type"
+
+     the row format is:
+     "name|acumen"
+
+     the examples format is:
+     "name|link^name|link"
+-->
+<table>
+  <tr>
+  {{ range split $headers "|" }}
+    <th>{{ . }}</th>
+  {{ end }}
+  </tr>
+  {{ range split $rows "^" }}
+  <tr>
+    {{ $row := split . "|" }}
+    {{ $name := index $row 0 }}
+    {{ $acumen := index $row 1 }}
+    <td>{{ $name }}</td>
+    <td><meter value="{{ $acumen }}" min="1" max="10">{{ $acumen}} out of 10</meter></td>
+  </tr>
+  {{ end }}
+</table>
+
+<!-- list of examples -->
+{{ if $examples }}
+  <ul>
+  {{ range split $examples "^" }}
+    {{ $example := split . "|" }}
+    {{ $name := index $example 0 }}
+    {{ $link := index $example 1 }}
+    <li><a href="{{ $link }}">{{ $name }}</a></li>
+  {{ end }}
+  </ul>
+{{ end }}
+</div>
