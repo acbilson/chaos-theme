@@ -409,3 +409,26 @@ SVG Icons - svgicons.sparkk.fr
 }
 
 /* END Share CSS */
+
+/*
+ * Shortcode CSS
+ */
+
+/* vocab */
+span.word {
+ font-size: 1.6rem;
+}
+
+span.term {
+ font-variant: small-caps;
+}
+
+span.definition {
+ margin-left: 5%;
+}
+
+span.example {
+ font-style: italic;
+}
+
+/* END Shortcode CSS */

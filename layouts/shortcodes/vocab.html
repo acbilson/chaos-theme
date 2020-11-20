@@ -1,0 +1,15 @@
+{{ $word := .Get "word" }}
+{{ $term := .Get "term" }}
+{{ $phonetic := .Get "phonetic" }}
+{{ $match := .Get "match" }}
+{{ $example := .Get "example" }}
+
+<p>
+  <span class="word">{{$word}}</span>
+  <span class="term">{{$term}}</span>
+</p>
+
+<p>
+<span class="definition">{{$phonetic}}.{{with $match}} {{.}}.{{end}}</span>
+  <span class="example">"{{$example}}"</span>
+</p>
