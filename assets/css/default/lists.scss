@@ -1,0 +1,44 @@
+ul {
+	padding-left: 0;
+}
+ol {
+	padding-left: 0;
+}
+li {
+	ul {
+		padding-left: 1em;
+	}
+	ol {
+		padding-left: 1em;
+	}
+	>p {
+		padding-top: .5em;
+		margin: 0;
+	}
+}
+
+.post-toc {
+	position: relative;
+	width: inherit;
+}
+
+.post-citations {
+	>ul {
+		list-style-type: none;
+	}
+}
+
+.post-addendum {
+	>ul {
+		list-style-type: none;
+	}
+}
+
+@media screen and (min-width: 40.063em) {
+	ul {
+		padding-left: 1.6em;
+	}
+	ol {
+		padding-left: 1.6em;
+	}
+}

@@ -1,0 +1,32 @@
+a {
+	color: var(--color-primary);
+}
+
+.link-body {
+	padding: 1.2rem;
+	box-sizing: border-box;
+	margin-left: 0;
+}
+
+.post-link {
+	color: var(--color-primary);
+}
+
+.quote-link {
+	padding-left: 2em;
+	margin-bottom: 1em;
+}
+
+.u-photo {
+	position: relative;
+	max-width: 250px;
+	border-radius: 50%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+@media screen and (min-width: 40.063em) {
+	.link-body {
+		margin-left: 15%;
+	}
+}

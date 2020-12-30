@@ -1,0 +1,15 @@
+
+
+body {
+    font-family: 'Ubuntu', Georgia, serif;
+    font-size: 1.125em;
+    word-break: break-word;
+    align-items: center;
+    box-sizing: border-box;
+    background-color: --var(color-bg);
+    color: --var(color-txt);
+    display: flex;
+    flex-direction: column;
+    line-height: 1.575em;
+    width: 100%;
+}

@@ -1,0 +1,27 @@
+/*
+adds a prefix to all custom variables to remove variable conflict
+*/
+@mixin cssvars($css_variables, $prefix: chaos) {
+    :root {
+        @each $name, $value in $css_variables {
+            --#{$prefix}-#{$name}: #{$value};
+        }
+    }
+}
+
+/*
+adds a way to modify a single variable at one spot that matches the rest
+*/
+@mixin cssvar($name, $value: '', $prefix: chaos) {
+    --#{$prefix}-#{$name}: #{$value};
+}
+
+/*
+simplifies how custom variables are called
+*/
+@function cssvar($name, $prefix: chaos) {
+    @return var(--#{$prefix}-#{$name});
+}
+ /*
+thanks goes to Felippe at https://dev.to/felipperegazio/css-custom-properties-vars-with-sass-scss-a-practical-architecture-strategy-1m88
+ */

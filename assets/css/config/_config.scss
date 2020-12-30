@@ -1,0 +1,31 @@
+/*
+adds global configuration values
+*/
+:root[color-mode="light"] {
+  --color-bg: white,
+  --color-bg-offset: #29293e,
+  --color-txt: #141823,
+  --color-txt-offset: #94a1b2,
+  --color-border: #383a61,
+  --primary-color: #7f5af0,
+  --primary-color-offset: #e068fd,
+  --secondary-color: #2cb67d,
+}
+
+:root[color-mode="dark"] {
+  --color-bg: #16161a,
+  --color-bg-offset: #29293e,
+  --color-txt: #fffffe,
+  --color-txt-offset: #94a1b2,
+  --color-border: #383a61,
+  --primary-color: #7f5af0,
+  --primary-color-offset: #e068fd,
+  --secondary-color: #2cb67d,
+}
+ /*
+thanks goes to Felippe at https://dev.to/felipperegazio/css-custom-properties-vars-with-sass-scss-a-practical-architecture-strategy-1m88
+
+and to Max Bock for the idea to use SCSS for color switching: https://mxb.dev/blog/color-theme-switcher/
+
+and to Ryan Feigenbaum for implementation details: https://ryanfeigenbaum.com/dark-mode/
+ */
