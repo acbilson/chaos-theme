@@ -1,3 +1,8 @@
+$switch-width: 40px;
+$switch-height: 20px;
+$slider-width: $switch-width / 2.5;
+$slider-height: $switch-height - ($switch-height / 3);
+
 .nav-bar {
 	font-family: Verdana, Geneva, sans-serif;
   background-color: var(--color-bg);
@@ -28,6 +33,7 @@
 	margin-top: 4em;
 	text-align: center;
 }
+
 h1.list-header-title {
 	margin: 0.1em 0 0.2em 0;
 	font-size: 2.2em;
@@ -38,17 +44,84 @@ h1.list-header-title {
 	display: flex;
 	margin: 1em;
 }
+
 .list-pagination-left {
 	flex: 50%;
 	text-align: left;
 }
+
 .list-pagination-left-number {
 	margin-left: 0.2em;
 }
+
 .list-pagination-right-number {
 	margin-right: 0.2em;
 }
+
 .list-pagination-right {
 	flex: 50%;
 	text-align: right;
 }
+
+.dark-switch {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: $switch-width;
+  height: $switch-height;
+  margin-top: 5px;
+}
+
+.switch-label {
+  font-size: 0.8em;
+  margin-left: 5px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--color-secondary);
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: $slider-height;
+  width: $slider-width;
+  left: ($switch-width - $slider-width) / 5;
+  bottom: ($switch-height - $slider-height) / 2;
+  background-color: var(--color-primary);
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: var(--color-secondary);
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px var(--color-secondary);
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX($slider-width);
+  -ms-transform: translateX($slider-width);
+  transform: translateX($slider-width);
+}
+

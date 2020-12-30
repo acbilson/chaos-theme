@@ -10,5 +10,13 @@
     {{ range where .Site.Pages "Params.displayinmenu" true -}}
     <a href="{{ .Permalink }}" class="hamburger-menu-overlay-link">{{ .Title }}</a>
     {{ end -}}
+
+    <div class="dark-switch">
+    <label class="switch">
+      <input type="checkbox" />
+      <span class="slider"></span>
+    </label>
+    <label class="switch-label">dark-mode</label>
+    </div>
   </div>
 </nav>
