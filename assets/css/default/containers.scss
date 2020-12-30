@@ -1,3 +1,12 @@
+div.home-page {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+div.title-body {
+  margin-left: 2%;
+}
+
 .page-content {
 	max-width: 50rem;
 	width: 100%;
@@ -61,6 +70,7 @@
 .card-summary {
 	margin: 1em 0;
 	line-height: 1.5;
+  color: var(--color-txt);
 }
 
 .home-card {
@@ -111,7 +121,7 @@ section.timeline {
 	margin-top: 1em;
 	>p {
 		border-top: 2px dashed;
-		border-color: blue !important;
+		border-color: var(--color-secondary) !important;
 		margin: 0;
 		padding: 30px;
 		&:nth-child(even) {
@@ -149,8 +159,8 @@ span.timeline-title {
 	margin-right: auto;
 	width: 10em;
 	text-align: center;
-	background: white;
-	border: 2px dashed blue;
+	background: var(--color-bg);
+	border: 2px dashed var(--color-secondary);
 	border-radius: 30%;
 	padding: 0 0.2em 0 0.2em;
 }
@@ -197,5 +207,13 @@ span.timeline-title {
 		margin-top: 2em;
 		text-align: center;
 	}
+}
+
+@media screen and (min-width: 80em) {
+
+  div.home-page {
+    display: flex;
+    flex-flow: row nowrap;
+  }
 }
 

@@ -94,7 +94,7 @@ h1.list-header-title {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: var(--color-secondary);
+  background-color: var(--color-primary-offset);
   -webkit-transition: .4s;
   transition: .4s;
 }
@@ -112,11 +112,11 @@ h1.list-header-title {
 }
 
 input:checked + .slider {
-  background-color: var(--color-secondary);
+  background-color: var(--color-primary-offset);
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px var(--color-secondary);
+  box-shadow: 0 0 1px var(--color-primary-offset);
 }
 
 input:checked + .slider:before {

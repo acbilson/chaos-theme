@@ -16,7 +16,7 @@ th {
 tr {
 	&:nth-child(even) {
 		td {
-			background: var(--color-secondary);
+			background: var(--color-primary-offset);
 		}
 	}
 }

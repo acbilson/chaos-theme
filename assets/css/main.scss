@@ -25,6 +25,11 @@ hr {
 	clear: both;
 }
 
+#covid {
+  border: 6px double var(--color-border);
+  padding: 10px;
+}
+
 @import './default/containers.scss';
 @import './default/text.scss';
 @import './default/nav.scss';
