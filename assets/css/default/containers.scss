@@ -81,7 +81,7 @@ div.title-body {
 	>span {
 		font-size: 2em;
 		font-weight: bold;
-		background-color: white;
+		background-color: var(--color-bg);
 		padding: 0 0.4em 0.2em 0.4em;
 	}
 }
@@ -104,10 +104,10 @@ div.title-body {
 }
 .post-accordion-quote {
 	&:hover {
-		background-color: white;
+		background-color: var(--color-primary-offset);
 	}
 	box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.19) inset, 0 0.3rem 0.3rem -0.1rem rgba(0, 0, 0, 0.23) inset;
-	background-color: #ecedef;
+	background-color: var(--color-bg);
 }
 .accordion-content {
 	display: flex;

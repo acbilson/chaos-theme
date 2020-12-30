@@ -16,8 +16,6 @@ img {
     border-radius: 50%;
 }
 
-
-
 .card-img {
 	border-radius: 0.3rem;
 	object-fit: cover;
@@ -32,8 +30,8 @@ img {
 	width: 100%;
 	box-sizing: border-box;
 	margin: 0;
-	color: white;
-	background-color: rgba(0, 0, 0, 0.4);
+	color: var(--color-txt);
+	background-color: var(--color-bg);
 	z-index: 5;
 }
 
@@ -43,6 +41,7 @@ img {
 		stroke-width: 1;
 	}
 }
+
 @media screen and (min-width: 40.063em) {
 	.card-img {
 		margin: 0;
