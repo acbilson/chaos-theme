@@ -43,4 +43,13 @@
   {{ range .AlternativeOutputFormats -}}
   {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
   {{ end -}}
+
+  <!-- sets color scheme before page load -->
+  <script>
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches && !localStorage.getItem('color-mode')) {
+      document.documentElement.setAttribute('color-mode', 'dark');
+    } else if (localStorage.getItem('color-mode')) {
+      document.documentElement.setAttribute('color-mode', localStorage.getItem('color-mode'));
+    }
+  </script>
 </head>
