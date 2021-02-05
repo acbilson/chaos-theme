@@ -1,8 +1,8 @@
 ul {
-	padding-left: 0;
+	padding-left: 1.5em;
 }
 ol {
-	padding-left: 0;
+	padding-left: 1.5em;
 }
 li {
 	ul {
@@ -34,11 +34,7 @@ li {
 	}
 }
 
-@media screen and (min-width: 40.063em) {
-	ul {
-		padding-left: 1.6em;
-	}
-	ol {
-		padding-left: 1.6em;
-	}
+.home-list {
+  list-style-type: none;
+  padding-left: none;
 }

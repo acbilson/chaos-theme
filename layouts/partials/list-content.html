@@ -12,7 +12,7 @@
   <section class="link-body">
   {{ range $groups}}
     <h2>{{ .Key | upper }}</h2>
-    <ol style="list-style: none;">
+    <ol class="home-list">
     {{ range .Pages }}
     <li>
       <span style="display: inline-block; width: 125px">{{ .Date.Format "2006-01-02" }}</span>
