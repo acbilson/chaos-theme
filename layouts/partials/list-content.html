@@ -7,10 +7,9 @@
 <!-- Gets regular pages for the site -->
 {{ if .IsHome }}
 
-  {{ $pages := where .Data.Pages ".Params.category" "!=" nil}}
-  {{ $groups := $pages.GroupByParam "category" }}
+  {{ with .Site.GetPage "/posts" }}
   <section class="link-body">
-  {{ range $groups}}
+  {{ range .Pages.GroupByParam "category" }}
     <h2>{{ .Key | upper }}</h2>
     <ol class="home-list">
     {{ range .Pages }}
@@ -22,6 +21,7 @@
     </ol>
   {{ end }}
   </section>
+  {{ end }}
 
 {{ else }}
   {{ $pages := .Pages }}
