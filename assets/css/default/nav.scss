@@ -73,12 +73,13 @@ h1.list-header-title {
   display: inline-block;
   width: $switch-width;
   height: $switch-height;
-  margin-top: 5px;
+  margin: auto;
+  margin-right: 5px;
 }
 
 .switch-label {
   font-size: 0.8em;
-  margin-left: 5px;
+  margin: auto;
 }
 
 .switch input {
