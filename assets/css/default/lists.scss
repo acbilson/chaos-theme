@@ -1,14 +1,9 @@
-ul {
+ul, ol {
 	padding-left: 1.5em;
-}
-ol {
-	padding-left: 1.5em;
+  line-height: 1.5em;
 }
 li {
-	ul {
-		padding-left: 1em;
-	}
-	ol {
+	ul, ol {
 		padding-left: 1em;
 	}
 	>p {
