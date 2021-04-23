@@ -3,6 +3,8 @@ img {
 	width: 100%;
 	height: auto;
 	margin: 1.5em 0;
+  border-radius: 0.3em;
+  filter: drop-shadow(3px 3px 3px gray);
 }
 
 .title-img-container {
@@ -14,7 +16,6 @@ img {
 
 .title-img {
     border-radius: 50%;
-    filter: drop-shadow(3px 3px 3px gray);
 }
 
 .card-img {
@@ -49,6 +50,5 @@ img {
 		max-height: 250px;
 		height: 100%;
 		width: 15em;
-    filter: drop-shadow(3px 3px 3px gray);
 	}
 }
