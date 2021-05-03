@@ -11,8 +11,19 @@ function toggleMode(event) {
 
     if (checked) {
       updateMode('dark');
+
+      // manually update comments
+      if (window.REMARK42) {
+        window.REMARK42.changeTheme('dark');
+      }
+
     } else {
       updateMode('light');
+
+      // manually update comments
+      if (window.REMARK42) {
+        window.REMARK42.changeTheme('light');
+      }
     }
   }
 }
