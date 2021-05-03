@@ -13,6 +13,10 @@
         {{ .Content }}
       </div>
 
+    {{ if .Params.comments }}
+    <div id="remark42"></div>
+    {{ end }}
+
     <ul class="comment-subtext muted-text">
       <li>
         <p>Posted <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time></p>
@@ -30,9 +34,6 @@
       {{ end }}
    </ul>
 
-    {{ if .Params.comments }}
-    <div id="remark42"></div>
-    {{ end }}
     </article>
 
     <!-- Next Post Card & Home Card -->
