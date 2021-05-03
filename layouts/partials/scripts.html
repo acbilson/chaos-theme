@@ -17,6 +17,7 @@
     host: "https://comments.alexbilson.dev",
     site_id: "remark42",
     url: {{ .Permalink }},
+    theme: localStorage.getItem('color-mode')
   };
 
   (function(c) {
@@ -24,7 +25,6 @@
       var d = document, s = d.createElement('script');
       s.src = remark_config.host + '/web/' + c[i] +'.js';
       s.defer = true;
-      console.log(s.src);
       (d.head || d.body).appendChild(s);
     }
   })(remark_config.components || ['embed']);
