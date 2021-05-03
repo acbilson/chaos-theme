@@ -1,0 +1,24 @@
+<!-- Content Footer -->
+<footer class="comment-footer muted-text">
+  {{ if .Params.comments }}
+  <p>To leave a reply, write a comment below (see my <a href="{{ .Site.BaseURL }}/policies">policies</a>) or send me a <a class="post-link" href="https://indieweb.org/Webmention">webmention</a> with a reference to this post and I may add it here. &#x1F601;</p>
+  <div id="remark42"></div>
+  {{ end }}
+
+  <ul class="comment-subtext muted-text">
+    <li>
+      <p>Posted <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time></p>
+    </li>
+      {{ if (isset .Params "categories") }}
+    <li>
+      <p>Category: {{ range .Params.categories }}#{{ . | urlize | title }} {{ end }}</p>
+    </li>
+    {{ end }}
+
+      {{ if (isset .Params "tags") }}
+    <li>
+      <p>Tags: {{ range .Params.tags }}#{{ . | urlize | title }} {{ end }}</p>
+    </li>
+    {{ end }}
+ </ul>
+</footer>
