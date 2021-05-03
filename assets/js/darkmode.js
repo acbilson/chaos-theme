@@ -22,6 +22,8 @@ const toggle = document.getElementById('mode-switch');
 // sets toggle visual to default value
 if (localStorage.getItem('color-mode') === 'dark') {
   toggle.checked = true;
+} else {
+  toggle.checked = false;
 }
 
 toggle.addEventListener('change', toggleMode);
