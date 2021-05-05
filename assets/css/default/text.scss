@@ -104,6 +104,10 @@ span.example {
 	font-style: italic;
 }
 
+.p-author {
+  color: var(--color-txt-offset);
+}
+
 @media screen and (min-width: 40.063em) {
 	.card-subtext {
 		display: flex;
