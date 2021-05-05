@@ -11,7 +11,6 @@ function display_diagram(dataPath) {
     var width = viewBox[2];
     var height = viewBox[3];
 
-    console.log(svg);
     /*
     * SIMULATION
     */
@@ -70,7 +69,6 @@ function display_diagram(dataPath) {
                        .append("text")
                          .attr("class", "diagram-node-text")
                        .text(function(d){return d.name})
-                       .attr("font-size","12px")
                        .attr("x", function(d){return `-${d.name.length*3.5}px`})
                        .attr("y","3px");
 
