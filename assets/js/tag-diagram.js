@@ -11,7 +11,6 @@ function display_diagram(dataPath) {
     var width = viewBox[2];
     var height = viewBox[3];
 
-    console.log(svg);
     /*
     * SIMULATION
     */
@@ -25,21 +24,21 @@ function display_diagram(dataPath) {
                         .distance(70);
     var charge_force = d3.forceManyBody()
                          .distanceMin(50)
-                         .distanceMax(1000)
-                         .strength(-30);
+                         .distanceMax(width-300)
+                         .strength(-20);
     var center_force = d3.forceCenter(width / 2, height / 2);
     var collide_force = d3.forceCollide()
-                          .strength(1);
+                          .strength(2);
 
     var x_force = d3.forceX().strength(0.01);
     var y_force = d3.forceY().strength(0.01);
 
-    simulation.force("charge", charge_force)
-              .force("center", center_force)
-              .force("link",   link_force)
-              .force("collide",   collide_force)
-              .force("x",   x_force)
-              .force("",   y_force);
+    simulation.force("charge",  charge_force)
+              .force("center",  center_force)
+              .force("link",    link_force)
+              .force("collide", collide_force)
+              .force("x",       x_force)
+              .force("",        y_force);
 
     // -- Updates
     simulation.on("tick", updateCoordsOnTick );
@@ -69,8 +68,7 @@ function display_diagram(dataPath) {
                          .attr("href", function(d){return `${d.path}`})
                        .append("text")
                          .attr("class", "diagram-node-text")
-                       .text(function(d){return d.name})
-                       .attr("font-size","12px")
+                       .text(function(d){return `${d.name}:${d.count}`})
                        .attr("x", function(d){return `-${d.name.length*3.5}px`})
                        .attr("y","3px");
 
@@ -79,7 +77,7 @@ function display_diagram(dataPath) {
                   .data(links_data)
                   .enter()
                   .append("line")
-                    .attr("class", "diagram-link");
+                  .attr("class", "diagram-link");
 
     /*
     * TRANSFORM FUNCS

@@ -5,8 +5,6 @@
 {{ $sitejs := slice $hamburgerjs $accordionjs | resources.Concat "js/concated.js" | minify }}
 
 <script src="{{ $sitejs.Permalink }}"></script>
-<script src="{{ $diagramjs.Permalink }}"></script>
-<script src="https://d3js.org/d3.v5.min.js"></script>
 
   <!-- adds event handler to let the user change the color scheme -->
 <script src="{{ $darkmodejs.Permalink }}"></script>
