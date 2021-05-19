@@ -75,9 +75,13 @@ h1.post-title {
 
 .card-subtext {
 	display: flex;
-	flex-flow: row wrap;
+	flex-flow: column wrap;
 	justify-content: space-evenly;
 	align-items: center;
+    > p {
+      margin: 5px 0;
+      line-height: 1.15;
+    }
 }
 
 .comment-subtext {
@@ -112,5 +116,6 @@ span.example {
 @media screen and (min-width: 40.063em) {
 	.card-subtext {
 		display: flex;
-	}
+    flex-flow: row nowrap;
+  }
 }
