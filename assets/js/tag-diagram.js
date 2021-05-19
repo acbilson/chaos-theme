@@ -2,76 +2,68 @@ function display_diagram(dataPath) {
 
   d3.json(dataPath).then(function(data) {
 
-    console.log(data);
+    /* DATA */
     nodes_data = data['nodes'];
     links_data = data['links'];
 
+    /* SVG */
     var svg = d3.select("svg");
     var viewBox = svg.attr("viewBox").split(/\s+|,/);
     var width = viewBox[2];
     var height = viewBox[3];
 
-    /*
-    * SIMULATION
-    */
+    /* SIMULATION */
     var link_force =  d3.forceLink(links_data)
     var simulation = d3.forceSimulation()
                        .nodes(nodes_data);
 
-    // -- FORCES
-    var link_force =  d3.forceLink(links_data)
-                        .id(function(d) { return d.name; })
-                        .distance(70);
-    var charge_force = d3.forceManyBody()
-                         .distanceMin(50)
-                         .distanceMax(width-300)
-                         .strength(-20);
-    var center_force = d3.forceCenter(width / 2, height / 2);
+    /* FORCES */
+    var link_force    = d3.forceLink(links_data)
+                          .id(function(d) { return d.name; })
+                          .distance(70);
+    var charge_force  = d3.forceManyBody()
+                          .distanceMin(50)
+                          .distanceMax(width-300)
+                          .strength(-20);
+    var center_force  = d3.forceCenter(width / 2, height / 2);
     var collide_force = d3.forceCollide()
                           .strength(2);
-
-    var x_force = d3.forceX().strength(0.01);
-    var y_force = d3.forceY().strength(0.01);
+    var x_force       = d3.forceX().strength(0.01);
+    var y_force       = d3.forceY().strength(0.01);
 
     simulation.force("charge",  charge_force)
               .force("center",  center_force)
               .force("link",    link_force)
               .force("collide", collide_force)
               .force("x",       x_force)
-              .force("",        y_force);
+              .force("y",       y_force);
 
-    // -- Updates
+    /* UPDATES */
     simulation.on("tick", updateCoordsOnTick );
 
-
-    /*
-    * ELEMENTS
-    */
+    /* NODES */
     var node = svg.append("g")
                   .attr("class", "nodes")
                   .selectAll("circle")
                   .data(nodes_data)
                   .enter()
                   .append("g")
-                  .attr("transform", function(d) {
-                    return `translate(${d.y}, ${d.x})`
-                  })
-                  .call(drag(simulation));
+                    .attr("class", "diagram-node")
+                    .call(drag(simulation));
 
-    /*
-        var circle = node.append("circle")
-                         .attr("class", "diagram-node-circle")
-                         .attr("r", function(d){return d.name.length*4});
-                         */
+    var circle = node.append("circle")
+                       .attr("r", function(d){return (d.count + 5) / 2})
+                       .attr("class", function(d){ return `diagram-${d.type}`})
 
-        var text = node.append("a")
-                         .attr("href", function(d){return `${d.path}`})
-                       .append("text")
-                         .attr("class", "diagram-node-text")
-                       .text(function(d){return `${d.name}:${d.count}`})
-                       .attr("x", function(d){return `-${d.name.length*3.5}px`})
-                       .attr("y","3px");
+    var text = node.append("a")
+                     .attr("href", function(d){return `${d.path}`})
+                   .append("text")
+                     .attr("class", "diagram-node-text")
+                     .text(function(d){return `${d.name}:${d.count}`})
+                     .attr("x", function(d){return `-${d.name.length*3.5}px`})
+                     .attr("y","3px");
 
+    /* LINKS */
     var link = svg.append("g")
                   .selectAll("line")
                   .data(links_data)
@@ -79,9 +71,7 @@ function display_diagram(dataPath) {
                   .append("line")
                   .attr("class", "diagram-link");
 
-    /*
-    * TRANSFORM FUNCS
-    */
+    /* TRANSFORM FUNCS */
     function updateCoordsOnTick() {
 
         //update node position each tick of the simulation
