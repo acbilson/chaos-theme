@@ -1,4 +1,12 @@
 <div class="comment-body next-card">
+
+    <!-- Card Header -->
+      {{ if isset .Params "author" }}
+        <p class="muted-text">By <a rel="author" class="p-author">{{ .Params.author }}</a></p>
+      {{ else }}
+        <p class="muted-text">By <a rel="author" class="p-author">Alex Bilson</a></p>
+      {{ end }}
+
     <!-- Card Text -->
     <div class="comment-content">
       {{ .Content }}

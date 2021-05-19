@@ -9,6 +9,7 @@
     <!-- Content Body -->
 
     <article class="comment-body h-entry">
+
       <div class="comment-content-single">
         {{ .Content }}
       </div>
@@ -22,6 +23,12 @@
       {{ end }}
 
       <ul class="comment-subtext muted-text">
+      {{ if isset .Params "author" }}
+        <li>By <a rel="author" class="p-author">{{ .Params.author }}</a></li>
+      {{ else }}
+        <li>By <a rel="author" class="p-author">Alex Bilson</a></li>
+      {{ end }}
+
         <li>
           <p>Posted <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time></p>
         </li>

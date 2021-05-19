@@ -7,8 +7,12 @@
   <!-- Post Attributes -->
   <div class="post-attributes muted-text">
 
-    <p>By <a rel="author" class="p-author">Alex Bilson</a></p>
-    <img class="u-photo" style="display: none;" src="{{ "img/selfie.jpg" | absURL | safeCSS }}" />
+    {{ if isset .Params "author" }}
+      <p>By <a rel="author" class="p-author">{{ .Params.author }}</a></p>
+    {{ else }}
+      <p>By <a rel="author" class="p-author">Alex Bilson</a></p>
+    {{ end }}
+
     {{ if isset .Params "date" }}
     <p>Posted <time class="dt-published"
         datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time></p>
