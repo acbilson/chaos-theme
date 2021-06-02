@@ -1,0 +1,4 @@
+{{ $anchor := .Get 0 }}
+{{ $ref := .Get 1 }}
+{{ $text := .Get 2 }}
+<a name="{{$anchor}}" href="{{$ref}}">{{$text}}</a>
