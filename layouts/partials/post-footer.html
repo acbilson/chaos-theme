@@ -28,10 +28,10 @@
   {{ $anchor := .File.BaseFileName }}
   {{ with .Params.backlinks }}
     <h3>Backlinks</h3>
-    <div style="display: flex; flex-flow: row wrap; justify-content: space-between;">
+    <div class="backlinks">
     {{ range $val := . }}
-    <div style="border: 1px solid black; width: 45%; margin-top: 2%; padding: 10px;">
-    <p style="margin-top: 0;"><a href="{{$val.ref}}#{{ $anchor }}">{{$val.ref}}</a></p>
+    <div class="backlink">
+    <p class="backlink-source"><a href="{{$val.ref}}#{{ $anchor }}">{{$val.ref}}</a></p>
     <p>{{$val.content}}</p>
     </div>
     {{ end }}

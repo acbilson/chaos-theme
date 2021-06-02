@@ -1,0 +1,8 @@
+{{ $ref := .Get 0 }}
+{{ $text := .Get 1 }}
+
+<!-- gets the filename off the reference path -->
+{{ $dirFile := path.Split $ref }}
+
+<!-- by using ref I'll also get errors if the link does not exist -->
+<a name="{{ $dirFile.File }}" href="{{ ref . $ref }}">{{ $text }}</a>
