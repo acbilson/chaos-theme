@@ -2,26 +2,10 @@
       <section class="post-body">
         {{ . }}
       </section>
-      {{- end }}
+    {{- end }}
 
 <!-- Gets regular pages for the site -->
 {{ if .IsHome }}
-
-  {{ with .Site.GetPage "/posts" }}
-  <section class="link-body">
-  {{ range .Pages.GroupByParam "category" }}
-    <h2>{{ .Key | upper }}</h2>
-    <ol class="home-list">
-    {{ range .Pages }}
-    <li>
-      <span style="display: inline-block; width: 125px">{{ .Date.Format "2006-01-02" }}</span>
-      <a href="{{ .Permalink }}">{{ .Params.title }}</a>
-    </li>
-    {{ end }}
-    </ol>
-  {{ end }}
-  </section>
-  {{ end }}
 
 {{ else }}
   {{ $pages := .Pages }}
