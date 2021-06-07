@@ -1,4 +1,22 @@
 .comment-body {
+  display: flex;
+  flex-flow: row nowrap;
 	padding: 0em 1em 0em 1em;
 	box-sizing: border-box;
+  line-height: 1.575em;
+}
+
+.comment-attr {
+  display: flex;
+  flex-flow: column nowrap;
+  min-width: 120px;
+
+  > span {
+    color: var(--color-txt-offset);
+    font-size: 0.8em;
+
+    > a {
+      color: var(--color-txt-offset);
+    }
+  }
 }

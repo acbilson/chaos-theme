@@ -50,8 +50,8 @@ div.title-body {
 
 .comment-content {
 	>p {
-		&:last-child {
-			margin: 0;
+		&:first-child {
+			margin-top: 0;
 		}
 	}
 }
