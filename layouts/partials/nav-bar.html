@@ -5,11 +5,10 @@
   <div class="nav-header">
     <a href="{{ .Site.BaseURL }}">Home</a>
     <a href="{{ .Site.BaseURL }}/posts/">Posts</a>
-    <a href="{{ .Site.BaseURL }}/comments/">Comments</a>
-
-    {{ range where .Site.Pages "Params.displayinmenu" true -}}
-    <a href="{{ .Permalink }}" class="hamburger-menu-overlay-link">{{ .Title }}</a>
-    {{ end -}}
+    <a href="{{ .Site.BaseURL }}/logs/">Log</a>
+    <a href="{{ .Site.BaseURL }}/blogroll/">Blog Roll</a>
+    <a href="{{ .Site.BaseURL }}/about/">About</a>
+    <a href="{{ .Site.BaseURL }}/resume/">Resumé</a>
 
     <div class="dark-switch">
     <label class="switch">
