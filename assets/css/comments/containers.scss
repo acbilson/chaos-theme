@@ -8,7 +8,7 @@
 
 .li-comment-body {
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: column nowrap;
 	padding: 0em 1em 0em 1em;
 	box-sizing: border-box;
   line-height: 1.575em;
@@ -16,8 +16,9 @@
 
 .li-comment-attr {
   display: flex;
-  flex-flow: column nowrap;
-  min-width: 100px;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  min-width: 14%;
 
   > span {
     color: var(--color-txt-offset);
@@ -30,7 +31,7 @@
 }
 
 .li-comment-content {
-  max-width: 200px;
+  //max-width: 200px;
 	>p {
 		&:first-child {
 			margin-top: 0;
@@ -38,7 +39,18 @@
 	}
 }
 
-@media screen and (min-width: 80em) {
+@media screen and (min-width: 40.063em) {
+
+  .li-comment-body {
+    display: flex;
+    flex-flow: row nowrap;
+  }
+
+  .li-comment-attr {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+  }
 
   .li-comment-content {
     max-width: unset;
