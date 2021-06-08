@@ -20,7 +20,6 @@
       <div class="card-subtext muted-text">
         <p>Posted <time
             datetime="{{ .PublishDate.Format "2006-01-02 12:00" }}">{{ .PublishDate.Format "Jan 2, 2006" }}</time></p>
-        {{ if (isset .Params "categories") }}<p>{{ range .Params.categories }}#{{ . }} {{ end }}</p>{{ end }}
       </div>
     </article>
   </a>

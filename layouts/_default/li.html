@@ -22,7 +22,6 @@
     <p>By Alex Bilson</p>
     {{ end }}
       <p>Posted <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time></p>
-      {{ if (isset .Params "categories") }}<p>{{ range .Params.categories }}#{{ . | urlize | title }} {{ end }}</p>{{ end }}
     </div>
   </article>
 </a>
