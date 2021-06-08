@@ -10,11 +10,13 @@
     <!-- simpler list for post base page -->
     {{ if and (eq .Kind "section") (eq .Title "Posts") }}
       {{ with .Content }}
-        <p>{{ . }}</p>
+        <section class="post-body">{{ . }}</section>
       {{ end }}
       {{ range .Pages }}
+      <div class="list-content">
         <h2><a href="{{.Permalink}}">{{ .Title }}</a></h2>
         <p>{{ .Content }}</p>
+      </div>
       {{ end }}
     {{ else }}
       {{ partial "list-content.html" . }}

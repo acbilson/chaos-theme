@@ -9,7 +9,9 @@
 
   <!-- Renders all page cards -->
   {{ range .Pages -}}
-  {{ .Render "li" }}
+  <div class="list-content">
+    {{ .Render "li" }}
+  </div>
   {{- end }}
 
 {{ end }}
