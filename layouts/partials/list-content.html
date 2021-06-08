@@ -2,17 +2,14 @@
       <section class="post-body">
         {{ . }}
       </section>
-    {{- end }}
+{{- end }}
 
 <!-- Gets regular pages for the site -->
-{{ if .IsHome }}
-
-{{ else }}
-  {{ $pages := .Pages }}
-  {{ $paginator := .Paginate (where $pages "Params.displayinlist" "!=" false) -}}
+{{ if not .IsHome }}
 
   <!-- Renders all page cards -->
-  {{- range $paginator.Pages -}}
+  {{ range .Pages -}}
   {{ .Render "li" }}
   {{- end }}
+
 {{ end }}
