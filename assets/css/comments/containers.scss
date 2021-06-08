@@ -30,10 +30,18 @@
 }
 
 .li-comment-content {
+  max-width: 200px;
 	>p {
 		&:first-child {
 			margin-top: 0;
 		}
 	}
+}
+
+@media screen and (min-width: 80em) {
+
+  .li-comment-content {
+    max-width: unset;
+  }
 }
 
