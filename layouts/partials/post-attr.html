@@ -9,10 +9,7 @@
 
   {{ if isset .Params "date" }}
   <p>Posted <time class="dt-published" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time></p>
-  {{ end }}
-
-  {{ if isset .Params "modified" }}
-  <p>Modified <time datetime="{{ .Params.modified.Format "2006-01-02" }}">{{ .Params.modified.Format "Jan 2, 2006" }}</time></p>
+  <p>Modified <time datetime="{{ .Lastmod.Format "2006-01-02" }}">{{ .Lastmod.Format "Jan 2, 2006" }}</time></p>
   {{ end }}
 
   <!-- Adds tags to the post if they exist -->
