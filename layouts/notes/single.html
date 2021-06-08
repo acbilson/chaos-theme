@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="dark">
+{{ partial "head.html" . }}
+
+<body>
+  <div class="page-content">
+    {{ partial "nav-bar.html" . }}
+
+    <!-- Content Body -->
+    <article class="post-body h-entry {{ if ne .Params.dropcap false }}dropcase{{ end }}">
+
+      <h1 class="p-name post-title">{{ .Title }}</h1>
+      <a class="u-url" href="{{ .Permalink }}"></a>
+      {{ partial "post-content.html" . }}
+      {{ partial "post-attr.html" . }}
+      {{ partial "post-footer.html" . }}
+    </article>
+
+    {{ partial "foot.html" . }}
+
+  </div>
+  {{ partial "scripts.html" . }}
+</body>
+
+</html>
