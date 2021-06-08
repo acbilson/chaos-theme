@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="dark">
+<html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="{{ .Site.Params.defaultColorMode }}">
 {{ partial "head.html" . }}
 
 <body>
@@ -32,11 +32,6 @@
         <li>
           <p>Posted <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time></p>
         </li>
-          {{ if (isset .Params "categories") }}
-        <li>
-          <p>Category: {{ range .Params.categories }}#{{ . | urlize | title }} {{ end }}</p>
-        </li>
-        {{ end }}
 
           {{ if (isset .Params "tags") }}
         <li>

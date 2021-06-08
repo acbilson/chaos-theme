@@ -8,19 +8,14 @@
 
     <!-- Content Body -->
     <article class="post-body h-entry {{ if ne .Params.dropcap false }}dropcase{{ end }}">
-      {{ partial "post-header.html" . }}
+
+      <h1 class="p-name post-title">{{ .Title }}</h1>
+      <a class="u-url" href="{{ .Permalink }}"></a>
       {{ partial "post-content.html" . }}
+      {{ partial "post-attr.html" . }}
       {{ partial "post-footer.html" . }}
     </article>
 
-    <!-- Next Post Card & Home Card -->
-    <nav>
-      {{ with .PrevInSection }}
-      {{ .Render "li-next" }}
-      {{ end }}
-    </nav>
-
-    {{ partial "business-card.html" . }}
     {{ partial "foot.html" . }}
 
   </div>

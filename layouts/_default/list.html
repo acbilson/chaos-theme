@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="dark">
+<html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="{{ .Site.Params.defaultColorMode }}">
 {{ partial "head.html" . }}
 
 <body>
@@ -8,8 +8,11 @@
     {{ partial "list-header.html" . }}
     {{ partial "list-content.html" . }}
     {{ partial "list-footer.html" . }}
-    {{ partial "business-card.html" . }}
-    {{ partial "foot.html" . }}
+
+    {{ if not .IsHome }}
+      {{ partial "business-card.html" . }}
+      {{ partial "foot.html" . }}
+    {{ end }}
 
   </div>
   {{ partial "scripts.html" . }}

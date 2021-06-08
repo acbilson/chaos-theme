@@ -1,3 +1,13 @@
+.backlinks {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+.list-content {
+	padding: 0 1.2rem;
+}
+
 div.home-page {
   display: flex;
   flex-flow: column nowrap;
@@ -40,18 +50,6 @@ div.title-body {
 	flex-direction: column;
 	align-items: stretch;
 	text-decoration: none;
-}
-
-.comment-content {
-	>p {
-		&:last-child {
-			margin: 0;
-		}
-	}
-}
-
-.comment-content-single {
-	margin-top: 4%;
 }
 
 .card-img-container {

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="{{ .Site.Params.defaultColorMode }}">
+{{ partial "head.html" . }}
+
+<body>
+  <div class="page-content">
+    {{ partial "nav-bar.html" . }}
+    {{ partial "list-header.html" . }}
+
+    <!-- simpler list for post base page -->
+    {{ if and (eq .Kind "section") (eq .Title "Posts") }}
+      {{ with .Content }}
+        <section class="post-body">{{ . }}</section>
+      {{ end }}
+      {{ range .Pages }}
+      <div class="list-content">
+        <h2><a href="{{.Permalink}}">{{ .Title }}</a></h2>
+        <p>{{ .Content }}</p>
+      </div>
+      {{ end }}
+    {{ else }}
+      {{ partial "list-content.html" . }}
+    {{ end }}
+    {{ partial "list-footer.html" . }}
+    {{ partial "business-card.html" . }}
+    {{ partial "foot.html" . }}
+
+  </div>
+  {{ partial "scripts.html" . }}
+
+</body>
+
+</html>
