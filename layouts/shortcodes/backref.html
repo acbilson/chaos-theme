@@ -5,4 +5,4 @@
 {{ $dirFile := path.Split $ref }}
 
 <!-- by using ref I'll also get errors if the link does not exist -->
-<a name="{{ $dirFile.File }}" href="{{ ref . $ref }}">{{ $text }}</a>
+<a class="internal" name="{{ $dirFile.File }}" href="{{ ref . $ref }}">{{ $text }}</a>
