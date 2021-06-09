@@ -3,6 +3,14 @@
 //       It breaks after too many hovers and should
 //       probably only be made visible by hovering.
 
+// I'm thinking that we should turn all internal links into a content array
+// available for a number of methods in state. The content divs could be placed
+// anywhere on the page since they're absolute, and I may consider using
+// a similar approach to fill backlink preview context instead of manually
+// including the context in the metadata.
+
+// THOUGHT: might be worth wiring up the babel transpiler so I can use ES2016
+
 function createPopup(offsetTop, offsetLeft, contentElement) {
 
   const popup = document.createElement('div');
@@ -44,15 +52,13 @@ function showBacklink(event) {
     if (text === null) { console.log('no content found'); }
     const contentElement = parsePageContent(text);
     const popup = createPopup(link.offsetTop, link.offsetLeft, contentElement);
-    link.appendChild(popup);
+    document.body.appendChild(popup);
   });
 }
 
 function hideBacklink(event) {
-
-  const link = event.target;
   const popup = document.getElementById('popup');
-  link.removeChild(popup);
+  document.body.removeChild(popup);
 }
 
 // adds backlink events to all links marked internal
