@@ -11,6 +11,47 @@
 
 // THOUGHT: might be worth wiring up the babel transpiler so I can use ES2016
 
+class BacklinkGenerator {
+
+  constructor(links) {
+    this.links = {};
+    this.parser = new DOMParser();
+    this.getLinkContent(links);
+  }
+
+  getLinkContent(links) {
+    links.forEach((link) => {
+
+      fetch(link.href)
+        .then((resp) => {
+        if (resp.status === 200) {
+          return resp.text();
+        } else {
+          return null;
+        }})
+        .then((text) => {
+          if (text === null) { return null; }
+          const contentElement = this.parsePageContent(text);
+          this.links[link.href] = contentElement;
+          console.log(this.links);
+      });
+    });
+  }
+
+  parsePageContent(text) {
+    var bodyDOM = this.parser.parseFromString(text, 'text/html');
+    const contentElement = bodyDOM.querySelector('div.e-content');
+
+    if (contentElement) {
+      return contentElement.firstElementChild;
+    } else {
+      const missing = document.createElement('p');
+      missing.text = 'no content found';
+      return missing;
+    }
+  }
+}
+
 function createPopup(offsetTop, offsetLeft, contentElement) {
 
   const popup = document.createElement('div');
@@ -61,10 +102,17 @@ function hideBacklink(event) {
   document.body.removeChild(popup);
 }
 
+function newShowBacklink(event) {
+  const content = document.generator.links[event.target.href];
+  console.log(content.innerHTML);
+}
+
 // adds backlink events to all links marked internal
 const internalLinks = document.querySelectorAll('a.internal');
 
 internalLinks.forEach(function(link) {
-  link.addEventListener('mouseover', showBacklink);
+  link.addEventListener('mouseover', newShowBacklink);
   link.addEventListener('mouseout', hideBacklink);
 });
+
+document.generator = new BacklinkGenerator(internalLinks);
