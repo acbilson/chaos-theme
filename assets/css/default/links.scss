@@ -8,8 +8,11 @@ a {
   padding: 10px;
 }
 
-.backlink-source {
-  margin-top: 0px;
+// displays the backlink popup
+.internal:hover {
+	> div.hide {
+		display: block;
+	}
 }
 
 .link-body {
