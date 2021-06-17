@@ -8,6 +8,12 @@
 	padding: 0 1.2rem;
 }
 
+.backlink-content {
+  border: 1px solid var(--color-txt);
+  margin-top: 2%;
+  padding: 10px;
+}
+
 div.home-page {
   display: flex;
   flex-flow: column nowrap;
@@ -204,6 +210,9 @@ span.timeline-title {
 	.list-header {
 		margin-top: 2em;
 		text-align: center;
+	}
+	.backlink-content {
+		width: 45%;
 	}
 }
 

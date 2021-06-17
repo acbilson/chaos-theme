@@ -1,3 +1,11 @@
+function parsePageContext(text) {
+  var bodyDOM = new DOMParser().parseFromString(text, 'text/html');
+  var urlParts = document.URL.split('/');
+  var backlinkName = urlParts[urlParts.length - 2];
+  var backlinkElement = bodyDOM.getElementsByName(backlinkName)[0];
+  return backlinkElement.parentElement;
+}
+
 function parsePageContent(text) {
   var bodyDOM = new DOMParser().parseFromString(text, 'text/html');
   const contentElement = bodyDOM.querySelector('div.e-content');
@@ -42,15 +50,40 @@ function appendLinkPopup(link) {
     })
     .then((text) => {
       if (text === null) { return null; }
-      const contentElements = this.parsePageContent(text);
+      const contentElements = parsePageContent(text);
       const popupElement = createPopup(link.offsetTop, link.offsetLeft, contentElements);
       link.appendChild(popupElement);
     });
 }
 
-// adds backlink events to all links marked internal
+function appendSourceContent(link) {
+  fetch(link.href)
+    .then((resp) => {
+      if (resp.status === 200) {
+        return resp.text();
+      } else {
+        return null;
+      }
+    })
+    .then((text) => {
+      if (text === null) { return null; }
+      const contextElement = parsePageContext(text);
+      const wrapper = document.createElement('p');
+      wrapper.appendChild(contextElement);
+      link.parentElement.appendChild(wrapper);
+    });
+}
+
+// adds backlink popup as a hidden child element to all links marked internal
 const internalLinks = document.querySelectorAll('a.internal');
 
 internalLinks.forEach((link) => {
   appendLinkPopup(link);
+});
+
+// retrieves content from all backlinks that reference this page
+const sourceLinks = document.querySelectorAll('a.backlink');
+
+sourceLinks.forEach((link) => {
+  appendSourceContent(link);
 });
