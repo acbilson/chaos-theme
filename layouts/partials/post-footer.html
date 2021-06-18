@@ -29,9 +29,9 @@
   {{ with .Params.backlinks }}
     <h3>Backlinks</h3>
     <div class="backlinks">
-    {{ range $val := . }}
+    {{ range . }}
     <div class="backlink-content">
-      <a class="backlink" href="{{$val.ref}}#{{ $anchor }}">{{$val.ref}}</a>
+      <a class="backlink" href="{{ . }}#{{ $anchor }}">{{ . }}</a>
     </div>
     {{ end }}
     </div>
