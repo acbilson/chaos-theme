@@ -6,13 +6,14 @@ function parsePageContext(text) {
   return backlinkElement.parentElement;
 }
 
-function parsePageContent(text) {
+function parsePageContent(text, elementTypes) {
   var bodyDOM = new DOMParser().parseFromString(text, 'text/html');
   const contentElement = bodyDOM.querySelector('div.e-content');
 
   if (contentElement) {
-    const elementCount = contentElement.childElementCount < 3 ? contentElement.childElementCount : 3;
-    const contentSlice = Array.from(contentElement.children).slice(0, elementCount);
+    const paragraphElements = Array.from(contentElement.children).filter((el) => elementTypes.includes(el.localName));
+    const elementCount = paragraphElements.length < 3 ? paragraphElements.length : 3;
+    const contentSlice = Array.from(paragraphElements).slice(0, elementCount);
 
     if (elementCount < contentElement.childElementCount) {
       const ellipsisElement = document.createElement('p');
@@ -39,7 +40,7 @@ function createPopup(offsetTop, offsetLeft, contentElements) {
   return popup;
 }
 
-function appendLinkPopup(link) {
+function appendLinkPopup(link, elementTypes) {
   fetch(link.href)
     .then((resp) => {
       if (resp.status === 200) {
@@ -50,7 +51,7 @@ function appendLinkPopup(link) {
     })
     .then((text) => {
       if (text === null) { return null; }
-      const contentElements = parsePageContent(text);
+      const contentElements = parsePageContent(text, elementTypes);
       const popupElement = createPopup(link.offsetTop, link.offsetLeft, contentElements);
       link.appendChild(popupElement);
     });
@@ -78,7 +79,12 @@ function appendSourceContent(link) {
 const internalLinks = document.querySelectorAll('a.internal');
 
 internalLinks.forEach((link) => {
-  appendLinkPopup(link);
+  const popupElementTypes = [
+    'h1', 'h2', 'h3', 'h4', // headers
+    'p',                    // paragraphs
+    'ol', 'ul', 'li'        // lists
+  ];
+  appendLinkPopup(link, popupElementTypes);
 });
 
 // retrieves content from all backlinks that reference this page
