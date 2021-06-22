@@ -4,7 +4,7 @@
 
 <body>
     {{ partial "nav-bar.html" . }}
-    {{ partial "list-header.html" . }}
+    {{ partial "lists/list-header.html" . }}
 
     <!-- simpler list for post base page -->
     {{ if and (eq .Kind "section") (eq .Title "Posts") }}
@@ -18,11 +18,9 @@
       </div>
       {{ end }}
     {{ else }}
-      {{ partial "list-content.html" . }}
+      {{ partial "lists/list-content.html" . }}
     {{ end }}
-    {{ partial "list-footer.html" . }}
-    {{ partial "business-card.html" . }}
-    {{ partial "foot.html" . }}
+      {{ partial "lists/list-footer.html" . }}
 
   {{ partial "scripts.html" . }}
 

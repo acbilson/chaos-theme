@@ -1,0 +1,7 @@
+<ul class="notes-list">
+{{ range .Pages }}
+  {{ if not .Draft }}
+    <li>{{ .Render "li" }}</li>
+  {{ end }}
+{{ end }}
+</ul>

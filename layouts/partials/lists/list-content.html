@@ -1,17 +1,9 @@
-{{ with .Content -}}
-      <section class="post-body">
-        {{ . }}
-      </section>
-{{- end }}
-
 <!-- Gets regular pages for the site -->
 {{ if not .IsHome }}
 
   <!-- Renders all page cards -->
   {{ range .Pages -}}
-  <div class="list-content">
     {{ .Render "li" }}
-  </div>
   {{- end }}
 
 {{ end }}

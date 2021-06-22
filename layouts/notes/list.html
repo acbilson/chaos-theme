@@ -4,13 +4,8 @@
 <body>
     {{ partial "nav-bar.html" . }}
     {{ partial "lists/list-header.html" . }}
-    {{ partial "lists/list-content.html" . }}
-
-    {{ if not .IsHome }}
-      {{ partial "lists/list-footer" . }}
-    {{ end }}
-
-  {{ partial "scripts.html" . }}
-
+    {{ partial "notes/list-content.html" . }}
+    {{ partial "lists/list-footer.html" . }}
+    {{ partial "scripts.html" . }}
 </body>
 </html>
