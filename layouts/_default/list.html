@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="{{ .Site.Params.defaultColorMode }}">
 {{ partial "head.html" . }}
-
 <body>
-  <div class="page-content">
     {{ partial "nav-bar.html" . }}
     {{ partial "list-header.html" . }}
     {{ partial "list-content.html" . }}
@@ -14,9 +12,7 @@
       {{ partial "foot.html" . }}
     {{ end }}
 
-  </div>
   {{ partial "scripts.html" . }}
 
 </body>
-
 </html>

@@ -1,23 +1,10 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="{{ .Site.Params.defaultColorMode }}">
 {{ partial "head.html" . }}
-
 <body>
-    {{ partial "nav-bar.html" . }}
-
-    <!-- Content Body -->
-    <article class="post-body h-entry {{ if ne .Params.dropcap false }}dropcase{{ end }}">
-
-      <h1 class="p-name post-title">{{ .Title }}</h1>
-      <a class="u-url" href="{{ .Permalink }}"></a>
-      {{ partial "post-content.html" . }}
-      {{ partial "post-attr.html" . }}
-      {{ partial "post-footer.html" . }}
-    </article>
-
-    {{ partial "foot.html" . }}
-
+  {{ partial "nav-bar.html" . }}
+  {{ partial "notes/note-content.html" . }}
+  {{ partial "notes/note-footer.html" . }}
   {{ partial "scripts.html" . }}
 </body>
-
 </html>
