@@ -3,28 +3,10 @@
 {{ partial "head.html" . }}
 
 <body>
-  <div class="page-content">
     {{ partial "nav-bar.html" . }}
-
-    <!-- Content Body -->
-    <article class="post-body h-entry {{ if ne .Params.dropcap false }}dropcase{{ end }}">
-      {{ partial "post-header.html" . }}
-      {{ partial "post-content.html" . }}
-      {{ partial "post-footer.html" . }}
-    </article>
-
-    <!-- Next Post Card & Home Card -->
-    <nav>
-      {{ with .PrevInSection }}
-      {{ .Render "li-next" }}
-      {{ end }}
-    </nav>
-
-    {{ partial "business-card.html" . }}
-    {{ partial "foot.html" . }}
-
-  </div>
+    {{ partial "posts/post-header.html" . }}
+    {{ partial "posts/post-content.html" . }}
+    {{ partial "posts/post-footer.html" . }}
   {{ partial "scripts.html" . }}
 </body>
-
 </html>

@@ -6,24 +6,14 @@
     {{ partial "nav-bar.html" . }}
     {{ partial "lists/list-header.html" . }}
 
-    <!-- simpler list for post base page -->
+    <!-- shows a special page for the main post landing -->
     {{ if and (eq .Kind "section") (eq .Title "Posts") }}
-      {{ with .Content }}
-        <section class="post-body">{{ . }}</section>
-      {{ end }}
-      {{ range .Pages }}
-      <div class="list-content">
-        <h2><a href="{{.Permalink}}">{{ .Title }}</a></h2>
-        <p>{{ .Content }}</p>
-      </div>
-      {{ end }}
+      {{ partial "posts/list-content.html" . }}
     {{ else }}
       {{ partial "lists/list-content.html" . }}
     {{ end }}
-      {{ partial "lists/list-footer.html" . }}
 
+    {{ partial "lists/list-footer.html" . }}
   {{ partial "scripts.html" . }}
-
 </body>
-
 </html>
