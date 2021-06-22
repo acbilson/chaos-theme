@@ -5,12 +5,14 @@ body {
 	font-size: 14pt;
 	word-break: break-word;
 	color: var(--color-txt);
-  background-color: var(--color-bg);
-	align-items: center;
+	background-color: var(--color-bg);
 	box-sizing: border-box;
+	max-width: 50rem;
+	margin: auto;
+
 	display: flex;
 	flex-direction: column;
-	width: 100%;
+	align-items: center;
 }
 
 header {

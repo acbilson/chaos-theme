@@ -6,14 +6,10 @@
   <meta name="description" content="{{if .IsHome}}{{ $.Site.Params.description }}{{else}}{{.Description}}{{end}}" />
 
   <!-- Page Title -->
-  <title>
-    {{ if not .IsHome }}
-    {{with .Title }}
-    {{ . }} &middot;
-    {{ end }}
-    {{ end }}
-    {{ .Site.Title }}
-  </title>
+  <title> {{ .Site.Title }}
+          {{ if not .IsHome }}
+            &middot; {{ .Title }}
+          {{ end }} </title>
 
   <!-- Page Links -->
   <!-- concats all css into a single, minified file -->
@@ -28,16 +24,6 @@
 
   <!-- favicon.ico -->
   <link rel="shortcut icon" href="{{ .Site.BaseURL }}favicon.ico" />
-
-  <!-- adds webmentions -->
-  <link rel="webmention" href="https://webmention.io/alexbilson.dev/webmention" />
-
-  <!-- adds IndieAuth -->
-  <link rel="authorization_endpoint" href="https://indieauth.com/auth">
-  <link rel="token_endpoint" href="https://tokens.indieauth.com/token">
-
-  <!-- adds micropub -->
-  <link rel="micropub" href="https://pub.alexbilson.dev/micropub">
 
   <!-- adds PWA manifest -->
   <link rel="manifest" href="{{ .Site.BaseURL }}manifest.json">
