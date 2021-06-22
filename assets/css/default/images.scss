@@ -49,7 +49,7 @@ img {
   padding: 10px 0;
 }
 
-@media screen and (min-width: 40.063em) {
+@media screen and (min-width: $phone-width) {
 	.card-img {
 		margin: 0;
 		max-height: 250px;

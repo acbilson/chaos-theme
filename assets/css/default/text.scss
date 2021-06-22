@@ -124,7 +124,7 @@ span.example {
     color: var(--color-txt-offset);
 }
 
-@media screen and (min-width: 40.063em) {
+@media screen and (min-width: $phone-width) {
     .card-subtext {
         display: flex;
         flex-flow: row nowrap;

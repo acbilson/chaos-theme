@@ -30,7 +30,7 @@
     }
 }
 
-@media screen and (min-width: 40.063em) {
+@media screen and (min-width: $phone-width) {
     .log {
         display: flex;
         flex-flow: row nowrap;
