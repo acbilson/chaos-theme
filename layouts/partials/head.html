@@ -27,7 +27,7 @@
   <link href="{{ $mainStyle.Permalink }}" type="text/css" rel="stylesheet">
 
   <!-- favicon.ico -->
-  <link rel="shortcut icon" href="{{ .Site.BaseURL }}/favicon.ico" />
+  <link rel="shortcut icon" href="{{ .Site.BaseURL }}favicon.ico" />
 
   <!-- adds webmentions -->
   <link rel="webmention" href="https://webmention.io/alexbilson.dev/webmention" />
@@ -38,6 +38,9 @@
 
   <!-- adds micropub -->
   <link rel="micropub" href="https://pub.alexbilson.dev/micropub">
+
+  <!-- adds PWA manifest -->
+  <link rel="manifest" href="{{ .Site.BaseURL }}manifest.json">
 
   <!-- adds RSS feed -->
   {{ range .AlternativeOutputFormats -}}
