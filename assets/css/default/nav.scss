@@ -9,9 +9,6 @@ $slider-height: $switch-height - ($switch-height / 3);
 	padding: 0;
 	width: 100%;
 	z-index: 10;
-}
-
-.nav-header {
 	display: flex;
 	flex-flow: row wrap;
 	justify-content: space-evenly;
@@ -26,17 +23,6 @@ $slider-height: $switch-height - ($switch-height / 3);
 	>a {
 		text-decoration: none;
 	}
-}
-
-.list-header {
-	margin-top: 4em;
-	text-align: center;
-}
-
-h1.list-header-title {
-	margin: 0.1em 0 0.2em 0;
-	font-size: 2.2em;
-	text-transform: uppercase;
 }
 
 .list-pagination-container {

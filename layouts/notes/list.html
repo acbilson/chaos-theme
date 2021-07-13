@@ -1,19 +1,11 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="{{ .Site.Params.defaultColorMode }}">
 {{ partial "head.html" . }}
-
 <body>
     {{ partial "nav-bar.html" . }}
     {{ partial "lists/list-header.html" . }}
-
-    <!-- shows a special page for the main post landing -->
-    {{ if and (eq .Kind "section") (eq .Title "Posts") }}
-      {{ partial "posts/list-content.html" . }}
-    {{ else }}
-      {{ partial "lists/list-content.html" . }}
-    {{ end }}
-
+    {{ partial "notes/list-content.html" . }}
     {{ partial "lists/list-footer.html" . }}
-  {{ partial "scripts.html" . }}
+    {{ partial "scripts.html" . }}
 </body>
 </html>

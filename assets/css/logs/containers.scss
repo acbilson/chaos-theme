@@ -1,0 +1,46 @@
+.comment-content-single {
+    margin-top: 4%;
+}
+
+.log {
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.log-attr {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    min-width: 14%;
+    line-height: 1.575em;
+    >span {
+        color: var(--color-txt-offset);
+        font-size: 0.8em;
+        >a {
+            color: var(--color-txt-offset);
+        }
+    }
+}
+
+.log-content {
+    >p {
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+}
+
+@media screen and (min-width: $phone-width) {
+    .log {
+        display: flex;
+        flex-flow: row nowrap;
+    }
+    .log-attr {
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: flex-start;
+    }
+    .log-content {
+        max-width: unset;
+    }
+}

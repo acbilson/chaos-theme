@@ -1,0 +1,31 @@
+<!-- Post Citations & Addendum -->
+<footer class="post-footer muted-text">
+  {{ with .Params.citations }}
+  <div class="post-citations">
+  <h3><a name="citations">Citations</a></h3>
+  <ul>
+    {{ range . }}
+    <li>
+      <p>{{ . }}</p>
+    </li>
+    {{ end }}
+  </ul>
+</div>
+  {{ end }}
+  {{ with .Params.addendum }}
+  <div class="post-addendum">
+  <h3><a name="addendum">Addendum</a></h3>
+  <ul>
+    {{ range $index, $val := . }}
+    <li>
+      <p><sup>[{{ add $index 1 }}]</sup>{{ $val }}</p>
+    </li>
+    {{ end }}
+  </ul>
+</div>
+  {{ end }}
+
+  {{ partial "backlink.html" . }}
+  {{ partial "comments.html" . }}
+  {{ partial "foot.html" . }}
+</footer>

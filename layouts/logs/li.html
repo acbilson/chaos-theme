@@ -1,18 +1,18 @@
-<div class="li-comment-body">
-    <div class="li-comment-attr">
+<article class="log">
+  <div class="log-attr">
 
-      <span><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time></span>
+    <span><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time></span>
 
-      {{ if isset .Params "author" }}
-        <span><a rel="author" class="p-author">{{ .Params.author }}</a></span>
-      {{ else }}
-        <span><a rel="author" class="p-author">Alex Bilson</a></span>
-      {{ end }}
+    {{ if isset .Params "author" }}
+      <span><a rel="author" class="p-author">{{ .Params.author }}</a></span>
+    {{ else }}
+      <span><a rel="author" class="p-author">Alex Bilson</a></span>
+    {{ end }}
 
-      <span><a style="text-decoration: none;" href="{{ .Permalink }}" rel="bookmark">⚓</a></span>
+    <span><a style="text-decoration: none;" href="{{ .Permalink }}" rel="bookmark">⚓</a></span>
 
-    </div>
-    <div class="li-comment-content">
-      {{ .Content }}
-    </div>
-</div>
+  </div>
+  <div class="log-content e-content">
+    {{ .Content }}
+  </div>
+</article>

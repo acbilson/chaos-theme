@@ -1,0 +1,13 @@
+{{ $anchor := .File.BaseFileName }}
+{{ with .Params.backlinks }}
+
+  <h3>Backlinks</h3>
+  <div class="backlinks">
+  {{ range . }}
+  <div class="backlink-content">
+    <a class="backlink" href="{{ . }}#{{ $anchor }}">{{ . }}</a>
+  </div>
+  {{ end }}
+  </div>
+
+{{ end }}

@@ -1,121 +1,132 @@
 h1 {
-	font-family: 'Ubuntu Condensed', Verdana, Geneva, sans-serif;
-  color: var(--color-txt);
-	clear: both;
+    font-family: 'Ubuntu Condensed', Verdana, Geneva, sans-serif;
+    color: var(--color-txt);
+    clear: both;
 }
 
-h2,h3,h4,h5,h6 {
-	font-family: 'Ubuntu Condensed', Verdana, Geneva, sans-serif;
-  color: var(--color-txt);
-	margin: 1.5em 0 -0.5em 0;
-	padding-bottom: 0.125em;
-	clear: both;
-  line-height: 1;
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Ubuntu Condensed', Verdana, Geneva, sans-serif;
+    color: var(--color-txt);
+    margin: 1.5em 0 -0.5em 0;
+    padding-bottom: 0.125em;
+    clear: both;
+    line-height: 1;
 }
 
 p {
-	margin: 1.5em 0;
-	line-height: 1.575em;
-	text-align: justify;
+    margin: 1.5em 0;
+    line-height: 1.575em;
+    text-align: justify;
 }
 
 pre {
-	>code {
-		font-family: 'Ubuntu Mono', monospace !important;
-		padding: 1em;
-		line-height: 1.5;
-		border: grey 3px solid;
-		border-radius: 0.3rem;
-		margin: 1.5em 0;
-		display: block;
-		word-break: normal;
-		overflow-x: auto;
-	}
+    >code {
+        font-family: 'Ubuntu Mono', monospace !important;
+        padding: 1em;
+        line-height: 1.5;
+        border: grey 3px solid;
+        border-radius: 0.3rem;
+        margin: 1.5em 0;
+        display: block;
+        word-break: normal;
+        overflow-x: auto;
+    }
 }
 
 sup {
-	color: var(--color-txt);
-	padding-left: .12em;
-	padding-right: .12em;
-	>a {
-		text-decoration: none;
-		color: var(--color-txt-offset);
-	}
+    color: var(--color-txt);
+    padding-left: .12em;
+    padding-right: .12em;
+    >a {
+        text-decoration: none;
+        color: var(--color-txt-offset);
+    }
 }
 
 blockquote {
-	border-left: 0.3em solid var(--color-border);
-	margin: 0.8em 0.8em 0em 0.8em;
-	padding: 0.5em 0.5em;
-	font-style: italic;
-  line-height: 1.5;
-	p {
-		display: inline;
-	}
+    border-left: 0.3em solid var(--color-border);
+    margin: 0.8em 0.8em 0em 0.8em;
+    padding: 0.5em 0.5em;
+    font-style: italic;
+    line-height: 1.5;
+    p {
+        display: inline;
+    }
 }
 
 h1.post-title {
-	font-size: 3em;
+    font-size: 3em;
+}
+
+h1.list-title {
+	text-align: center;
+    margin: 0.1em 0 0.2em 0;
+    font-size: 2.2em;
+    text-transform: uppercase;
 }
 
 .post-attributes {
-	display: flex;
-	flex-flow: column;
-	justify-content: space-evenly;
-	>p {
-		margin: 0;
-		text-align: center;
-	}
+    display: flex;
+    flex-flow: column;
+    justify-content: space-evenly;
+    >p {
+        margin: 0;
+        text-align: center;
+    }
 }
 
 .muted-text {
-	color: var(--color-txt-offset);
-	font-size: 0.8em;
+    color: var(--color-txt-offset);
+    font-size: 0.8em;
 }
 
 .card-subtext {
-	display: flex;
-	flex-flow: column wrap;
-	justify-content: space-evenly;
-	align-items: center;
-    > p {
-      margin: 5px 0;
-      line-height: 1.15;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    >p {
+        margin: 5px 0;
+        line-height: 1.15;
     }
 }
 
 .comment-subtext {
-	list-style-type: none;
+    list-style-type: none;
 }
 
 .copyright {
-	text-align: right;
-	font-size: 0.8em;
+    text-align: right;
+    font-size: 0.8em;
 }
 
 span.word {
-	font-size: 1.6rem;
+    font-size: 1.6rem;
 }
 
 span.term {
-	font-variant: small-caps;
+    font-variant: small-caps;
 }
 
 span.definition {
-	margin-left: 5%;
+    margin-left: 5%;
 }
 
 span.example {
-	font-style: italic;
+    font-style: italic;
 }
 
 .p-author {
-  color: var(--color-txt-offset);
+    color: var(--color-txt-offset);
 }
 
-@media screen and (min-width: 40.063em) {
-	.card-subtext {
-		display: flex;
-    flex-flow: row nowrap;
-  }
+@media screen and (min-width: $phone-width) {
+    .card-subtext {
+        display: flex;
+        flex-flow: row nowrap;
+    }
 }

@@ -1,22 +1,16 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="{{ .Site.Params.defaultColorMode }}">
 {{ partial "head.html" . }}
-
 <body>
-  <div class="page-content">
     {{ partial "nav-bar.html" . }}
-    {{ partial "list-header.html" . }}
-    {{ partial "list-content.html" . }}
-    {{ partial "list-footer.html" . }}
+    {{ partial "lists/list-header.html" . }}
+    {{ partial "lists/list-content.html" . }}
 
     {{ if not .IsHome }}
-      {{ partial "business-card.html" . }}
-      {{ partial "foot.html" . }}
+      {{ partial "lists/list-footer" . }}
     {{ end }}
 
-  </div>
   {{ partial "scripts.html" . }}
 
 </body>
-
 </html>
