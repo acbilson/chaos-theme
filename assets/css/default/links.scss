@@ -2,6 +2,10 @@ a {
 	color: var(--color-primary);
 }
 
+.internal {
+  text-transform: capitalize;
+}
+
 // displays the backlink popup
 .internal:hover {
 	> div.hide {

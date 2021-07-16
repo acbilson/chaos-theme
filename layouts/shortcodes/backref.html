@@ -1,8 +1,15 @@
 {{ $ref := .Get 0 }}
-{{ $text := .Get 1 }}
+{{ $title := .Get 1 }}
 
 <!-- gets the filename off the reference path -->
 {{ $dirFile := path.Split $ref }}
+{{ $words := split $dirFile.File "-" }}
 
 <!-- by using ref I'll also get errors if the link does not exist -->
-<a class="internal" name="{{ $dirFile.File }}" href="{{ ref . $ref }}">{{ $text }}</a>
+<a class="internal" name="{{ $dirFile.File }}" href="{{ ref . $ref }}">
+{{ with $title }}
+  {{ . }}
+{{ else }}
+  {{ range $words }} {{ . }} {{ end }}
+{{ end }}
+</a>
