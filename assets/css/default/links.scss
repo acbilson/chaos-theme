@@ -2,15 +2,19 @@ a {
 	color: var(--color-primary);
 }
 
-.internal {
+a.internal {
   text-transform: capitalize;
 }
 
 // displays the backlink popup
-.internal:hover {
+a.internal:hover {
 	> div.hide {
 		display: block;
 	}
+}
+
+a.external {
+  text-decoration-style: double;
 }
 
 .link-body {
