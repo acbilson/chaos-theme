@@ -4,7 +4,7 @@
 <script>
 window.store = {
     // You can specify your post section only:
-    {{ range where .Site.RegularPages "Section" "in" ("posts notes") }}
+    {{ range where .Site.RegularPages "Section" "in" ("posts notes logs") }}
     // For all pages in your site, use "range .Site.Pages"
     // You can use any unique identifier here
     "{{ .Permalink }}": {
