@@ -1,0 +1,8 @@
+<div class="poetry">
+{{ $lines := split .Inner "\n"}}
+{{ range $lines }}
+  {{ if ne . "" }}
+    <p>{{ . }}</p>
+  {{ end }}
+{{ end }}
+</div>

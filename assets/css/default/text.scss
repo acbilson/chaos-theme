@@ -124,6 +124,15 @@ span.example {
     color: var(--color-txt-offset);
 }
 
+.poetry {
+   font-style: italic;
+   margin-left: 3%;
+   >p {
+    margin: 0px;
+    line-height: 2em;
+   }
+}
+
 @media screen and (min-width: $phone-width) {
     .card-subtext {
         display: flex;
