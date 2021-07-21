@@ -1,1 +1,9 @@
-<a href="{{ .Permalink }}">{{ .Title }}</a>
+{{ $epVal := "🌱" }}
+{{ with .Params.epistemic }}
+  {{ if eq . "sprout" }}
+    {{ $epVal = "🌿" }}
+  {{ else if eq . "plant" }}
+    {{ $epVal = "🪴" }}
+  {{ end }}
+{{ end }}
+<a href="{{ .Permalink }}">{{ .Title }}</a><span> {{ $epVal }}</span>
