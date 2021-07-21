@@ -6,21 +6,29 @@ function parsePageContext(text) {
     return backlinkElement.parentElement;
 }
 
-function parsePageContent(text, elementTypes) {
+function parsePageContent(text, elementTypes, paragraphNumber = undefined) {
     var bodyDOM = new DOMParser().parseFromString(text, 'text/html');
     const contentElement = bodyDOM.querySelector('.e-content');
 
     if (contentElement) {
         const paragraphElements = Array.from(contentElement.children).filter((el) => elementTypes.includes(el.localName));
-        const elementCount = paragraphElements.length < 3 ? paragraphElements.length : 3;
-        const contentSlice = Array.from(paragraphElements).slice(0, elementCount);
 
-        if (elementCount < contentElement.childElementCount) {
-            const ellipsisElement = document.createElement('p');
-            ellipsisElement.innerText = '...';
-            contentSlice.push(ellipsisElement);
+        if (paragraphNumber === undefined || paragraphNumber > paragraphElements.length) {
+          const elementCount = paragraphElements.length < 3 ? paragraphElements.length : 3;
+          const contentSlice = Array.from(paragraphElements).slice(0, elementCount);
+
+          if (elementCount < contentElement.childElementCount) {
+              const ellipsisElement = document.createElement('p');
+              ellipsisElement.innerText = '...';
+              contentSlice.push(ellipsisElement);
+          }
+
+          return contentSlice;
+
+        } else {
+          const index = parseInt(paragraphNumber) + 1;
+          return [paragraphElements[index]];
         }
-        return contentSlice;
 
     } else {
         const missing = document.createElement('p');
@@ -40,7 +48,7 @@ function createPopup(offsetTop, offsetLeft, contentElements) {
     return popup;
 }
 
-function appendLinkPopup(link, elementTypes) {
+function appendLinkPopup(link, elementTypes, paragraphNumber) {
     fetch(link.href)
         .then((resp) => {
             if (resp.status === 200) {
@@ -51,7 +59,8 @@ function appendLinkPopup(link, elementTypes) {
         })
         .then((text) => {
             if (text === null) { return null; }
-            const contentElements = parsePageContent(text, elementTypes);
+
+            const contentElements = parsePageContent(text, elementTypes, paragraphNumber);
             const popupElement = createPopup(link.offsetTop, link.offsetLeft, contentElements);
             link.appendChild(popupElement);
         });
@@ -88,7 +97,8 @@ if (widerThanPhone) {
             'p', // paragraphs
             'ol', 'ul', 'li' // lists
         ];
-        appendLinkPopup(link, popupElementTypes);
+
+        appendLinkPopup(link, popupElementTypes, link.dataset.paragraph);
     });
 }
 

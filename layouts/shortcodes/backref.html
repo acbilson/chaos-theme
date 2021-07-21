@@ -1,12 +1,17 @@
 {{ $ref := .Get 0 }}
 {{ $title := .Get 1 }}
+{{ $paragraph := .Get 2 }}
 
 <!-- gets the filename off the reference path -->
 {{ $dirFile := path.Split $ref }}
 {{ $words := split $dirFile.File "-" }}
 
 <!-- by using ref I'll also get errors if the link does not exist -->
-<a class="internal" name="{{ $dirFile.File }}" href="{{ ref . $ref }}">
+{{ if ne $paragraph "" }}
+  <a class="internal" data-paragraph="{{ $paragraph }}" name="{{ $dirFile.File }}" href="{{ ref . $ref }}">
+{{ else }}
+  <a class="internal" name="{{ $dirFile.File }}" href="{{ ref . $ref }}">
+{{ end }}
 {{ with $title }}
   {{ . }}
 {{ else }}
