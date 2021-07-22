@@ -1,35 +1,38 @@
-ul, ol {
-	padding-left: 1.5em;
-  line-height: 1.5em;
+ul,
+ol {
+    padding-left: 1.5em;
+    line-height: 1.5em;
 }
+
 li {
-	ul, ol {
-		padding-left: 1em;
-	}
-	>p {
-		padding-top: .5em;
-		margin: 0;
-	}
+    ul,
+    ol {
+        padding-left: 1em;
+    }
+    >p {
+        padding-top: .5em;
+        margin: 0;
+    }
 }
 
 .post-toc {
-	position: relative;
-	width: inherit;
+    position: relative;
+    width: inherit;
 }
 
-.post-citations {
-	>ul {
-		list-style-type: none;
-	}
+.addendum {
+    list-style-type: none;
+	font-size: $font-size - 2pt;
+	color: var(--color-txt-offset);
 }
 
-.post-addendum {
-	>ul {
-		list-style-type: none;
-	}
+.citation {
+	list-style-type: none;
+	font-size: $font-size - 2pt;
+	color: var(--color-txt-offset);
 }
 
 .home-list {
-  list-style-type: none;
-  padding-left: 0;
+    list-style-type: none;
+    padding-left: 0;
 }

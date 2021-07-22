@@ -1,7 +1,7 @@
 @import './_vars.scss';
 body {
     font-family: 'Ubuntu', Georgia, serif;
-    font-size: 14pt;
+    font-size: $font-size;
     word-break: break-word;
     color: var(--color-txt);
     background-color: var(--color-bg);
