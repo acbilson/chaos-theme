@@ -1,18 +1,18 @@
-{{ $ref := .Get 0 }}
-{{ $title := .Get 1 }}
-{{ $paragraph := .Get 2 }}
+{{ $src := .Get "src" }}
+{{ $name := .Get "name" }}
+{{ $paragraph := .Get "paragraph" }}
 
 <!-- gets the filename off the reference path -->
-{{ $dirFile := path.Split $ref }}
+{{ $dirFile := path.Split $src }}
 {{ $words := split $dirFile.File "-" }}
 
 <!-- by using ref I'll also get errors if the link does not exist -->
 {{ if ne $paragraph "" }}
-  <a class="internal" data-paragraph="{{ $paragraph }}" name="{{ $dirFile.File }}" href="{{ ref . $ref }}">
+  <a class="internal" data-paragraph="{{ $paragraph }}" name="{{ $dirFile.File }}" href="{{ ref . $src }}">
 {{ else }}
-  <a class="internal" name="{{ $dirFile.File }}" href="{{ ref . $ref }}">
+  <a class="internal" name="{{ $dirFile.File }}" href="{{ ref . $src }}">
 {{ end }}
-{{ with $title }}
+{{ with $name }}
   {{ . }}
 {{ else }}
   {{ range $words }} {{ . }} {{ end }}

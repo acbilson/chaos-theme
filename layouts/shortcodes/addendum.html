@@ -1,0 +1,11 @@
+{{ $title := or (.Get "title") "Addendum" }}
+{{ $lines := split .Inner "\n"}}
+
+<h2>{{ $title }}<a name="addendum"></a></h2>
+<ul class="addendum">
+{{ range $idx, $line := $lines }}
+    {{ if ne $line "" }}
+    <li><sup>[{{$idx}}]</sup>{{ $line }}</li>
+    {{ end }}
+{{ end }}
+</ul>
