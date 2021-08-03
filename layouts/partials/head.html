@@ -28,9 +28,11 @@
   <!-- adds PWA manifest -->
   <link rel="manifest" href="{{ .Site.BaseURL }}/manifest.json">
 
-  <!-- adds RSS feed -->
+  <!-- adds supported RSS feeds -->
   {{ range .AlternativeOutputFormats -}}
-  {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
+  <link rel="{{ .Rel }}" type="{{ .MediaType.Type | html }}" href="{{ $.Site.BaseURL }}/logs/index.xml" title="{{ $.Site.Title }} - Ship's Log" />
+  <link rel="{{ .Rel }}" type="{{ .MediaType.Type | html }}" href="{{ $.Site.BaseURL }}/notes/index.xml" title="{{ $.Site.Title }} - Notes" />
+  <link rel="{{ .Rel }}" type="{{ .MediaType.Type | html }}" href="{{ $.Site.BaseURL }}/posts/index.xml" title="{{ $.Site.Title }} - Posts" />
   {{ end -}}
 
   <!-- sets color scheme before page load -->
