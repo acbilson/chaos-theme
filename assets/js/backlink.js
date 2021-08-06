@@ -42,7 +42,6 @@ function createPopup(offsetTop, offsetLeft, contentElements) {
 
     popup.classList.add('backlink-popup', 'hide');
     popup.style.top = `${offsetTop + 20}px`;
-    popup.style.left = `${offsetLeft}px`;
     contentElements.forEach((el) => popup.appendChild(el));
 
     return popup;
