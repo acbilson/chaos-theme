@@ -6,4 +6,5 @@
     {{ $epVal = "🪴" }}
   {{ end }}
 {{ end }}
-<a href="{{ .Permalink }}">{{ .Title }}</a><span> {{ $epVal }}</span>
+
+<a data-epistemic="{{$epVal}}" href="{{ .Permalink }}">{{ .Title }}</a><span> {{ $epVal }}</span>
