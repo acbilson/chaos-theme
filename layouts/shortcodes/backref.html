@@ -1,20 +1,11 @@
-{{ $src := .Get "src" }}
-{{ $name := .Get "name" }}
-{{ $paragraph := .Get "paragraph" }}
-
-<!-- gets the filename off the reference path -->
+{{ $src := .Get "src" }} {{ $name := .Get "name" }} {{ $paragraph := .Get "paragraph" }}
 {{ $dirFile := path.Split $src }}
 {{ $words := split $dirFile.File "-" }}
-
-<!-- by using ref I'll also get errors if the link does not exist -->
+{{ $title := delimit $words " " }}
 {{ if ne $paragraph "" }}
   <a class="internal" data-paragraph="{{ $paragraph }}" name="{{ $dirFile.File }}" href="{{ ref . $src }}">
 {{ else }}
   <a class="internal" name="{{ $dirFile.File }}" href="{{ ref . $src }}">
 {{ end }}
-{{ with $name }}
-  {{ . }}
-{{ else }}
-  {{ range $words }} {{ . }} {{ end }}
-{{ end }}
-</a>
+{{ with $name }}{{ . }}{{ else }}{{ $title }}{{ end }}</a>
+{{- print "" -}}

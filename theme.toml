@@ -5,7 +5,7 @@ description = "Chaos is a Hugo theme built special for Alex Bilson at https://al
 homepage = "https://alexbilson.dev/"
 tags = ["Blog", "Personal", "Minimal", "Simple", "Clean", "Modern", "Technical"]
 features = ["Responsive"]
-min_version = "0.41"
+min_version = "0.71.1"
 
 [author]
 name = "Alex Bilson"
