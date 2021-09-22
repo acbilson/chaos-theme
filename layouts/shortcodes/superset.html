@@ -1,3 +1,1 @@
-{{ $text := .Get 0 }}
-{{ $link := or (.Get 1) "addendum" }}
-<sup><a href="#{{ $link }}">({{ $text }})</a></sup>
+{{ $text := .Get 0 }}{{ $link := or (.Get 1) "addendum" }}<sup><a href="#{{ $link }}">({{ $text }})</a></sup>
