@@ -1,7 +1,6 @@
 h1 {
     font-family: 'Ubuntu Condensed', Verdana, Geneva, sans-serif;
     color: var(--color-txt);
-    clear: both;
 }
 
 h2,
@@ -11,14 +10,9 @@ h5,
 h6 {
     font-family: 'Ubuntu Condensed', Verdana, Geneva, sans-serif;
     color: var(--color-txt);
-    margin: 1.5em 0 0.5em 0;
-    padding-bottom: 0.125em;
-    clear: both;
-    line-height: 1;
 }
 
 p {
-    margin: 1.5em 0;
     line-height: 1.575em;
     text-align: justify;
 }
@@ -26,21 +20,17 @@ p {
 pre {
     >code {
         font-family: 'Ubuntu Mono', monospace !important;
-        padding: 1em;
-        line-height: 1.5;
+        word-break: normal;
+
         border: grey 3px solid;
         border-radius: 0.3rem;
-        margin: 1.5em 0;
         display: block;
-        word-break: normal;
         overflow-x: auto;
     }
 }
 
 sup {
-    color: var(--color-txt);
-    padding-left: .12em;
-    padding-right: .12em;
+    padding: 0 .12em;
     >a {
         text-decoration: none;
         color: var(--color-txt-offset);
@@ -48,11 +38,11 @@ sup {
 }
 
 blockquote {
-    border: 2px solid var(--color-border);
     background-color: var(--color-primary-offset);
-    margin: 0.8em 0.8em 0em 0.8em;
-    padding: 0.5em 0.5em;
-    line-height: 1.5;
+    border: 2px solid var(--color-border);
+    border-radius: 0.3rem;
+    padding: 0.5em;
+    line-height: 1.575em;
     p {
         display: inline;
     }
@@ -63,7 +53,7 @@ h1.post-title {
 }
 
 h1.list-title {
-	text-align: center;
+    text-align: center;
     margin: 0.1em 0 0.2em 0;
     font-size: 2.2em;
     text-transform: uppercase;
