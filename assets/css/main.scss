@@ -1,6 +1,7 @@
 @import './_vars.scss';
 body {
     font-family: 'Ubuntu', Georgia, serif;
+    -moz-osx-font-smoothing: grayscale;
     font-size: $font-size;
     word-break: break-word;
     color: var(--color-txt);
@@ -54,3 +55,4 @@ hr {
 @import './logs/text.scss';
 @import './search/containers.scss';
 @import './network/nodes.scss';
+@import './styles/containers.scss';
