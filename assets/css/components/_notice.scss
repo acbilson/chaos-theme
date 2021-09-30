@@ -1,0 +1,22 @@
+.notice {
+    $spacing: 25px;
+    text-align: center;
+    &__header {
+        position: relative;
+        top: -$spacing;
+        margin: auto;
+        text-align: inherit;
+        font-size: 2em;
+        line-height: 0;
+    }
+    &__text {
+        text-align: inherit;
+        margin: 0;
+    }
+    &__top {
+        margin-bottom: $spacing;
+    }
+    &__bottom {
+        margin-top: $spacing;
+    }
+}

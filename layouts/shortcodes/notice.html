@@ -1,0 +1,9 @@
+{{- $type := .Get "type" -}}
+{{- $icon := "ℹ️" -}}
+{{- if eq $type "warning" -}}{{- $icon = "⚠️" -}}{{- end -}}
+<div class="notice">
+  <hr class="notice__top"/>
+  <p class="notice__header">{{$icon}}</p>
+  <p class="notice__text">{{- .Inner -}}</p>
+  <hr class="notice__bottom"/>
+</div>

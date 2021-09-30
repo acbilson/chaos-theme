@@ -32,7 +32,6 @@ function toggleMode(event) {
     }
 }
 
-
 const storedTheme = localStorage.getItem('color-mode');
 
 if (storedTheme != null) {
