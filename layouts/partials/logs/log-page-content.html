@@ -1,0 +1,9 @@
+<section class="log-page">
+
+  <h1 class="log-page__title">{{- .Title -}}</h1>
+  <p>{{- .Content -}}</p>
+
+  {{ range .Pages -}}
+    {{ .Render "li" }}
+  {{- end }}
+</section>
