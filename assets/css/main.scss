@@ -7,8 +7,9 @@
 
 /* Component styles */
 
+@import './components/nav-bar.scss';
 @import './components/log.scss';
- @import './components/log-card.scss';
+@import './components/log-card.scss';
 @import './components/note.scss';
 @import './components/note-page.scss';
 @import './components/note-card.scss';
@@ -18,7 +19,6 @@
 // @import './components/bible.scss';
 // @import './components/post.scss';
 // @import './components/post-card.scss';
-
 @import './default/containers.scss';
 @import './default/text.scss';
 @import './default/nav.scss';

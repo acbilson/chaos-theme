@@ -1,0 +1,25 @@
+.nav-bar {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    background-color: var(--color-background);
+    padding: 0;
+    width: 100%;
+    z-index: 10;
+    margin: 0;
+    >a {
+        padding-left: 0.5em;
+    }
+    &__title {
+        font-size: 0.8em;
+        margin: auto;
+    }
+    &__switch {
+        max-height: 24px;
+        font-size: 0.8em;
+        color: var(--color-accent);
+        background-color: var(--color-link);
+        border: 3px bevel var(--color-accent);
+        margin-top: 3px;
+    }
+}

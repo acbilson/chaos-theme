@@ -1,40 +1,42 @@
 function updateMode(mode) {
-  document.documentElement.setAttribute('color-mode', mode);
-  localStorage.setItem("color-mode", mode);
+    document.documentElement.setAttribute('color-mode', mode);
+    localStorage.setItem("color-mode", mode);
 }
 
 function toggleMode(event) {
 
-  if (event && event.target) {
+    if (event && event.target) {
 
-    const checked = event.target.checked;
+        const selectedTheme = document.querySelector('#nav-switch option:checked').value;
 
-    if (checked) {
-      updateMode('dark');
+        if (selectedTheme) {
+            updateMode(selectedTheme);
 
-      // manually update comments
-      if (window.REMARK42) {
-        window.REMARK42.changeTheme('dark');
-      }
+            // manually update comments
+            if (window.REMARK42) {
+                var theme;
+                switch (selectedTheme) {
+                    case 'jungle':
+                    case 'void':
+                        theme = 'dark';
+                        break;
 
-    } else {
-      updateMode('light');
-
-      // manually update comments
-      if (window.REMARK42) {
-        window.REMARK42.changeTheme('light');
-      }
+                    case 'minimal':
+                    default:
+                        theme = 'light';
+                        break;
+                }
+                window.REMARK42.changeTheme(theme);
+            }
+        }
     }
-  }
 }
 
-const toggle = document.getElementById('mode-switch');
 
-// sets toggle visual to default value
-if (localStorage.getItem('color-mode') === 'dark') {
-  toggle.checked = true;
-} else {
-  toggle.checked = false;
+const storedTheme = localStorage.getItem('color-mode');
+
+if (storedTheme != null) {
+  document.querySelector(`#nav-switch option[value='${storedTheme}']`).selected = true;
 }
 
-toggle.addEventListener('change', toggleMode);
+document.getElementById('nav-switch').addEventListener('change', toggleMode);

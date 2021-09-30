@@ -1,12 +1,3 @@
-/*
-:root[color-mode="light"] {
-  --color-bg: #fffffe;
-  --color-bg-offset: #29293e;
-  --color-txt: black;
-  --color-txt-offset: gray;
-  --color-stroke: gray;
-}
-*/
 :root {
   // jungle pallette
   --color-midnight:      rgb(22, 22, 26);
@@ -25,15 +16,9 @@
   // sunshine pallette
   --color-royalty:       rgb(39, 35, 67);
   --color-sunshine:      rgb(255, 216, 3);
-
 }
 
-// TODO: background and cards should have separate colors,
-//       with headlines sitting comfortably against the background
-//       and paragraph/aside sitting with cards
-// https://www.happyhues.co/palettes/14
-// https://www.rapidtables.com/convert/color/hex-to-rgb.html
-:root[color-mode="light"] {
+:root[color-mode="jungle"] {
   --color-background: var(--color-forest-green);
   --color-accent: var(--color-midnight);
   --color-stroke: var(--color-faded-orange);
@@ -42,9 +27,12 @@
   --color-paragraph: var(--color-teal);
   --color-aside: var(--color-teal);
   --color-link: var(--color-sunset-red);
+
+  // theme-specific formatting
+  --minimal-border: 3px solid black;
 }
 
-:root[color-mode="dark"] {
+:root[color-mode="void"] {
   --color-background: var(--color-midnight);
   --color-accent: var(--color-jungle-green);
   --color-stroke: var(--color-pitch-black);
@@ -53,6 +41,23 @@
   --color-paragraph: var(--color-slate);
   --color-aside: var(--color-slate);
   --color-link: var(--color-magenta);
+
+  // theme-specific formatting
+  --minimal-border: none;
+}
+
+:root[color-mode="minimal"] {
+  --color-background: var(--color-midnight);
+  --color-accent: var(--color-jungle-green);
+  --color-stroke: var(--color-pitch-black);
+
+  --color-headline: var(--color-eggshell);
+  --color-paragraph: var(--color-slate);
+  --color-aside: var(--color-slate);
+  --color-link: var(--color-magenta);
+
+  // theme-specific formatting
+  --minimal-border: none;
 }
 
 $laptop-width: 80em;
