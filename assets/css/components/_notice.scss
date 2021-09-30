@@ -1,17 +1,25 @@
 .notice {
     $spacing: 25px;
-    text-align: center;
+    &--is-long {
+        text-align: left;
+    }
+    &--is-short {
+        text-align: center;
+    }
     &__header {
         position: relative;
         top: -$spacing;
         margin: auto;
-        text-align: inherit;
+        text-align: center;
         font-size: 2em;
         line-height: 0;
     }
     &__text {
         text-align: inherit;
         margin: 0;
+    }
+    &__ref {
+        text-align: center;
     }
     &__top {
         margin-bottom: $spacing;

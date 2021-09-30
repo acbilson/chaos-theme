@@ -1,0 +1,12 @@
+.accordion {
+    &__title {
+        color: var(--color-link);
+    }
+    &__text {
+        color: var(--color-background);
+        background-color: var(--color-paragraph);
+        border: 1px solid var(--color-stroke);
+        border-radius: 3px;
+        padding: 0 15px;
+    }
+}

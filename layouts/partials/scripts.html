@@ -1,11 +1,6 @@
 {{ $diagramjs := resources.Get "js/tag-diagram.js" }}
-{{ $hamburgerjs := resources.Get "js/hamburger.js" }}
-{{ $accordionjs := resources.Get "js/accordion.js" }}
 {{ $darkmodejs := resources.Get "js/darkmode.js" }}
 {{ $backlinkjs := resources.Get "js/backlink.js" }}
-{{ $sitejs := slice $hamburgerjs $accordionjs | resources.Concat "js/concated.js" | minify }}
-
-<script src="{{ $sitejs.Permalink }}"></script>
 
   <!-- adds event handler to let the user change the color scheme -->
 <script src="{{ $darkmodejs.Permalink }}"></script>
