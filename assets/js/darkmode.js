@@ -16,11 +16,11 @@ function toggleMode(event) {
             if (window.REMARK42) {
                 var theme;
                 switch (selectedTheme) {
-                    case 'jungle':
                     case 'void':
                         theme = 'dark';
                         break;
 
+                    case 'jungle':
                     case 'minimal':
                     default:
                         theme = 'light';

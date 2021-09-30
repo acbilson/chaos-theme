@@ -1,8 +1,11 @@
-.log-page {
+.post {
     width: 90%;
     &__title {
-        text-align: center;
         font-size: 3em;
+    }
+    &__toc {
+        position: relative;
+        width: inherit;
     }
     @media screen and (min-width: $phone-width) {
         width: 100%;

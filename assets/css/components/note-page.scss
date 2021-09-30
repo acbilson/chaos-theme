@@ -1,15 +1,18 @@
 .note-page {
+    width: 90%;
     &__title {
         text-align: center;
         font-size: 3em;
     }
     &__list {
+        padding-left: 0;
         list-style: none;
     }
     &__form {
         align-self: flex-start;
     }
     @media screen and (min-width: $phone-width) {
+        width: 100%;
         &__list {
             column-count: 2;
             --moz-column-count: 2;

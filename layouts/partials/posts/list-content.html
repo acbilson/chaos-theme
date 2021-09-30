@@ -1,6 +1,7 @@
-{{ range .Pages.ByTitle }}
-  <section>
-    <h2><a href="{{.Permalink}}">{{ .Title }}</a></h2>
-    {{ .Content }}
-  </section>
-{{ end }}
+<section class="post-list">
+  <h1 class="post-list__title">{{- .Title -}}</h1>
+  <p>{{- .Content -}}</p>
+  {{- range .Pages -}}
+    {{ .Render "li" }}
+  {{- end -}}
+</section>

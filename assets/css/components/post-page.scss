@@ -1,0 +1,31 @@
+.post-page {
+    width: 90%;
+    &__title {
+        text-align: center;
+        font-size: 3em;
+    }
+    &__category {
+        width: 90%;
+        margin: auto;
+    }
+    @media screen and (min-width: $phone-width) {
+        width: 100%;
+    }
+}
+
+.post-list {
+    width: 90%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-evenly;
+    >article {
+        margin: 5px 0;
+    }
+    &__title {
+        text-align: center;
+        font-size: 3em;
+    }
+    @media screen and (min-width: $phone-width) {
+        width: 100%;
+    }
+}
