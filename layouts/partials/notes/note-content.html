@@ -1,9 +1,47 @@
-<article class="h-entry">
+<article class="note h-entry">
 
-    <h1 class="p-name post-title">{{ .Title }}</h1>
-    <a class="u-url" href="{{ .Permalink }}"></a>
+    <h1 class="note__title p-name">{{ .Title }}</h1>
+    <a class="u-url" href="{{ .Permalink }}" hidden></a>
 
-    <div class="e-content">
+    <div class="note__content e-content">
         {{ .Content }}
     </div>
+
+    <ul class="note__attr">
+    {{- if isset .Params "author" -}}
+        <li>By <a rel="author" class="p-author">{{- .Params.author -}}</a></li>
+    {{- else -}}
+        <li>By <a rel="author" class="p-author">Alex Bilson</a></li>
+    {{- end -}}
+
+    {{- if isset .Params "date" -}}
+    <li>Posted <time class="dt-published" datetime="{{ .Date.Format "2006-01-02" }}">{{- .Date.Format "Jan 2, 2006" -}}</time></li>
+    <li>Modified <time datetime="{{ .Lastmod.Format "2006-01-02" }}">{{- .Lastmod.Format "Jan 2, 2006" -}}</time></li>
+    {{- end -}}
+
+    {{- if isset .Params "epistemic" -}}
+        {{- $epVal := "🌱" -}}
+        {{- with .Params.epistemic -}}
+        {{- if eq . "sprout" -}}
+            {{- $epVal = "🌿" -}}
+        {{- else if eq . "plant" -}}
+            {{- $epVal = "🪴" -}}
+        {{- end -}}
+        {{- end -}}
+        <li>Epistemic: <span>{{ $epVal }}(<a href="/notes/epistemic-notes-reveal-growth">{{ .Params.epistemic }}</a>)</span></li>
+    {{- end -}}
+
+    {{- if isset .Params "tags" -}}
+    <li>Tags:
+        {{- range $name := .Param "tags" -}}
+        {{- with $.Site.GetPage (printf "/%s/%s" "tags" ( $name | urlize)) -}}
+        <span><a class="p-category" href="{{ .Permalink }}">{{- $name -}}</a></span>
+        {{- end -}}
+        {{- end -}}
+    </li>
+    {{- end -}}
+    </ul>
+
+  {{ partial "backlink.html" . }}
+  {{ partial "comments.html" . }}
 </article>

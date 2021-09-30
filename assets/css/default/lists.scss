@@ -1,9 +1,3 @@
-ul,
-ol {
-    padding-left: 1.5em;
-    line-height: 1.5em;
-}
-
 li {
     ul,
     ol {
@@ -23,13 +17,13 @@ li {
 .addendum {
     list-style-type: none;
 	font-size: $font-size - 2pt;
-	color: var(--color-txt-offset);
+	color: var(--color-aside);
 }
 
 .citation {
 	list-style-type: none;
 	font-size: $font-size - 2pt;
-	color: var(--color-txt-offset);
+	color: var(--color-aside);
 }
 
 .home-list {

@@ -5,7 +5,7 @@ $slider-height: $switch-height - ($switch-height / 3);
 
 .nav-bar {
 	font-family: Verdana, Geneva, sans-serif;
-  background-color: var(--color-bg);
+  background-color: var(--color-background);
 	padding: 0;
 	width: 100%;
 	z-index: 10;
@@ -80,7 +80,7 @@ $slider-height: $switch-height - ($switch-height / 3);
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: var(--color-primary-offset);
+  background-color: var(--color-accent);
   -webkit-transition: .4s;
   transition: .4s;
 }
@@ -92,17 +92,17 @@ $slider-height: $switch-height - ($switch-height / 3);
   width: $slider-width;
   left: ($switch-width - $slider-width) / 5;
   bottom: ($switch-height - $slider-height) / 2;
-  background-color: var(--color-primary);
+  background-color: var(--color-link);
   -webkit-transition: .4s;
   transition: .4s;
 }
 
 input:checked + .slider {
-  background-color: var(--color-primary-offset);
+  background-color: var(--color-stroke);
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px var(--color-primary-offset);
+  box-shadow: 0 0 1px var(--color-stroke);
 }
 
 input:checked + .slider:before {

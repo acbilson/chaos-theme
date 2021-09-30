@@ -2,36 +2,25 @@
 <html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="{{ .Site.Params.defaultColorMode }}">
 {{ partial "head.html" . }}
 <body>
-    {{ partial "nav-bar.html" . }}
-    {{ partial "lists/list-header.html" . }}
+  {{ partial "nav-bar.html" . }}
+  {{ partial "notes/note-page-content.html" . }}
+  {{ partial "foot.html" . }}
+  {{ partial "scripts.html" . }}
+  <script>
+  function handleForm() {
+    const form = document.notesForm;
+    filterByEpistemic(form);
+  }
 
-    <form name="notesForm" class="note-form" action="javascript:handleForm()">
-    <select name="epistemicSelector">
-      <option value="🌱">Seedling 🌱</option>
-      <option value="🌿">Sprout 🌿</option>
-      <option value="🪴">Plant 🪴</option>
-    </select>
-    <input type="submit" value="Filter"/>
-    </form>
+  function filterByEpistemic(form) {
+    const selectedEpistemic = Array.from(form.epistemicSelector.selectedOptions).map(o => o.value)[0];
 
-    {{ partial "notes/list-content.html" . }}
-    {{ partial "lists/list-footer.html" . }}
-    {{ partial "scripts.html" . }}
+    Array.from(document.querySelector('#note-form').children)
+      .forEach(li => {
+        const epistemic = li.children[0].dataset.epistemic;
+        li.style.display = epistemic === selectedEpistemic ? 'block' : 'none';
+      });
+  }
+  </script>
 </body>
-<script>
-function handleForm() {
-  const form = document.notesForm;
-  filterByEpistemic(form);
-}
-
-function filterByEpistemic(form) {
-  const selectedEpistemic = Array.from(form.epistemicSelector.selectedOptions).map(o => o.value)[0];
-
-  Array.from(document.querySelector('ul.notes-list').children)
-    .forEach(li => {
-      const epistemic = li.children[0].dataset.epistemic;
-      li.style.display = epistemic === selectedEpistemic ? 'block' : 'none';
-    });
-}
-</script>
 </html>

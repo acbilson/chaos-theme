@@ -1,0 +1,25 @@
+<article class="note-page">
+
+  <h1 class="note-page__title">{{- .Title -}}</h1>
+
+  {{- with .Content -}}
+  <p>{{- . -}}</p>
+  {{- end -}}
+
+    <form id="note-form" name="notesForm" class="note-page__form" action="javascript:handleForm()">
+    <select name="epistemicSelector">
+      <option value="🌱">Seedling 🌱</option>
+      <option value="🌿">Sprout 🌿</option>
+      <option value="🪴">Plant 🪴</option>
+    </select>
+    <input type="submit" value="Filter"/>
+    </form>
+
+  <ul class="note-page__list">
+  {{- range .Pages.ByLastmod.Reverse -}}
+    {{- if not .Draft -}}
+      <li>{{ .Render "li" }}</li>
+    {{- end -}}
+  {{- end -}}
+  </ul>
+</article>

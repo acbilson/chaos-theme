@@ -1,0 +1,11 @@
+.note {
+    &__title {
+        font-size: 3em;
+    }
+    &__attr {
+        display: flex;
+        flex-flow: column nowrap;
+        list-style: none;
+        font-size: 0.8em;
+    }
+}

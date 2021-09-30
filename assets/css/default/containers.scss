@@ -5,7 +5,7 @@
 }
 
 .backlink-content {
-    border: 1px solid var(--color-txt);
+    border: 1px solid var(--color-paragraph);
     margin-top: 2%;
     padding: 10px;
 }
@@ -57,7 +57,7 @@ div.title-body {
 .card-summary {
     margin: 1em 0;
     line-height: 1.5;
-    color: var(--color-txt);
+    color: var(--color-paragraph);
 }
 
 .business-card-container {
@@ -81,7 +81,7 @@ div.title-body {
 
 .post-accordion-quote {
     &:hover {
-        background-color: var(--color-primary-offset);
+        background-color: var(--color-aside);
     }
     box-shadow: 0 0.5rem 1rem 0 rgba(0,
     0,
@@ -91,7 +91,7 @@ div.title-body {
     0,
     0,
     0.23) inset;
-    background-color: var(--color-bg);
+    background-color: var(--color-background);
 }
 
 .accordion-content {
@@ -106,7 +106,7 @@ section.timeline {
     margin-top: 1em;
     >p {
         border-top: 2px dashed;
-        border-color: var(--color-secondary) !important;
+        border-color: var(--color-stroke) !important;
         margin: 0;
         padding: 30px;
         &:nth-child(even) {
@@ -144,8 +144,8 @@ span.timeline-title {
     margin-right: auto;
     width: 10em;
     text-align: center;
-    background: var(--color-bg);
-    border: 2px dashed var(--color-secondary);
+    background: var(--color-background);
+    border: 2px dashed var(--color-stroke);
     border-radius: 30%;
     padding: 0 0.2em 0 0.2em;
 }

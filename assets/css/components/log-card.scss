@@ -1,0 +1,39 @@
+.log-card {
+    display: flex;
+    flex-flow: column nowrap;
+    &__list {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        min-width: 14%;
+        line-height: 1.575em;
+        list-style: none;
+        margin-top: 0;
+        padding-left: 0;
+        >li {
+            font-size: 0.8em;
+        }
+    }
+    &__link {
+        text-decoration: none;
+    }
+    &__content {
+        >p {
+            &:first-child {
+                margin-top: 0;
+            }
+        }
+    }
+    @media screen and (min-width: $phone-width) {
+        display: flex;
+        flex-flow: row nowrap;
+        &__list {
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: flex-start;
+        }
+        &__content {
+            max-width: unset;
+        }
+    }
+}

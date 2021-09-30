@@ -1,0 +1,41 @@
+body {
+    font-family: 'Ubuntu', Georgia, serif;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: $font-size;
+    word-break: break-word;
+    color: var(--color-paragraph);
+    background-color: var(--color-background);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    max-width: 700px;
+    margin: auto;
+}
+
+header {
+    margin-top: 2em;
+}
+
+article {
+    width: 100%;
+    max-width: 600px;
+}
+
+section {
+    width: 100%;
+}
+
+hr {
+    border: 0;
+    border-bottom: thin solid var(--color-stroke);
+    margin: 3em 0;
+    clear: both;
+}
+
+@media screen and (min-width: $phone-width) {
+    body {
+        padding: 0;
+    }
+}

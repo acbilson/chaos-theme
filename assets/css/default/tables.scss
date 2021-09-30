@@ -1,22 +1,15 @@
 table {
-	color: var(--color-primary);
+	color: var(--color-paragraph);
 	border-collapse: collapse;
 	border-spacing: 0;
 	margin: 1.5em 0;
 }
 td {
 	padding: 0.5em 1em;
-	border: thin solid var(--color-border);
+	border: thin solid var(--color-stroke);
 }
 th {
 	padding: 0.5em 1em;
-	border: thin solid var(--color-border);
+	border: thin solid var(--color-stroke);
 	font-weight: normal;
-}
-tr {
-	&:nth-child(even) {
-		td {
-			background: var(--color-primary-offset);
-		}
-	}
 }

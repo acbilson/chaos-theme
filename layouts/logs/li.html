@@ -1,18 +1,18 @@
-<article class="log">
-  <div class="log-attr">
+<article class="log-card">
+  <ul class="log-card__list">
 
-    <span><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time></span>
+    <li><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time></li>
 
-    {{ if isset .Params "author" }}
-      <span><a rel="author" class="p-author">{{ .Params.author }}</a></span>
-    {{ else }}
-      <span><a rel="author" class="p-author">Alex Bilson</a></span>
-    {{ end }}
+    {{- if isset .Params "author" -}}
+      <li><a rel="author" class="p-author">{{- .Params.author -}}</a></li>
+    {{- else -}}
+      <li><a rel="author" class="p-author">Alex Bilson</a></li>
+    {{- end -}}
 
-    <span><a style="text-decoration: none;" href="{{ .Permalink }}" rel="bookmark">⚓</a></span>
+    <li><a class="log-card__link" href="{{ .Permalink }}" rel="bookmark">⚓</a></li>
 
-  </div>
-  <div class="log-content e-content">
+  </ul>
+  <div class="log-card__content e-content">
     {{ .Content }}
   </div>
 </article>
