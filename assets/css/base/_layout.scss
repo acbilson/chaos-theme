@@ -1,14 +1,11 @@
 body {
-    -moz-osx-font-smoothing: grayscale;
-    word-break: break-word;
-    color: var(--color-paragraph);
-    background-color: var(--color-background);
     display: flex;
     flex-direction: column;
     align-items: center;
     box-sizing: border-box;
     max-width: 700px;
     margin: auto;
+    background-color: var(--color-background);
 }
 
 header {

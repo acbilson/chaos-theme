@@ -15,6 +15,7 @@
         }
     }
     &__link {
+        color: var(--color-aside);
         text-decoration: none;
     }
     &__content {
@@ -31,6 +32,7 @@
             display: flex;
             flex-flow: column nowrap;
             justify-content: flex-start;
+            text-align: center;
         }
         &__content {
             max-width: unset;

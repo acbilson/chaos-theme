@@ -4,9 +4,9 @@
     <li><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time></li>
 
     {{- if isset .Params "author" -}}
-      <li><a rel="author" class="p-author">{{- .Params.author -}}</a></li>
+      <li><a rel="author" class="log-card__link p-author">{{- .Params.author -}}</a></li>
     {{- else -}}
-      <li><a rel="author" class="p-author">Alex Bilson</a></li>
+      <li><a rel="author" class="log-card__link p-author">Alex Bilson</a></li>
     {{- end -}}
 
     <li><a class="log-card__link" href="{{ .Permalink }}" rel="bookmark">⚓</a></li>
