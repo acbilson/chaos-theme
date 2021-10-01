@@ -1,5 +1,6 @@
 .notice {
-    $spacing: 25px;
+    $spacing: $base-size * 8;
+    margin: ($base-size * 10) ($base-size * 3);
     &--is-long {
         text-align: left;
     }
@@ -11,7 +12,7 @@
         top: -$spacing;
         margin: auto;
         text-align: center;
-        font-size: 2em;
+        font-size: $base-size * 10;
         line-height: 0;
     }
     &__text {
@@ -23,8 +24,10 @@
     }
     &__top {
         margin-bottom: $spacing;
+        margin-top: 0;
     }
     &__bottom {
         margin-top: $spacing;
+        margin-bottom: 0;
     }
 }

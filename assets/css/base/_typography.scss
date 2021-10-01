@@ -33,6 +33,8 @@ pre {
 blockquote {
     font-size: $font-md;
     line-height: $font-lg;
+    color: var(--color-background);
+    background-color: var(--color-paragraph);
 }
 
 a {
@@ -48,4 +50,9 @@ ul, ol {
 figcaption {
   font-style: italic;
   line-height: $font-lg;
+  color: var(--color-aside);
+}
+
+details {
+    font-size: $font-md;
 }
