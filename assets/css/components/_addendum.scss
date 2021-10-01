@@ -1,0 +1,22 @@
+.addendum {
+    margin: ($base-size * 5) 0;
+    &__title {
+        margin: 0 0 ($base-size * 5) 0;
+    }
+    &__list {
+        margin: 0;
+        list-style: none;
+        line-height: $font-md;
+    }
+    &__item {
+        >sup {
+            padding-right: $base-size;
+        }
+    }
+    &__item+&__item {
+        margin: ($base-size * 4) 0;
+    }
+    &__item:last-of-type {
+        margin: ($base-size * 4) 0 0 0;
+    }
+}

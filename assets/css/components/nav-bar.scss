@@ -18,7 +18,7 @@
         font-size: $font-sm;
         color: var(--color-accent);
         background-color: var(--color-link);
-        border: 3px bevel var(--color-accent);
+        border: $base-size bevel var(--color-accent);
     }
     @media screen and (min-width: $phone-width) {
         width: $screen-width-lg;

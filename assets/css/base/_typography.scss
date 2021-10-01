@@ -44,3 +44,8 @@ ul, ol {
     color: var(--color-paragraph);
     line-height: $font-lg;
 }
+
+figcaption {
+  font-style: italic;
+  line-height: $font-lg;
+}

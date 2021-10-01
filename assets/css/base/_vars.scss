@@ -60,10 +60,14 @@
   --minimal-border: none;
 }
 
+// all sizes are multiples of this value
+// to make sizing and alignment simple
+$base-size: 3px;
+
 $laptop-width: 80em;
 $phone-width: 40.063em;
 
-$font-sm: 12px;
+$font-sm: $base-size * 4;
 $font-md: $font-sm + 6;
 $font-lg: $font-md + 12;
 $font-xl: $font-lg + 18;

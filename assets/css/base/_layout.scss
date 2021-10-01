@@ -3,18 +3,18 @@ body {
     flex-direction: column;
     align-items: center;
     box-sizing: border-box;
-    max-width: 700px;
+    max-width: $base-size * 250;
     margin: auto;
     background-color: var(--color-background);
 }
 
 header {
-    margin-top: 2em;
+    margin-top: $base-size * 5;
 }
 
 article,
 section {
-    max-width: 600px;
+    max-width: $base-size * 200;
     width: $screen-width-sm;
     >h1 {
         font-size: $font-xl;
@@ -25,7 +25,7 @@ section {
 pre {
     >code {
         display: block;
-        border: 3px solid var(--color-stroke);
+        border: $base-size solid var(--color-stroke);
         border-radius: $rounded-sm;
         overflow-x: auto;
         padding: 5px;
@@ -34,35 +34,48 @@ pre {
 
 blockquote {
     background-color: var(--color-background);
-    border: 2px solid var(--color-stroke);
+    border: $base-size solid var(--color-stroke);
     border-radius: $rounded-sm;
-    padding: 0.5em;
+    padding: $base-size * 2;
     p {
         display: inline;
     }
 }
 
-
 hr {
     border: 0;
     border-bottom: thin solid var(--color-stroke);
-    margin: 3em 0;
+    margin: ($base-size * 5) 0;
     clear: both;
 }
 
 input[type="submit"] {
-        color: var(--color-accent);
-        background-color: var(--color-link);
-        border: 3px bevel var(--color-accent);
-        border-radius: $rounded-sm;
-        padding: 2px;
+    color: var(--color-accent);
+    background-color: var(--color-link);
+    border: $base-size bevel var(--color-accent);
+    border-radius: $rounded-sm;
+    padding: $base-size;
 }
 
 select {
-        color: var(--color-accent);
-        background-color: var(--color-link);
-        border: 3px bevel var(--color-accent);
-        border-radius: $rounded-sm;
+    color: var(--color-accent);
+    background-color: var(--color-link);
+    border: $base-size bevel var(--color-accent);
+    border-radius: $rounded-sm;
+}
+
+img {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: ($base-size * 5) 0;
+    border-radius: $rounded-sm;
+    filter: drop-shadow($base-size $base-size $base-size gray);
+}
+
+figcaption {
+    margin-top: -($base-size * 3);
+    padding-left: $base-size * 3;
 }
 
 @media screen and (min-width: $phone-width) {
@@ -71,7 +84,7 @@ select {
     }
     article,
     section {
-        max-width: 600px;
+        max-width: $base-size * 200;
         width: $screen-width-lg;
     }
 }

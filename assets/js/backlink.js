@@ -1,3 +1,5 @@
+const linkClass = 'backref';
+
 function parsePageContext(text) {
     var bodyDOM = new DOMParser().parseFromString(text, 'text/html');
     var urlParts = document.URL.split('/');
@@ -40,8 +42,8 @@ function parsePageContent(text, elementTypes, paragraphNumber = undefined) {
 function createPopup(offsetTop, offsetLeft, contentElements) {
     const popup = document.createElement('div');
 
-    popup.classList.add('backlink-popup', 'hide');
-    popup.style.top = `${offsetTop + 20}px`;
+    popup.classList.add('backref__popup');
+    //popup.style.top = `${offsetTop + 20}px`;
     contentElements.forEach((el) => popup.appendChild(el));
 
     return popup;
@@ -88,7 +90,7 @@ function appendSourceContent(link) {
 const widerThanPhone = window.matchMedia("screen and (min-width:40.063em)").matches;
 
 if (widerThanPhone) {
-    const internalLinks = document.querySelectorAll('a.internal');
+    const internalLinks = document.querySelectorAll(`a.${linkClass}`);
 
     internalLinks.forEach((link) => {
         const popupElementTypes = [
@@ -102,7 +104,7 @@ if (widerThanPhone) {
 }
 
 // retrieves content from all backlinks that reference this page
-const sourceLinks = document.querySelectorAll('a.backlink');
+const sourceLinks = document.querySelectorAll(`a.${linkClass}`);
 
 sourceLinks.forEach((link) => {
     appendSourceContent(link);
