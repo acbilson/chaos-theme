@@ -1,13 +1,28 @@
 .post {
-    width: $screen-width-sm;
     &__title {
         font-size: 3em;
+    }
+    &__author {
+        color: var(--color-aside);
     }
     &__toc {
         position: relative;
         width: inherit;
     }
-    @media screen and (min-width: $phone-width) {
-        width: $screen-width-lg;
+    &__attr {
+        display: flex;
+        flex-flow: column nowrap;
+        list-style: none;
+        font-size: $font-md;
+        padding-left: 5%;
+    }
+    &__link+&__link {
+        margin: 0 $base-size;
+    }
+    &__link:last-of-type {
+        margin-right: 0;
+    }
+    &__link:first-of-type {
+        margin-left: $base-size;
     }
 }
