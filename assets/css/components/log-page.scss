@@ -1,10 +1,10 @@
 .log-page {
-    width: 90%;
+    width: $screen-width-sm;
     &__title {
         text-align: center;
-        font-size: 3em;
+        font-size: $font-xl;
     }
     @media screen and (min-width: $phone-width) {
-        width: 100%;
+        width: $screen-width-lg;
     }
 }

@@ -2,24 +2,22 @@
     display: flex;
     flex-flow: row wrap;
     justify-content: space-evenly;
-    background-color: var(--color-background);
-    padding: 0;
-    width: 100%;
-    z-index: 10;
-    margin: 0;
+    background-color: transparent;
+    margin: 10px 0 0 0;
+    width: $screen-width-lg;
     >a {
-        padding-left: 0.5em;
+        color: var(--color-link);
+        text-decoration: none;
     }
     &__title {
-        font-size: 0.8em;
+        font-size: $font-sm;
         margin: auto;
     }
     &__switch {
         max-height: 24px;
-        font-size: 0.8em;
+        font-size: $font-sm;
         color: var(--color-accent);
         background-color: var(--color-link);
         border: 3px bevel var(--color-accent);
-        margin-top: 3px;
     }
 }

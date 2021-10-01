@@ -1,7 +1,5 @@
 body {
-    font-family: 'Ubuntu', Georgia, serif;
     -moz-osx-font-smoothing: grayscale;
-    font-size: $font-size;
     word-break: break-word;
     color: var(--color-paragraph);
     background-color: var(--color-background);
@@ -19,12 +17,10 @@ header {
 }
 
 article {
-    width: 100%;
     max-width: 600px;
 }
 
 section {
-    width: 100%;
     max-width: 600px;
 }
 

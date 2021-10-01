@@ -1,5 +1,5 @@
 .post {
-    width: 90%;
+    width: $screen-width-sm;
     &__title {
         font-size: 3em;
     }
@@ -8,6 +8,6 @@
         width: inherit;
     }
     @media screen and (min-width: $phone-width) {
-        width: 100%;
+        width: $screen-width-lg;
     }
 }
