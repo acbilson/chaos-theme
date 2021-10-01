@@ -4,7 +4,7 @@
     justify-content: space-evenly;
     background-color: transparent;
     margin: 10px 0 0 0;
-    width: $screen-width-lg;
+    width: 50%;
     >a {
         color: var(--color-link);
         text-decoration: none;
@@ -19,5 +19,8 @@
         color: var(--color-accent);
         background-color: var(--color-link);
         border: 3px bevel var(--color-accent);
+    }
+    @media screen and (min-width: $phone-width) {
+        width: $screen-width-lg;
     }
 }
