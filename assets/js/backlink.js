@@ -43,7 +43,6 @@ function createPopup(offsetTop, offsetLeft, contentElements) {
     const popup = document.createElement('div');
 
     popup.classList.add('backref__popup');
-    //popup.style.top = `${offsetTop + 20}px`;
     contentElements.forEach((el) => popup.appendChild(el));
 
     return popup;
@@ -63,7 +62,7 @@ function appendLinkPopup(link, elementTypes, paragraphNumber) {
 
             const contentElements = parsePageContent(text, elementTypes, paragraphNumber);
             const popupElement = createPopup(link.offsetTop, link.offsetLeft, contentElements);
-            link.appendChild(popupElement);
+            link.insertAdjacentElement('afterend', popupElement);
         });
 }
 
