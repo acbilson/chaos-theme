@@ -1,9 +1,12 @@
-<!-- Gets regular pages for the site -->
-{{ if not .IsHome }}
+<section class="basic">
+{{- with .Title -}}<h1 class="basic__title">{{- . -}}</h1>{{- end -}}
+{{- with .Content -}}
+<p>{{- . -}}</p>
+{{- end -}}
 
-  <!-- Renders all page cards -->
-  {{ range .Pages -}}
-    {{ .Render "li" }}
-  {{- end }}
-
-{{ end }}
+{{- if not .IsHome -}}
+  {{- range .Pages -}}
+    {{- .Render "li" -}}
+  {{- end -}}
+{{- end -}}
+</section>

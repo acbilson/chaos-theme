@@ -2,15 +2,9 @@
 <html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="{{ .Site.Params.defaultColorMode }}">
 {{ partial "head.html" . }}
 <body>
-    {{ partial "nav-bar.html" . }}
-    {{ partial "lists/list-header.html" . }}
-    {{ partial "lists/list-content.html" . }}
-
-    {{ if not .IsHome }}
-      {{ partial "lists/list-footer" . }}
-    {{ end }}
-
+  {{ partial "nav-bar.html" . }}
+  {{ partial "lists/list-content.html" . }}
+  {{ partial "foot.html" . }}
   {{ partial "scripts.html" . }}
-
 </body>
 </html>
