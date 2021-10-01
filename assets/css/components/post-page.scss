@@ -1,31 +1,15 @@
 .post-page {
-    width: $screen-width-sm;
-    &__title {
-        text-align: center;
-        font-size: $font-xl;
-    }
     &__category {
         width: $screen-width-sm;
         margin: auto;
     }
-    @media screen and (min-width: $phone-width) {
-        width: $screen-width-lg;
-    }
 }
 
 .post-list {
-    width: $screen-width-sm;
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-evenly;
     >article {
         margin: 5px 0;
-    }
-    &__title {
-        text-align: center;
-        font-size: $font-xl;
-    }
-    @media screen and (min-width: $phone-width) {
-        width: $screen-width-lg;
     }
 }

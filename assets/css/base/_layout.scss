@@ -3,7 +3,6 @@ body {
     word-break: break-word;
     color: var(--color-paragraph);
     background-color: var(--color-background);
-
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -16,12 +15,14 @@ header {
     margin-top: 2em;
 }
 
-article {
-    max-width: 600px;
-}
-
+article,
 section {
     max-width: 600px;
+    width: $screen-width-sm;
+    >h1 {
+        font-size: $font-xl;
+        text-align: center;
+    }
 }
 
 hr {
@@ -34,5 +35,10 @@ hr {
 @media screen and (min-width: $phone-width) {
     body {
         padding: 0;
+    }
+    article,
+    section {
+        max-width: 600px;
+        width: $screen-width-lg;
     }
 }

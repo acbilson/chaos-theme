@@ -1,9 +1,4 @@
 .note-page {
-    width: $screen-width-sm;
-    &__title {
-        text-align: center;
-        font-size: $font-xl;
-    }
     &__list {
         padding-left: 0;
         list-style: none;
@@ -12,7 +7,6 @@
         align-self: flex-start;
     }
     @media screen and (min-width: $phone-width) {
-        width: $screen-width-lg;
         &__list {
             column-count: 2;
             --moz-column-count: 2;
