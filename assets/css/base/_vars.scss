@@ -63,10 +63,10 @@
 $laptop-width: 80em;
 $phone-width: 40.063em;
 
-$font-sm: 0.8em;
-$font-md: 1em;
-$font-lg: 1.5em;
-$font-xl: 3em;
+$font-sm: 12px;
+$font-md: $font-sm + 6;
+$font-lg: $font-md + 12;
+$font-xl: $font-lg + 18;
 
 $screen-width-sm: 90%;
 $screen-width-lg: 100%;

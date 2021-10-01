@@ -4,7 +4,11 @@
         list-style: none;
     }
     &__form {
-        align-self: flex-start;
+        display:flex;
+        flex-flow: row nowrap;
+        > * {
+            margin: 0 5px;
+        }
     }
     @media screen and (min-width: $phone-width) {
         &__list {

@@ -22,11 +22,47 @@ section {
     }
 }
 
+pre {
+    >code {
+        display: block;
+        border: 3px solid var(--color-stroke);
+        border-radius: $rounded-sm;
+        overflow-x: auto;
+        padding: 5px;
+    }
+}
+
+blockquote {
+    background-color: var(--color-background);
+    border: 2px solid var(--color-stroke);
+    border-radius: $rounded-sm;
+    padding: 0.5em;
+    p {
+        display: inline;
+    }
+}
+
+
 hr {
     border: 0;
     border-bottom: thin solid var(--color-stroke);
     margin: 3em 0;
     clear: both;
+}
+
+input[type="submit"] {
+        color: var(--color-accent);
+        background-color: var(--color-link);
+        border: 3px bevel var(--color-accent);
+        border-radius: $rounded-sm;
+        padding: 2px;
+}
+
+select {
+        color: var(--color-accent);
+        background-color: var(--color-link);
+        border: 3px bevel var(--color-accent);
+        border-radius: $rounded-sm;
 }
 
 @media screen and (min-width: $phone-width) {

@@ -16,34 +16,23 @@ h6 {
 p {
     font-family: 'Ubuntu', Georgia, 'Times New Roman', Times, serif;
     font-size: $font-md;
-    line-height: 1.575em;
+    line-height: $font-lg;
     text-align: justify;
     color: var(--color-paragraph);
 }
 
 pre {
     >code {
-        display: block;
         font-family: 'Ubuntu Mono', monospace !important;
         font-size: $font-md;
-        line-height: 1.575em;
+        line-height: $font-lg;
         word-break: normal;
-        border: 3px solid var(--color-stroke);
-        border-radius: $rounded-sm;
-        overflow-x: auto;
     }
 }
 
 blockquote {
-    background-color: var(--color-background);
-    border: 2px solid var(--color-stroke);
-    border-radius: $rounded-sm;
-    padding: 0.5em;
     font-size: $font-md;
-    line-height: 1.575em;
-    p {
-        display: inline;
-    }
+    line-height: $font-lg;
 }
 
 a {
@@ -53,4 +42,5 @@ a {
 ul, ol {
     font-size: $font-md;
     color: var(--color-paragraph);
+    line-height: $font-lg;
 }
