@@ -27,30 +27,34 @@ pre {
         font-size: $font-md;
         line-height: $font-lg;
         word-break: normal;
+        color: var(--color-paragraph);
     }
 }
 
 blockquote {
     font-size: $font-md;
     line-height: $font-lg;
-    color: var(--color-background);
     background-color: var(--color-paragraph);
+    >p {
+        color: var(--color-background);
+    }
 }
 
 a {
-	color: var(--color-link);
+    color: var(--color-link);
 }
 
-ul, ol {
+ul,
+ol {
     font-size: $font-md;
     color: var(--color-paragraph);
     line-height: $font-lg;
 }
 
 figcaption {
-  font-style: italic;
-  line-height: $font-lg;
-  color: var(--color-aside);
+    font-style: italic;
+    line-height: $font-lg;
+    color: var(--color-aside);
 }
 
 details {

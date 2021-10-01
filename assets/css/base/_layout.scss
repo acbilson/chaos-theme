@@ -16,7 +16,7 @@ article,
 section {
     max-width: $base-size * 200;
     width: $screen-width-sm;
-    >h1 {
+    >h1:first-of-type {
         font-size: $font-xl;
         text-align: center;
     }
