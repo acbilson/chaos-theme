@@ -3,8 +3,18 @@
 {{ partial "head.html" . }}
 <body>
   {{ partial "nav-bar.html" . }}
-  {{ partial "bible/bible-content.html" . }}
-  {{ partial "bible/bible-footer.html" . }}
+  <article class="bible h-entry">
+
+      <h1 class="bible__title p-name">{{- .Title -}}</h1>
+      <a class="u-url" href="{{ .Permalink }}" hidden></a>
+      <h3 class="bible__src">(<span class="bible__version">ESV</span>, {{ .Params.ref }})</h3>
+
+      <div class="bible__content e-content">
+          {{ .Content }}
+      </div>
+  </article>
+  {{ partial "backlink.html" . }}
+  {{ partial "foot.html" }}
   {{ partial "scripts.html" . }}
 </body>
 </html>
