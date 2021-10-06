@@ -9,15 +9,17 @@
   <script>
   function handleForm() {
     const form = document.notesForm;
-    filterByEpistemic(form);
+    if (!form) console.warn('no form retrieved');
+    const notes = document.getElementById('notes-list').querySelectorAll('.note-card');
+    if (!notes) console.warn('no form children retrieved');
+    filterByEpistemic(form, notes);
   }
 
-  function filterByEpistemic(form) {
+  function filterByEpistemic(form, notes) {
     const selectedEpistemic = Array.from(form.epistemicSelector.selectedOptions).map(o => o.value)[0];
-
-    Array.from(document.querySelector('#note-form').children)
+    Array.from(notes)
       .forEach(li => {
-        const epistemic = li.children[0].dataset.epistemic;
+        const epistemic = li.dataset.epistemic;
         li.style.display = epistemic === selectedEpistemic ? 'block' : 'none';
       });
   }

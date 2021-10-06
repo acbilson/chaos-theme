@@ -15,7 +15,7 @@
     <input type="submit" value="Filter"/>
     </form>
 
-  <ul class="note-page__list">
+  <ul id="notes-list" class="note-page__list">
   {{- range .Pages.ByLastmod.Reverse -}}
     {{- if not .Draft -}}
       <li>{{ .Render "li" }}</li>
