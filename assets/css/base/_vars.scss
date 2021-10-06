@@ -16,6 +16,30 @@
   // sunshine pallette
   --color-royalty:       rgb(39, 35, 67);
   --color-sunshine:      rgb(255, 216, 3);
+
+  // fall pallette
+  --color-pumpkin-orange: rgb(255,107,18);
+  --color-navy-blue:      navy;
+  --color-cream:          rgb(245,240,196);
+  --color-army-green:     rgb(62,62,10);
+  --color-light-tan:      rgb(255,222,222);
+  --color-maroon:        maroon;
+
+  // winter pallette
+  // - merry-red
+  // - snow-white
+  // - gold
+  // - pine-green
+  // - chocolate-brown
+
+  // spring pallette
+  // - pastel
+
+  // summer pallette
+  // - lime-green
+  // - sunflower
+  // - midnight
+  // - navy
 }
 
 :root[color-mode="jungle"] {
@@ -47,14 +71,15 @@
 }
 
 :root[color-mode="minimal"] {
-  --color-background: var(--color-midnight);
-  --color-accent: var(--color-jungle-green);
-  --color-stroke: var(--color-pitch-black);
+  --color-background: var(--color-cream);
+  --color-accent: var(--color-army-green);
+  --color-stroke: var(--color-midnight);
 
-  --color-headline: var(--color-eggshell);
-  --color-paragraph: var(--color-slate);
-  --color-aside: var(--color-slate);
+  --color-headline: var(--color-pumpkin-orange);
+  --color-paragraph: var(--color-navy-blue);
+  --color-aside: var(--color-navy-blue);
   --color-link: var(--color-magenta);
+  --color-link: var(--color-maroon);
 
   // theme-specific formatting
   --minimal-border: none;
