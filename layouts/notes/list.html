@@ -6,23 +6,5 @@
   {{ partial "notes/note-page-content.html" . }}
   {{ partial "foot.html" . }}
   {{ partial "scripts.html" . }}
-  <script>
-  function handleForm() {
-    const form = document.notesForm;
-    if (!form) console.warn('no form retrieved');
-    const notes = document.getElementById('notes-list').querySelectorAll('.note-card');
-    if (!notes) console.warn('no form children retrieved');
-    filterByEpistemic(form, notes);
-  }
-
-  function filterByEpistemic(form, notes) {
-    const selectedEpistemic = Array.from(form.epistemicSelector.selectedOptions).map(o => o.value)[0];
-    Array.from(notes)
-      .forEach(li => {
-        const epistemic = li.dataset.epistemic;
-        li.style.display = epistemic === selectedEpistemic ? 'block' : 'none';
-      });
-  }
-  </script>
 </body>
 </html>

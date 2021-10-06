@@ -53,7 +53,7 @@
   --color-link: var(--color-sunset-red);
 
   // theme-specific formatting
-  --minimal-border: 3px solid black;
+  --minimal-border: $base-size solid black;
 }
 
 :root[color-mode="void"] {
