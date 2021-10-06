@@ -1,13 +1,12 @@
-{{ $anchor := .File.BaseFileName }}
-{{ with .Params.backlinks }}
-
-  <h3>Backlinks</h3>
-  <div class="backlinks">
-  {{ range . }}
-  <div class="backlink-content">
-    <a class="backlink" href="{{ . }}#{{ $anchor }}">{{ . }}</a>
-  </div>
-  {{ end }}
-  </div>
-
-{{ end }}
+{{- $anchor := .File.BaseFileName -}}
+{{- with .Params.backlinks -}}
+<h3>Backlinks</h3>
+<div class="backref-card">
+{{- range . -}}
+<div class="backref-card__card">
+  <a class="backref-card__link" href="{{ . }}#{{ $anchor }}">{{- . -}}</a>
+  <div class="backref-card__content"></div>
+</div>
+{{- end -}}
+</div>
+{{- end -}}

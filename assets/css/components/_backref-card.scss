@@ -1,0 +1,10 @@
+.backref-card {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    &__card {
+        border: 1px solid var(--color-stroke);
+        width: 50%;
+        padding: $base-size * 2;
+    }
+}
