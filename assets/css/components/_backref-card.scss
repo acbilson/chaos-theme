@@ -1,10 +1,18 @@
 .backref-card {
     display: flex;
-    flex-flow: row nowrap;
+    flex-flow: column nowrap;
     justify-content: space-between;
+    &__link {
+        display: block;
+        text-decoration: none;
+        padding-top: $base-size;
+        width: $base-size * 6;
+    }
+    &__card+&__card {
+        margin-top: $base-size * 3;
+    }
     &__card {
-        border: 1px solid var(--color-stroke);
-        width: 50%;
+        border: $base-size groove var(--color-stroke);
         padding: $base-size * 2;
     }
     &__content {
