@@ -44,7 +44,6 @@
 
 :root[color-mode="jungle"] {
   --color-background: var(--color-forest-green);
-  --color-accent: var(--color-midnight);
   --color-stroke: var(--color-faded-orange);
 
   --color-headline: var(--color-eggshell);
@@ -58,7 +57,6 @@
 
 :root[color-mode="void"] {
   --color-background: var(--color-midnight);
-  --color-accent: var(--color-jungle-green);
   --color-stroke: var(--color-pitch-black);
 
   --color-headline: var(--color-eggshell);
@@ -72,7 +70,6 @@
 
 :root[color-mode="fall"] {
   --color-background: var(--color-cream);
-  --color-accent: var(--color-army-green);
   --color-stroke: var(--color-midnight);
 
   --color-headline: var(--color-pumpkin-orange);
@@ -86,7 +83,6 @@
 
 :root[color-mode="minimal"] {
   --color-background: var(--color-eggshell);
-  --color-accent: var(--color-eggshell);
   --color-stroke: var(--color-midnight);
 
   --color-headline: var(--color-royalty);
