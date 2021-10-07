@@ -29,11 +29,13 @@ document.addEventListener('DOMContentLoaded', (e) => {
         parsePageToSummary(text, name) {
             const pageDOM = this.parser.parseFromString(text, 'text/html');
             var elements = pageDOM.getElementsByName(name);
-            const contentElement = elements ? this._firstParentWithSibling(elements[0]) : null;
+            const contentElement = elements ? this._firstParentWithSibling(elements[0].parentElement) : null;
             const context = [contentElement.previousElementSibling, contentElement, contentElement.nextElementSibling];
 
             if (context) {
-                return this._filterElements(context, this.elementTypes);
+                const filtered = this._filterElements(context, this.elementTypes);
+                const alt = this._addAlternativeContainers(filtered);
+                return alt;
             } else {
                 const missing = document.createElement('p');
                 missing.text = 'no content found';
@@ -50,6 +52,16 @@ document.addEventListener('DOMContentLoaded', (e) => {
             const startIndex = (this.paragraphIndex && this.paragraphIndex < validElements.length) ? this.paragraphIndex : 0;
             const endIndex = (validElements.length - startIndex) > 3 ? (startIndex + 3) : validElements.length;
             return Array.from(validElements).slice(startIndex, endIndex);
+        }
+
+        _addAlternativeContainers(elements) {
+            // adds a ul for a bare set of li
+            if (elements.every((el) => el.localName === 'li')) {
+                const ul = document.createElement('ul');
+                elements.forEach((el) => ul.appendChild(el));
+                return [ul];
+            }
+            return elements;
         }
 
         _appendEllipsis(elements, total) {
@@ -120,13 +132,13 @@ document.addEventListener('DOMContentLoaded', (e) => {
         }
 
         insertSummaryAsync() {
-            fetch(this.url)
+            return fetch(this.url)
                 .then((resp) => resp.status === 200 ? resp.text() : null)
                 .then((text) => {
                     if (text === null) return null;
                     const elements = this.parser.parsePageToSummary(text, this.name);
                     const summary = this._createSummary(elements);
-                    this._insertSummaryAfterLink(summary);
+                    return this._insertSummaryAfterLink(summary);
                 });
         }
 
@@ -138,7 +150,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
         }
 
         _insertSummaryAfterLink(popup) {
-            this.el.insertAdjacentElement('afterend', popup);
+            return this.el.insertAdjacentElement('afterend', popup);
         }
     }
 
@@ -154,13 +166,14 @@ document.addEventListener('DOMContentLoaded', (e) => {
         // inserts summaries for all backlink cards at the bottom of the page
         backlinks = Array.from(backlinkElements).map(el => new Backlink(el, parser));
         const linkResp$ = backlinks.map((l) => l.insertSummaryAsync());
-        Promise.allSettled(linkResp$).then((r) => console.log(r));
+        Promise.allSettled(linkResp$).then((resp) => {
+            const fulfilled = resp.filter(p => p.status === 'fulfilled').length;
+            console.log(`backlinks inserted: ${fulfilled}\nbacklinks errored: ${resp.length - fulfilled}`);
+        });
 
         // inserts previews for all backref hyperlinks
-        /*
         backrefs = Array.from(backrefElements).map(el => new BackRef(el, parser));
         const refResp$ = backrefs.map((l) => l.insertPreviewAsync());
         Promise.allSettled(refResp$).then((r) => console.log(r));
-        */
     }
 });
