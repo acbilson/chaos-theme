@@ -7,4 +7,6 @@
   {{ end }}
 {{ end }}
 
-<a data-epistemic="{{$epVal}}" href="{{ .Permalink }}">{{ .Title }}</a><span> {{ $epVal }}</span>
+<div class="note-card" data-epistemic="{{- $epVal -}}">
+  <a class="note-card__link" href="{{- .Permalink -}}">{{- .Title -}}</a><span class="note-card__icon">{{- $epVal -}}</span>
+</div>

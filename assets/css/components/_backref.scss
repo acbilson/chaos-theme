@@ -1,0 +1,15 @@
+.backref {
+    text-transform: capitalize;
+    &:hover + &__popup {
+        display: block;
+    }
+    &__popup {
+        display: none;
+        border: $base-size solid var(--color-stroke);
+        padding: $base-size * 3;
+        font-size-adjust: 0.4;
+        > * {
+            margin: ($base-size * 2) ($base-size * 2);
+        }
+    }
+}

@@ -1,0 +1,23 @@
+.note-page {
+    &__list {
+        padding-left: 0;
+        list-style: none;
+    }
+    &__form {
+        display:flex;
+        flex-flow: row nowrap;
+        > * {
+            margin: 0 5px;
+        }
+    }
+    @media screen and (min-width: $phone-width) {
+        &__list {
+            column-count: 2;
+            --moz-column-count: 2;
+            --webkit-column-count: 2;
+            column-gap: 2%;
+            --moz-column-gap: 2%;
+            --webkit-column-gap: 2%;
+        }
+    }
+}

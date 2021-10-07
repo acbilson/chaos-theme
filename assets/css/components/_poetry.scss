@@ -1,0 +1,8 @@
+.poetry {
+    font-style: italic;
+    margin-left: $base-size * 5;
+    >p {
+        margin: 0px;
+        line-height: $font-lg;
+    }
+}

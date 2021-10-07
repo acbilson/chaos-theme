@@ -1,56 +1,37 @@
-@import './_vars.scss';
-body {
-    font-family: 'Ubuntu', Georgia, serif;
-    font-size: $font-size;
-    word-break: break-word;
-    color: var(--color-txt);
-    background-color: var(--color-bg);
-    box-sizing: border-box;
-    max-width: 50rem;
-    margin: auto;
-    padding: 0 3%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+/* Base styles */
 
-header {
-    margin-top: 2em;
-}
+@import './base/_vars.scss';
+@import './base/_fonts.scss';
+@import './base/_layout.scss';
+@import './base/_typography.scss';
 
-article {
-    width: 100%;
-    max-width: 50rem;
-}
+/* Component styles */
 
-section {
-    width: 100%;
-}
-
-hr {
-    border: 0;
-    border-bottom: thin solid var(--color-border);
-    margin: 3em 0;
-    clear: both;
-}
-
-@media screen and (min-width: $phone-width) {
-    body {
-        padding: 0;
-    }
-}
-
-@import './default/containers.scss';
-@import './default/text.scss';
-@import './default/nav.scss';
-@import './default/images.scss';
-@import './default/tables.scss';
-@import './default/lists.scss';
-@import './default/links.scss';
-@import './default/popups.scss';
-@import './default/forms.scss';
-@import './notes/containers.scss';
-@import './logs/containers.scss';
-@import './logs/text.scss';
-@import './search/containers.scss';
-@import './network/nodes.scss';
+@import './components/home.scss';
+@import './components/node.scss';
+@import './components/search.scss';
+@import './components/style.scss';
+@import './components/_accordion.scss';
+@import './components/_addendum.scss';
+@import './components/_backref.scss';
+@import './components/_backref-card.scss';
+@import './components/_basic-page.scss';
+@import './components/_bible.scss';
+@import './components/_bible-card.scss';
+@import './components/_chart.scss';
+@import './components/_log-card.scss';
+@import './components/_log-page.scss';
+@import './components/_log.scss';
+@import './components/_nav-bar.scss';
+@import './components/_note-card.scss';
+@import './components/_note-page.scss';
+@import './components/_note.scss';
+@import './components/_notice.scss';
+@import './components/_outref.scss';
+@import './components/_poetry.scss';
+@import './components/_post-card.scss';
+@import './components/_post-page.scss';
+@import './components/_post.scss';
+@import './components/_superset.scss';
+@import './components/_timeline.scss';
+@import './components/_vocab.scss';

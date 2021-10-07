@@ -1,0 +1,10 @@
+<section class="post-page">
+  <h1 class="post-page__title p-name">{{ .Title }}</h1>
+  <p>{{- .Content -}}</p>
+{{ range .Pages.ByTitle }}
+  <article class="post-page__category">
+    <h2 class="post-page__category-title"><a href="{{.Permalink}}">{{ .Title }}</a></h2>
+    {{ .Content }}
+  </article>
+{{ end }}
+</section>

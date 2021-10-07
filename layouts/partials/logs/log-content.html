@@ -1,5 +1,20 @@
-<article class="comment-body h-entry">
-    <div class="comment-content-single">
+<article class="log h-entry">
+    <div class="log__content">
         {{ .Content }}
     </div>
+
+  <ul class="log__attr">
+    {{- if isset .Params "author" -}}
+        <li>By: <a rel="author" class="log__author p-author">{{- .Params.author -}}</a></li>
+    {{- else -}}
+        <li>By: <a rel="author" class="log__author p-author">Alex Bilson</a></li>
+    {{- end -}}
+
+    {{- if isset .Params "date" -}}
+    <li>Posted: <time class="dt-published" datetime="{{ .Date.Format "2006-01-02" }}">{{- .Date.Format "Jan 2, 2006" -}}</time></li>
+    <li>Modified: <time datetime="{{ .Lastmod.Format "2006-01-02" }}">{{- .Lastmod.Format "Jan 2, 2006" -}}</time></li>
+    {{- end -}}
+  </ul>
+
+  {{ partial "comments.html" . }}
 </article>

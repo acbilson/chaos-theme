@@ -1,0 +1,26 @@
+.nav-bar {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    background-color: transparent;
+    margin: 10px 0 0 0;
+    width: 50%;
+    >a {
+        color: var(--color-link);
+        text-decoration: none;
+    }
+    &__title {
+        font-size: $font-sm;
+        margin: auto;
+    }
+    &__switch {
+        max-height: 24px;
+        font-size: $font-sm;
+        color: var(--color-background);
+        background-color: var(--color-link);
+        border: $base-size bevel var(--color-stroke);
+    }
+    @media screen and (min-width: $phone-width) {
+        width: $screen-width-lg;
+    }
+}

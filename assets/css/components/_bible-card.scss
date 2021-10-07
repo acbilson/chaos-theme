@@ -1,0 +1,17 @@
+.bible-card {
+    &__title {
+        font-size: $font-lg;
+        margin: 0;
+    }
+    &__src {
+        font-size: $font-sm;
+        color: var(--color-aside);
+        margin: 0;
+    }
+    &__version {
+        font-style: italic;
+    }
+    &__summary {
+        margin-top: $base-size * 3;
+    }
+}

@@ -1,0 +1,15 @@
+.post-page {
+    &__category {
+        width: $screen-width-sm;
+        margin: auto;
+    }
+}
+
+.post-list {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-evenly;
+    >article {
+        margin: 5px 0;
+    }
+}

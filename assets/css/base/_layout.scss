@@ -1,0 +1,90 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    max-width: $base-size * 250;
+    margin: auto;
+    background-color: var(--color-background);
+}
+
+header {
+    margin-top: $base-size * 5;
+}
+
+article,
+section {
+    max-width: $base-size * 200;
+    width: $screen-width-sm;
+    >h1:first-of-type {
+        font-size: $font-xl;
+        text-align: center;
+    }
+}
+
+pre {
+    >code {
+        display: block;
+        border: $base-size solid var(--color-stroke);
+        border-radius: $rounded-sm;
+        overflow-x: auto;
+        padding: 5px;
+    }
+}
+
+blockquote {
+    background-color: var(--color-background);
+    border: $base-size solid var(--color-stroke);
+    border-radius: $rounded-sm;
+    padding: $base-size * 2;
+    p {
+        display: inline;
+    }
+}
+
+hr {
+    border: 0;
+    border-bottom: thin solid var(--color-stroke);
+    margin: ($base-size * 5) 0;
+    clear: both;
+}
+
+input[type="submit"] {
+    color: var(--color-background);
+    background-color: var(--color-link);
+    border: $base-size bevel var(--color-stroke);
+    border-radius: $rounded-sm;
+    padding: $base-size;
+}
+
+select {
+    color: var(--color-background);
+    background-color: var(--color-link);
+    border: $base-size bevel var(--color-stroke);
+    border-radius: $rounded-sm;
+}
+
+img {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: ($base-size * 5) 0;
+    border-radius: $rounded-sm;
+    filter: drop-shadow($base-size $base-size $base-size gray);
+}
+
+figcaption {
+    margin-top: -($base-size * 3);
+    padding-left: $base-size * 3;
+}
+
+@media screen and (min-width: $phone-width) {
+    body {
+        padding: 0;
+    }
+    article,
+    section {
+        max-width: $base-size * 200;
+        width: $screen-width-lg;
+    }
+}

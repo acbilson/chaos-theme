@@ -1,0 +1,13 @@
+.bible {
+    &__title {
+        font-size: $font-xl;
+    }
+    &__src {
+        font-size: $font-lg;
+        text-align: center;
+        color: var(--color-aside);
+    }
+    &__version {
+        font-style: italic;
+    }
+}

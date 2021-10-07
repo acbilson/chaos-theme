@@ -4,16 +4,15 @@
 
 <body>
     {{ partial "nav-bar.html" . }}
-    {{ partial "lists/list-header.html" . }}
 
     <!-- shows a special page for the main post landing -->
     {{ if and (eq .Kind "section") (eq .Title "Posts") }}
-      {{ partial "posts/list-content.html" . }}
+      {{ partial "posts/list-categories.html" . }}
     {{ else }}
-      {{ partial "lists/list-content.html" . }}
+      {{ partial "posts/list-content.html" . }}
     {{ end }}
 
-    {{ partial "lists/list-footer.html" . }}
+    {{ partial "foot.html" . }}
   {{ partial "scripts.html" . }}
 </body>
 </html>

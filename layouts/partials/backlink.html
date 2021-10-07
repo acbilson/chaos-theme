@@ -1,13 +1,15 @@
-{{ $anchor := .File.BaseFileName }}
-{{ with .Params.backlinks }}
+{{- $anchor := .File.BaseFileName -}}
+{{- with .Params.backlinks -}}
+<h3>Backlinks</h3>
+<div class="backref-card">
+{{- range . -}}
+<div class="backref-card__card">
+  <a class="backref-card__link" href="{{ . }}#{{ $anchor }}">⚓</a>
+</div>
+{{- end -}}
+</div>
+{{- end -}}
 
-  <h3>Backlinks</h3>
-  <div class="backlinks">
-  {{ range . }}
-  <div class="backlink-content">
-    <a class="backlink" href="{{ . }}#{{ $anchor }}">{{ . }}</a>
-  </div>
-  {{ end }}
-  </div>
-
-{{ end }}
+<!-- adds event handler to preview backlinks -->
+{{- $backlinkjs := resources.Get "js/backlink.js" -}}
+<script src="{{ $backlinkjs.Permalink }}"></script>

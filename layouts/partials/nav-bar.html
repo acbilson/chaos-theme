@@ -8,11 +8,10 @@
     <a href="{{ .Site.BaseURL }}/about/">About</a>
     <a href="{{ .Site.BaseURL }}/resume/">Resumé</a>
 
-    <div class="dark-switch">
-    <label class="switch">
-      <input id="mode-switch" type="checkbox" />
-      <span class="slider"></span>
-    </label>
-    <label class="switch-label">dark-mode</label>
-    </div>
+    <select id="nav-switch" class="nav-bar__switch">
+      <option value="jungle">Jungle</option>
+      <option value="void">Void</option>
+      <option value="fall">Fall</option>
+      <option value="minimal">Minimal</option>
+    </select>
 </nav>

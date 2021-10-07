@@ -1,0 +1,26 @@
+.note {
+    &__title {
+        font-size: $font-xl;
+    }
+    &__author {
+        color: var(--color-aside);
+    }
+    &__attr {
+        display: flex;
+        flex-flow: column nowrap;
+        list-style: none;
+        font-size: $font-md;
+        >li+li {
+            margin: 0 $base-size;
+        }
+    }
+    &__link+&__link {
+        margin: 0 $base-size;
+    }
+    &__link:first-of-type {
+        margin-left: $base-size;
+    }
+    &__link:last-of-type {
+        margin-right: 0;
+    }
+}

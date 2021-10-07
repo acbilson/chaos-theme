@@ -1,0 +1,32 @@
+.chart {
+    margin: ($base-size * 10) 0;
+    &__title {
+        margin-top: 0;
+    }
+    >table {
+        border: $base-size solid var(--color-stroke);
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+    &__header {
+        border: $base-size solid var(--color-stroke);
+        padding: $base-size * 3;
+        color: var(--color-paragraph);
+    }
+    &__cell {
+        border: thin solid var(--color-stroke);
+        padding: $base-size * 3;
+        color: var(--color-paragraph);
+    }
+    &__examples {
+        margin: 0;
+        font-size: $font-sm;
+    }
+    &__list {
+        list-style: none;
+        line-height: $font-md;
+        padding-left: $base-size * 2;
+        margin-top: $base-size;
+        margin-bottom: 0;
+    }
+}

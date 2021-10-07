@@ -1,18 +1,5 @@
-{{ $id := lower (.Get 0) }}
-{{ $part := .Get 1 }}
-<div class="post-accordion">
-  <blockquote 
-    id="{{ $id }}-button" 
-    class="post-accordion-quote" 
-    onclick="accordionHide('{{ $id }}')">
-    {{ $part }}...
-  </blockquote>
-  <blockquote 
-    id="{{ $id }}-quote" 
-    class="post-accordion-quote post-accordion-hide" 
-    onclick="accordionHide('{{ $id }}')">
-    <div class="accordion-content">
-    {{ .Inner }}
-    </div>
-  </blockquote>
-</div>
+{{- $name := .Get "name" -}}
+<details class="accordion">
+  <summary class="accordion__title">{{- $name -}}...</summary>
+  <div class="accordion__text">{{- .Inner -}}</div>
+</details>

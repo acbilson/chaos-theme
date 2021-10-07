@@ -1,3 +1,4 @@
-{{ $src := .Get "src" }} {{ $name := .Get "name" }}
-<a class="external" href="{{ $src }}">{{ $name }}</a>
+{{- $src := .Get "src" -}}
+{{- $name := .Get "name" -}}
+<a class="outref" href="{{ $src }}">{{- $name -}}</a>
 {{- print "" -}}

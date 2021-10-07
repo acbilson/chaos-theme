@@ -1,0 +1,19 @@
+.vocab {
+    margin: ($base-size * 10) 0;
+    &__title {
+        margin: 0;
+    }
+    &__summary {
+        margin-left: $base-size * 5;
+        margin-bottom: 0;
+    }
+    &__word {
+        font-size: $font-lg - $base-size;
+    }
+    &__term {
+        font-variant: small-caps;
+    }
+    &__example {
+        font-style: italic;
+    }
+}

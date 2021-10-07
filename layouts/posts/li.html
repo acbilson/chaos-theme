@@ -1,0 +1,21 @@
+<article class="post-card">
+<a href="{{ .Permalink }}" class="post-card__selector" rel="bookmark" >
+
+  <!-- Card Image -->
+  {{ with .Params.featuredImage }}
+  <picture>
+    <img class="post-card__img" src="{{ .small }}" alt="{{ .alt }}">
+  </picture>
+  {{ end }}
+
+    <!-- Card Text -->
+  <div class="post-card__text">
+    <h2 class="post-card__title">{{- .Title -}}</h2>
+    <p class="post-card__summary">{{- if (isset .Params "description") -}}{{- index .Params "description" -}}{{- else -}}{{- .Summary -}}{{- end -}}</p>
+    <div class="post-card__attr">
+      {{- if isset .Params "author" -}}<p>By {{- .Params.author -}}</p>{{- else -}}<p>By Alex Bilson</p>{{- end -}}
+      <p>Posted <time datetime="{{ .Date.Format "2006-01-02" }}">{{- .Date.Format "Jan 2, 2006" -}}</time></p>
+    </div>
+  </div>
+</a>
+</article>

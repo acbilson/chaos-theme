@@ -1,40 +1,52 @@
-function updateMode(mode) {
-  document.documentElement.setAttribute('color-mode', mode);
-  localStorage.setItem("color-mode", mode);
-}
+document.addEventListener('DOMContentLoaded', (e) => {
+    class ThemeSwitch {
+        themeAttr = 'color-mode';
 
-function toggleMode(event) {
+        get stored() {
+            return localStorage.getItem(this.themeAttr);
+        }
 
-  if (event && event.target) {
+        constructor(el) {
+            this.el = el;
+        }
 
-    const checked = event.target.checked;
+        onSelect(event) {
+            const selectedTheme = event.target.querySelector('option:checked').value;
+            this.setTheme(selectedTheme);
+            this.setCommentTheme(selectedTheme);
+        }
 
-    if (checked) {
-      updateMode('dark');
+        setOptionFromStore() {
+            if (this.stored) {
+                this.el.querySelector(`option[value='${this.stored}']`).selected = true;
+            }
+        }
 
-      // manually update comments
-      if (window.REMARK42) {
-        window.REMARK42.changeTheme('dark');
-      }
+        setTheme(selectedTheme) {
+            document.documentElement.setAttribute(this.themeAttr, selectedTheme);
+            localStorage.setItem(this.themeAttr, selectedTheme);
+        }
 
-    } else {
-      updateMode('light');
-
-      // manually update comments
-      if (window.REMARK42) {
-        window.REMARK42.changeTheme('light');
-      }
+        setCommentTheme(selectedTheme) {
+            if (window.REMARK42) {
+                switch (selectedTheme) {
+                    case 'void':
+                        window.REMARK42.changeTheme('dark');
+                        break;
+                    case 'jungle':
+                    case 'minimal':
+                    case 'fall':
+                    default:
+                        window.REMARK42.changeTheme('light');
+                        break;
+                }
+            }
+        }
     }
-  }
-}
 
-const toggle = document.getElementById('mode-switch');
+    const el = document.getElementById('nav-switch');
+    const themeSelector = new ThemeSwitch(el);
+    themeSelector.setOptionFromStore();
 
-// sets toggle visual to default value
-if (localStorage.getItem('color-mode') === 'dark') {
-  toggle.checked = true;
-} else {
-  toggle.checked = false;
-}
-
-toggle.addEventListener('change', toggleMode);
+    el.addEventListener('change', (e) => themeSelector.onSelect(e));
+});

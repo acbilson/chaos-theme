@@ -1,0 +1,62 @@
+body {
+    -moz-osx-font-smoothing: grayscale;
+    word-break: break-word;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Ubuntu Condensed', Verdana, Geneva, sans-serif;
+    color: var(--color-headline);
+}
+
+p {
+    font-family: 'Ubuntu', Georgia, 'Times New Roman', Times, serif;
+    font-size: $font-md;
+    line-height: $font-lg;
+    text-align: justify;
+    color: var(--color-paragraph);
+}
+
+pre {
+    >code {
+        font-family: 'Ubuntu Mono', monospace !important;
+        font-size: $font-md;
+        line-height: $font-lg;
+        word-break: normal;
+        color: var(--color-paragraph);
+    }
+}
+
+blockquote {
+    font-size: $font-md;
+    line-height: $font-lg;
+    background-color: var(--color-paragraph);
+    >p {
+        color: var(--color-background);
+    }
+}
+
+a {
+    color: var(--color-link);
+}
+
+ul,
+ol {
+    font-size: $font-md;
+    color: var(--color-paragraph);
+    line-height: $font-lg;
+}
+
+figcaption {
+    font-style: italic;
+    line-height: $font-lg;
+    color: var(--color-aside);
+}
+
+details {
+    font-size: $font-md;
+}

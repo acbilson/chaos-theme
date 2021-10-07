@@ -1,8 +1,7 @@
-{{ $src := .Get "src" }}
-{{ $caption := .Get "caption" }}
-{{ $alt := .Get "alt" }}
-
+{{- $src := .Get "src" -}}
+{{- $caption := .Get "caption" -}}
+{{- $alt := .Get "alt" -}}
 <figure>
 <img src="{{ $src }}" alt="{{ $alt }}" />
-<figcaption>{{ $caption }}</figcaption>
+<figcaption>{{- $caption -}}</figcaption>
 </figure>
