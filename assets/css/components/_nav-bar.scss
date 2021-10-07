@@ -16,9 +16,9 @@
     &__switch {
         max-height: 24px;
         font-size: $font-sm;
-        color: var(--color-accent);
+        color: var(--color-background);
         background-color: var(--color-link);
-        border: $base-size bevel var(--color-accent);
+        border: $base-size bevel var(--color-stroke);
     }
     @media screen and (min-width: $phone-width) {
         width: $screen-width-lg;

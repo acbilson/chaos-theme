@@ -70,7 +70,7 @@
   --minimal-border: none;
 }
 
-:root[color-mode="minimal"] {
+:root[color-mode="fall"] {
   --color-background: var(--color-cream);
   --color-accent: var(--color-army-green);
   --color-stroke: var(--color-midnight);
@@ -79,11 +79,25 @@
   --color-paragraph: var(--color-navy-blue);
   --color-aside: var(--color-navy-blue);
   --color-link: var(--color-magenta);
-  --color-link: var(--color-maroon);
 
   // theme-specific formatting
   --minimal-border: none;
 }
+
+:root[color-mode="minimal"] {
+  --color-background: var(--color-eggshell);
+  --color-accent: var(--color-eggshell);
+  --color-stroke: var(--color-midnight);
+
+  --color-headline: var(--color-royalty);
+  --color-paragraph: var(--color-midnight);
+  --color-aside: var(--color-midnight);
+  --color-link: var(--color-navy-blue);
+
+  // theme-specific formatting
+  --minimal-border: none;
+}
+
 
 // all sizes are multiples of this value
 // to make sizing and alignment simple

@@ -35,6 +35,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
                         break;
                     case 'jungle':
                     case 'minimal':
+                    case 'fall':
                     default:
                         window.REMARK42.changeTheme('light');
                         break;
