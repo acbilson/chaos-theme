@@ -39,8 +39,10 @@
       // handles user's transition from light/dark
       if (localStorage.getItem('color-mode') === 'light') {
         document.documentElement.setAttribute('color-mode', 'minimal');
+        localStorage.setItem('color-mode', 'minimal');
       } else if (localStorage.getItem('color-mode') === 'dark') {
         document.documentElement.setAttribute('color-mode', 'void');
+        localStorage.setItem('color-mode', 'void');
       } else {
         document.documentElement.setAttribute('color-mode', localStorage.getItem('color-mode'));
       }
