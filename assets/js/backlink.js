@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
         }
 
         _filterElements(elements, elementTypes) {
-            const validElements = Array.from(elements).filter((el) => elementTypes.includes(el?.localName));
+            const validElements = Array.from(elements).filter((el) => el ? elementTypes.includes(el.localName) : false);
             const startIndex = (this.paragraphIndex && this.paragraphIndex < validElements.length) ? this.paragraphIndex : 0;
             const endIndex = (validElements.length - startIndex) > 3 ? (startIndex + 3) : validElements.length;
             return Array.from(validElements).slice(startIndex, endIndex);
@@ -168,12 +168,15 @@ document.addEventListener('DOMContentLoaded', (e) => {
         const linkResp$ = backlinks.map((l) => l.insertSummaryAsync());
         Promise.allSettled(linkResp$).then((resp) => {
             const fulfilled = resp.filter(p => p.status === 'fulfilled').length;
-            console.log(`backlinks inserted: ${fulfilled}\nbacklinks errored: ${resp.length - fulfilled}`);
+            console.log(`backlink summaries inserted: ${fulfilled}\nbacklink summaries errored: ${resp.length - fulfilled}`);
         });
 
         // inserts previews for all backref hyperlinks
         backrefs = Array.from(backrefElements).map(el => new BackRef(el, parser));
         const refResp$ = backrefs.map((l) => l.insertPreviewAsync());
-        Promise.allSettled(refResp$).then((r) => console.log(r));
+        Promise.allSettled(refResp$).then((resp) => {
+            const fulfilled = resp.filter(p => p.status === 'fulfilled').length;
+            console.log(`backref previews inserted: ${fulfilled}\nbacklink previews errored: ${resp.length - fulfilled}`);
+        });
     }
 });

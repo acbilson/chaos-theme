@@ -7,8 +7,9 @@
         display: none;
         border: $base-size solid var(--color-stroke);
         padding: $base-size * 3;
-        >p {
-            margin: 0;
+        font-size-adjust: 0.4;
+        > * {
+            margin: ($base-size * 2) ($base-size * 2);
         }
     }
 }
