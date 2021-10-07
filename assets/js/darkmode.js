@@ -1,41 +1,51 @@
-function updateMode(mode) {
-    document.documentElement.setAttribute('color-mode', mode);
-    localStorage.setItem("color-mode", mode);
-}
+document.addEventListener('DOMContentLoaded', (e) => {
+    class ThemeSwitch {
+        themeAttr = 'color-mode';
 
-function toggleMode(event) {
+        get stored() {
+            return localStorage.getItem(this.themeAttr);
+        }
 
-    if (event && event.target) {
+        constructor(el) {
+            this.el = el;
+        }
 
-        const selectedTheme = document.querySelector('#nav-switch option:checked').value;
+        onSelect(event) {
+            const selectedTheme = event.target.querySelector('option:checked').value;
+            this.setTheme(selectedTheme);
+            this.setCommentTheme(selectedTheme);
+        }
 
-        if (selectedTheme) {
-            updateMode(selectedTheme);
+        setOptionFromStore() {
+            if (this.stored) {
+                this.el.querySelector(`option[value='${this.stored}']`).selected = true;
+            }
+        }
 
-            // manually update comments
+        setTheme(selectedTheme) {
+            document.documentElement.setAttribute(this.themeAttr, selectedTheme);
+            localStorage.setItem(this.themeAttr, selectedTheme);
+        }
+
+        setCommentTheme(selectedTheme) {
             if (window.REMARK42) {
-                var theme;
                 switch (selectedTheme) {
                     case 'void':
-                        theme = 'dark';
+                        window.REMARK42.changeTheme('dark');
                         break;
-
                     case 'jungle':
                     case 'minimal':
                     default:
-                        theme = 'light';
+                        window.REMARK42.changeTheme('light');
                         break;
                 }
-                window.REMARK42.changeTheme(theme);
             }
         }
     }
-}
 
-const storedTheme = localStorage.getItem('color-mode');
+    const el = document.getElementById('nav-switch');
+    const themeSelector = new ThemeSwitch(el);
+    themeSelector.setOptionFromStore();
 
-if (storedTheme != null) {
-  document.querySelector(`#nav-switch option[value='${storedTheme}']`).selected = true;
-}
-
-document.getElementById('nav-switch').addEventListener('change', toggleMode);
+    el.addEventListener('change', (e) => themeSelector.onSelect(e));
+});

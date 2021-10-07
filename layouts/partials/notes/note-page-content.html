@@ -21,8 +21,9 @@
       <li>{{ .Render "li" }}</li>
     {{- end -}}
   {{- end -}}
-
-  {{ $notepagejs := resources.Get "js/note-page.js" }}
-  <script type="module" src="{{ $notepagejs.Permalink }}"></script>
   </ul>
+
+  <!-- adds event handler to respond to notes form -->
+  {{- $notepagejs := resources.Get "js/note-page.js" -}}
+  <script src="{{ $notepagejs.Permalink }}"></script>
 </article>
