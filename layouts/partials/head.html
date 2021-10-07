@@ -35,10 +35,16 @@
 
   <!-- sets color scheme before page load -->
   <script>
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches && !localStorage.getItem('color-mode')) {
-      document.documentElement.setAttribute('color-mode', 'dark');
-    } else if (localStorage.getItem('color-mode')) {
+    if (localStorage.getItem('color-mode')) {
       document.documentElement.setAttribute('color-mode', localStorage.getItem('color-mode'));
+    } else {
+      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.setAttribute('color-mode', 'void');
+        localStorage.setItem('color-mode', 'void');
+      } else {
+        document.documentElement.setAttribute('color-mode', 'minimal');
+        localStorage.setItem('color-mode', 'minimal');
+      }
     }
   </script>
 </head>
