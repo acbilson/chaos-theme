@@ -15,6 +15,10 @@
     <input type="submit" value="Filter"/>
     </form>
 
+  <!-- adds event handler to handle form -->
+  {{- $notepagejs := resources.Get "js/note-page.js" -}}
+  <script src="{{ $notepagejs.Permalink }}"></script>
+
   <ul id="notes-list" class="note-page__list">
   {{- range .Pages.ByLastmod.Reverse -}}
     {{- if not .Draft -}}
@@ -22,8 +26,4 @@
     {{- end -}}
   {{- end -}}
   </ul>
-
-  <!-- adds event handler to respond to notes form -->
-  {{- $notepagejs := resources.Get "js/note-page.js" -}}
-  <script src="{{ $notepagejs.Permalink }}"></script>
 </article>

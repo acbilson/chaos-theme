@@ -7,4 +7,9 @@
         width: 50%;
         padding: $base-size * 2;
     }
+    &__content {
+        >* {
+            font-size-adjust: 0.4;
+        }
+    }
 }

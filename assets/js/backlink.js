@@ -1,110 +1,166 @@
-const linkClass = 'backref';
+document.addEventListener('DOMContentLoaded', (e) => {
+    class PageParser {
 
-function parsePageContext(text) {
-    var bodyDOM = new DOMParser().parseFromString(text, 'text/html');
-    var urlParts = document.URL.split('/');
-    var backlinkName = urlParts[urlParts.length - 2];
-    var backlinkElement = bodyDOM.getElementsByName(backlinkName)[0];
-    return backlinkElement.parentElement;
-}
-
-function parsePageContent(text, elementTypes, paragraphNumber = undefined) {
-    var bodyDOM = new DOMParser().parseFromString(text, 'text/html');
-    const contentElement = bodyDOM.querySelector('.e-content');
-
-    if (contentElement) {
-        const paragraphElements = Array.from(contentElement.children).filter((el) => elementTypes.includes(el.localName));
-
-        if (paragraphNumber === undefined || paragraphNumber > paragraphElements.length) {
-          const elementCount = paragraphElements.length < 3 ? paragraphElements.length : 3;
-          const contentSlice = Array.from(paragraphElements).slice(0, elementCount);
-
-          if (elementCount < contentElement.childElementCount) {
-              const ellipsisElement = document.createElement('p');
-              ellipsisElement.innerText = '...';
-              contentSlice.push(ellipsisElement);
-          }
-
-          return contentSlice;
-
-        } else {
-          const index = parseInt(paragraphNumber) + 1;
-          return [paragraphElements[index]];
-        }
-
-    } else {
-        const missing = document.createElement('p');
-        missing.text = 'no content found';
-        return [missing];
-    }
-}
-
-function createPopup(offsetTop, offsetLeft, contentElements) {
-    const popup = document.createElement('div');
-
-    popup.classList.add('backref__popup');
-    contentElements.forEach((el) => popup.appendChild(el));
-
-    return popup;
-}
-
-function appendLinkPopup(link, elementTypes, paragraphNumber) {
-    fetch(link.href)
-        .then((resp) => {
-            if (resp.status === 200) {
-                return resp.text();
-            } else {
-                return null;
-            }
-        })
-        .then((text) => {
-            if (text === null) { return null; }
-
-            const contentElements = parsePageContent(text, elementTypes, paragraphNumber);
-            const popupElement = createPopup(link.offsetTop, link.offsetLeft, contentElements);
-            link.insertAdjacentElement('afterend', popupElement);
-        });
-}
-
-function appendSourceContent(link) {
-    fetch(link.href)
-        .then((resp) => {
-            if (resp.status === 200) {
-                return resp.text();
-            } else {
-                return null;
-            }
-        })
-        .then((text) => {
-            if (text === null) { return null; }
-            const contextElement = parsePageContext(text);
-            const wrapper = document.createElement('p');
-            wrapper.appendChild(contextElement);
-            link.parentElement.appendChild(wrapper);
-        });
-}
-
-// adds backlink popup as a hidden child element to all links marked internal
-// if the viewport is wider than a cell phone
-const widerThanPhone = window.matchMedia("screen and (min-width:40.063em)").matches;
-
-if (widerThanPhone) {
-    const internalLinks = document.querySelectorAll(`a.${linkClass}`);
-
-    internalLinks.forEach((link) => {
-        const popupElementTypes = [
+        elementTypes = [
             'h1', 'h2', 'h3', 'h4', // headers
             'p', // paragraphs
             'ol', 'ul', 'li' // lists
         ];
 
-        appendLinkPopup(link, popupElementTypes, link.dataset.paragraph);
-    });
-}
+        constructor(parser) {
+            this.parser = parser;
+        }
 
-// retrieves content from all backlinks that reference this page
-const sourceLinks = document.querySelectorAll(`a.${linkClass}`);
+        parsePageToPreview(text) {
+            const pageDOM = this.parser.parseFromString(text, 'text/html');
+            const contentElement = pageDOM.querySelector('.e-content');
 
-sourceLinks.forEach((link) => {
-    appendSourceContent(link);
+            if (contentElement) {
+                const filtered = this._filterElements(contentElement.children, this.elementTypes);
+                const appended = this._appendEllipsis(filtered, contentElement.childElementCount);
+                return appended;
+            } else {
+                const missing = document.createElement('p');
+                missing.text = 'no content found';
+                return [missing];
+            }
+        }
+
+        parsePageToSummary(text, name) {
+            const pageDOM = this.parser.parseFromString(text, 'text/html');
+            var elements = pageDOM.getElementsByName(name);
+            const contentElement = elements ? this._firstParentWithSibling(elements[0]) : null;
+            const context = [contentElement.previousElementSibling, contentElement, contentElement.nextElementSibling];
+
+            if (context) {
+                return this._filterElements(context, this.elementTypes);
+            } else {
+                const missing = document.createElement('p');
+                missing.text = 'no content found';
+                return [missing];
+            }
+        }
+
+        _firstParentWithSibling(element) {
+            return (element.previousElementSibling || element.nextElementSibling) ? element : this._firstParentWithSibling(element.parentElement);
+        }
+
+        _filterElements(elements, elementTypes) {
+            const validElements = Array.from(elements).filter((el) => elementTypes.includes(el?.localName));
+            const startIndex = (this.paragraphIndex && this.paragraphIndex < validElements.length) ? this.paragraphIndex : 0;
+            const endIndex = (validElements.length - startIndex) > 3 ? (startIndex + 3) : validElements.length;
+            return Array.from(validElements).slice(startIndex, endIndex);
+        }
+
+        _appendEllipsis(elements, total) {
+            if (elements.length < total) {
+                const ellipsisElement = document.createElement('p');
+                ellipsisElement.innerText = '...';
+                elements.push(ellipsisElement);
+            }
+            return elements;
+        }
+    }
+
+    class BackRef {
+        static linkClass = 'backref';
+
+        get paragraphIndex() {
+            return this.el.dataset.paragraph ? int(this.el.dataset.paragraphNumber) - 1 : null;
+        }
+
+        get url() {
+            return this.el.href;
+        }
+
+        constructor(el, parser) {
+            if (!el || !parser) throw 'wtf!';
+            this.el = el;
+            this.parser = parser;
+        }
+
+        insertPreviewAsync() {
+            return fetch(this.url)
+                .then((resp) => resp.status === 200 ? resp.text() : null)
+                .then((text) => {
+                    if (text === null) return null;
+                    const elements = this.parser.parsePageToPreview(text);
+                    const popup = this._createPreview(elements);
+                    this._insertPreviewAfterLink(popup);
+                });
+        }
+
+        _createPreview(elements) {
+            const popup = document.createElement('div');
+            popup.classList.add('backref__popup');
+            elements.forEach((el) => popup.appendChild(el));
+            return popup;
+        }
+
+        _insertPreviewAfterLink(popup) {
+            this.el.insertAdjacentElement('afterend', popup);
+        }
+    }
+
+    class Backlink {
+        static linkClass = 'backref-card__link';
+
+        get url() {
+            return this.el.href;
+        }
+
+        get name() {
+            const urlParts = document.URL.split('/');
+            return urlParts[urlParts.length - 2];
+        }
+
+        constructor(el, parser) {
+            this.el = el;
+            this.parser = parser;
+        }
+
+        insertSummaryAsync() {
+            fetch(this.url)
+                .then((resp) => resp.status === 200 ? resp.text() : null)
+                .then((text) => {
+                    if (text === null) return null;
+                    const elements = this.parser.parsePageToSummary(text, this.name);
+                    const summary = this._createSummary(elements);
+                    this._insertSummaryAfterLink(summary);
+                });
+        }
+
+        _createSummary(elements) {
+            const summary = document.createElement('div');
+            summary.classList.add('backref-card__content');
+            elements.forEach((el) => summary.appendChild(el));
+            return summary;
+        }
+
+        _insertSummaryAfterLink(popup) {
+            this.el.insertAdjacentElement('afterend', popup);
+        }
+    }
+
+    // adds backlink popup as a hidden child element to all links marked internal
+    // if the viewport is wider than a cell phone
+    const widerThanPhone = window.matchMedia("screen and (min-width:40.063em)").matches;
+
+    if (widerThanPhone) {
+        const backlinkElements = document.querySelectorAll(`a.${Backlink.linkClass}`);
+        const backrefElements = document.querySelectorAll(`a.${BackRef.linkClass}`);
+        var parser = new PageParser(new DOMParser());
+
+        // inserts summaries for all backlink cards at the bottom of the page
+        backlinks = Array.from(backlinkElements).map(el => new Backlink(el, parser));
+        const linkResp$ = backlinks.map((l) => l.insertSummaryAsync());
+        Promise.allSettled(linkResp$).then((r) => console.log(r));
+
+        // inserts previews for all backref hyperlinks
+        /*
+        backrefs = Array.from(backrefElements).map(el => new BackRef(el, parser));
+        const refResp$ = backrefs.map((l) => l.insertPreviewAsync());
+        Promise.allSettled(refResp$).then((r) => console.log(r));
+        */
+    }
 });

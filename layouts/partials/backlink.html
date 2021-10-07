@@ -5,8 +5,10 @@
 {{- range . -}}
 <div class="backref-card__card">
   <a class="backref-card__link" href="{{ . }}#{{ $anchor }}">{{- . -}}</a>
-  <div class="backref-card__content"></div>
 </div>
 {{- end -}}
 </div>
+<!-- adds event handler to preview backlinks -->
+{{- $backlinkjs := resources.Get "js/backlink.js" -}}
+<script src="{{ $backlinkjs.Permalink }}"></script>
 {{- end -}}

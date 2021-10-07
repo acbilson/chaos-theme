@@ -44,8 +44,4 @@
 
   {{ partial "backlink.html" . }}
   {{ partial "comments.html" . }}
-
-    <!-- adds event handler to preview backlinks -->
-    {{- $backlinkjs := resources.Get "js/backlink.js" -}}
-    <script src="{{ $backlinkjs.Permalink }}"></script>
 </article>
