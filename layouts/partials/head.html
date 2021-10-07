@@ -36,7 +36,14 @@
   <!-- sets color scheme before page load -->
   <script>
     if (localStorage.getItem('color-mode')) {
-      document.documentElement.setAttribute('color-mode', localStorage.getItem('color-mode'));
+      // handles user's transition from light/dark
+      if (localStorage.getItem('color-mode') === 'light') {
+        document.documentElement.setAttribute('color-mode', 'minimal');
+      } else if (localStorage.getItem('color-mode') === 'dark') {
+        document.documentElement.setAttribute('color-mode', 'void');
+      } else {
+        document.documentElement.setAttribute('color-mode', localStorage.getItem('color-mode'));
+      }
     } else {
       if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
         document.documentElement.setAttribute('color-mode', 'void');
