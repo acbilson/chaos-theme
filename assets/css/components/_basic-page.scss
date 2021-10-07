@@ -1,0 +1,13 @@
+.basic-page {
+    &__title {
+        text-transform: capitalize;
+    }
+    &__content {
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: space-evenly;
+        >*+* {
+            margin-top: $base-size * 3;
+        }
+    }
+}

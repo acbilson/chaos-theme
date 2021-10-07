@@ -1,16 +1,18 @@
-{{- $class := "basic" -}}
+{{- $class := "basic-page" -}}
 {{- if .IsHome -}}{{- $class = "home" -}}{{- end -}}
 <section class="{{ $class }}">
 {{- with .Title -}}
-  <h1 class="basic__title">{{- . -}}</h1>
+  <h1 class="basic-page__title">{{- . -}}</h1>
 {{- end -}}
 {{- with .Content -}}
   <p>{{- . -}}</p>
 {{- end -}}
 
 {{- if not .IsHome -}}
+  <div class="basic-page__content">
   {{- range .Pages -}}
     {{- .Render "li" -}}
   {{- end -}}
+  </div>
 {{- end -}}
 </section>
