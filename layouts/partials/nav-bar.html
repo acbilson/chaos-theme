@@ -1,17 +1,32 @@
 <nav class="nav-bar">
+  <div>
+    <button type="button" class="nav-bar__btn" onclick="window.location.href='{{ .Site.BaseURL }}'">Home</button>
+  </div>
+  <div>
+    <button type="button" class="nav-bar__btn" onclick="window.location.href='{{ .Site.BaseURL }}/posts/'">Posts</button>
+  </div>
+  <div>
+    <button type="button" class="nav-bar__btn" onclick="window.location.href='{{ .Site.BaseURL }}/notes/'">Notes</button>
+  </div>
+  <div>
+    <button type="button" class="nav-bar__btn" onclick="window.location.href='{{ .Site.BaseURL }}/logs/'">Logs</button>
+  </div>
+  <div>
+    <button type="button" class="nav-bar__btn" onclick="window.location.href='{{ .Site.BaseURL }}/blogroll/'">Blog Roll</button>
+  </div>
+  <div>
+    <button type="button" class="nav-bar__btn" onclick="window.location.href='{{ .Site.BaseURL }}/about/'">About</button>
+  </div>
+  <div>
+    <button type="button" class="nav-bar__btn" onclick="window.location.href='{{ .Site.BaseURL }}/resume/'">Resumé</button>
+  </div>
 
-    <a href="{{ .Site.BaseURL }}">Home</a>
-    <a href="{{ .Site.BaseURL }}/posts/">Posts</a>
-    <a href="{{ .Site.BaseURL }}/notes/">Notes</a>
-    <a href="{{ .Site.BaseURL }}/logs/">Log</a>
-    <a href="{{ .Site.BaseURL }}/blogroll/">Blog Roll</a>
-    <a href="{{ .Site.BaseURL }}/about/">About</a>
-    <a href="{{ .Site.BaseURL }}/resume/">Resumé</a>
-
+  <div>
     <select id="nav-switch" class="nav-bar__switch">
       <option value="jungle">Jungle</option>
       <option value="void">Void</option>
       <option value="fall">Fall</option>
       <option value="minimal">Minimal</option>
     </select>
+  </div>
 </nav>

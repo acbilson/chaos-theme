@@ -1,26 +1,25 @@
+$column-width: $base-size * 26;
+
 .nav-bar {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-evenly;
+    display: grid;
+    grid-column-gap: $base-size * 3;
+    grid-template-columns: $column-width $column-width $column-width $column-width;
+    grid-template-rows: $base-size * 10;
     background-color: transparent;
-    margin: 10px 0 0 0;
-    width: 50%;
-    >a {
-        color: var(--color-link);
-        text-decoration: none;
-    }
-    &__title {
-        font-size: $font-sm;
-        margin: auto;
+    margin-top: $base-size * 3;
+    &__btn {
+        width: 100%;
     }
     &__switch {
-        max-height: 24px;
-        font-size: $font-sm;
+        width: 100%;
+        height: $base-size * 8;
         color: var(--color-background);
         background-color: var(--color-link);
-        border: $base-size bevel var(--color-stroke);
+        border-color: var(--color-stroke);
     }
     @media screen and (min-width: $phone-width) {
-        width: $screen-width-lg;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-evenly;
     }
 }

@@ -57,11 +57,16 @@ input[type="submit"] {
     padding: $base-size;
 }
 
+button {
+    color: var(--color-background);
+    background-color: var(--color-link);
+    border-color: var(--color-stroke);
+}
+
 select {
     color: var(--color-background);
     background-color: var(--color-link);
-    border: $base-size bevel var(--color-stroke);
-    border-radius: $rounded-sm;
+    border-color: var(--color-stroke);
 }
 
 img {
