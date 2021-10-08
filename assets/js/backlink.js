@@ -158,18 +158,10 @@ document.addEventListener('DOMContentLoaded', (e) => {
     // if the viewport is wider than a cell phone
     const widerThanPhone = window.matchMedia("screen and (min-width:40.063em)").matches;
 
-    if (widerThanPhone) {
-        const backlinkElements = document.querySelectorAll(`a.${Backlink.linkClass}`);
-        const backrefElements = document.querySelectorAll(`a.${BackRef.linkClass}`);
-        var parser = new PageParser(new DOMParser());
+    var parser = new PageParser(new DOMParser());
 
-        // inserts summaries for all backlink cards at the bottom of the page
-        backlinks = Array.from(backlinkElements).map(el => new Backlink(el, parser));
-        const linkResp$ = backlinks.map((l) => l.insertSummaryAsync());
-        Promise.allSettled(linkResp$).then((resp) => {
-            const fulfilled = resp.filter(p => p.status === 'fulfilled').length;
-            console.log(`backlink summaries inserted: ${fulfilled}\nbacklink summaries errored: ${resp.length - fulfilled}`);
-        });
+    if (widerThanPhone) {
+        const backrefElements = document.querySelectorAll(`a.${BackRef.linkClass}`);
 
         // inserts previews for all backref hyperlinks
         backrefs = Array.from(backrefElements).map(el => new BackRef(el, parser));
@@ -179,4 +171,14 @@ document.addEventListener('DOMContentLoaded', (e) => {
             console.log(`backref previews inserted: ${fulfilled}\nbacklink previews errored: ${resp.length - fulfilled}`);
         });
     }
+
+    const backlinkElements = document.querySelectorAll(`a.${Backlink.linkClass}`);
+
+    // inserts summaries for all backlink cards at the bottom of the page
+    backlinks = Array.from(backlinkElements).map(el => new Backlink(el, parser));
+    const linkResp$ = backlinks.map((l) => l.insertSummaryAsync());
+    Promise.allSettled(linkResp$).then((resp) => {
+        const fulfilled = resp.filter(p => p.status === 'fulfilled').length;
+        console.log(`backlink summaries inserted: ${fulfilled}\nbacklink summaries errored: ${resp.length - fulfilled}`);
+    });
 });
