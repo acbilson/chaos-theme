@@ -10,6 +10,6 @@
     flex-flow: column nowrap;
     justify-content: space-evenly;
     >article {
-        margin: 5px 0;
+        margin: ($base-size * 10) 0;
     }
 }

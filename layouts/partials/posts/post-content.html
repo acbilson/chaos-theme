@@ -28,9 +28,11 @@
 
   <!-- Post Image -->
   {{ with .Params.featuredImage -}}
+    {{- if ne .large "" -}}
   <picture>
     <img src="{{ .large }}" alt="{{ .alt }}">
   </picture>
+    {{- end }}
   {{- end }}
 
   <!-- Post Table of Contents -->

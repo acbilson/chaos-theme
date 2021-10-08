@@ -1,3 +1,21 @@
+@mixin hover-sm {
+    filter: drop-shadow(($base-size / 4) ($base-size / 2) ($base-size / 2) var(--color-aside));
+    filter: drop-shadow(($base-size / 2) $base-size $base-size var(--color-aside));
+    filter: drop-shadow($base-size ($base-size * 2) ($base-size * 2) var(--color-aside));
+}
+
+@mixin hover-md {
+    filter: drop-shadow(($base-size / 2) $base-size $base-size var(--color-aside));
+    filter: drop-shadow($base-size ($base-size * 2) ($base-size * 2) var(--color-aside));
+    filter: drop-shadow(($base-size * 2) ($base-size * 4) ($base-size * 4) var(--color-aside));
+}
+
+@mixin hover-lg {
+    filter: drop-shadow($base-size ($base-size * 2) ($base-size * 2) var(--color-aside));
+    filter: drop-shadow($base-size ($base-size * 2) ($base-size * 2) var(--color-aside));
+    filter: drop-shadow(($base-size * 3) ($base-size * 6) ($base-size * 6) var(--color-aside));
+}
+
 body {
     display: flex;
     flex-direction: column;
@@ -55,6 +73,7 @@ input[type="submit"] {
     border-color: var(--color-stroke);
     border-radius: $rounded-sm;
     padding: $base-size;
+    @include hover-sm();
 }
 
 button {
@@ -62,6 +81,7 @@ button {
     background-color: var(--color-link);
     border-color: var(--color-stroke);
     border-radius: $rounded-sm;
+    @include hover-sm();
 }
 
 select {
@@ -69,6 +89,7 @@ select {
     background-color: var(--color-link);
     border-color: var(--color-stroke);
     border-radius: $rounded-sm;
+    @include hover-sm();
 }
 
 img {
@@ -77,7 +98,7 @@ img {
     height: auto;
     margin: ($base-size * 5) 0;
     border-radius: $rounded-sm;
-    filter: drop-shadow($base-size $base-size $base-size gray);
+    @include hover-md();
 }
 
 figcaption {
