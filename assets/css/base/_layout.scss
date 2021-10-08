@@ -52,7 +52,7 @@ hr {
 input[type="submit"] {
     color: var(--color-background);
     background-color: var(--color-link);
-    border: $base-size bevel var(--color-stroke);
+    border-color: var(--color-stroke);
     border-radius: $rounded-sm;
     padding: $base-size;
 }
@@ -61,12 +61,14 @@ button {
     color: var(--color-background);
     background-color: var(--color-link);
     border-color: var(--color-stroke);
+    border-radius: $rounded-sm;
 }
 
 select {
     color: var(--color-background);
     background-color: var(--color-link);
     border-color: var(--color-stroke);
+    border-radius: $rounded-sm;
 }
 
 img {
