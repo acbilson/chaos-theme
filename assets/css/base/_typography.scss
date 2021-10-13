@@ -9,12 +9,12 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: 'Ubuntu Condensed', Verdana, Geneva, sans-serif;
+    font-family: $font-family-condensed;
     color: var(--color-headline);
 }
 
 p {
-    font-family: 'Ubuntu', Georgia, 'Times New Roman', Times, serif;
+    font-family: $font-family-regular;
     font-size: $font-md;
     line-height: $font-lg;
     text-align: justify;
@@ -23,7 +23,7 @@ p {
 
 pre {
     >code {
-        font-family: 'Ubuntu Mono', monospace !important;
+        font-family: $font-family-mono;
         font-size: $font-md;
         line-height: $font-lg;
         word-break: normal;
@@ -46,17 +46,20 @@ a {
 
 ul,
 ol {
+    font-family: $font-family-regular;
     font-size: $font-md;
     color: var(--color-paragraph);
     line-height: $font-lg;
 }
 
 figcaption {
+    font-family: $font-family-regular;
     font-style: italic;
     line-height: $font-lg;
     color: var(--color-aside);
 }
 
 details {
+    font-family: $font-family-regular;
     font-size: $font-md;
 }
