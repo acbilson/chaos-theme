@@ -27,7 +27,6 @@ pre {
         font-size: $font-md;
         line-height: $font-lg;
         word-break: normal;
-        color: var(--color-paragraph);
     }
 }
 
@@ -42,6 +41,8 @@ blockquote {
 
 a {
     color: var(--color-link);
+    font-family: $font-family-regular;
+    font-size: $font-md;
 }
 
 ul,
