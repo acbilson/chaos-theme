@@ -8,5 +8,9 @@
         border: 1px solid var(--color-stroke);
         border-radius: $rounded-sm;
         padding: 0 ($base-size * 5);
+
+        > * {
+        color: var(--color-background) !important;
+        }
     }
 }
