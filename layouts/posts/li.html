@@ -2,11 +2,13 @@
 <a href="{{ .Permalink }}" class="post-card__selector" rel="bookmark" >
 
   <!-- Card Image -->
-  {{ with .Params.featuredImage }}
+  {{- with .Params.featuredImage -}}
+    {{- if ne .small "" -}}
   <picture>
     <img class="post-card__img" src="{{ .small }}" alt="{{ .alt }}">
   </picture>
-  {{ end }}
+    {{- end -}}
+  {{- end -}}
 
     <!-- Card Text -->
   <div class="post-card__text">
