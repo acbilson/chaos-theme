@@ -1,0 +1,9 @@
+{{- $author := .Get "author" -}}
+{{- $copyright := .Get "copyright" -}}
+{{- $page := .Get "page" -}}
+{{- $source := .Get "source" -}}
+
+<p class="quote">
+{{- .Inner -}}
+<div><span class="quote__author">{{- $author -}}</span><span class="quote__copyright">{{- $copyright -}}</span><span class="quote__source">{{- $source -}}</span><span class="quote__page">{{- $page -}}</span></div>
+</p>
