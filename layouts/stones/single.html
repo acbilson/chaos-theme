@@ -3,12 +3,32 @@
 {{ partial "head.html" . }}
 <body>
   {{ partial "nav-bar.html" . }}
+
+
   <article class="stone h-entry">
-      <h1 class="stone__title p-name">{{- .Title -}}</h1>
-      <a class="u-url" href="{{ .Permalink }}" hidden></a>
-      <div class="stone__content e-content">
-          {{ .Content }}
-      </div>
+    <h1 class="stone__title p-name">{{- .Title -}}</h1>
+    <!-- Adds tags to the post if they exist -->
+    {{- $taxo := "tags" -}}
+    {{- if isset .Params $taxo -}}
+    <div class="stone__tags">
+      {{- range $name := .Param $taxo -}}
+        {{- with $.Site.GetPage (printf "/%s/%s" $taxo ( $name | urlize)) -}}
+      <a class="stone__link p-category" href="{{ .Permalink }}">{{- $name -}}</a>
+        {{- end -}}
+      {{- end -}}
+    </div>
+  {{- end -}}
+    <a class="u-url" href="{{ .Permalink }}" hidden></a>
+    <div class="stone__content e-content">
+      {{ .Content }}
+    </div>
+    <div class="stone__ref">
+      -
+      <span class="stone__author">{{- .Params.author -}}.</span>
+      <span class="stone__copyright">({{- .Params.copyright -}})</span>
+      <span class="stone__source">{{- .Params.source -}}</span>
+      <span class="stone__page">pg. {{- .Params.page -}}</span>
+    </div>
   </article>
   {{ partial "backlink.html" . }}
   {{ partial "foot.html" }}

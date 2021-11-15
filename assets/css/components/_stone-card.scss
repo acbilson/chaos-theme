@@ -1,0 +1,9 @@
+.stone-card {
+    &__title {
+        line-height: 1.2;
+    }
+    &__summary {
+        text-align: unset;
+        color: var(--color-paragraph);
+    }
+}

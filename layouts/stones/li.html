@@ -1,4 +1,11 @@
 <article class="stone-card">
   <h2 class="stone-card__title"><a href="{{ .Permalink }}">{{- .Title -}}</a></h2>
-  <div class="stone-card__content">{{ .Content }}</div>
+  <p class="stone-card__summary">{{ .Summary }}</p>
+  <div class="stone__ref">
+    -
+    <span class="stone__author">{{- .Params.author -}}.</span>
+    <span class="stone__copyright">({{- .Params.copyright -}})</span>
+    <span class="stone__source">{{- .Params.source -}}</span>
+    <span class="stone__page">pg. {{- .Params.page -}}</span>
+  </div>
 </article>
