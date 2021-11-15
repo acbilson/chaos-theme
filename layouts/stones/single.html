@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="{{ .Site.Params.defaultColorMode }}">
+{{ partial "head.html" . }}
+<body>
+  {{ partial "nav-bar.html" . }}
+  <article class="stone h-entry">
+      <h1 class="stone__title p-name">{{- .Title -}}</h1>
+      <a class="u-url" href="{{ .Permalink }}" hidden></a>
+      <div class="stone__content e-content">
+          {{ .Content }}
+      </div>
+  </article>
+  {{ partial "backlink.html" . }}
+  {{ partial "foot.html" }}
+  {{ partial "scripts.html" . }}
+</body>
+</html>
