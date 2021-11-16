@@ -22,7 +22,19 @@
   <ul id="notes-list" class="note-page__list">
   {{- range .Pages.ByLastmod.Reverse -}}
     {{- if not .Draft -}}
-      <li>{{ .Render "li" }}</li>
+      {{- $epVal := "🌱" -}}
+
+      {{- if eq .Params.epistemic "sprout" -}}
+          {{- $epVal = "🌿" -}}
+      {{- else if eq .Params.epistemic "plant" -}}
+          {{- $epVal = "🪴" -}}
+      {{- end -}}
+
+      <li>
+        <div class="note-card" data-epistemic="{{- $epVal -}}">
+          <a class="note-card__link" href="{{- .Permalink -}}">{{- .Title -}}</a><span class="note-card__icon">{{- $epVal -}}</span>
+        </div>
+      </li>
     {{- end -}}
   {{- end -}}
   </ul>
