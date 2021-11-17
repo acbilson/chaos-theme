@@ -1,0 +1,13 @@
+.terms-page {
+
+  &__terms {
+
+    display: grid;
+    grid-gap: 5px;
+    grid-template-columns: repeat(2, auto);
+
+    @media screen and (min-width: $phone-width) {
+      grid-template-columns: repeat(5, auto);
+    }
+  }
+}

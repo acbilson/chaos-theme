@@ -5,27 +5,27 @@
   {{- partial "nav-bar.html" . -}}
 </body>
 </html>
-  <header class="list-header">
-    {{- with .Title -}}<h1 class="list-header-title">{{- . -}}</h1>{{- end -}}
-    {{- with .Description -}}<p class="list-header-subtext">{{- . -}}</p>{{- end -}}
-  </header>
-  <div class="terms">
 
-  {{- $root := .Data.Plural -}}
+  <section class="terms-page">
+    <h1>{{- .Title -}}</h1>
+    <div class="terms-page__terms">
 
-  <!-- retrieves every tag, ordered alphabetically -->
-  {{- range $term := .Data.Terms.Alphabetical -}}
+    {{- $root := .Data.Plural -}}
 
-  <!-- retrieves every tag page for simple links -->
-    {{- $path := path.Join $root .Term -}}
+    <!-- retrieves every tag, ordered alphabetically -->
+    {{- range $term := .Data.Terms.Alphabetical -}}
 
-    {{- with $.Site.GetPage $path -}}
-      <div class="term">
-        <a href="{{ .Permalink }}" class="term__title">{{- .Title -}}<sup>({{- $term.Count -}})</sup></a>
-      </div>
+    <!-- retrieves every tag page for simple links -->
+      {{- $path := path.Join $root .Term -}}
+
+      {{- with $.Site.GetPage $path -}}
+        <div>
+          <a href="{{ .Permalink }}">{{- .Title -}}<sup>({{- $term.Count -}})</sup></a>
+        </div>
+      {{- end -}}
     {{- end -}}
-  {{- end -}}
-  </div>
+    </div>
+  </section>
   {{- partial "foot.html" . -}}
   {{- partial "scripts.html" . -}}
   </body>
