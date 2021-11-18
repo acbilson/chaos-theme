@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="{{ .Site.Params.defaultColorMode }}">
+{{ partial "head.html" . }}
+
+<body>
+    {{ partial "nav-bar.html" . }}
+
+    <h1>Sections: {{ .Site.Sections }}</h1>
+    {{ range .Site.Sections }}
+      {{ if eq .Title "Notes" }}
+    <h1>Notes: {{ .Pages }} 🚣🏻‍♂️  |  ⛵ </h1>
+      {{ end }}
+    {{ end }}
+
+    {{ .Content }}
+
+    {{ partial "foot.html" . }}
+  {{ partial "scripts.html" . }}
+</body>
+</html>
