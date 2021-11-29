@@ -15,12 +15,26 @@
     <!-- retrieves every tag, ordered alphabetically -->
     {{- range $term := .Data.Terms.Alphabetical -}}
 
+    <!-- counts the number of plants and stones for all pages except authors -->
+    {{- $stoneCount := 0 -}}
+    {{- $plantCount := 0 -}}
+    {{- if ne $root "authors" -}}
+      {{- range .Pages -}}
+        {{ if hasPrefix .File.Dir "stones" }}{{- $stoneCount = add 1 $stoneCount -}}{{- end -}}
+        {{ if hasPrefix .File.Dir "plants" }}{{- $plantCount = add 1 $plantCount -}}{{- end -}}
+      {{- end -}}
+    {{- end -}}
+
     <!-- retrieves every tag page for simple links -->
       {{- $path := path.Join $root .Term -}}
 
       {{- with $.Site.GetPage $path -}}
         <div>
+          {{- if ne $root "authors" -}}
+          <a href="{{ .Permalink }}">{{- .Title -}}<sup>({{- $plantCount -}}/{{- $stoneCount -}})</sup></a>
+          {{- else -}}
           <a href="{{ .Permalink }}">{{- .Title -}}<sup>({{- $term.Count -}})</sup></a>
+          {{- end -}}
         </div>
       {{- end -}}
     {{- end -}}
