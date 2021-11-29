@@ -3,22 +3,27 @@
     <button type="button" class="nav-bar__btn" onclick="window.location.href='{{ .Site.BaseURL }}'">Home</button>
   </div>
   <div>
-    <button type="button" class="nav-bar__btn" onclick="window.location.href='{{ .Site.BaseURL }}/posts/'">Posts</button>
-  </div>
-  <div>
-    <button type="button" class="nav-bar__btn" onclick="window.location.href='{{ .Site.BaseURL }}/notes/'">Notes</button>
+    <button type="button" class="nav-bar__btn" onclick="window.location.href='{{ .Site.BaseURL }}/gardens/'">Gardens</button>
   </div>
   <div>
     <button type="button" class="nav-bar__btn" onclick="window.location.href='{{ .Site.BaseURL }}/logs/'">Logs</button>
   </div>
   <div>
-    <button type="button" class="nav-bar__btn" onclick="window.location.href='{{ .Site.BaseURL }}/blogroll/'">Blog Roll</button>
-  </div>
-  <div>
-    <button type="button" class="nav-bar__btn" onclick="window.location.href='{{ .Site.BaseURL }}/about/'">About</button>
+    <button type="button" class="nav-bar__btn" onclick="window.location.href='{{ .Site.BaseURL }}/blogroll/'">Roll</button>
   </div>
   <div>
     <button type="button" class="nav-bar__btn" onclick="window.location.href='{{ .Site.BaseURL }}/resume/'">Resumé</button>
+  </div>
+  <div>
+    <select>
+      <option selected>--Extra</option>
+      <option>About</option>
+      <option>Comments</option>
+      <option>Network</option>
+      <option>Policies</option>
+      <option>Search</option>
+      <option>Styles</option>
+    </select>
   </div>
 
   <div>

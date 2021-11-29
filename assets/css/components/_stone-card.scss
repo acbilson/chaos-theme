@@ -2,6 +2,9 @@
     &__title {
         line-height: 1.2;
     }
+    &__link {
+        text-transform: capitalize;
+    }
     &__summary {
         text-align: unset;
         color: var(--color-paragraph);

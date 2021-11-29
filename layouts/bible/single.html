@@ -5,7 +5,8 @@
   {{ partial "nav-bar.html" . }}
   <article class="bible h-entry">
 
-      <h1 class="bible__title p-name">{{- .Title -}}</h1>
+      {{- $title := .Title -}}{{- if eq $title "" -}}{{- $title = humanize .File.BaseFileName -}}{{- end -}}
+      <h1 class="bible__title p-name">{{- $title -}}</h1>
       <a class="u-url" href="{{ .Permalink }}" hidden></a>
       <h3 class="bible__src">(<span class="bible__version">ESV</span>, {{ .Params.ref }})</h3>
 

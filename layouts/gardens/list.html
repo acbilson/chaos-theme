@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="{{ .Site.Params.defaultColorMode }}">
+{{ partial "head.html" . }}
+<style>
+  svg {
+    width: max-content;
+  }
+  text {
+    text-transform: capitalize;
+    fill: blue;
+    font-size: 10px;
+  }
+</style>
+<body>
+    {{ partial "nav-bar.html" . }}
+
+    <h1>Sections: {{ .Site.Sections }}</h1>
+    <h1>{{ .Pages }} 🚣🏻‍♂️  |  ⛵ </h1>
+
+    {{ .Content }}
+
+    <svg id="background" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0, 0, 400, 640">
+      <defs>
+        <g id="river">
+          <!-- TODO: add river path -->
+        </g>
+      </defs>
+      <defs>
+        <g id="garden">
+          <circle r="6" stroke="black" stroke-width="1" fill="blue"></circle>
+          <!-- TODO: add boats -->
+        </g>
+      </defs>
+      {{- range .Pages -}}
+        {{- if isset .Params "coordinates" -}}
+        {{- $title := .Title -}}{{- if eq $title "" -}}{{- $title = humanize .File.BaseFileName -}}{{- end -}}
+        <g>
+          <a href="{{ .Permalink }}">{{- $title -}}
+            <text x="{{ add .Params.coordinates.x 10 }}" y="{{ sub .Params.coordinates.y 10 }}">{{- $title -}}</text>
+            <use href="#garden" x="{{ .Params.coordinates.x }}" y="{{ .Params.coordinates.y }}"></use>
+          </a>
+        </g>
+          <!-- TODO: add use elements to render river -->
+        {{- end -}}
+      {{- end -}}
+      <g>
+        <a href="{{ .Site.BaseURL }}/tags">
+            <text x="50" y="100">Tags directory</text>
+            <use href="#garden" x="40" y="110"></use>
+        </a>
+      </g>
+      <g>
+        <a href="{{ .Site.BaseURL }}/authors">
+            <text x="110" y="200">Authors directory</text>
+            <use href="#garden" x="100" y="210"></use>
+        </a>
+      </g>
+
+      </svg>
+
+    {{ partial "foot.html" . }}
+  {{ partial "scripts.html" . }}
+</body>
+</html>

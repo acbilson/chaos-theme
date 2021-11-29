@@ -3,7 +3,24 @@
 {{ partial "head.html" . }}
 <body>
   {{ partial "nav-bar.html" . }}
-  {{ .Content }}
+  {{- $title := .Title -}}{{- if eq $title "" -}}{{- $title = humanize .File.BaseFileName -}}{{- end -}}
+  <article class="basic h-entry">
+    <h1 class="basic__title p-name">{{ $title }}</h1>
+    <a class="u-url" href="{{ .Permalink }}" hidden></a>
+
+    <!-- Post Table of Contents -->
+    {{ if isset .Params "toc" -}}
+      <div class="post__toc">
+        <h2>Contents</h2>
+        {{ .TableOfContents }}
+      </div>
+    {{- end }}
+
+    <div class="basic__content e-content">
+        {{ .Content }}
+    </div>
+  </article>
+  {{ partial "foot.html" . }}
   {{ partial "scripts.html" . }}
 </body>
 </html>

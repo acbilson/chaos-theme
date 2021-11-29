@@ -1,11 +1,17 @@
+{{- $title := .Title -}}{{- if eq $title "" -}}{{- $title = humanize .File.BaseFileName -}}{{- end -}}
 <article class="stone-card">
-  <h2 class="stone-card__title"><a href="{{ .Permalink }}">{{- .Title -}}</a></h2>
+  <h2 class="stone-card__title"><a class="stone-card__link" href="{{ .Permalink }}">{{- $title -}}</a></h2>
   <p class="stone-card__summary">{{ .Summary }}</p>
+  {{- if .Truncated -}}<p>&mldr;</p>{{- end -}}
   <div class="stone__ref">
     -
-    <span class="stone__author">{{- .Params.author -}}.</span>
+    <span class="stone__author">{{- delimit .Params.authors "," -}}.</span>
     <span class="stone__copyright">({{- .Params.copyright -}})</span>
-    <span class="stone__source">{{- .Params.source -}}</span>
-    <span class="stone__page">pg. {{- .Params.page -}}</span>
+    <span class="stone__source">{{- .Params.source -}}.</span>
+    {{ $page := printf "pg. %s" .Params.page }}
+    {{- if in "Preface Foreword" .Params.page -}}
+    {{- $page = .Params.page -}}
+    {{- end -}}
+    <span class="stone__page">{{- $page -}}</span>
   </div>
 </article>

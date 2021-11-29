@@ -1,5 +1,6 @@
 .bible-card {
     &__title {
+        text-transform: capitalize;
         font-size: $font-lg;
         margin: 0;
     }

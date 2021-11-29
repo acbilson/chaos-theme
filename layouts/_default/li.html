@@ -1,27 +1,6 @@
-<article class="next-card">
-<a href="{{ .Permalink }}" class="card-display" rel="bookmark" >
-
-  <!-- Card Image -->
-  {{ with .Params.featuredImage }}
-  <div class="card-img-container">
-    <picture>
-      <img class="card-img" src="{{ .small }}" alt="{{ .alt }}">
-    </picture>
-  </div>
-  {{ end }}
-
-    <!-- Card Text -->
-  <div class="card-text-container">
-    <h2 class="card-title">{{ .Title }}</h2>
-    <p class="card-summary">{{ if (isset .Params "description") }}{{ index .Params "description" }}{{ else }}{{ .Summary }}{{ end }}</p>
-    <div class="card-subtext muted-text">
-    {{ if isset .Params "author" }}
-    <p>By {{ .Params.author }}</p>
-    {{ else }}
-    <p>By Alex Bilson</p>
-    {{ end }}
-      <p>Posted <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time></p>
-    </div>
-  </div>
-</a>
+{{- $title := .Title -}}{{- if eq $title "" -}}{{- $title = humanize .File.BaseFileName -}}{{- end -}}
+<article class="basic-card">
+  <h2><a class="basic-card__link" href="{{- .Permalink -}}">{{- $title -}}</a></h2>
+  <p>{{- .Summary -}}</p>
+  {{- if .Truncated -}}<p>&mldr;</p>{{- end -}}
 </article>

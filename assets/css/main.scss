@@ -7,6 +7,7 @@
 
 /* Component styles */
 
+@import './components/basic.scss';
 @import './components/home.scss';
 @import './components/node.scss';
 @import './components/search.scss';
@@ -17,6 +18,7 @@
 @import './components/_backref-card.scss';
 @import './components/_backref.scss';
 @import './components/_basic-page.scss';
+@import './components/_basic-card.scss';
 @import './components/_bible-card.scss';
 @import './components/_bible.scss';
 @import './components/_chart.scss';

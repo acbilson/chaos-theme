@@ -3,10 +3,9 @@
 {{ partial "head.html" . }}
 <body>
   {{ partial "nav-bar.html" . }}
-
-
   <article class="stone h-entry">
-    <h1 class="stone__title p-name">{{- .Title -}}</h1>
+    {{- $title := .Title -}}{{- if eq $title "" -}}{{- $title = humanize .File.BaseFileName -}}{{- end -}}
+    <h1 class="stone__title p-name">{{- $title -}}</h1>
     <!-- Adds tags to the post if they exist -->
     {{- $taxo := "tags" -}}
     {{- if isset .Params $taxo -}}
@@ -24,10 +23,14 @@
     </div>
     <div class="stone__ref">
       -
-      <span class="stone__author">{{- .Params.author -}}.</span>
+      <span class="stone__author">{{- delimit .Params.authors "," -}}.</span>
       <span class="stone__copyright">({{- .Params.copyright -}})</span>
       <span class="stone__source">{{- .Params.source -}}</span>
-      <span class="stone__page">pg. {{- .Params.page -}}</span>
+      {{ $page := printf "pg. %s" .Params.page }}
+      {{- if in "Preface Foreword" .Params.page -}}
+      {{- $page = .Params.page -}}
+      {{- end -}}
+      <span class="stone__page">{{- $page -}}</span>
     </div>
   </article>
   {{ partial "backlink.html" . }}

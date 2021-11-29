@@ -10,4 +10,5 @@
 <article class="note-card" data-epistemic="{{- $epVal -}}">
   <h2><a class="note-card__link" href="{{- .Permalink -}}">{{- .Title -}}</a><span class="note-card__icon">{{- $epVal -}}</span></h2>
   <p>{{- .Summary -}}</p>
+  {{- if .Truncated -}}<p>&mldr;</p>{{- end -}}
 </article>

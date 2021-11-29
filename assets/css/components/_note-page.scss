@@ -11,10 +11,11 @@
         }
     }
     @media screen and (min-width: $phone-width) {
+        $columns: 3;
         &__list {
-            column-count: 2;
-            --moz-column-count: 2;
-            --webkit-column-count: 2;
+            column-count: $columns;
+            --moz-column-count: $columns;
+            --webkit-column-count: $columns;
             column-gap: 2%;
             --moz-column-gap: 2%;
             --webkit-column-gap: 2%;
