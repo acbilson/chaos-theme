@@ -1,8 +1,7 @@
 {{- $title := .Title -}}{{- if eq $title "" -}}{{- $title = humanize .File.BaseFileName -}}{{- end -}}
 <article class="stone-card">
   <h2 class="stone-card__title"><a class="stone-card__link" href="{{ .Permalink }}">{{- $title -}}</a></h2>
-  <p class="stone-card__summary">{{ .Summary }}</p>
-  {{- if .Truncated -}}<p>&mldr;</p>{{- end -}}
+  <p class="stone-card__summary">{{- .Summary -}}{{- if .Truncated -}}&mldr;{{- end -}}</p>
   <div class="stone__ref">
     -
     <span class="stone__author">{{- delimit .Params.authors "," -}}.</span>

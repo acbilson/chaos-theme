@@ -4,6 +4,9 @@
         font-size: $font-lg;
         margin: 0;
     }
+    &__link {
+      text-decoration: none;
+    }
     &__src {
         font-size: $font-sm;
         color: var(--color-aside);
