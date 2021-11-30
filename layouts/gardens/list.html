@@ -1,25 +1,24 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="{{ .Site.Params.defaultColorMode }}">
 {{ partial "head.html" . }}
-<style>
-  svg {
-    width: max-content;
-  }
-  text {
-    text-transform: capitalize;
-    fill: blue;
-    font-size: 10px;
-  }
-</style>
 <body>
     {{ partial "nav-bar.html" . }}
 
-    <h1>Sections: {{ .Site.Sections }}</h1>
-    <h1>{{ .Pages }} 🚣🏻‍♂️  |  ⛵ </h1>
-
+    <section class="garden-page">
     {{ .Content }}
 
-    <svg id="background" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0, 0, 400, 640">
+    {{- $radius := 2.5 -}}
+    {{- $tagX := 30 -}}
+    {{- $tagY := 80 -}}
+    {{- $authorX := 60 -}}
+    {{- $authorY := 100 -}}
+
+    <!-- meta isle: (0,0), (160,100) -->
+    <!-- faith isle: (160,100), (400,300) -->
+    <!-- business isle: (20,180), (160,250) -->
+    <!-- technology isle: (0,280), (200,380) -->
+    <!-- parenting isle: (220,400), (380,450) -->
+    <svg class="garden-page__canvas" id="background" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0, 0, 400, 450">
       <defs>
         <g id="river">
           <!-- TODO: add river path -->
@@ -27,37 +26,37 @@
       </defs>
       <defs>
         <g id="garden">
-          <circle r="6" stroke="black" stroke-width="1" fill="blue"></circle>
           <!-- TODO: add boats -->
+          <circle r="{{ $radius }}"></circle>
         </g>
       </defs>
       {{- range .Pages -}}
         {{- if isset .Params "coordinates" -}}
         {{- $title := .Title -}}{{- if eq $title "" -}}{{- $title = humanize .File.BaseFileName -}}{{- end -}}
-        <g>
-          <a href="{{ .Permalink }}">{{- $title -}}
-            <text x="{{ add .Params.coordinates.x 10 }}" y="{{ sub .Params.coordinates.y 10 }}">{{- $title -}}</text>
-            <use href="#garden" x="{{ .Params.coordinates.x }}" y="{{ .Params.coordinates.y }}"></use>
+        <g class="garden">
+          <a class="garden__link" href="{{ .Permalink }}">{{- $title -}}
+            <text class="garden__title" x="{{ add .Params.coordinates.x $radius }}" y="{{ sub .Params.coordinates.y $radius }}">{{- $title -}}</text>
+            <use class="garden__icon" href="#garden" x="{{ .Params.coordinates.x }}" y="{{ .Params.coordinates.y }}"></use>
           </a>
         </g>
           <!-- TODO: add use elements to render river -->
         {{- end -}}
       {{- end -}}
       <g>
-        <a href="{{ .Site.BaseURL }}/tags">
-            <text x="50" y="100">Tags directory</text>
-            <use href="#garden" x="40" y="110"></use>
+        <a class="garden__link" href="{{ .Site.BaseURL }}/tags">
+            <text class="garden__title" x="{{ add $tagX $radius }}" y="{{ sub $tagY $radius }}">tags directory</text>
+            <use class="garden__icon" href="#garden" x="{{ $tagX }}" y="{{ $tagY }}"></use>
         </a>
       </g>
       <g>
-        <a href="{{ .Site.BaseURL }}/authors">
-            <text x="110" y="200">Authors directory</text>
-            <use href="#garden" x="100" y="210"></use>
+        <a class="garden__link" href="{{ .Site.BaseURL }}/authors">
+            <text class="garden__title" x="{{ add $authorX $radius }}" y="{{ sub $authorY $radius }}">authors directory</text>
+            <use class="garden__icon" href="#garden" x="{{ $authorX }}" y="{{ $authorY }}"></use>
         </a>
       </g>
 
       </svg>
-
+    </section>
     {{ partial "foot.html" . }}
   {{ partial "scripts.html" . }}
 </body>
