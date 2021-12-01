@@ -1,29 +1,29 @@
 <nav class="nav-bar">
   <div>
-    <button type="button" class="nav-bar__btn" onclick="window.location.href='{{ .Site.BaseURL }}'">Home</button>
+    <a class="nav-bar__link" href="{{ .Site.BaseURL }}">Home</a>
   </div>
   <div>
-    <button type="button" class="nav-bar__btn" onclick="window.location.href='{{ .Site.BaseURL }}/gardens/'">Gardens</button>
+    <a class="nav-bar__link" href="{{ .Site.BaseURL }}/gardens/">Gardens</a>
   </div>
   <div>
-    <button type="button" class="nav-bar__btn" onclick="window.location.href='{{ .Site.BaseURL }}/logs/'">Logs</button>
+    <a class="nav-bar__link" href="{{ .Site.BaseURL }}/logs/">Logs</a>
   </div>
   <div>
-    <button type="button" class="nav-bar__btn" onclick="window.location.href='{{ .Site.BaseURL }}/blogroll/'">Roll</button>
+    <a class="nav-bar__link" href="{{ .Site.BaseURL }}/blogroll/">Roll</a>
   </div>
   <div>
-    <button type="button" class="nav-bar__btn" onclick="window.location.href='{{ .Site.BaseURL }}/resume/'">Resumé</button>
+    <a class="nav-bar__link" href="{{ .Site.BaseURL }}/resume/">Resumé</a>
   </div>
-  <div>
-    <select>
-      <option selected>--Extra</option>
-      <option>About</option>
-      <option>Comments</option>
-      <option>Network</option>
-      <option>Policies</option>
-      <option>Search</option>
-      <option>Styles</option>
-    </select>
+  <div class="nav-bar__dropdown">
+    <ul>
+      <li><a class="outer nav-bar__link">--Extra</a></li>
+      <li><a class="inner nav-bar__link" href="{{ .Site.BaseURL }}/about/">About</a></li>
+      <li><a class="inner nav-bar__link" href="{{ .Site.BaseURL }}/comments/">Comments</a></li>
+      <li><a class="inner nav-bar__link" href="{{ .Site.BaseURL }}/network/">Network</a></li>
+      <li><a class="inner nav-bar__link" href="{{ .Site.BaseURL }}/policy/">Policies</a></li>
+      <li><a class="inner nav-bar__link" href="{{ .Site.BaseURL }}/search/">Search</a></li>
+      <li><a class="inner nav-bar__link" href="{{ .Site.BaseURL }}/style/">Styles</a></li>
+    </ul>
   </div>
 
   <div>

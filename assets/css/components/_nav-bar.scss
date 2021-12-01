@@ -3,19 +3,59 @@ $column-width: $base-size * 26;
 .nav-bar {
     display: grid;
     grid-column-gap: $base-size * 3;
-    grid-template-columns: $column-width $column-width $column-width $column-width;
-    grid-template-rows: $base-size * 10;
+    grid-template-columns: $column-width;
     background-color: transparent;
     margin-top: $base-size * 3;
-    &__btn {
+    &__link {
+        font-family: $font-family-condensed;
+        font-size: $font-md;
+        text-decoration: none;
         width: 100%;
-    }
-    &__switch {
-        width: 100%;
-        height: $base-size * 8;
+        padding: $base-size;
         color: var(--color-background);
         background-color: var(--color-link);
-        border-color: var(--color-stroke);
+        border: 1px solid var(--color-stroke);
+        border-radius: $rounded-sm;
+        @include hover-sm;
+        &:hover {
+          border-color: var(--color-background);
+        }
+    }
+    &__dropdown {
+      position: relative;
+      margin: 0;
+      ul {
+        position: absolute;
+        width: 80px;
+        z-index: 9;
+        margin: 0;
+        padding-left: 0;
+        list-style: none;
+        line-height: unset;
+      }
+      li:not(:first-child) {
+      margin-top: $base-size * 4;
+      }
+      &:hover, &:active {
+        .inner {
+          display: inline;
+          }
+      }
+      .inner {
+        display: none;
+      }
+    }
+    &__switch {
+      font-family: $font-family-condensed;
+      font-size: $font-md;
+      margin-left: 50px;
+      margin-top: -$base-size;
+      color: var(--color-background);
+      background-color: var(--color-link);
+      border-color: var(--color-stroke);
+        &:hover {
+          border-color: var(--color-background);
+        }
     }
     @media screen and (min-width: $phone-width) {
         display: flex;
