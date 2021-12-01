@@ -5,12 +5,34 @@ document.addEventListener('DOMContentLoaded', (e) => {
             return this.el.dataset.epistemic;
         }
 
+        get folder() {
+            return this.el.dataset.folder;
+        }
+
         constructor(el) {
             this.el = el;
         }
 
-        selectEpistemic(selectedEpistemic) {
-            this.el.style.display = this.epistemic === selectedEpistemic ? 'block' : 'none';
+        toggleVisibility(selectedEpistemic, selectedFolder) {
+            const applyEpistemicFilter = selectedEpistemic !== 'all';
+            const applyFolderFilter = selectedFolder !== 'all';
+
+            if (applyEpistemicFilter && applyFolderFilter) {
+                if (this.epistemic === selectedEpistemic &&
+                    this.folder === selectedFolder) {
+                        this.el.style.display = 'block';
+                    }
+                else {
+                        this.el.style.display = 'none';
+                }
+            }
+            else if (applyEpistemicFilter) {
+                this.el.style.display = this.epistemic === selectedEpistemic ? 'block' : 'none';
+            } else if (applyFolderFilter) {
+                this.el.style.display = this.folder === selectedFolder ? 'block' : 'none';
+            } else {
+                this.el.style.display = 'block';
+            }
         }
     }
 
@@ -18,6 +40,10 @@ document.addEventListener('DOMContentLoaded', (e) => {
 
         get selectedEpistemic() {
             return Array.from(this.form.epistemicSelector.selectedOptions).map(o => o.value)[0];
+        }
+
+        get selectedFolder() {
+            return Array.from(this.form.folderSelector.selectedOptions).map(o => o.value)[0];
         }
 
         constructor(form, notes) {
@@ -30,14 +56,14 @@ document.addEventListener('DOMContentLoaded', (e) => {
         }
 
         filterByEpistemic() {
-            Array.from(this.notes).forEach(n => n.selectEpistemic(this.selectedEpistemic));
+            Array.from(this.notes).forEach(n => n.toggleVisibility(this.selectedEpistemic, this.selectedFolder));
         }
     }
 
     const form = document.notesForm;
     const notes = Array.from(document
             .getElementById('notes-list')
-            .querySelectorAll('.note-card'))
+            .querySelectorAll('li'))
         .map(el => new NoteCard(el));
 
     if (!form || !notes || notes.length === 0) {

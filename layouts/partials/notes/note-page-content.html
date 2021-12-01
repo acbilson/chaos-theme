@@ -14,10 +14,20 @@
 
     <form id="note-form" name="notesForm" class="note-page__form">
     <select name="epistemicSelector">
+      <option value="all">All ({{- len $everyPlant -}})</option>
       <option value="🌲">Evergreen 🌲 ({{- len $evergreens -}})</option>
       <option value="🪴">Plant 🪴 ({{- len $plants -}})</option>
       <option value="🌿">Sprout 🌿 ({{- len $sprouts -}})</option>
       <option value="🌱">Seedling 🌱 ({{- len $seedlings -}})</option>
+    </select>
+    <select name="folderSelector">
+      <option value="all">All</option>
+      <option value="business">Business</option>
+      <option value="faith">Faith</option>
+      <option value="identity">Identity</option>
+      <option value="parenting">Parenting</option>
+      <option value="technology">Technology</option>
+      <option value="writing">Writing</option>
     </select>
     <input type="submit" value="Filter"/>
     </form>
@@ -26,7 +36,7 @@
   {{- $notepagejs := resources.Get "js/note-page.js" -}}
   <script src="{{ $notepagejs.Permalink }}"></script>
 
-  <ul id="evergreens-list" class="note-page__list">
+  <ul id="notes-list" class="note-page__list">
   {{- range $everyPlant -}}
     {{- if not .Draft -}}
       {{- $epVal := "🌱" -}}
@@ -40,8 +50,8 @@
 
       {{- $title := .Title -}}{{- if eq $title "" -}}{{- $title = humanize .File.BaseFileName -}}{{- end -}}
     {{- $topFolder := index (split .URL "/") 2 -}}
-      <li>
-        <div class="note-card" data-epistemic="{{- $epVal -}}">
+      <li data-epistemic="{{- $epVal -}}" data-folder="{{- $topFolder -}}">
+        <div class="note-card">
           <div class="note-card__attr">[<span>{{- $epVal -}}</span>
             <span>{{- .Lastmod.Format "2/1/06" -}}</span>
             <span>{{- substr $topFolder 0 5 -}}</span>]</div>
