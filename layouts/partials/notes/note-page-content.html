@@ -6,12 +6,18 @@
   <p>{{- . -}}</p>
   {{- end -}}
 
+  {{- $evergreens := sort (where .Pages "Params.epistemic" "evergreen") "Lastmod" "desc" -}}
+  {{- $plants := sort (where .Pages "Params.epistemic" "plant") "Lastmod" "desc" -}}
+  {{- $sprouts := sort (where .Pages "Params.epistemic" "sprout") "Lastmod" "desc" -}}
+  {{- $seedlings := sort (where .Pages "Params.epistemic" "seedling") "Lastmod" "desc" -}}
+  {{- $everyPlant := $evergreens | append $plants | append $sprouts | append $seedlings -}}
+
     <form id="note-form" name="notesForm" class="note-page__form">
     <select name="epistemicSelector">
-      <option value="🌱">Seedling 🌱</option>
-      <option value="🌿">Sprout 🌿</option>
-      <option value="🪴">Plant 🪴</option>
-      <option value="🌲">Evergreen 🌲</option>
+      <option value="🌲">Evergreen 🌲 ({{- len $evergreens -}})</option>
+      <option value="🪴">Plant 🪴 ({{- len $plants -}})</option>
+      <option value="🌿">Sprout 🌿 ({{- len $sprouts -}})</option>
+      <option value="🌱">Seedling 🌱 ({{- len $seedlings -}})</option>
     </select>
     <input type="submit" value="Filter"/>
     </form>
@@ -20,8 +26,8 @@
   {{- $notepagejs := resources.Get "js/note-page.js" -}}
   <script src="{{ $notepagejs.Permalink }}"></script>
 
-  <ul id="notes-list" class="note-page__list">
-  {{- range .Pages.ByLastmod.Reverse -}}
+  <ul id="evergreens-list" class="note-page__list">
+  {{- range $everyPlant -}}
     {{- if not .Draft -}}
       {{- $epVal := "🌱" -}}
       {{- if eq .Params.epistemic "sprout" -}}
@@ -45,4 +51,5 @@
     {{- end -}}
   {{- end -}}
   </ul>
+
 </section>

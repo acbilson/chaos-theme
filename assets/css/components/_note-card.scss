@@ -1,7 +1,6 @@
 .note-card {
-  display: grid;
-  grid-column-gap: $base-size * 3;
-  grid-template-columns: 140px auto;
+    display: flex;
+    flex-flow: column nowrap;
     &__link {
         text-decoration: none;
         text-transform: capitalize;
@@ -11,5 +10,10 @@
         span + span {
           padding-left: $base-size;
         }
+    }
+    @media screen and (min-width: $phone-width) {
+      display: grid;
+      grid-column-gap: $base-size * 3;
+      grid-template-columns: 140px auto;
     }
 }
