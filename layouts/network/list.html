@@ -2,8 +2,10 @@
 <html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="{{ .Site.Params.defaultColorMode }}">
 {{ partial "head.html" . }}
 <body>
+  {{ partial "nav-bar.html" . }}
   <h1>{{ .Title }}</h1>
   <svg class="diagram-svg" viewbox="0 0 1200 1200"></svg>
+  {{ partial "foot.html" . }}
 </body>
 
 <!-- this displays the tags cloud diagram after other scripts load. I've done it this way so that I can use Hugo
@@ -17,5 +19,4 @@ to pass along the path to the JSON file. -->
 {{ $diagramjs := resources.Get "js/tag-diagram.js" }}
 <script src="{{ $diagramjs.Permalink }}"></script>
 <script src="https://d3js.org/d3.v5.min.js"></script>
-
 </html>
