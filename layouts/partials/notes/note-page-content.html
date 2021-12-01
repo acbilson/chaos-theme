@@ -11,6 +11,7 @@
       <option value="🌱">Seedling 🌱</option>
       <option value="🌿">Sprout 🌿</option>
       <option value="🪴">Plant 🪴</option>
+      <option value="🌲">Evergreen 🌲</option>
     </select>
     <input type="submit" value="Filter"/>
     </form>
@@ -23,16 +24,22 @@
   {{- range .Pages.ByLastmod.Reverse -}}
     {{- if not .Draft -}}
       {{- $epVal := "🌱" -}}
-
       {{- if eq .Params.epistemic "sprout" -}}
           {{- $epVal = "🌿" -}}
       {{- else if eq .Params.epistemic "plant" -}}
           {{- $epVal = "🪴" -}}
+      {{- else if eq .Params.epistemic "evergreen" -}}
+          {{- $epVal = "🌲" -}}
       {{- end -}}
 
+      {{- $title := .Title -}}{{- if eq $title "" -}}{{- $title = humanize .File.BaseFileName -}}{{- end -}}
+    {{- $topFolder := index (split .URL "/") 2 -}}
       <li>
         <div class="note-card" data-epistemic="{{- $epVal -}}">
-          <a class="note-card__link" href="{{- .Permalink -}}">{{- .Title -}}</a><span class="note-card__icon">{{- $epVal -}}</span>
+          <div class="note-card__attr">[<span>{{- $epVal -}}</span>
+            <span>{{- .Lastmod.Format "2/1/06" -}}</span>
+            <span>{{- substr $topFolder 0 5 -}}</span>]</div>
+          <div><a class="note-card__link" href="{{- .Permalink -}}">{{- $title -}}</a></div>
         </div>
       </li>
     {{- end -}}
