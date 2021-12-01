@@ -51,11 +51,11 @@
       {{- $title := .Title -}}{{- if eq $title "" -}}{{- $title = humanize .File.BaseFileName -}}{{- end -}}
     {{- $topFolder := index (split .URL "/") 2 -}}
       <li data-epistemic="{{- $epVal -}}" data-folder="{{- $topFolder -}}">
-        <div class="note-card">
-          <div class="note-card__attr">[<span>{{- $epVal -}}</span>
+        <div class="note-page__item">
+          <div class="note-page__attr">[<span>{{- $epVal -}}</span>
             <span>{{- .Lastmod.Format "2/1/06" -}}</span>
             <span>{{- substr $topFolder 0 5 -}}</span>]</div>
-          <div><a class="note-card__link" href="{{- .Permalink -}}">{{- $title -}}</a></div>
+          <div><a class="note-page__link" href="{{- .Permalink -}}">{{- $title -}}</a></div>
         </div>
       </li>
     {{- end -}}
