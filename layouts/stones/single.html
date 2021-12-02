@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="{{ .Site.Params.defaultColorMode }}">
+{{ partial "head.html" . }}
+<body>
+  {{ partial "nav-bar.html" . }}
+  <section>
+  <article class="stone h-entry">
+    {{- $title := .Title -}}{{- if eq $title "" -}}{{- $title = humanize .File.BaseFileName -}}{{- end -}}
+    <h1 class="stone__title p-name">{{- $title -}}</h1>
+    <!-- Adds tags to the post if they exist -->
+    {{- $taxo := "tags" -}}
+    {{- if isset .Params $taxo -}}
+    <div class="stone__tags">
+      {{- range $name := .Param $taxo -}}
+        {{- with $.Site.GetPage (printf "/%s/%s" $taxo ( $name | urlize)) -}}
+      <a class="stone__link p-category" href="{{ .Permalink }}">{{- $name -}}</a>
+        {{- end -}}
+      {{- end -}}
+    </div>
+  {{- end -}}
+    <a class="u-url" href="{{ .Permalink }}" hidden></a>
+    <div class="stone__content e-content">
+      {{ .Content }}
+    </div>
+    <div class="stone__ref">
+      -
+      <span class="stone__author">{{- delimit .Params.authors "," -}}.</span>
+      <span class="stone__copyright">({{- .Params.copyright -}})</span>
+      <span class="stone__source">{{- .Params.source -}}</span>
+      {{ $page := printf "pg. %s" .Params.page }}
+      {{- if in "Preface Foreword" .Params.page -}}
+      {{- $page = .Params.page -}}
+      {{- end -}}
+      <span class="stone__page">{{- $page -}}</span>
+    </div>
+  </article>
+  {{ partial "backlink.html" . }}
+  </section>
+  {{ partial "foot.html" }}
+  {{ partial "scripts.html" . }}
+</body>
+</html>

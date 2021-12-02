@@ -3,11 +3,12 @@
         text-transform: capitalize;
     }
     &__content {
-        display: flex;
-        flex-flow: column nowrap;
-        justify-content: space-evenly;
-        >*+* {
-            margin-top: $base-size * 3;
+        display: grid;
+        grid-gap: $base-size * 3;
+        grid-template-columns: 100%;
+        @media screen and (min-width: $phone-width) {
+            grid-template-columns: repeat($column-count, auto);
+            grid-gap: $base-size * 10;
         }
     }
 }

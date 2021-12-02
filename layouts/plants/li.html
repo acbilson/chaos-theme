@@ -1,0 +1,24 @@
+{{ $epVal := "🌱" }}
+{{ with .Params.epistemic }}
+  {{ if eq . "sprout" }}
+    {{ $epVal = "🌿" }}
+  {{ else if eq . "plant" }}
+    {{ $epVal = "🪴" }}
+  {{ else if eq . "evergreen" }}
+    {{ $epVal = "🌲" }}
+  {{ end }}
+{{ end }}
+
+{{- $title := .Title -}}{{- if eq $title "" -}}{{- $title = humanize .File.BaseFileName -}}{{- end -}}
+{{- $topFolder := index (split .URL "/") 2 -}}
+<article class="plant-card">
+  <div class="plant-card__title">
+    <h2>
+      <a class="plant-card__link" href="{{- .Permalink -}}">{{- $title -}}</a>
+    </h2>
+    <div class="note-page__attr">[<span>{{- $epVal -}}</span>
+            <span>{{- .Lastmod.Format "2/1/06" -}}</span>
+            <span>{{- substr $topFolder 0 5 -}}</span>]</div>
+  </div>
+  <p class="plant-card__summary">{{- .Summary -}}{{- if .Truncated -}}&mldr;{{- end -}}</p>
+</article>

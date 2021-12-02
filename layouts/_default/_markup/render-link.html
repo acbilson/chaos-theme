@@ -1,1 +1,2 @@
-<a href="{{ .Destination | safeURL }}"{{ with .Title}} title="{{ . }}"{{ end }} class="outref">{{ .Text | safeHTML }}</a>
+<a class="outref" href="{{ .Destination | safeURL }}"{{ with .Title}} title="{{ . }}" {{- end -}}>{{- .Text | safeHTML -}}</a>
+{{- print "" -}}

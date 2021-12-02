@@ -2,6 +2,11 @@
 <html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="{{ .Site.Params.defaultColorMode }}">
 {{ partial "head.html" . }}
 <body>
+  {{ partial "nav-bar.html" . }}
+</body>
+</html>
+
+  <section>
   <div class="search-bar">
   {{ partial "search/search.html" . }}
   </div>
@@ -16,5 +21,7 @@
       </li>
   </ul>
   {{ partial "search/search-index.html" . }}
+  </section>
+  {{ partial "foot.html" . }}
 </body>
 </html>

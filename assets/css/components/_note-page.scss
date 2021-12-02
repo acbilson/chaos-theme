@@ -3,21 +3,41 @@
         padding-left: 0;
         list-style: none;
     }
+    &__item {
+        display: flex;
+        flex-flow: column nowrap;
+    }
+    &__link {
+        text-decoration: none;
+        text-transform: capitalize;
+    }
+    &__attr {
+        font-size: $font-sm;
+        span+span {
+            padding-left: $base-size;
+        }
+    }
     &__form {
-        display:flex;
+        display: flex;
         flex-flow: row nowrap;
-        > * {
+        >* {
             margin: 0 5px;
         }
     }
     @media screen and (min-width: $phone-width) {
+        $columns: 2;
         &__list {
-            column-count: 2;
-            --moz-column-count: 2;
-            --webkit-column-count: 2;
+            column-count: $columns;
+            --moz-column-count: $columns;
+            --webkit-column-count: $columns;
             column-gap: 2%;
             --moz-column-gap: 2%;
             --webkit-column-gap: 2%;
+        }
+        &__item {
+            display: grid;
+            grid-column-gap: $base-size * 3;
+            grid-template-columns: 140px auto;
         }
     }
 }

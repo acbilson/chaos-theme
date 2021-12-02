@@ -1,7 +1,11 @@
 .bible-card {
     &__title {
+        text-transform: capitalize;
         font-size: $font-lg;
         margin: 0;
+    }
+    &__link {
+        text-decoration: none;
     }
     &__src {
         font-size: $font-sm;

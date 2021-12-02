@@ -2,10 +2,11 @@
 <html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="{{ .Site.Params.defaultColorMode }}">
 {{ partial "head.html" . }}
 <body>
-    {{ partial "nav-bar.html" . }}
-    <section>
-    {{ partial "logs/log-content.html" . }}
-    </section>
-    {{ partial "foot.html" . }}
+  {{ partial "nav-bar.html" . }}
+  <section>
+  {{ partial "notes/note-content.html" . }}
+  </section>
+  {{ partial "foot.html" }}
+  {{ partial "scripts.html" . }}
 </body>
 </html>

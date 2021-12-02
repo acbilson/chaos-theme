@@ -7,23 +7,21 @@
 
 /* Component styles */
 
-@import './components/home.scss';
-@import './components/node.scss';
-@import './components/search.scss';
-@import './components/style.scss';
 @import './components/_accordion.scss';
 @import './components/_addendum.scss';
-@import './components/_backref.scss';
 @import './components/_backref-card.scss';
+@import './components/_backref.scss';
+@import './components/_basic-card.scss';
 @import './components/_basic-page.scss';
-@import './components/_bible.scss';
 @import './components/_bible-card.scss';
+@import './components/_bible.scss';
 @import './components/_chart.scss';
+@import './components/_garden-page.scss';
 @import './components/_log-card.scss';
 @import './components/_log-page.scss';
 @import './components/_log.scss';
 @import './components/_nav-bar.scss';
-@import './components/_note-card.scss';
+@import './components/_plant-card.scss';
 @import './components/_note-page.scss';
 @import './components/_note.scss';
 @import './components/_notice.scss';
@@ -32,6 +30,16 @@
 @import './components/_post-card.scss';
 @import './components/_post-page.scss';
 @import './components/_post.scss';
+@import './components/_quote.scss';
+@import './components/_stone-card.scss';
 @import './components/_superset.scss';
+@import './components/_terms-page.scss';
 @import './components/_timeline.scss';
 @import './components/_vocab.scss';
+@import './components/basic.scss';
+@import './components/garden.scss';
+@import './components/home.scss';
+@import './components/node.scss';
+@import './components/search.scss';
+@import './components/stone.scss';
+@import './components/style.scss';

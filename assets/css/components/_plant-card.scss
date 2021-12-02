@@ -1,0 +1,23 @@
+.plant-card {
+    &__title {
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: space-between;
+        align-items: center;
+    }
+    &__link {
+        text-decoration: none;
+        text-transform: capitalize;
+    }
+    &__attr {
+        font-size: $font-sm;
+        span+span {
+            padding-left: $base-size;
+        }
+    }
+    @media screen and (min-width: $phone-width) {
+        &__title {
+            flex-flow: row nowrap;
+        }
+    }
+}

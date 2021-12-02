@@ -1,55 +1,46 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="{{ .Site.Params.defaultColorMode }}">
-  <!-- BEGIN head.html -->
-  <!-- END head.html -->
-  <body class="list-body">
-  <!-- BEGIN nav-bar.html -->
-  <!-- END nav-bar.html -->
-    <main class="card-container side-gutter">
-      {{ if or (not (eq .Description "")) (not (eq .Title "")) -}}
-      <header class="list-header">
-        {{ with .Title }}<h1 class="list-header-title">{{ . }}</h1>{{ end }}
-        {{ with .Description }}<p class="list-header-subtext">{{ . }}</p>{{ end }}
-      </header>
-      {{- end }}
+{{- partial "head.html" . -}}
+<body>
+  {{- partial "nav-bar.html" . -}}
+</body>
+</html>
 
-      <!-- The anchor for the tag cloud diagram -->
-        <svg class="diagram-svg" viewbox="0 0 600 800"></svg>
-      {{ with .Content -}}
-      <section class="list-header-content">
-        {{ . }}
-      </section>
-      {{- end }}
-      <div class="tag-card">
-      <!-- retrieves every tag, ordered by count -->
-      {{ range $term := .Data.Terms.ByCount }}
-      <!-- retrieves every tag page for simple links -->
-        {{ with $.Site.GetPage (printf "/tags/%s" .Term) }}
-          <!-- renders card here. Could extract if I could learn how to pass args to .Render -->
-          <a ontouchstart="cardPressed.call(this)" ontouchend="cardReleased.call(this)" ontouchmove="cardReleased.call(this)" href="{{ .Permalink }}" class="card" rel="bookmark" >
-          <article class="card-body">
-            <h2 class="card-title">{{ .Title }}<sup>({{ $term.Count }})</sup></h2>
-            <div class="card-subtext muted-text">
-              <p>Last Post <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time></p>
-            </div>
-          </article>
-        </a>
-        {{- end }}
-      {{- end }}
-      </div>
+  <section class="terms-page">
+    <h1>{{- .Title -}}</h1>
+    <div class="terms-page__terms">
 
-    </main>
-    {{ partial "foot.html" . }}
-    {{ partial "scripts.html" . }}
+    {{- $root := .Data.Plural -}}
 
-    <!-- this displays the tags cloud diagram after other scripts load. I've done it this way so that I can use Hugo
-    to pass along the path to the JSON file. -->
-    <script>
-      document.addEventListener("DOMContentLoaded", function() {
-        display_diagram("/posts/data/diagram.json");
-      });
-    </script>
+    <!-- retrieves every tag, ordered alphabetically -->
+    {{- range $term := .Data.Terms.Alphabetical -}}
 
-    <h1>{{ .Site.Data.Permalink }}</h1>
+    <!-- counts the number of plants and stones for all pages except authors -->
+    {{- $stoneCount := 0 -}}
+    {{- $plantCount := 0 -}}
+    {{- if ne $root "authors" -}}
+      {{- range .Pages -}}
+        {{ if hasPrefix .File.Dir "stones" }}{{- $stoneCount = add 1 $stoneCount -}}{{- end -}}
+        {{ if hasPrefix .File.Dir "plants" }}{{- $plantCount = add 1 $plantCount -}}{{- end -}}
+      {{- end -}}
+    {{- end -}}
+
+    <!-- retrieves every tag page for simple links -->
+      {{- $path := path.Join $root .Term -}}
+
+      {{- with $.Site.GetPage $path -}}
+        <div>
+          {{- if ne $root "authors" -}}
+          <a href="{{ .Permalink }}">{{- .Title -}}<sup>({{- $plantCount -}}/{{- $stoneCount -}})</sup></a>
+          {{- else -}}
+          <a href="{{ .Permalink }}">{{- .Title -}}<sup>({{- $term.Count -}})</sup></a>
+          {{- end -}}
+        </div>
+      {{- end -}}
+    {{- end -}}
+    </div>
+  </section>
+  {{- partial "foot.html" . -}}
+  {{- partial "scripts.html" . -}}
   </body>
 </html>

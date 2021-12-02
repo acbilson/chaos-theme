@@ -1,6 +1,6 @@
-{{- $class := "basic-page" -}}
-{{- if .IsHome -}}{{- $class = "home" -}}{{- end -}}
-<section class="{{ $class }}">
+{{- $class := "basic-page" -}}{{- if .IsHome -}}{{- $class = "home" -}}{{- end -}}
+{{- $narrow := "" -}}{{- if eq .Params.narrow true -}}{{- $narrow = "narrow" -}}{{- end -}}
+<section class="{{ $class }} {{ $narrow }}">
 {{- with .Title -}}
   <h1 class="basic-page__title">{{- . -}}</h1>
 {{- end -}}

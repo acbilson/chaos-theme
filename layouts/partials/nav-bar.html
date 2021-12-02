@@ -1,24 +1,32 @@
 <nav class="nav-bar">
   <div>
-    <button type="button" class="nav-bar__btn" onclick="window.location.href='{{ .Site.BaseURL }}'">Home</button>
+    <a class="nav-bar__link" href="{{ .Site.BaseURL }}">Home</a>
   </div>
   <div>
-    <button type="button" class="nav-bar__btn" onclick="window.location.href='{{ .Site.BaseURL }}/posts/'">Posts</button>
+    <a class="nav-bar__link" href="{{ .Site.BaseURL }}/gardens/">Gardens</a>
   </div>
   <div>
-    <button type="button" class="nav-bar__btn" onclick="window.location.href='{{ .Site.BaseURL }}/notes/'">Notes</button>
+    <a class="nav-bar__link" href="{{ .Site.BaseURL }}/logs/">Logs</a>
   </div>
   <div>
-    <button type="button" class="nav-bar__btn" onclick="window.location.href='{{ .Site.BaseURL }}/logs/'">Logs</button>
+    <a class="nav-bar__link" href="{{ .Site.BaseURL }}/blogroll/">Roll</a>
   </div>
   <div>
-    <button type="button" class="nav-bar__btn" onclick="window.location.href='{{ .Site.BaseURL }}/blogroll/'">Blog Roll</button>
+    <a class="nav-bar__link" href="{{ .Site.BaseURL }}/resume/">Resumé</a>
   </div>
-  <div>
-    <button type="button" class="nav-bar__btn" onclick="window.location.href='{{ .Site.BaseURL }}/about/'">About</button>
-  </div>
-  <div>
-    <button type="button" class="nav-bar__btn" onclick="window.location.href='{{ .Site.BaseURL }}/resume/'">Resumé</button>
+  <div class="nav-bar__dropdown">
+    <ul>
+      <li><a class="outer nav-bar__link">--Extra</a></li>
+      <li><a class="inner nav-bar__link" href="{{ .Site.BaseURL }}/about/">About</a></li>
+      <li><a class="inner nav-bar__link" href="{{ .Site.BaseURL }}/comment/">Comments</a></li>
+      <li><a class="inner nav-bar__link" href="{{ .Site.BaseURL }}/network/">Network</a></li>
+      <li><a class="inner nav-bar__link" href="{{ .Site.BaseURL }}/plants/">Plants</a></li>
+      <li><a class="inner nav-bar__link" href="{{ .Site.BaseURL }}/policy/">Policies</a></li>
+      <li><a class="inner nav-bar__link" href="{{ .Site.BaseURL }}/quips/">Quips</a></li>
+      <li><a class="inner nav-bar__link" href="{{ .Site.BaseURL }}/search/">Search</a></li>
+      <li><a class="inner nav-bar__link" href="{{ .Site.BaseURL }}/stones/">Stones</a></li>
+      <li><a class="inner nav-bar__link" href="{{ .Site.BaseURL }}/style/">Styles</a></li>
+    </ul>
   </div>
 
   <div>

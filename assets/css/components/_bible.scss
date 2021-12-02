@@ -1,5 +1,6 @@
 .bible {
     &__title {
+        text-transform: capitalize;
         font-size: $font-xl;
     }
     &__src {
