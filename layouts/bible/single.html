@@ -3,7 +3,7 @@
 {{ partial "head.html" . }}
 <body>
   {{ partial "nav-bar.html" . }}
-  <section>
+  <section class="narrow">
   <article class="bible h-entry">
 
       {{- $title := .Title -}}{{- if eq $title "" -}}{{- $title = humanize .File.BaseFileName -}}{{- end -}}
