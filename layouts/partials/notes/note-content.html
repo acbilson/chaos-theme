@@ -1,6 +1,7 @@
 <article class="note h-entry">
 
-    <h1 class="note__title p-name">{{ .Title }}</h1>
+    {{- $title := .Title -}}{{- if eq $title "" -}}{{- $title = humanize .File.BaseFileName -}}{{- end -}}
+    <h1 class="note__title p-name">{{ $title }}</h1>
     <a class="u-url" href="{{ .Permalink }}" hidden></a>
 
     <div class="note__content e-content">
