@@ -1,10 +1,24 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="{{ .Site.Params.defaultColorMode }}">
+{{- $path := printf "/%s" .File.Path -}}
 {{ partial "head.html" . }}
 <body>
   {{ partial "nav-bar.html" . }}
   <section class="narrow">
   {{ partial "notes/note-content.html" . }}
+    <ol>
+    {{- range getJSON "http://micropub/test" -}}
+    {{- range $key, $val := . -}}
+      {{- range $k, $v := $val -}}
+        {{- $ref := printf "%s.md" $k -}}
+      {{- if eq $path $ref -}}
+        <li>match btwn<br />{{- $ref -}}<br />{{- $path -}}</li>
+	<li>result will be: {{- range $v -}}<a href="{{- path.Join $key . -}}">{{- humanize (strings.TrimSuffix ".md" . ) -}}</a>{{- end -}}</li>
+      {{- end -}}
+      {{- end -}}
+    {{- end -}}
+    {{- end -}}
+    </ol>
   </section>
   {{ partial "foot.html" }}
   {{ partial "scripts.html" . }}
