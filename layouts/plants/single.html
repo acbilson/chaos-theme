@@ -6,18 +6,6 @@
   {{ partial "nav-bar.html" . }}
   <section class="narrow">
   {{ partial "notes/note-content.html" . }}
-    {{- $response := getJSON "http://chaos-theme-service/backrefs" -}}
-    <h1>Backlinks</h1>
-    {{- range $backlink, $backrefs := $response.results -}}
-      {{- if eq $path $backlink -}}
-      <ul>
-        {{- range $backrefs -}}
-        <li><a class="backref-card__link" href="{{- . -}}">{{ humanize $backlink }}</a></li>
-        {{- end -}}
-      </ul>
-      {{- end -}}
-    {{- end -}}
-
   </section>
   {{ partial "foot.html" }}
   {{ partial "scripts.html" . }}

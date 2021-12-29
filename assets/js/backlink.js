@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
                     if (text === null) return null;
                     const elements = this.parser.parsePageToSummary(text, this.name);
                     const summary = this._createSummary(elements);
-                    return this._insertSummaryAfterLink(summary);
+                    return this._insertSummaryAfterAttributes(summary);
                 });
         }
 
@@ -149,8 +149,9 @@ document.addEventListener('DOMContentLoaded', (e) => {
             return summary;
         }
 
-        _insertSummaryAfterLink(popup) {
-            return this.el.insertAdjacentElement('afterend', popup);
+        _insertSummaryAfterAttributes(popup) {
+            console.log(this.el);
+            return this.el.parentElement.insertAdjacentElement('afterend', popup);
         }
     }
 

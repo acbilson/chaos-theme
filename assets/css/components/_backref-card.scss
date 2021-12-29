@@ -2,6 +2,16 @@
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-between;
+    &__attr {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: flex-start;
+      align-items: baseline;
+    }
+    &__title {
+      color: var(--color-headline);
+      margin-left: $base-size * 3;
+    }
     &__link {
         display: block;
         text-decoration: none;
