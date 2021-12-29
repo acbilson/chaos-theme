@@ -3,6 +3,7 @@
         text-transform: capitalize;
     }
     &__ref {
+        color: var(--color-paragraph);
         font-size: $font-md;
         text-align: right;
     }
