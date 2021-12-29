@@ -4,16 +4,6 @@
 <body>
     {{ partial "nav-bar.html" . }}
 
-    <ol>
-    {{- range getJSON "http://micropub/test" -}}
-    {{- range . -}}
-      <li>{{- . -}}</li>
-      <li>missing: {{- .missing -}}</li>
-      <li>failed: {{- .failed -}}</li>
-    {{- end -}}
-    {{- end -}}
-    </ol>
-
     <section class="garden-page">
     {{ .Content }}
 
