@@ -1,13 +1,21 @@
 {{- $anchor := .File.BaseFileName -}}
-{{- with .Params.backlinks -}}
+{{- $path := strings.TrimSuffix ".md" (printf "/%s" .File.Path) -}}
+{{- $response := getJSON "http://chaos-theme-service/backrefs" -}}
+
 <h3>Backlinks</h3>
-<div class="backref-card">
-{{- range . -}}
-<div class="backref-card__card">
-  <a class="backref-card__link" href="{{ . }}#{{ $anchor }}">⚓</a>
-</div>
-{{- end -}}
-</div>
+{{- range $backlink, $backrefs := $response.results -}}
+  {{- if eq $path $backlink -}}
+  <div class="backref-card">
+    {{- range $backrefs -}}
+    <div class="backref-card__card">
+      <div class="backref-card__attr">
+        <a class="backref-card__link" href="{{ $.Site.BaseURL }}{{ . }}/#{{ $anchor }}">⚓</a>
+        <span class="backref-card__title">{{- humanize (path.Base .) -}}</span>
+      </div>
+    </div>
+    {{- end -}}
+  </div>
+  {{- end -}}
 {{- end -}}
 
 <!-- adds event handler to preview backlinks -->
