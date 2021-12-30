@@ -1,8 +1,15 @@
 .poetry {
+    &__content {
     font-style: italic;
     margin-left: $base-size * 5;
-    >p {
-        margin: 0px;
-        line-height: $font-lg;
+      >p {
+          margin: 0px;
+          line-height: $font-lg;
+    text-align: center;
+      }
+    }
+    &__title {
+      font-style: normal;
+    text-align: center;
     }
 }

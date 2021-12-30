@@ -2,9 +2,9 @@
 {{- $path := strings.TrimSuffix ".md" (printf "/%s" .File.Path) -}}
 {{- $response := getJSON "http://chaos-theme-service/backrefs" -}}
 
-<h3>Backlinks</h3>
 {{- range $backlink, $backrefs := $response.results -}}
   {{- if eq $path $backlink -}}
+  <h3>Backlinks</h3>
   <div class="backref-card">
     {{- range $backrefs -}}
     <div class="backref-card__card">
