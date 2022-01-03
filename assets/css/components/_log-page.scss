@@ -1,0 +1,12 @@
+.log-page {
+
+  &__archive {
+    margin-bottom: $base-size * 10;
+  }
+
+  &__archive-list {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+  }
+}
