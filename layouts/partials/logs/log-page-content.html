@@ -6,7 +6,7 @@
   <!-- at the top level, shows the last six months of logs with archive links -->
   {{- if eq .CurrentSection .FirstSection -}}
 
-    {{- range .RegularPages -}}
+    {{- range .RegularPagesRecursive -}}
       {{- if ge .Date (now.AddDate 0 -6 0) -}}
         {{ .Render "li" }}
       {{- end -}}
