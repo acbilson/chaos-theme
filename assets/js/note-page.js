@@ -36,45 +36,34 @@ document.addEventListener('DOMContentLoaded', (e) => {
         }
     }
 
-    class NoteForm {
+    // fires on every page load, reading the form values
+    // from the query string, updating the dropdowns and
+    // applying the filter to the list
+    const params = new URLSearchParams(window.location.search)
+    const epistemic = params.get('epistemic')
+    const category = params.get('category')
 
-        get selectedEpistemic() {
-            return Array.from(this.form.epistemicSelector.selectedOptions).map(o => o.value)[0];
-        }
+    if (epistemic && category) {
+	const getOptions = (name) => {
+		return Array.from(document
+			.getElementById('note-form')
+			.querySelector(`select[name="${name}"]`)
+			.querySelectorAll('option'));
+	};
+        // select the options from query string
+	getOptions('epistemic').find(o => o.value === epistemic).selected = true;
+	getOptions('category').find(o => o.value === category).selected = true;
 
-        get selectedFolder() {
-            return Array.from(this.form.folderSelector.selectedOptions).map(o => o.value)[0];
-        }
-
-        constructor(form, notes) {
-            this.form = form;
-            this.notes = notes;
-        }
-
-        handleForm() {
-            this.filterByEpistemic();
-        }
-
-        filterByEpistemic() {
-            Array.from(this.notes).forEach(n => n.toggleVisibility(this.selectedEpistemic, this.selectedFolder));
-        }
-    }
-
-    const form = document.notesForm;
     const notes = Array.from(document
             .getElementById('notes-list')
             .querySelectorAll('li'))
-        .map(el => new NoteCard(el));
+            .map(el => new NoteCard(el));
 
-    if (!form || !notes || notes.length === 0) {
+    if (!notes || notes.length === 0) {
         console.warn('failed to retrieve note-form data from page');
-        console.warn({ form, notes });
-        return;
+        console.warn({ epistemic, category, notes });
+	    return;
     }
-    const noteForm = new NoteForm(form, notes);
-
-    document.notesForm.addEventListener('submit', (e) => {
-        e.preventDefault(); // refreshes page w/o this
-        noteForm.handleForm();
-    });
+    notes.forEach((note) => note.toggleVisibility(epistemic, category));
+    }
 });

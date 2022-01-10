@@ -12,15 +12,15 @@
   {{- $seedlings := sort (where .Pages "Params.epistemic" "seedling") "Lastmod" "desc" -}}
   {{- $everyPlant := $evergreens | append $plants | append $sprouts | append $seedlings -}}
 
-    <form id="note-form" name="notesForm" class="note-page__form">
-    <select name="epistemicSelector">
+    <form id="note-form" name="notesForm" class="note-page__form" action='{{ with .GetPage "/plants" }}{{ .Permalink }}{{ end }}' method=get>
+    <select name="epistemic">
       <option value="all">All ({{- len $everyPlant -}})</option>
       <option value="🌲">Evergreen 🌲 ({{- len $evergreens -}})</option>
       <option value="🪴">Plant 🪴 ({{- len $plants -}})</option>
       <option value="🌿">Sprout 🌿 ({{- len $sprouts -}})</option>
       <option value="🌱">Seedling 🌱 ({{- len $seedlings -}})</option>
     </select>
-    <select name="folderSelector">
+    <select name="category">
       <option value="all">All</option>
       <option value="business">Business</option>
       <option value="culture">Culture</option>
