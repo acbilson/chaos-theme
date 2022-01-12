@@ -3,8 +3,17 @@
         display: grid;
         grid-gap: 5px;
         grid-template-columns: repeat(2, auto);
+	padding-top: $base-size * 8;
         @media screen and (min-width: $phone-width) {
             grid-template-columns: repeat(5, auto);
+        }
+
+    }
+    &__form {
+        display: flex;
+        flex-flow: row nowrap;
+        >* {
+            margin: 0 5px;
         }
     }
 }
