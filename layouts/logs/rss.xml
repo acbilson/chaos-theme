@@ -16,7 +16,7 @@
      {{ printf "<atom:link href=%q rel=\"self\" type=%q />" .Permalink .MediaType | safeHTML }}
    {{ end }}
 
-   {{- range .Pages -}}
+   {{- range .RegularPagesRecursive -}}
     <item>
       <title>{{ .Title }}</title>
       <link>{{ .Permalink }}</link>

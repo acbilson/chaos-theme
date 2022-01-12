@@ -29,8 +29,7 @@
   <!-- adds supported RSS feeds -->
   {{ range .AlternativeOutputFormats -}}
   <link rel="{{ .Rel }}" type="{{ .MediaType.Type | html }}" href="{{ $.Site.BaseURL }}/logs/index.xml" title="{{ $.Site.Title }} - Ship's Log" />
-  <link rel="{{ .Rel }}" type="{{ .MediaType.Type | html }}" href="{{ $.Site.BaseURL }}/notes/index.xml" title="{{ $.Site.Title }} - Notes" />
-  <link rel="{{ .Rel }}" type="{{ .MediaType.Type | html }}" href="{{ $.Site.BaseURL }}/posts/index.xml" title="{{ $.Site.Title }} - Posts" />
+  <link rel="{{ .Rel }}" type="{{ .MediaType.Type | html }}" href="{{ $.Site.BaseURL }}/plants/index.xml" title="{{ $.Site.Title }} - Notes" />
   {{ end -}}
 
   <!-- sets color scheme before page load -->
