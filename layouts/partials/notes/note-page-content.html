@@ -56,7 +56,8 @@
       <li data-epistemic="{{- $epVal -}}" data-folder="{{- $topFolder -}}">
         <div class="note-page__item">
           <div class="note-page__attr">[<span>{{- $epVal -}}</span>
-            <span>{{- .Lastmod.Format "2/1/06" -}}</span>
+            <span hidden>{{- .Lastmod.Format "2/1/06" -}}</span>
+            <span>{{- .Date.Format "2/1/06" -}}</span>
             <span>{{- substr $topFolder 0 5 -}}</span>]</div>
           <div><a class="note-page__link" href="{{- .Permalink -}}">{{- $title -}}</a></div>
         </div>
