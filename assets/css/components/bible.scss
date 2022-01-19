@@ -1,3 +1,18 @@
+.bible {
+    &__title {
+        text-transform: capitalize;
+        font-size: $font-xl;
+    }
+    &__src {
+        font-size: $font-lg;
+        text-align: center;
+        color: var(--color-aside);
+    }
+    &__version {
+        font-style: italic;
+    }
+}
+
 .bible-card {
     &__title {
         text-transform: capitalize;

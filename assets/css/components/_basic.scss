@@ -1,3 +1,18 @@
+.basic-page {
+    &__title {
+        text-transform: capitalize;
+    }
+    &__content {
+        display: grid;
+        grid-gap: $base-size * 3;
+        grid-template-columns: 100%;
+        @media screen and (min-width: $phone-width) {
+            grid-template-columns: repeat($column-count, auto);
+            grid-gap: $base-size * 10;
+        }
+    }
+}
+
 .basic {
     &__title {
         text-transform: capitalize;
@@ -24,5 +39,12 @@
     }
     &__link:first-of-type {
         margin-left: $base-size;
+    }
+}
+
+.basic-card {
+    &__link {
+        text-decoration: none;
+        text-transform: capitalize;
     }
 }
