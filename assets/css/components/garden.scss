@@ -1,3 +1,9 @@
+.garden-page {
+    &__canvas {
+        width: max-content;
+    }
+}
+
 .garden {
     &__title {
         text-transform: capitalize;

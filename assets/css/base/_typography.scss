@@ -1,3 +1,8 @@
+@mixin title-heading {
+    text-transform: capitalize;
+    font-size: $font-xl;
+}
+
 body {
     -moz-osx-font-smoothing: grayscale;
     word-break: break-word;

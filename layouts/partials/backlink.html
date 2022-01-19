@@ -1,6 +1,7 @@
 {{- $anchor := .File.BaseFileName -}}
 {{- $path := strings.TrimSuffix ".md" (printf "/%s" .File.Path) -}}
 {{- $response := getJSON "http://chaos-theme-service/backrefs" -}}
+{{- $backlinkjs := resources.Get "js/backlink.js" -}}
 
 {{- range $backlink, $backrefs := $response.results -}}
   {{- if eq $path $backlink -}}
@@ -19,5 +20,4 @@
 {{- end -}}
 
 <!-- adds event handler to preview backlinks -->
-{{- $backlinkjs := resources.Get "js/backlink.js" -}}
 <script src="{{ $backlinkjs.Permalink }}"></script>

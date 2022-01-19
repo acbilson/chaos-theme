@@ -1,7 +1,21 @@
-.stone-entry {
+.basic-page {
+    &__title {
+        text-transform: capitalize;
+    }
+    &__content {
+        display: grid;
+        grid-gap: $base-size * 3;
+        grid-template-columns: 100%;
+        @media screen and (min-width: $phone-width) {
+            grid-template-columns: repeat($column-count, auto);
+            grid-gap: $base-size * 10;
+        }
+    }
+}
+
+.basic {
     &__title { @include title-heading; }
     &__ref {
-        color: var(--color-paragraph);
         font-size: $font-md;
         text-align: right;
     }
@@ -10,6 +24,10 @@
     }
     &__tags {
         text-align: center;
+    }
+    &__toc {
+        position: relative;
+        width: inherit;
     }
     &__link+&__link {
         margin: 0 $base-size;
@@ -22,16 +40,9 @@
     }
 }
 
-.stone-card {
-    &__title {
-        line-height: 1.2;
-    }
+.basic-card {
     &__link {
         text-decoration: none;
         text-transform: capitalize;
-    }
-    &__summary {
-        text-align: unset;
-        color: var(--color-paragraph);
     }
 }
