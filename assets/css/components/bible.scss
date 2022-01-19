@@ -1,3 +1,15 @@
+.bible-entry {
+    &__title { @include title-heading; }
+    &__src {
+        font-size: $font-lg;
+        text-align: center;
+        color: var(--color-aside);
+    }
+    &__version {
+        font-style: italic;
+    }
+}
+
 .bible-card {
     &__title {
         text-transform: capitalize;
