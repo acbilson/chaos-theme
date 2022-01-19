@@ -54,7 +54,7 @@
 	{{- end -}}
 
 	{{- $title := .Title -}}{{- if eq $title "" -}}{{- $title = humanize .File.BaseFileName -}}{{- end -}}
-	{{- $topFolder := index (split .URL "/") 2 -}}
+	{{- $topFolder := index (split .RelPermalink "/") 2 -}}
 	<li data-epistemic="{{- $epVal -}}" data-folder="{{- $topFolder -}}">
 	  <div class="plant-page__item">
 	    <div class="plant-page__attr">[<span>{{- $epVal -}}</span>
