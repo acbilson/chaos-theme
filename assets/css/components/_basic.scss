@@ -14,9 +14,7 @@
 }
 
 .basic {
-    &__title {
-        text-transform: capitalize;
-    }
+    &__title { @include title-heading; }
     &__ref {
         font-size: $font-md;
         text-align: right;

@@ -1,7 +1,5 @@
 .stone-entry {
-    &__title {
-        text-transform: capitalize;
-    }
+    &__title { @include title-heading; }
     &__ref {
         color: var(--color-paragraph);
         font-size: $font-md;

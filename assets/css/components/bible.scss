@@ -1,8 +1,5 @@
 .bible-entry {
-    &__title {
-        text-transform: capitalize;
-        font-size: $font-xl;
-    }
+    &__title { @include title-heading; }
     &__src {
         font-size: $font-lg;
         text-align: center;

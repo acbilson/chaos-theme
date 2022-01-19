@@ -56,11 +56,11 @@
 	{{- $title := .Title -}}{{- if eq $title "" -}}{{- $title = humanize .File.BaseFileName -}}{{- end -}}
 	{{- $topFolder := index (split .RelPermalink "/") 2 -}}
 	<li data-epistemic="{{- $epVal -}}" data-folder="{{- $topFolder -}}">
-	  <div class="plant-page__item">
-	    <div class="plant-page__attr">[<span>{{- $epVal -}}</span>
+	  <div class="plant-card">
+	    <div class="plant-card__attr">[<span>{{- $epVal -}}</span>
 	      <span>{{- .Lastmod.Format "2/1/06" -}}</span>
 	      <span>{{- substr $topFolder 0 5 -}}</span>]</div>
-	    <div><a class="plant-page__link" href="{{- .Permalink -}}">{{- $title -}}</a></div>
+	    <div><a class="plant-card__link" href="{{- .Permalink -}}">{{- $title -}}</a></div>
 	  </div>
 	</li>
       {{- end -}}
