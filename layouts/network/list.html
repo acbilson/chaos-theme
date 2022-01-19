@@ -1,3 +1,4 @@
+{{ $diagramjs := resources.Get "js/tag-diagram.js" }}
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="{{ .Site.Params.defaultColorMode }}">
 {{ partialCached "head.html" . }}
@@ -16,8 +17,6 @@ to pass along the path to the JSON file. -->
     display_diagram("/network/diagram.json");
   });
 </script>
-
-{{ $diagramjs := resources.Get "js/tag-diagram.js" }}
 <script src="{{ $diagramjs.Permalink }}"></script>
 <script src="https://d3js.org/d3.v5.min.js"></script>
 </html>

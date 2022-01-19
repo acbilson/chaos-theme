@@ -7,7 +7,7 @@
   <section class="log-page narrow">
 
     <h1 class="log-page__title">{{- .Title -}}</h1>
-    <p>{{- .Content -}}</p>
+    <div class="log-page__content">{{- .Content -}}</div>
 
     <!-- at the top level, shows the last six months of logs with archive links -->
     {{- if eq .CurrentSection .FirstSection -}}

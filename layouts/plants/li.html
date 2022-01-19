@@ -8,7 +8,6 @@
     {{ $epVal = "🌲" }}
   {{ end }}
 {{ end }}
-
 {{- $title := .Title -}}{{- if eq $title "" -}}{{- $title = humanize .File.BaseFileName -}}{{- end -}}
 {{- $topFolder := index (split .URL "/") 2 -}}
 <article class="plant-card">

@@ -1,3 +1,4 @@
+{{- $author := "Alex Bilson" -}}{{- if isset .Params "author" -}}{{- $author = .Params.author -}}{{- end -}}
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="{{ .Site.Params.defaultColorMode }}">
 {{ partialCached "head.html" . }}
@@ -6,17 +7,10 @@
 
     <section class="narrow">
       <article class="log h-entry">
-	  <div class="log__content">
-	      {{ .Content }}
-	  </div>
+	<div class="log__content">{{- .Content -}}</div>
 
 	<ul class="log__attr">
-	  {{- if isset .Params "author" -}}
-	      <li>By: <a rel="author" class="log__author p-author">{{- .Params.author -}}</a></li>
-	  {{- else -}}
-	      <li>By: <a rel="author" class="log__author p-author">Alex Bilson</a></li>
-	  {{- end -}}
-
+	  <li>By: <a rel="author" class="log__author p-author">{{- $author -}}</a></li>
 	  {{- if isset .Params "date" -}}
 	  <li>Posted: <time class="dt-published" datetime="{{ .Date.Format "2006-01-02" }}">{{- .Date.Format "Jan 2, 2006" -}}</time></li>
 	  <li>Modified: <time datetime="{{ .Lastmod.Format "2006-01-02" }}">{{- .Lastmod.Format "Jan 2, 2006" -}}</time></li>

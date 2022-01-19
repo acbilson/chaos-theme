@@ -1,3 +1,8 @@
+{{- $evergreens := sort (where .Pages "Params.epistemic" "evergreen") "Lastmod" "desc" -}}
+{{- $plants := sort (where .Pages "Params.epistemic" "plant") "Lastmod" "desc" -}}
+{{- $sprouts := sort (where .Pages "Params.epistemic" "sprout") "Lastmod" "desc" -}}
+{{- $seedlings := sort (where .Pages "Params.epistemic" "seedling") "Lastmod" "desc" -}}
+{{- $everyPlant := $evergreens | append $plants | append $sprouts | append $seedlings -}}
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="{{ .Site.Params.defaultColorMode }}">
 {{ partialCached "head.html" . }}
@@ -7,16 +12,7 @@
   <section class="note-page">
 
     <h1 class="note-page__title">{{- .Title -}}</h1>
-
-    {{- with .Content -}}
-    <p>{{- . -}}</p>
-    {{- end -}}
-
-    {{- $evergreens := sort (where .Pages "Params.epistemic" "evergreen") "Lastmod" "desc" -}}
-    {{- $plants := sort (where .Pages "Params.epistemic" "plant") "Lastmod" "desc" -}}
-    {{- $sprouts := sort (where .Pages "Params.epistemic" "sprout") "Lastmod" "desc" -}}
-    {{- $seedlings := sort (where .Pages "Params.epistemic" "seedling") "Lastmod" "desc" -}}
-    {{- $everyPlant := $evergreens | append $plants | append $sprouts | append $seedlings -}}
+    <div class="note-page__content">{{- .Content -}}</div>
 
       <form id="note-form" name="notesForm" class="note-page__form">
       <select name="epistemicSelector">
@@ -58,7 +54,7 @@
 	{{- end -}}
 
 	{{- $title := .Title -}}{{- if eq $title "" -}}{{- $title = humanize .File.BaseFileName -}}{{- end -}}
-      {{- $topFolder := index (split .URL "/") 2 -}}
+	{{- $topFolder := index (split .URL "/") 2 -}}
 	<li data-epistemic="{{- $epVal -}}" data-folder="{{- $topFolder -}}">
 	  <div class="note-page__item">
 	    <div class="note-page__attr">[<span>{{- $epVal -}}</span>
