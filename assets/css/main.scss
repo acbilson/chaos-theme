@@ -7,28 +7,18 @@
 
 /* Base Component styles */
 @import './components/_basic.scss';
-@import './components/_chart.scss';
 @import './components/_home.scss';
 @import './components/_nav-bar.scss';
+@import './components/_shortcodes.scss';
 @import './components/_style.scss';
 @import './components/node.scss';
 @import './components/search.scss';
-@import './components/shortcodes.scss';
 
 /* Entries Component styles */
 @import './components/backref.scss';
-@import './components/_note.scss';
-@import './components/_post.scss';
 @import './components/bible.scss';
 @import './components/garden.scss';
 @import './components/log.scss';
 @import './components/plant.scss';
 @import './components/stone.scss';
 @import './components/terms.scss';
-
-/* Page Component styles */
-@import './components/_note-page.scss';
-@import './components/_post-page.scss';
-
-/* Card Component styles */
-@import './components/_post-card.scss';

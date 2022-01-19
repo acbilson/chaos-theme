@@ -1,3 +1,74 @@
+.plant-page {
+    &__list {
+        padding-left: 0;
+        list-style: none;
+    }
+    &__item {
+        display: flex;
+        flex-flow: column nowrap;
+    }
+    &__link {
+        text-decoration: none;
+        text-transform: capitalize;
+    }
+    &__attr {
+        font-size: $font-sm;
+        span+span {
+            padding-left: $base-size;
+        }
+    }
+    &__form {
+        display: flex;
+        flex-flow: row nowrap;
+        >* {
+            margin: 0 5px;
+        }
+    }
+    @media screen and (min-width: $phone-width) {
+        $columns: 2;
+        &__list {
+            column-count: $columns;
+            --moz-column-count: $columns;
+            --webkit-column-count: $columns;
+            column-gap: 2%;
+            --moz-column-gap: 2%;
+            --webkit-column-gap: 2%;
+        }
+        &__item {
+            display: grid;
+            grid-column-gap: $base-size * 3;
+            grid-template-columns: 140px auto;
+        }
+    }
+}
+
+.plant-entry {
+    &__title {
+        font-size: $font-xl;
+    }
+    &__author {
+        color: var(--color-aside);
+    }
+    &__attr {
+        display: flex;
+        flex-flow: column nowrap;
+        list-style: none;
+        font-size: $font-md;
+        >li+li {
+            margin: 0 $base-size;
+        }
+    }
+    &__link+&__link {
+        margin: 0 $base-size;
+    }
+    &__link:first-of-type {
+        margin-left: $base-size;
+    }
+    &__link:last-of-type {
+        margin-right: 0;
+    }
+}
+
 .plant-card {
     &__title {
         display: flex;

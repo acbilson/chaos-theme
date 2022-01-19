@@ -8,17 +8,17 @@
   {{ partialCached "nav-bar.html" . }}
 
   <section class="narrow">
-    <article class="note h-entry">
+    <article class="plant-entry h-entry">
 
-	<h1 class="note__title p-name">{{ $title }}</h1>
+	<h1 class="plant-entry__title p-name">{{ $title }}</h1>
 	<a class="u-url" href="{{ .Permalink }}" hidden></a>
 
-	<div class="note__content e-content">
+	<div class="plant-entry__content e-content">
 	    {{ .Content }}
 	</div>
 
-	<ul class="note__attr">
-	  <li>By: <a rel="author" class="note__author p-author">{{- $author -}}</a></li>
+	<ul class="plant-entry__attr">
+	  <li>By: <a rel="author" class="plant-entry__author p-author">{{- $author -}}</a></li>
 	  {{- if isset .Params "date" -}}
 	  <li>Posted: <time class="dt-published" datetime="{{ .Date.Format "2006-01-02" }}">{{- .Date.Format "Jan 2, 2006" -}}</time></li>
 	  <li>Modified: <time datetime="{{ .Lastmod.Format "2006-01-02" }}">{{- .Lastmod.Format "Jan 2, 2006" -}}</time></li>
@@ -40,7 +40,7 @@
 	    <li>Tags:
 	      {{- range $name := .Param "tags" -}}
 		{{- with $.Site.GetPage (printf "/%s/%s" "tags" ( $name | urlize)) -}}
-		<a class="note__link p-category" href="{{ .Permalink }}">{{- $name -}}</a>
+		<a class="plant-entry__link p-category" href="{{ .Permalink }}">{{- $name -}}</a>
 		{{- end -}}
 	      {{- end -}}
 	    </li>

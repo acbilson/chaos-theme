@@ -7,11 +7,11 @@
   {{ partialCached "nav-bar.html" . }}
 
   <section class="narrow">
-    <article class="bible h-entry">
-      <h1 class="bible__title p-name">{{- $title -}}</h1>
+    <article class="bible-entry h-entry">
+      <h1 class="bible-entry__title p-name">{{- $title -}}</h1>
       <a class="u-url" href="{{ .Permalink }}" hidden></a>
-      <h3 class="bible__src">(<span class="bible__version">{{- $version -}}</span>, {{ .Params.ref }})</h3>
-      <div class="bible__content e-content">{{- .Content -}}</div>
+      <h3 class="bible-entry__src">(<span class="bible-entry__version">{{- $version -}}</span>, {{ .Params.ref }})</h3>
+      <div class="bible-entry__content e-content">{{- .Content -}}</div>
     </article>
   {{ partial "backlink.html" . }}
   </section>

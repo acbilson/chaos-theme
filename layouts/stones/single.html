@@ -6,34 +6,22 @@
 <body>
   {{ partialCached "nav-bar.html" . }}
   <section class="narrow">
-    <article class="stone h-entry">
-      <h1 class="stone__title p-name">{{- $title -}}</h1>
+    <article class="stone-entry h-entry">
+      <h1 class="stone-entry__title p-name">{{- $title -}}</h1>
 
       <!-- Adds tags to the post if they exist -->
       {{- if isset .Params $taxo -}}
-        <div class="stone__tags">
+        <div class="stone-entry__tags">
           {{- range $name := .Param $taxo -}}
             {{- with $.Site.GetPage (printf "/%s/%s" $taxo ( $name | urlize)) -}}
-          <a class="stone__link p-category" href="{{ .Permalink }}">{{- $name -}}</a>
+          <a class="stone-entry__link p-category" href="{{ .Permalink }}">{{- $name -}}</a>
             {{- end -}}
           {{- end -}}
         </div>
       {{- end -}}
-    <a class="u-url" href="{{ .Permalink }}" hidden></a>
-    <div class="stone__content e-content">{{- .Content -}}</div>
-    <div class="stone__ref">
-      -
-      <span class="stone__author">{{- delimit .Params.authors "," -}}.</span>
-      <span class="stone__copyright">({{- .Params.copyright -}})</span>
-      <span class="stone__source">{{- .Params.source -}}.</span>
-      {{- if isset .Params "page" -}}
-	      {{- $page := printf " pg. %s" .Params.page -}}
-	      {{- if in "Preface Foreword" .Params.page -}}
-		      {{- $page = .Params.page -}}
-	      {{- end -}}
-      <span class="stone__page">{{- $page -}}</span>
-      {{- end -}}
-    </div>
+      <a class="u-url" href="{{ .Permalink }}" hidden></a>
+      <div class="stone-entry__content e-content">{{- .Content -}}</div>
+      {{ partial "citation.html" . }}
   </article>
   {{ partial "backlink.html" . }}
   </section>

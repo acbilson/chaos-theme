@@ -12,13 +12,13 @@
   <section class="terms-page">
     <h1>{{- .Title -}}</h1>
     <form id="term-form" name="termsForm" class="terms-page__form" action='{{ with .GetPage "/tags" }}{{ .Permalink }}{{ end }}' method=get>
-	    <select name="minimum">
-		    <option value="0">&gt; 0 (All)</option>
-		    <option value="1">&gt; 1</option>
-		    <option value="3">&gt; 3</option>
-		    <option value="5">&gt; 5</option>
-		    <option value="10">&gt; 10</option>
-	    </select>
+      <select name="minimum">
+	<option value="0">&gt; 0 (All)</option>
+	<option value="1">&gt; 1</option>
+	<option value="3">&gt; 3</option>
+	<option value="5">&gt; 5</option>
+	<option value="10">&gt; 10</option>
+      </select>
     <input type="submit" value="Filter"/>
     </form>
   {{- end -}}

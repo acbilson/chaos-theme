@@ -9,12 +9,12 @@
 <body>
   {{ partialCached "nav-bar.html" . }}
 
-  <section class="note-page">
+  <section class="plant-page">
 
-    <h1 class="note-page__title">{{- .Title -}}</h1>
-    <div class="note-page__content">{{- .Content -}}</div>
+    <h1 class="plant-page__title">{{- .Title -}}</h1>
+    <div class="plant-page__content">{{- .Content -}}</div>
 
-      <form id="note-form" name="notesForm" class="note-page__form">
+      <form id="note-form" name="notesForm" class="plant-page__form">
       <select name="epistemicSelector">
 	<option value="all">All ({{- len $everyPlant -}})</option>
 	<option value="🌲">Evergreen 🌲 ({{- len $evergreens -}})</option>
@@ -41,7 +41,7 @@
     {{- $notepagejs := resources.Get "js/note-page.js" -}}
     <script src="{{ $notepagejs.Permalink }}"></script>
 
-    <ul id="notes-list" class="note-page__list">
+    <ul id="notes-list" class="plant-page__list">
     {{- range $everyPlant -}}
       {{- if not .Draft -}}
 	{{- $epVal := "🌱" -}}
@@ -56,11 +56,11 @@
 	{{- $title := .Title -}}{{- if eq $title "" -}}{{- $title = humanize .File.BaseFileName -}}{{- end -}}
 	{{- $topFolder := index (split .URL "/") 2 -}}
 	<li data-epistemic="{{- $epVal -}}" data-folder="{{- $topFolder -}}">
-	  <div class="note-page__item">
-	    <div class="note-page__attr">[<span>{{- $epVal -}}</span>
+	  <div class="plant-page__item">
+	    <div class="plant-page__attr">[<span>{{- $epVal -}}</span>
 	      <span>{{- .Lastmod.Format "2/1/06" -}}</span>
 	      <span>{{- substr $topFolder 0 5 -}}</span>]</div>
-	    <div><a class="note-page__link" href="{{- .Permalink -}}">{{- $title -}}</a></div>
+	    <div><a class="plant-page__link" href="{{- .Permalink -}}">{{- $title -}}</a></div>
 	  </div>
 	</li>
       {{- end -}}
