@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="{{ .Site.Params.defaultColorMode }}">
-{{ partial "head.html" . }}
+{{ partialCached "head.html" . }}
 <body>
-    {{ partial "nav-bar.html" . }}
+    {{ partialCached "nav-bar.html" . }}
 
     <section class="garden-page">
     {{ .Content }}
@@ -57,7 +57,7 @@
 
       </svg>
     </section>
-    {{ partial "foot.html" . }}
-  {{ partial "scripts.html" . }}
+    {{ partialCached "foot.html" . }}
+  {{ partialCached "scripts.html" . }}
 </body>
 </html>

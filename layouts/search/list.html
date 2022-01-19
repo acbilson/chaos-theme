@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="{{ .Site.Params.defaultColorMode }}">
-{{ partial "head.html" . }}
+{{ partialCached "head.html" . }}
 <body>
-  {{ partial "nav-bar.html" . }}
-</body>
-</html>
+  {{ partialCached "nav-bar.html" . }}
 
   <section>
   <div class="search-bar">
@@ -22,6 +20,6 @@
   </ul>
   {{ partial "search/search-index.html" . }}
   </section>
-  {{ partial "foot.html" . }}
+  {{ partialCached "foot.html" . }}
 </body>
 </html>

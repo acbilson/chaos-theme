@@ -12,6 +12,10 @@
     &__tags {
         text-align: center;
     }
+    &__toc {
+        position: relative;
+        width: inherit;
+    }
     &__link+&__link {
         margin: 0 $base-size;
     }

@@ -1,8 +1,9 @@
+{{ $tagpagejs := resources.Get "js/tag-page.js" }}
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="{{ .Site.Params.defaultColorMode }}">
-{{- partial "head.html" . -}}
+{{- partialCached "head.html" . -}}
 <body>
-  {{- partial "nav-bar.html" . -}}
+  {{- partialCached "nav-bar.html" . -}}
 </body>
 </html>
   {{- $root := .Data.Plural -}}
@@ -52,10 +53,9 @@
     {{- end -}}
     </div>
   </section>
-  {{- partial "foot.html" . -}}
-  {{- partial "scripts.html" . -}}
 
-{{ $tagpagejs := resources.Get "js/tag-page.js" }}
-<script src="{{ $tagpagejs.Permalink }}"></script>
+  {{- partialCached "foot.html" . -}}
+  {{- partialCached "scripts.html" . -}}
+  <script src="{{ $tagpagejs.Permalink }}"></script>
   </body>
 </html>

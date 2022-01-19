@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="{{ .Site.Params.defaultColorMode }}">
-{{ partial "head.html" . }}
+{{ partialCached "head.html" . }}
 <body>
-  {{ partial "nav-bar.html" . }}
+  {{ partialCached "nav-bar.html" . }}
   <section class="narrow">
   <article class="stone h-entry">
     {{- $title := .Title -}}{{- if eq $title "" -}}{{- $title = humanize .File.BaseFileName -}}{{- end -}}
@@ -38,7 +38,7 @@
   </article>
   {{ partial "backlink.html" . }}
   </section>
-  {{ partial "foot.html" }}
-  {{ partial "scripts.html" . }}
+  {{ partialCached "foot.html" . }}
+  {{ partialCached "scripts.html" . }}
 </body>
 </html>
