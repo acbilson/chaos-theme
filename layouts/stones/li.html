@@ -7,10 +7,12 @@
     <span class="stone__author">{{- delimit .Params.authors "," -}}.</span>
     <span class="stone__copyright">({{- .Params.copyright -}})</span>
     <span class="stone__source">{{- .Params.source -}}.</span>
-    {{ $page := printf "pg. %s" .Params.page }}
-    {{- if in "Preface Foreword" .Params.page -}}
-    {{- $page = .Params.page -}}
-    {{- end -}}
+    {{- if isset .Params "page" -}}
+	    {{- $page := printf " pg. %s" .Params.page -}}
+	    {{- if in "Preface Foreword" .Params.page -}}
+		    {{- $page = .Params.page -}}
+	    {{- end -}}
     <span class="stone__page">{{- $page -}}</span>
+    {{- end -}}
   </div>
 </article>
