@@ -1,14 +1,14 @@
-$column-width: $base-size * 22;
+$column-width: $base-size * 18;
 .nav-bar {
     display: grid;
     grid-template-columns: repeat(5, $column-width);
-    grid-column-gap: $base-size * 2;
+    grid-column-gap: $base-size * 3;
     grid-row-gap: $base-size * 4;
     background-color: transparent;
     margin-top: $base-size * 3;
     &__link {
         font-family: $font-family-condensed;
-        font-size: $font-md;
+        font-size: $font-md - $base-size;
         text-decoration: none;
         width: 100%;
         padding: $base-size;
@@ -48,7 +48,7 @@ $column-width: $base-size * 22;
     }
     &__switch {
         font-family: $font-family-condensed;
-        font-size: $font-md;
+        font-size: $font-md - $base-size;
         margin-top: -$base-size;
         color: var(--color-background);
         background-color: var(--color-link);
@@ -58,8 +58,12 @@ $column-width: $base-size * 22;
         }
     }
     @media screen and (min-width: $phone-width) {
+        &__link {
+          font-size: $font-md;
+        }
         &__switch {
-            margin-left: 50px;
+          font-size: $font-md;
+          margin-left: 50px;
         }
         grid-auto-flow: column;
         grid-template-columns: auto;
