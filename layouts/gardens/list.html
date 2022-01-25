@@ -2,61 +2,75 @@
 <html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="{{ .Site.Params.defaultColorMode }}">
 {{ partialCached "head.html" . }}
 <body>
-    {{ partialCached "nav-bar.html" . }}
+  {{ partialCached "nav-bar.html" . }}
 
-    <section class="garden-page">
+  <section class="garden-page">
     {{ .Content }}
 
-    {{- $radius := 2.5 -}}
-    {{- $tagX := 30 -}}
-    {{- $tagY := 80 -}}
-    {{- $authorX := 60 -}}
-    {{- $authorY := 100 -}}
+    <!-- for debug purpose only -->
+    {{- $stroke := "none" -}}
 
-    <!-- meta isle: (0,0), (160,100) -->
-    <!-- faith isle: (160,100), (400,300) -->
-    <!-- business isle: (20,180), (160,250) -->
-    <!-- technology isle: (0,280), (200,380) -->
-    <!-- parenting isle: (220,400), (380,450) -->
-    <svg class="garden-page__canvas" id="background" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0, 0, 400, 450">
-      <defs>
-        <g id="river">
-          <!-- TODO: add river path -->
-        </g>
-      </defs>
-      <defs>
-        <g id="garden">
-          <!-- TODO: add boats -->
-          <circle r="{{ $radius }}"></circle>
-        </g>
-      </defs>
-      {{- range .Pages -}}
-        {{- if isset .Params "coordinates" -}}
-        {{- $title := .Title -}}{{- if eq $title "" -}}{{- $title = humanize .File.BaseFileName -}}{{- end -}}
-        <g class="garden">
-          <a class="garden__link" href="{{ .Permalink }}">{{- $title -}}
-            <text class="garden__title" x="{{ add .Params.coordinates.x $radius }}" y="{{ sub .Params.coordinates.y $radius }}">{{- $title -}}</text>
-            <use class="garden__icon" href="#garden" x="{{ .Params.coordinates.x }}" y="{{ .Params.coordinates.y }}"></use>
-          </a>
-        </g>
-          <!-- TODO: add use elements to render river -->
-        {{- end -}}
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0, 0, 1275, 1200">
+      <image class="garden-page__background" width="1275" height="1200" href="/data/img/garden-background.png"></image>
+
+    {{- range .Pages -}}
+      {{- $title := .Title -}}{{- if eq $title "" -}}{{- $title = humanize .File.BaseFileName -}}{{- end -}}
+      {{- if isset .Params "coordinates" -}}
+        {{- $startX := .Params.coordinates.x }}
+        {{- $startY := .Params.coordinates.y }}
+        {{- $vertical := or .Params.coordinates.vertical false -}}
+
+        <!-- step defines the length of the text path and surrounding rectangle -->
+        <!-- bend defines the quadratic curve. can be a negative or positive number -->
+        {{- $step := or .Params.coordinates.step 60 }}
+        {{- $bend := or .Params.coordinates.bend 20 -}}
+      {{- if eq $vertical true -}}
+        <path
+          id="{{ .File.BaseFileName }}"
+          d="M {{ $startX }},{{ $startY }} Q {{ add $startX $bend }},{{ add $startY $step }} {{ $startX }},{{ add (add $startY $step) $step }}"
+          stroke="{{ $stroke }}"
+          fill="transparent"
+        />
+      {{- else -}}
+        <path
+          id="{{ .File.BaseFileName }}"
+          d="M {{ $startX }},{{ $startY }} Q {{ add $startX $step }},{{ sub $startY $bend }} {{ add (add $startX $step) $step }},{{ $startY }}"
+          stroke="{{ $stroke }}"
+          fill="transparent"
+        />
       {{- end -}}
-      <g>
-        <a class="garden__link" href="{{ .Site.BaseURL }}/tags">
-            <text class="garden__title" x="{{ add $tagX $radius }}" y="{{ sub $tagY $radius }}">tags directory</text>
-            <use class="garden__icon" href="#garden" x="{{ $tagX }}" y="{{ $tagY }}"></use>
-        </a>
-      </g>
-      <g>
-        <a class="garden__link" href="{{ .Site.BaseURL }}/authors">
-            <text class="garden__title" x="{{ add $authorX $radius }}" y="{{ sub $authorY $radius }}">authors directory</text>
-            <use class="garden__icon" href="#garden" x="{{ $authorX }}" y="{{ $authorY }}"></use>
-        </a>
-      </g>
-
-      </svg>
-    </section>
+      <a class="garden-page__link" href="{{ .Permalink }}">
+      {{- if eq $vertical true -}}
+        <rect
+	  class="garden-page__box"
+          x="{{ sub $startX (div $bend 2) }}"
+          y="{{ sub $startY (div $bend 2) }}"
+          width="{{ add $bend $bend }}"
+          height="{{ add (add $step $step) $bend }}"
+          stroke="{{ $stroke }}"
+          fill="transparent"
+        />
+      {{- else -}}
+        <rect
+	  class="garden-page__box"
+          x="{{ sub $startX (div $bend 2) }}"
+          y="{{ sub $startY (mul $bend 1.5) }}"
+          width="{{ add (add $step $step) $bend }}"
+          height="{{ add $bend $bend }}"
+          stroke="{{ $stroke }}"
+          fill="transparent"
+        />
+      {{- end -}}
+        <text>
+          <textPath xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#{{- .File.BaseFileName -}}">
+            {{ $title }}
+          </textPath>
+        </text>
+      </a>
+    {{- end -}}
+  {{- end -}}
+    </svg>
+  </section>
   {{ partialCached "foot.html" . }}
   {{ partialCached "scripts.html" . }}
 </body>

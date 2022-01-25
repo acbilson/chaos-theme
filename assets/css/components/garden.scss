@@ -1,6 +1,11 @@
 .garden-page {
-    &__canvas {
-        width: max-content;
+    &__background {
+      -moz-user-select: none;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+    &__link {
+      font-family: 'Times New Roman', Times, Georgia, 'Ubuntu', serif;
     }
 }
 
