@@ -5,9 +5,9 @@
     }
     &__form {
         display: flex;
-        flex-flow: row nowrap;
+        flex-flow: row wrap;
         >* {
-            margin: 0 5px;
+            margin: 5px;
         }
     }
     @media screen and (min-width: $phone-width) {
