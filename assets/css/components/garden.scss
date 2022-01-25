@@ -1,6 +1,11 @@
 .garden-page {
-    &__canvas {
-        width: max-content;
+    &__box:hover {
+      stroke: black;
+      stroke-width: 1px;
+    }
+    &__link {
+      color: var(--color-link);
+      font-family: 'Times New Roman', Times, Georgia, 'Ubuntu', serif;
     }
 }
 
