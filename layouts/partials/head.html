@@ -6,10 +6,7 @@
   <meta name="description" content="{{if .IsHome}}{{ $.Site.Params.description }}{{else}}{{.Description}}{{end}}" />
 
   <!-- Page Title -->
-  <title>
-    {{- .Site.Title -}}
-    {{- if not .IsHome -}} &middot; {{- .Title -}} {{- end -}}
-  </title>
+  <title>{{- .Site.Title -}}</title>
 
   <!-- Page Links -->
   {{- $normalizeStyle := resources.Get "css/vendor/normalize.css" -}}
