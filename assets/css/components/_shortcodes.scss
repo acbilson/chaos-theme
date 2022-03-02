@@ -84,6 +84,10 @@
         margin-top: $base-size;
         margin-bottom: 0;
     }
+
+    &__item + &__item {
+      margin-top: $base-size * 2;
+    }
 }
 
 .notice {
@@ -188,7 +192,8 @@
         justify-content: space-between;
     }
     &__attr {
-        margin: auto;
+	width: 5px;
+        margin: auto 0;
     }
     &__year {
         writing-mode: sideways-rl;
