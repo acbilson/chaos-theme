@@ -16,7 +16,8 @@
             column-count: $columns;
             --moz-column-count: $columns;
             --webkit-column-count: $columns;
-            column-gap: 2%;
+            // sets to 10 b/c Safari cuts them off at 11px but I want some gap;
+            column-gap: 10px;
             --moz-column-gap: 2%;
             --webkit-column-gap: 2%;
         }
