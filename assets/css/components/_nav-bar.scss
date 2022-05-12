@@ -1,11 +1,11 @@
 $column-width: $base-size * 18;
 .nav-bar {
-    display: grid;
-    grid-template-columns: repeat(5, $column-width);
-    grid-column-gap: $base-size * 3;
-    grid-row-gap: $base-size * 4;
-    background-color: transparent;
-    margin-top: $base-size * 3;
+		display: grid;
+		grid-auto-flow: column;
+		grid-template-columns: auto;
+		grid-column-gap: $base-size * 3;
+		background-color: transparent;
+		margin-top: $base-size * 3;
     &__link {
         font-family: $font-family-condensed;
         font-size: $font-md - $base-size;
@@ -22,53 +22,28 @@ $column-width: $base-size * 18;
             border-color: var(--color-background);
         }
     }
-    &__dropdown {
-        position: relative;
-        margin: 0;
-        ul {
-            position: absolute;
-            width: 80px;
-            z-index: 3;
-            margin: 0;
-            padding-left: 0;
-            list-style: none;
-            line-height: unset;
-        }
-        li:not(:first-child) {
-            margin-top: $base-size * 4;
-        }
-        &:hover,
-        &:active {
-            .inner {
-                display: inline;
-            }
-        }
-        .inner {
-            display: none;
-        }
-    }
-    &__switch {
+    &__select {
         font-family: $font-family-condensed;
         font-size: $font-md - $base-size;
         margin-top: -$base-size;
         color: var(--color-background);
         background-color: var(--color-link);
         border-color: var(--color-stroke);
+        border-radius: $rounded-sm;
         &:hover {
             border-color: var(--color-background);
         }
     }
     @media screen and (min-width: $phone-width) {
-        &__link {
-          font-size: $font-md;
-        }
-        &__switch {
-          font-size: $font-md;
-          margin-left: 50px;
-        }
+		display: grid;
         grid-auto-flow: column;
         grid-template-columns: auto;
         grid-column-gap: $base-size * 3;
-        grid-auto-flow: column;
+        &__link {
+          font-size: $font-md;
+        }
+        &__select {
+          font-size: $font-md;
+        }
     }
 }

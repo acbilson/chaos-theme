@@ -20,26 +20,22 @@
   <div>
     <a class="nav-bar__link" href="{{ .Site.BaseURL }}/resume/">Resumé</a>
   </div>
-  <div class="nav-bar__dropdown">
-    <ul>
-      <li><a class="outer nav-bar__link">--Extra</a></li>
-      <li><a class="inner nav-bar__link" href="{{ .Site.BaseURL }}/about/">About</a></li>
-      <li><a class="inner nav-bar__link" href="{{ .Site.BaseURL }}/network/">Network</a></li>
-      <li><a class="inner nav-bar__link" href="{{ .Site.BaseURL }}/tags/">Tags</a></li>
-      <li><a class="inner nav-bar__link" href="{{ .Site.BaseURL }}/authors/">Authors</a></li>
-      <li><a class="inner nav-bar__link" href="{{ .Site.BaseURL }}/policy/">Policies</a></li>
-      <li><a class="inner nav-bar__link" href="{{ .Site.BaseURL }}/quips/">Quips</a></li>
-      <li><a class="inner nav-bar__link" href="{{ .Site.BaseURL }}/search/">Search</a></li>
-      <li><a class="inner nav-bar__link" href="{{ .Site.BaseURL }}/style/">Styles</a></li>
-    </ul>
+
+  {{- $links := (slice "about" "network" "tags" "authors" "quips" "search" "style") -}}
+  <div class="nav-bar__select">
+	  <select id="nav-router" onchange="window.open(`${location.origin}/${this.value}`, '_self');">
+	  {{- range $links -}}
+		  <option value="{{ . }}">{{ . | title }}</option>
+	  {{- end -}}
+    </select>
   </div>
 
+  {{- $themes := (slice "jungle" "void" "fall" "minimal") -}}
   <div>
-    <select id="nav-switch" class="nav-bar__switch">
-      <option value="jungle">Jungle</option>
-      <option value="void">Void</option>
-      <option value="fall">Fall</option>
-      <option value="minimal">Minimal</option>
+    <select id="nav-switch" class="nav-bar__select">
+	  {{- range $themes -}}
+		  <option value="{{ . }}">{{ . | title }}</option>
+	  {{- end -}}
     </select>
   </div>
 </nav>
