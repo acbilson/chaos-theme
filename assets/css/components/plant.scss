@@ -1,7 +1,9 @@
 .plant-page {
     &__list {
-        padding-left: 0;
-        list-style: none;
+		padding-left: 0;
+		list-style: none;
+		grid-column-gap: unset;
+		grid-template-columns: 1fr;
     }
     &__form {
         display: flex;
@@ -11,15 +13,10 @@
         }
     }
     @media screen and (min-width: $phone-width) {
-        $columns: 2;
         &__list {
-            column-count: $columns;
-            --moz-column-count: $columns;
-            --webkit-column-count: $columns;
-            // sets to 10 b/c Safari cuts them off at 11px but I want some gap;
-            column-gap: 10px;
-            --moz-column-gap: 2%;
-            --webkit-column-gap: 2%;
+				display: grid;
+				grid-column-gap: 10px;
+				grid-template-columns: repeat(2, 1fr);
         }
         &__item {
             display: grid;
