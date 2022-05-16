@@ -60,7 +60,9 @@
 	    <div class="plant-card__attr">[<span>{{- $epVal -}}</span>
 	      <span>{{- .Date.Format "2/1/06" -}}</span>
 	      <span hidden>{{- .Lastmod.Format "2/1/06" -}}</span>
-	      <span>{{- substr $topFolder 0 5 -}}</span>]</div>
+	      <span>{{- substr $topFolder 0 5 -}}</span>
+	      <span>{{- .ReadingTime -}} m</span>]
+		 </div>
 	    <div><a class="plant-card__link" href="{{- .Permalink -}}">{{- $title -}}</a></div>
 	  </div>
 	</li>
