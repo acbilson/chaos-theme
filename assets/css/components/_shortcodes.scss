@@ -38,7 +38,9 @@
 }
 
 .backref {
-    text-transform: capitalize;
+		text-transform: capitalize;
+		text-decoration-line: underline;
+		text-decoration-style: double;
     &:hover+&__popup {
         display: block;
     }
