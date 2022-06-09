@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
 		}
 
 		getCopy(feedItem) {
-			console.log({feedItem, template: this.template});
+			console.log({ feedItem, template: this.template });
 			const article = this.template.cloneNode(true);
 
 			// sets contnet, link and date
@@ -40,11 +40,16 @@ document.addEventListener("DOMContentLoaded", (e) => {
 	const showOnThisDayEl = document
 		.getElementById("show-on-this-day")
 		.addEventListener("click", (e) => {
+			const onThisDayEl = document.getElementById("on-this-day");
+
+			if (!onThisDayEl.hidden) {
+				return;
+			}
+
 			const parser = new DOMParser();
 			const today = new Date();
 			const logsUri = this.location.href + "index.xml";
 
-			const onThisDayEl = document.getElementById("on-this-day");
 			const templateEl = document.querySelector("article.log-card");
 			const article = new Article(templateEl);
 
@@ -75,7 +80,9 @@ document.addEventListener("DOMContentLoaded", (e) => {
 						});
 					} else {
 						const msgEl = document.createElement("p");
-						msgEl.innerText = `No previous logs on this date (${today.getMonth() + 1}/${today.getDate()})`;
+						msgEl.innerText = `No previous logs on this date (${
+							today.getMonth() + 1
+						}/${today.getDate()})`;
 						onThisDayEl.appendChild(msgEl);
 					}
 					onThisDayEl.hidden = false;
