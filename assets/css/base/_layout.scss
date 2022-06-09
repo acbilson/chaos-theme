@@ -125,6 +125,11 @@ img {
 	@include hover-md();
 }
 
+video {
+	display: block;
+	margin: auto;
+}
+
 figcaption {
 	margin-top: -($base-size * 3);
 	padding-left: $base-size * 3;
