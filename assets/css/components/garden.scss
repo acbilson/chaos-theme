@@ -1,29 +1,29 @@
 .garden-page {
-    &__background {
-      -moz-user-select: none;
-      -webkit-user-select: none;
-      user-select: none;
-    }
-    &__link {
-      font-family: 'Times New Roman', Times, Georgia, 'Ubuntu', serif;
-    }
+	&__background {
+		-moz-user-select: none;
+		-webkit-user-select: none;
+		user-select: none;
+	}
+	&__link {
+		font-family: "Times New Roman", Times, Georgia, "Ubuntu", serif;
+	}
 }
 
 .garden {
-    &__title {
-        text-transform: capitalize;
-        fill: var(--color-link);
-        font-size: $font-sm;
-    }
-    &__icon {
-        fill: var(--color-background);
-        stroke: var(--color-stroke);
-        stroke-width: 1px;
-        stroke-dasharray: 1, 0.5;
-    }
-    @media screen and (min-width: $phone-width) {
-        &__title {
-            font-size: $font-sm / 2;
-        }
-    }
+	&__title {
+		text-transform: capitalize;
+		fill: var(--color-link);
+		font-size: $font-sm;
+	}
+	&__icon {
+		fill: var(--color-background);
+		stroke: var(--color-stroke);
+		stroke-width: 1px;
+		stroke-dasharray: 1, 0.5;
+	}
+	@media screen and (min-width: $phone-width) {
+		&__title {
+			font-size: $font-sm / 2;
+		}
+	}
 }
