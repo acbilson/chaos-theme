@@ -35,10 +35,14 @@ $column-width: $base-size * 18;
 		}
 	}
 	@media screen and (min-width: $phone-width) {
-		display: grid;
-		grid-auto-flow: column;
-		grid-template-columns: auto;
-		grid-column-gap: $base-size * 3;
+		display: flex;
+		flex-flow: column nowrap;
+
+		margin-left: $base-size * 3;
+
+		> div + div {
+			margin-top: $base-size * 3;
+			}
 		&__link {
 			font-size: $font-md;
 		}
