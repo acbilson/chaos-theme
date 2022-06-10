@@ -38,10 +38,8 @@ $column-width: $base-size * 18;
 		display: flex;
 		flex-flow: column nowrap;
 
-		margin-left: $base-size * 3;
-
 		> div + div {
-			margin-top: $base-size * 3;
+			margin-top: $base-size * 4;
 			}
 		&__link {
 			font-size: $font-md;
