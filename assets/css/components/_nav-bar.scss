@@ -1,11 +1,18 @@
 $column-width: $base-size * 18;
 .nav-bar {
-	display: grid;
-	grid-auto-flow: column;
-	grid-template-columns: auto;
-	grid-column-gap: $base-size * 3;
+	display: flex;
+	flex-flow: column nowrap;
 	background-color: transparent;
-	margin-top: $base-size * 3;
+
+	> * + * {
+		margin-top: $base-size * 4;
+	}
+
+	// menu button for small screens only
+	&__btn {
+		display: none;
+	}
+
 	&__link {
 		font-family: $font-family-condensed;
 		font-size: $font-md - $base-size;
@@ -34,18 +41,18 @@ $column-width: $base-size * 18;
 			border-color: var(--color-background);
 		}
 	}
-	@media screen and (min-width: $phone-width) {
-		display: flex;
-		flex-flow: column nowrap;
 
-		> div + div {
-			margin-top: $base-size * 4;
-			}
-		&__link {
-			font-size: $font-md;
+	@media screen and (max-width: $breakpoint-md) {
+		// shows button
+		&__btn {
+			display: block;
 		}
-		&__select {
-			font-size: $font-md;
+
+		// makes everything but button transparent
+		> :not(.nav-bar__btn) {
+			opacity: 0;
+			pointer-events: none;
+			cursor: default;
 		}
 	}
 }

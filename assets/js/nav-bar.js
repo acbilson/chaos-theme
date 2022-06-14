@@ -8,3 +8,25 @@ document.addEventListener("DOMContentLoaded", (e) => {
 		optionToSelect.selected = true;
 	}
 });
+
+const buttonEl = document.getElementById("navbar").querySelector("button");
+
+buttonEl.addEventListener("click", (e) => {
+	if (e.target.innerText === "MENU") {
+		document.querySelector("section").classList.add("hide");
+
+		const menuEls = document.getElementById("navbar").querySelectorAll("div");
+
+		Array.from(menuEls).map((el) => el.classList.add("reveal"));
+
+		e.target.innerText = "HIDE";
+	} else {
+		document.querySelector("section").classList.remove("hide");
+
+		const menuEls = document.getElementById("navbar").querySelectorAll("div");
+
+		Array.from(menuEls).map((el) => el.classList.remove("reveal"));
+
+		e.target.innerText = "MENU";
+	}
+});

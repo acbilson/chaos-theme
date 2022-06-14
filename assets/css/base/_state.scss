@@ -1,0 +1,12 @@
+// shows a transparent object
+.reveal {
+	opacity: 100% !important;
+	transition: opacity 1s;
+	pointer-events: revert !important;
+}
+
+.hide {
+	opacity: 0 !important;
+	transition: opacity 1s;
+	pointer-events: none !important;
+}
