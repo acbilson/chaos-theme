@@ -51,8 +51,8 @@ $column-width: $base-size * 18;
 		// makes everything but button transparent
 		> :not(.nav-bar__btn) {
 			opacity: 0;
+			// disables link clicks when invisible
 			pointer-events: none;
-			cursor: default;
 		}
 	}
 }
