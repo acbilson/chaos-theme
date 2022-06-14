@@ -1,6 +1,8 @@
 /* Base styles */
 
 @import "./base/_vars.scss";
+@import "./base/_mixins.scss";
+@import "./base/_base.scss";
 @import "./base/_fonts.scss";
 @import "./base/_layout.scss";
 @import "./base/_typography.scss";

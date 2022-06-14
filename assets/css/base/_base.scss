@@ -1,0 +1,121 @@
+body {
+	box-sizing: border-box;
+	background-color: var(--color-background);
+}
+
+header {
+	margin-top: $base-size * 5;
+}
+
+section {
+	max-width: $base-size * 200;
+	width: $screen-width-sm;
+
+	> h1:first-of-type {
+		font-size: $font-xl;
+		text-align: center;
+	}
+}
+
+article {
+	> h1:first-of-type {
+		font-size: $font-xl;
+		text-align: center;
+	}
+}
+
+pre {
+	> code {
+		display: block;
+		border: $base-size solid var(--color-stroke);
+		border-radius: $rounded-sm;
+		overflow-x: auto;
+		padding: 5px;
+	}
+}
+
+blockquote {
+	background-color: var(--color-background);
+	border: $base-size solid var(--color-stroke);
+	border-radius: $rounded-sm;
+	padding: $base-size * 2;
+	p {
+		display: inline;
+	}
+}
+
+hr {
+	border: 0;
+	border-bottom: thin solid var(--color-stroke);
+	margin: ($base-size * 5) 0;
+	clear: both;
+}
+
+input[type="submit"] {
+	color: var(--color-background);
+	background-color: var(--color-link);
+	border-color: var(--color-stroke);
+	border-radius: $rounded-sm;
+	padding: $base-size;
+	@include hover-sm();
+}
+
+button {
+	color: var(--color-background);
+	background-color: var(--color-link);
+	border-color: var(--color-stroke);
+	border-radius: $rounded-sm;
+	@include hover-sm();
+}
+
+select {
+	color: var(--color-background);
+	background-color: var(--color-link);
+	border-color: var(--color-stroke);
+	border-radius: $rounded-sm;
+	@include hover-sm();
+}
+
+img {
+	display: block;
+	width: 100%;
+	height: auto;
+	margin: ($base-size * 5) 0;
+	border-radius: $rounded-sm;
+	@include hover-md();
+}
+
+video {
+	display: block;
+	margin: auto;
+	border: 1px solid var(--color-stroke);
+}
+
+figcaption {
+	margin-top: -($base-size * 3);
+	padding-left: $base-size * 3;
+}
+
+@media screen and (min-width: $phone-width) {
+	body {
+		padding: 0;
+	}
+
+	section {
+		max-width: $base-size * 425;
+		width: $screen-width-lg;
+	}
+
+	// matches article width for narrow pages
+	section.narrow {
+		max-width: ($base-size * 425) / $column-count;
+		min-width: ($base-size * 200) / $column-count;
+	}
+
+	article {
+		max-width: ($base-size * 425) / $column-count;
+		// matches phone size. smaller turns to single-column
+		min-width: ($base-size * 200) / $column-count;
+		width: $screen-width-lg;
+	}
+}
