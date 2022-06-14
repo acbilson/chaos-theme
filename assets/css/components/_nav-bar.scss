@@ -43,6 +43,12 @@ $column-width: $base-size * 18;
 	}
 
 	@media screen and (max-width: $breakpoint-md) {
+
+		// collapses items to fit on a smaller screen
+	> * + * {
+		margin-top: $base-size * 2;
+	}
+
 		// shows button
 		&__btn {
 			display: block;

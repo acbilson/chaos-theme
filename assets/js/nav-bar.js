@@ -19,7 +19,7 @@ function reveal(e) {
 }
 
 document.addEventListener("DOMContentLoaded", (e) => {
-	const buttonEl = document.getElementById("navbar").querySelector("button");
+	const buttonEl = document.getElementById("navtoggle");
 
 	buttonEl.addEventListener("click", (e) =>
 		e.target.innerText === "MENU" ? hide(e) : reveal(e)
