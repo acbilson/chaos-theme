@@ -37,23 +37,43 @@
 // the whole page
 .container {
 	display: grid;
-	grid-template-columns: [leftedge] 0 [leftbar] 1fr [rightbar] 0 [rightedge];
+	grid-template-columns: [leftedge] 0 [leftmidbar] 0 [leftbar] 1fr [rightmidbar] 0 [rightbar] 0 [rightedge];
 	grid-template-rows: [topedge] 100px [topbar] 1fr [bottombar] 50px [bottomedge];
 
 	// the center, absent the sidebars and header/footer
 	.container-center {
-		grid-column-start: leftbar;
+		grid-column-start: leftmidbar;
+		grid-column-end: rightmidbar;
+		grid-row-start: topbar;
+		grid-row-end: bottombar;
+
+		justify-self: center;
+	}
+
+	// both the center and left sidebar
+	.container-left-center {
+		grid-column-start: leftedge;
+		grid-column-end: rightmidbar;
+		grid-row-start: topbar;
+		grid-row-end: bottombar;
+
+		justify-self: center;
+	}
+
+	.container-full {
+		grid-column-start: leftedge;
 		grid-column-end: rightbar;
 		grid-row-start: topbar;
 		grid-row-end: bottombar;
 
-		margin: auto;
+		justify-self: center;
+		width: 90%;
 	}
 
 	// the top-center
 	.container-header {
-		grid-column-start: leftbar;
-		grid-column-end: rightbar;
+		grid-column-start: leftmidbar;
+		grid-column-end: rightmidbar;
 		grid-row-start: topedge;
 		grid-row-end: topbar;
 
@@ -62,8 +82,8 @@
 
 	// the bottom-center
 	.container-footer {
-		grid-column-start: leftbar;
-		grid-column-end: rightbar;
+		grid-column-start: leftmidbar;
+		grid-column-end: rightmidbar;
 		grid-row-start: bottombar;
 		grid-row-end: bottomedge;
 
@@ -73,7 +93,7 @@
 
 @media screen and (min-width: $phone-width) {
 	.container {
-		grid-template-columns: [leftedge] 20% [leftbar] 1fr [rightbar] 20% [rightedge];
+		grid-template-columns: [leftedge] 10% [leftbar] 10% [leftmidbar] 1fr [rightmidbar] 10% [rightbar] 10% [rightedge];
 		grid-template-rows: [topedge] 0 [topbar] 1fr [bottombar] 40px [bottomedge];
 
 		.container-header {

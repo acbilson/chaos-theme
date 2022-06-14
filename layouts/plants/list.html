@@ -6,10 +6,10 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="{{ .Site.Params.defaultColorMode }}">
 {{ partialCached "head.html" . }}
-<body>
+<body class="container">
   {{ partialCached "nav-bar.html" . }}
 
-  <section class="plant-page">
+  <section class="plant-page container-left-center">
 
     <h1 class="plant-page__title">{{- .Title -}}</h1>
     <div class="plant-page__content">{{- .Content -}}</div>
