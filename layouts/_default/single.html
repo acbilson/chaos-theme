@@ -5,7 +5,7 @@
   {{ partialCached "nav-bar.html" . }}
 
   {{- $title := .Title -}}{{- if eq $title "" -}}{{- $title = humanize .File.BaseFileName -}}{{- end -}}
-  <section class="narrow">
+  <section>
   <article class="basic h-entry">
     <h1 class="basic__title p-name">{{ $title }}</h1>
     <a class="u-url" href="{{ .Permalink }}" hidden></a>

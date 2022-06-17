@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="{{ .Site.Params.defaultColorMode }}">
 {{ partialCached "head.html" . }}
-<body>
+<body class="container">
   {{ partialCached "nav-bar.html" . }}
 
-  <section class="log-page narrow">
+  <section class="log-page container-center">
 
 	<h1 class="log-page__title">{{- .Title -}}</h1>
 

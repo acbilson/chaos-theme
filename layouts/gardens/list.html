@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="{{ .Site.Params.defaultColorMode }}">
 {{ partialCached "head.html" . }}
-<body>
+<body class="container">
   {{ partialCached "nav-bar.html" . }}
 
-  <section class="garden-page">
-    {{ .Content }}
+  <section class="garden-page container-full">
+	  <div class="garden-page__content">{{ .Content }}</div>
 
     <!-- for debug purpose only -->
     {{- $stroke := "none" -}}

@@ -1,161 +1,79 @@
-@mixin hover-sm {
-	filter: drop-shadow(
-		($base-size / 4) ($base-size / 2) ($base-size / 2) var(--color-aside)
-	);
-	filter: drop-shadow(
-		($base-size / 2) $base-size $base-size var(--color-aside)
-	);
-	filter: drop-shadow(
-		$base-size ($base-size * 2) ($base-size * 2) var(--color-aside)
-	);
-}
+.container {
+	display: grid;
+	// columns have two variable sidebar slots and fills the center
+	grid-template-columns:
+		[leftedge] 10% [leftbar] 10%
+		[leftmidbar] 1fr [rightmidbar]
+		10% [rightbar] 10% [rightedge];
 
-@mixin hover-md {
-	filter: drop-shadow(
-		($base-size / 2) $base-size $base-size var(--color-aside)
-	);
-	filter: drop-shadow(
-		$base-size ($base-size * 2) ($base-size * 2) var(--color-aside)
-	);
-	filter: drop-shadow(
-		($base-size * 2) ($base-size * 4) ($base-size * 4) var(--color-aside)
-	);
-}
+	// rows fit header to its content, with a fixed footer and fill the center
+	grid-template-rows:
+		[topedge] auto
+		[topbar] 1fr [bottombar]
+		$base-size * 12 [bottomedge];
 
-@mixin hover-lg {
-	filter: drop-shadow(
-		$base-size ($base-size * 2) ($base-size * 2) var(--color-aside)
-	);
-	filter: drop-shadow(
-		$base-size ($base-size * 2) ($base-size * 2) var(--color-aside)
-	);
-	filter: drop-shadow(
-		($base-size * 3) ($base-size * 6) ($base-size * 6) var(--color-aside)
-	);
-}
+	// centers cell contents by default
+	place-items: center;
 
-body {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	box-sizing: border-box;
-	margin: auto;
-	background-color: var(--color-background);
-}
-
-header {
-	margin-top: $base-size * 5;
-}
-
-section {
-	max-width: $base-size * 200;
-	width: $screen-width-sm;
-
-	> h1:first-of-type {
-		font-size: $font-xl;
-		text-align: center;
-	}
-}
-
-article {
-	> h1:first-of-type {
-		font-size: $font-xl;
-		text-align: center;
-	}
-}
-
-pre {
-	> code {
-		display: block;
-		border: $base-size solid var(--color-stroke);
-		border-radius: $rounded-sm;
-		overflow-x: auto;
-		padding: 5px;
-	}
-}
-
-blockquote {
-	background-color: var(--color-background);
-	border: $base-size solid var(--color-stroke);
-	border-radius: $rounded-sm;
-	padding: $base-size * 2;
-	p {
-		display: inline;
-	}
-}
-
-hr {
-	border: 0;
-	border-bottom: thin solid var(--color-stroke);
-	margin: ($base-size * 5) 0;
-	clear: both;
-}
-
-input[type="submit"] {
-	color: var(--color-background);
-	background-color: var(--color-link);
-	border-color: var(--color-stroke);
-	border-radius: $rounded-sm;
-	padding: $base-size;
-	@include hover-sm();
-}
-
-button {
-	color: var(--color-background);
-	background-color: var(--color-link);
-	border-color: var(--color-stroke);
-	border-radius: $rounded-sm;
-	@include hover-sm();
-}
-
-select {
-	color: var(--color-background);
-	background-color: var(--color-link);
-	border-color: var(--color-stroke);
-	border-radius: $rounded-sm;
-	@include hover-sm();
-}
-
-img {
-	display: block;
-	width: 100%;
-	height: auto;
-	margin: ($base-size * 5) 0;
-	border-radius: $rounded-sm;
-	@include hover-md();
-}
-
-video {
-	display: block;
-	margin: auto;
-	border: 1px solid var(--color-stroke);
-}
-
-figcaption {
-	margin-top: -($base-size * 3);
-	padding-left: $base-size * 3;
-}
-
-@media screen and (min-width: $phone-width) {
-	body {
-		padding: 0;
+	// the center, absent both sidebars and header/footer
+	&-center {
+		grid-column-start: leftmidbar;
+		grid-column-end: rightmidbar;
+		grid-row-start: topbar;
+		grid-row-end: bottombar;
 	}
 
-	section {
-		max-width: $base-size * 425;
-		width: $screen-width-lg;
+	// all cells except the right sidebar and the footer
+	&-full {
+		grid-column-start: leftedge;
+		grid-column-end: rightbar;
+		grid-row-start: topedge;
+		grid-row-end: bottombar;
+
+		// start at the top
+		align-self: start;
 	}
 
-	// matches article width for narrow pages
-	section.narrow {
-		max-width: ($base-size * 425) / $column-count;
-		min-width: ($base-size * 200) / $column-count;
+	&-header {
+		grid-column-start: rightbar;
+		grid-column-end: rightedge;
+		grid-row-start: topbar;
+		grid-row-end: bottombar;
+
+		// places header at the top of its cell
+		align-self: start;
 	}
 
-	article {
-		max-width: ($base-size * 425) / $column-count;
-		// matches phone size. smaller turns to single-column
-		min-width: ($base-size * 200) / $column-count;
-		width: $screen-width-lg;
+	&-footer {
+		grid-column-start: leftmidbar;
+		grid-column-end: rightmidbar;
+		grid-row-start: bottombar;
+		grid-row-end: bottomedge;
+	}
+
+	@media screen and (max-width: $breakpoint-lg) {
+		// inner sidebars collapse
+		grid-template-columns:
+			[leftedge] 15% [leftbar] 0
+			[leftmidbar] 1fr [rightmidbar]
+			0 [rightbar] 15% [rightedge];
+	}
+
+	@media screen and (max-width: $breakpoint-md) {
+		// all sidebars collapse
+		grid-template-columns:
+			[leftedge] 0 [leftbar] 0
+			[leftmidbar] 1fr [rightmidbar]
+			0 [rightbar] 0 [rightedge];
+
+		// makes header the entire screen size
+		&-header {
+			grid-column-start: leftedge;
+			grid-column-end: rightedge;
+			grid-row-start: topedge;
+			grid-row-end: bottomedge;
+
+			place-items: center;
+		}
 	}
 }

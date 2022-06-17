@@ -1,11 +1,23 @@
-$column-width: $base-size * 18;
+$btn-padding: 0.8em 1.5em;
 .nav-bar {
-	display: grid;
-	grid-auto-flow: column;
-	grid-template-columns: auto;
-	grid-column-gap: $base-size * 3;
+	display: flex;
+	flex-flow: column nowrap;
 	background-color: transparent;
-	margin-top: $base-size * 3;
+
+	> * + * {
+		margin-top: $base-size * 4;
+	}
+
+	// menu button at bottom of screen
+	// only shows for small screens
+	&__btn {
+		display: none;
+		padding: $btn-padding;
+		position: fixed;
+		bottom: 0px;
+		left: 50%;
+	}
+
 	&__link {
 		font-family: $font-family-condensed;
 		font-size: $font-md - $base-size;
@@ -34,16 +46,33 @@ $column-width: $base-size * 18;
 			border-color: var(--color-background);
 		}
 	}
-	@media screen and (min-width: $phone-width) {
-		display: grid;
-		grid-auto-flow: column;
-		grid-template-columns: auto;
-		grid-column-gap: $base-size * 3;
-		&__link {
-			font-size: $font-md;
+
+	@media screen and (max-width: $breakpoint-md) {
+		flex-flow: row wrap;
+
+		> * + * {
+			margin-top: unset;
 		}
-		&__select {
-			font-size: $font-md;
+
+		> *:not(#navtoggle) {
+			margin: $base-size * 8;
+		}
+
+		// shows button
+		&__btn {
+			display: block;
+		}
+
+		&__link {
+			padding: $btn-padding;
+		}
+
+		// makes everything but button transparent
+		> :not(.nav-bar__btn) {
+			opacity: 0;
+			// disables link clicks when invisible
+			pointer-events: none;
+			filter: none;
 		}
 	}
 }

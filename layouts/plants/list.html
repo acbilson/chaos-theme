@@ -6,15 +6,15 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="{{ .Site.Params.defaultColorMode }}">
 {{ partialCached "head.html" . }}
-<body>
+<body class="container">
   {{ partialCached "nav-bar.html" . }}
 
-  <section class="plant-page">
+  <section class="plant-page container-full">
 
     <h1 class="plant-page__title">{{- .Title -}}</h1>
     <div class="plant-page__content">{{- .Content -}}</div>
 
-      <form id="note-form" name="notesForm" class="note-page__form" action='{{ with .GetPage "/plants" }}{{ .Permalink }}{{ end }}' method=get>
+      <form id="note-form" name="notesForm" class="plant-page__form" action='{{ with .GetPage "/plants" }}{{ .Permalink }}{{ end }}' method=get>
       <select name="epistemic">
 	<option value="all">All ({{- len $everyPlant -}})</option>
 	<option value="🌲">Evergreen 🌲 ({{- len $evergreens -}})</option>
