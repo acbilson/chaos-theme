@@ -8,11 +8,8 @@
 		@media screen and (max-width: $breakpoint-lg) {
 			grid-template-columns: repeat(3, auto);
 		}
-		@media screen and (max-width: $breakpoint-md) {
-			grid-template-columns: repeat(2, auto);
-			> div:nth-of-type(2n) {
-				justify-self: end;
-			}
+		@media screen and (max-width: $breakpoint-sm) {
+			grid-template-columns: 1fr;
 		}
 	}
 	&__form {
