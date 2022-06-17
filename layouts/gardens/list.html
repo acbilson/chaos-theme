@@ -5,7 +5,7 @@
   {{ partialCached "nav-bar.html" . }}
 
   <section class="garden-page container-full">
-    {{ .Content }}
+	  <div class="garden-page__content">{{ .Content }}</div>
 
     <!-- for debug purpose only -->
     {{- $stroke := "none" -}}

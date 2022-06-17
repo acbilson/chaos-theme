@@ -43,11 +43,10 @@ $column-width: $base-size * 18;
 	}
 
 	@media screen and (max-width: $breakpoint-md) {
-
-		// collapses items to fit on a smaller screen
-	> * + * {
-		margin-top: $base-size * 2;
-	}
+	border: none;
+		> * + * {
+			margin-top: $base-size * 2;
+		}
 
 		// shows button
 		&__btn {
@@ -59,6 +58,7 @@ $column-width: $base-size * 18;
 			opacity: 0;
 			// disables link clicks when invisible
 			pointer-events: none;
+			filter: none;
 		}
 	}
 }

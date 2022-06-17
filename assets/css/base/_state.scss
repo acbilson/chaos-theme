@@ -11,4 +11,5 @@
 	transition: opacity 1s;
 	// prevents clicks on invisible links
 	pointer-events: none !important;
+	filter: none;
 }

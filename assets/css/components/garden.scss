@@ -1,4 +1,8 @@
 .garden-page {
+	max-width: $base-size * 200;
+	&__content {
+		padding: 0 $base-size * 3;
+	}
 	&__background {
 		-moz-user-select: none;
 		-webkit-user-select: none;
@@ -6,6 +10,9 @@
 	}
 	&__link {
 		font-family: "Times New Roman", Times, Georgia, "Ubuntu", serif;
+	}
+	@media screen and (min-width: $phone-width) {
+		max-width: $base-size * 425;
 	}
 }
 
