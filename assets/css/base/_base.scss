@@ -10,11 +10,14 @@ header {
 
 section {
 	width: 100%;
-	padding: $base-size * 3;
 
 	> h1:first-of-type {
 		font-size: $font-xl;
 		text-align: center;
+	}
+	> * {
+		padding: 0 $base-size * 3;
+
 	}
 }
 
