@@ -69,10 +69,11 @@ $btn-padding: 0.8em 1.5em;
 
 		// makes everything but button transparent
 		> :not(.nav-bar__btn) {
-			opacity: 0;
+			display: none;
+			//opacity: 0;
 			// disables link clicks when invisible
-			pointer-events: none;
-			filter: none;
+			//pointer-events: none;
+			//filter: none;
 		}
 	}
 }
