@@ -7,7 +7,7 @@
   {{- $root := .Data.Plural -}}
 
   {{- if ne $root "authors" -}}
-  <section class="terms-page container-left-center">
+  <section class="terms-page container-full">
     <h1>{{- .Title -}}</h1>
     <form id="term-form" name="termsForm" class="terms-page__form" action='{{ with .GetPage "/tags" }}{{ .Permalink }}{{ end }}' method=get>
       <select name="minimum">
