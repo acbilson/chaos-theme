@@ -95,22 +95,3 @@ figcaption {
 	margin-top: -($base-size * 3);
 	padding-left: $base-size * 3;
 }
-
-@media screen and (min-width: $phone-width) {
-	body {
-		padding: 0;
-	}
-
-	// matches article width for narrow pages
-	section.narrow {
-		max-width: ($base-size * 425) / $column-count;
-		min-width: ($base-size * 200) / $column-count;
-	}
-
-	article {
-		max-width: ($base-size * 425) / $column-count;
-		// matches phone size. smaller turns to single-column
-		min-width: ($base-size * 200) / $column-count;
-		width: $screen-width-lg;
-	}
-}
