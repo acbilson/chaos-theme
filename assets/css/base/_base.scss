@@ -9,7 +9,7 @@ header {
 }
 
 section {
-	width: $screen-width-sm;
+	padding: $base-size * 3;
 
 	> h1:first-of-type {
 		font-size: $font-xl;
@@ -99,10 +99,6 @@ figcaption {
 @media screen and (min-width: $phone-width) {
 	body {
 		padding: 0;
-	}
-
-	section {
-		width: $screen-width-lg;
 	}
 
 	// matches article width for narrow pages
