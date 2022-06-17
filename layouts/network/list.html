@@ -1,3 +1,5 @@
+{{- $darkmodejs := resources.Get "js/darkmode.js" -}}
+{{- $navbarjs := resources.Get "js/nav-bar.js" -}}
 {{ $diagramjs := resources.Get "js/tag-diagram.js" }}
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="{{ .Site.Params.defaultColorMode }}">
@@ -20,5 +22,7 @@ to pass along the path to the JSON file. -->
   });
 </script>
 <script src="{{ $diagramjs.Permalink }}"></script>
+<script src="{{ $navbarjs.Permalink }}"></script>
+<script src="{{ $darkmodejs.Permalink }}"></script>
 <script src="https://d3js.org/d3.v5.min.js"></script>
 </html>

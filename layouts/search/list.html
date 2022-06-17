@@ -1,3 +1,5 @@
+{{- $darkmodejs := resources.Get "js/darkmode.js" -}}
+{{- $navbarjs := resources.Get "js/nav-bar.js" -}}
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="{{ .Site.Params.defaultColorMode }}">
 {{ partialCached "head.html" . }}
@@ -22,4 +24,6 @@
   </section>
   {{ partialCached "foot.html" . }}
 </body>
+<script src="{{ $navbarjs.Permalink }}"></script>
+<script src="{{ $darkmodejs.Permalink }}"></script>
 </html>
