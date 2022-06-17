@@ -1,4 +1,4 @@
-$column-width: $base-size * 18;
+$btn-padding: 0.8em 1.5em;
 .nav-bar {
 	display: flex;
 	flex-flow: column nowrap;
@@ -8,10 +8,14 @@ $column-width: $base-size * 18;
 		margin-top: $base-size * 4;
 	}
 
-	// menu button for small screens only
+	// menu button at bottom of screen
+	// only shows for small screens
 	&__btn {
 		display: none;
-		padding: 0.8em 1.5em;
+		padding: $btn-padding;
+		position: fixed;
+		bottom: 0;
+		left: 50%;
 	}
 
 	&__link {
@@ -44,14 +48,23 @@ $column-width: $base-size * 18;
 	}
 
 	@media screen and (max-width: $breakpoint-md) {
-		border: none;
+		flex-flow: column wrap;
+
 		> * + * {
-			margin-top: $base-size * 2;
+			margin-top: unset;
+		}
+
+		> * {
+			margin: $base-size * 8;
 		}
 
 		// shows button
 		&__btn {
 			display: block;
+		}
+
+		&__link {
+			padding: $btn-padding;
 		}
 
 		// makes everything but button transparent
@@ -62,15 +75,8 @@ $column-width: $base-size * 18;
 			filter: none;
 		}
 	}
+
 	@media only screen and (max-width: $breakpoint-md) and (orientation: landscape) {
 		flex-flow: row wrap;
-
-		> * + * {
-			margin-top: unset;
-		}
-
-		> * {
-			margin: $base-size * 2;
-		}
 	}
 }

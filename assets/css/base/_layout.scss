@@ -63,12 +63,14 @@
 			[leftmidbar] 1fr [rightmidbar]
 			0 [rightbar] 0 [rightedge];
 
-		// fixes header to bottom-center
+		// makes header the entire screen size
 		&-header {
-			display: block;
-			position: fixed;
-			bottom: 0;
-			left: 50%;
+			grid-column-start: leftedge;
+			grid-column-end: rightedge;
+			grid-row-start: topedge;
+			grid-row-end: bottomedge;
+
+			place-items: center;
 		}
 	}
 }
