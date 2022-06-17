@@ -8,6 +8,11 @@ header {
 	margin-top: $base-size * 5;
 }
 
+iframe {
+	// fits iframe within container
+	width: 100%;
+}
+
 section {
 	width: 100%;
 
@@ -17,7 +22,6 @@ section {
 	}
 	> * {
 		padding: 0 $base-size * 3;
-
 	}
 }
 

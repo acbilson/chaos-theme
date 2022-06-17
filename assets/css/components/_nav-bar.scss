@@ -11,6 +11,7 @@ $column-width: $base-size * 18;
 	// menu button for small screens only
 	&__btn {
 		display: none;
+		padding: 0.8em 1.5em;
 	}
 
 	&__link {
