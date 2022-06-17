@@ -2,12 +2,14 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="{{ .Site.Params.defaultColorMode }}">
 {{ partialCached "head.html" . }}
-<body>
+<body class="container">
   {{ partialCached "nav-bar.html" . }}
 
+  <section class="container-full">
   <h1>{{ .Title }}</h1>
   <svg class="diagram-svg" viewbox="0 0 1200 1200"></svg>
   {{ partialCached "foot.html" . }}
+  </section>
 </body>
 
 <!-- this displays the tags cloud diagram after other scripts load. I've done it this way so that I can use Hugo
