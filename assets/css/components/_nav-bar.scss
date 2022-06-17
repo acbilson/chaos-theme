@@ -44,7 +44,7 @@ $column-width: $base-size * 18;
 	}
 
 	@media screen and (max-width: $breakpoint-md) {
-	border: none;
+		border: none;
 		> * + * {
 			margin-top: $base-size * 2;
 		}
@@ -60,6 +60,17 @@ $column-width: $base-size * 18;
 			// disables link clicks when invisible
 			pointer-events: none;
 			filter: none;
+		}
+	}
+	@media only screen and (max-width: $breakpoint-md) and (orientation: landscape) {
+		flex-flow: row wrap;
+
+		> * + * {
+			margin-top: unset;
+		}
+
+		> * {
+			margin: $base-size * 2;
 		}
 	}
 }
