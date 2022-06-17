@@ -4,6 +4,8 @@
 		grid-row-gap: 5px;
 		grid-template-columns: repeat(5, auto);
 		padding-top: $base-size * 8;
+		padding-left: $base-size * 3;
+		padding-right: $base-size * 3;
 
 		@media screen and (max-width: $breakpoint-lg) {
 			grid-template-columns: repeat(3, auto);
