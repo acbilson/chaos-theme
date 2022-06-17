@@ -3,10 +3,10 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="{{ .Site.Params.defaultColorMode }}">
 {{ partialCached "head.html" . }}
-<body>
+<body class="container">
   {{ partialCached "nav-bar.html" . }}
 
-  <section class="narrow">
+  <section class="container-center">
     <article class="bible-entry h-entry">
       <h1 class="bible-entry__title p-name">{{- $title -}}</h1>
       <a class="u-url" href="{{ .Permalink }}" hidden></a>

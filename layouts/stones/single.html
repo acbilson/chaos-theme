@@ -3,9 +3,9 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="{{ .Site.Params.defaultColorMode }}">
 {{ partialCached "head.html" . }}
-<body>
+<body class="container">
   {{ partialCached "nav-bar.html" . }}
-  <section class="narrow">
+  <section class="container-center">
     <article class="stone-entry h-entry">
       <h1 class="stone-entry__title p-name">{{- $title -}}</h1>
 

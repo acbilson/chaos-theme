@@ -2,10 +2,10 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="{{ .Site.Params.defaultColorMode }}">
 {{ partialCached "head.html" . }}
-<body>
+<body class="container">
     {{ partialCached "nav-bar.html" . }}
 
-    <section class="narrow">
+    <section class="container-center">
       <article class="log-entry h-entry">
 	<div class="log-entry__content">{{- .Content -}}</div>
 
