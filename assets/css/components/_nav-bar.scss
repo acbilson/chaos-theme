@@ -14,7 +14,7 @@ $btn-padding: 0.8em 1.5em;
 		display: none;
 		padding: $btn-padding;
 		position: fixed;
-		bottom: 0;
+		bottom: 0px;
 		left: 50%;
 	}
 
@@ -54,7 +54,7 @@ $btn-padding: 0.8em 1.5em;
 			margin-top: unset;
 		}
 
-		> * {
+		> *:not(#navtoggle) {
 			margin: $base-size * 8;
 		}
 

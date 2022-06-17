@@ -29,6 +29,9 @@
 		grid-column-end: rightbar;
 		grid-row-start: topedge;
 		grid-row-end: bottombar;
+
+		// start at the top
+		align-self: start;
 	}
 
 	&-header {
