@@ -45,8 +45,8 @@
 	}
 
 	&-footer {
-		grid-column-start: leftmidbar;
-		grid-column-end: rightmidbar;
+		grid-column-start: leftedge;
+		grid-column-end: rightedge;
 		grid-row-start: bottombar;
 		grid-row-end: bottomedge;
 	}
