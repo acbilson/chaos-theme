@@ -1,6 +1,11 @@
+{{- $appjs := resources.Get "js/app/app.modern.js" -}}
 {{- $darkmodejs := resources.Get "js/darkmode.js" -}}
 {{- $navbarjs := resources.Get "js/nav-bar.js" -}}
 
+  <!-- adds my custom elements -->
+<script type="module" src="{{ $appjs.Permalink }}"></script>
+
+<script type="module "src="https://unpkg.com/lit-element@3.2.2/lit-element.js?module"></script>
   <!-- adds event handler to let the user change the color scheme -->
 <script src="{{ $darkmodejs.Permalink }}"></script>
 

@@ -22,6 +22,11 @@
     {{- end -}}
     </div>
   {{- end -}}
+
+  {{- if .IsHome -}}
+  <p>I'm home</p>
+  <my-element>Testing, testing</my-element>
+  {{- end -}}
   </section>
 
   {{ partialCached "foot.html" . }}

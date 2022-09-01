@@ -1,0 +1,17 @@
+{
+	"name": "app",
+	"type": "module",
+	"source": "src/app.ts",
+	"exports": {
+		"default": "./dist/app.modern.js"
+	},
+	"scripts": {
+		"build": "microbundle",
+		"dev": "microbundle watch"
+	},
+	"devDependencies": {
+		"lit": "^2.3.1",
+		"lit-html": "^2.3.1",
+		"microbundle": "^0.15.1"
+	}
+}
