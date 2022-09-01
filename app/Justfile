@@ -1,0 +1,7 @@
+# build the bundle to /dist
+build:
+	npm run build
+
+# deploys the app bundle for Hugo to pick up in theme/assets/js/app
+deploy: build
+	cp dist/app.modern.js /Users/alexbilson/source/chaos-theme/assets/js/app
