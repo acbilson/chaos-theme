@@ -5,6 +5,7 @@ import { customElement, property, state } from "lit/decorators.js";
 export class Panel extends LitElement {
 	static styles = css`
 		.panel {
+			width: 90%;
 		}
 	`;
 
@@ -22,16 +23,16 @@ export class Panels extends LitElement {
 	private _parser = new DOMParser();
 
 	@state()
-	asideContent: HTMLElement = null;
+	asideContents: HTMLCollection = null;
 
 	private getContent(href: string) {
 		fetch(href)
 			.then((r) => (r.status === 200 ? r.text() : null))
 			.then((t) => {
 				const pageDOM = this._parser.parseFromString(t, "text/html");
-				this.asideContent = pageDOM.querySelector(".e-content");
+				this.asideContents = pageDOM.querySelector(".h-entry").children;
 			});
-			console.log({url: href, aside: this.asideContent});
+			console.log({url: href, aside: this.asideContents});
 	}
 
 	constructor() {
@@ -43,6 +44,7 @@ export class Panels extends LitElement {
 		.panels {
 			display: flex;
 			flex-flow: row nowrap;
+			justify-content: space-between;
 		}
 	`;
 
@@ -50,7 +52,7 @@ export class Panels extends LitElement {
 		return html`
 		<div class="panels">
 			<app-panel><slot name="main"></slot></app-panel>
-			<app-panel>${ this.asideContent }<slot name="aside"></slot></app-panel>
+			<app-panel>${ this.asideContents }<slot name="aside"></slot></app-panel>
 		</div>
 		`;
 	}
