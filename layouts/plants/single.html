@@ -9,8 +9,7 @@
 
 	<section class="container-center">
 		<app-panels>
-			<app-panel slot="main" href="http://localhost:1313/plants/writing/note-taking-tools-and-strategies">
-				<article class="plant-entry h-entry">
+				<article slot="main" class="plant-entry h-entry">
 
 				<h1 class="plant-entry__title p-name">{{ $title }}</h1>
 				<a class="u-url" href="{{ .Permalink }}" hidden></a>
@@ -24,8 +23,7 @@
 				{{ partial "attributes.html" . }}
 				</article>
 			</app-panel>
-			<app-panel slot="aside">
-			</app-panel>
+			<article slot="aside"></article>
 		<app-panels>
 	</section>
 
