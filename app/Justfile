@@ -2,6 +2,10 @@
 build:
 	npm run build
 
+# watch and build on update
+serve:
+	npm run dev
+
 # deploys the app bundle for Hugo to pick up in theme/assets/js/app
 deploy: build
 	cp dist/app.modern.js /Users/alexbilson/source/chaos-theme/assets/js/app
