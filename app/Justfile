@@ -2,9 +2,9 @@
 build:
 	npm run build
 
-# watch and build on update
+# watch and deploy on update
 serve:
-	npm run dev
+	find ./src | entr -s 'npm run build && cp dist/app.modern.js ../assets/js/app/'
 
 # deploys the app bundle for Hugo to pick up in theme/assets/js/app
 deploy: build

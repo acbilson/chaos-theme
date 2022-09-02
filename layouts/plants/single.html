@@ -7,21 +7,27 @@
 <body class="container">
   {{ partialCached "nav-bar.html" . }}
 
-  <section class="container-center">
-    <article class="plant-entry h-entry">
+	<section class="container-center">
+		<app-panels>
+			<app-panel slot="main" href="http://localhost:1313/plants/writing/note-taking-tools-and-strategies">
+				<article class="plant-entry h-entry">
 
-	<h1 class="plant-entry__title p-name">{{ $title }}</h1>
-	<a class="u-url" href="{{ .Permalink }}" hidden></a>
+				<h1 class="plant-entry__title p-name">{{ $title }}</h1>
+				<a class="u-url" href="{{ .Permalink }}" hidden></a>
 
-	<div class="plant-entry__content e-content">
-	    {{ .Content }}
-	</div>
+				<div class="plant-entry__content e-content">
+				{{ .Content }}
+				</div>
 
-      {{ partial "backlink.html" . }}
-      {{ partial "comments.html" . }}
-      {{ partial "attributes.html" . }}
-    </article>
-  </section>
+				{{ partial "backlink.html" . }}
+				{{ partial "comments.html" . }}
+				{{ partial "attributes.html" . }}
+				</article>
+			</app-panel>
+			<app-panel slot="aside">
+			</app-panel>
+		<app-panels>
+	</section>
 
   {{ partialCached "foot.html" . }}
   {{ partialCached "scripts.html" . }}
