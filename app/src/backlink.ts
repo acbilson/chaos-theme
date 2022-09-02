@@ -1,5 +1,6 @@
 import { LitElement, PropertyValues, html, css } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
+import { BacklinkDetail } from "./models";
 
 @customElement("app-backlink")
 export class Backlink extends LitElement {
@@ -29,8 +30,9 @@ export class Backlink extends LitElement {
 		console.log("dispatching");
 		this.dispatchEvent(
 			new CustomEvent('backlink-clicked', {
-			detail: {
-				href: this.href
+			detail: <BacklinkDetail>{
+				href: this.href,
+				panel: 'aside'
 			},
 			bubbles: true,
 			composed: true

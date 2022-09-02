@@ -1,43 +1,27 @@
 import { LitElement, PropertyValues, html, css } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
-
-@customElement("app-panel")
-export class Panel extends LitElement {
-	static styles = css`
-		.panel {
-			width: 90%;
-		}
-	`;
-
-	render() {
-		return html`
-		<div class="panel">
-			<slot></slot>
-		</div>
-		`;
-	}
-}
+import { BacklinkDetail } from "./models";
 
 @customElement("app-panels")
 export class Panels extends LitElement {
 	private _parser = new DOMParser();
 
 	@state()
-	asideContents: HTMLCollection = null;
+	asideContents: HTMLElement = null;
 
-	private getContent(href: string) {
-		fetch(href)
+	private getContent(detail: BacklinkDetail) {
+		fetch(detail.href)
 			.then((r) => (r.status === 200 ? r.text() : null))
 			.then((t) => {
 				const pageDOM = this._parser.parseFromString(t, "text/html");
-				this.asideContents = pageDOM.querySelector(".h-entry").children;
+				this.asideContents = pageDOM.querySelector(".h-entry");
 			});
-			console.log({url: href, aside: this.asideContents});
+			console.log({url: detail.href, panel: detail.panel, aside: this.asideContents});
 	}
 
 	constructor() {
 		super();
-		this.addEventListener('backlink-clicked', (e: CustomEvent) => this.getContent(e.detail.href));
+		this.addEventListener('backlink-clicked', (e: CustomEvent) => this.getContent(e.detail));
 	}
 
 	static styles = css`
@@ -46,13 +30,16 @@ export class Panels extends LitElement {
 			flex-flow: row nowrap;
 			justify-content: space-between;
 		}
+		.panel {
+			width: 45%;
+		}
 	`;
 
 	render() {
 		return html`
 		<div class="panels">
-			<app-panel><slot name="main"></slot></app-panel>
-			<app-panel>${ this.asideContents }<slot name="aside"></slot></app-panel>
+			<div class="panel"><slot></slot></div>
+			<div class="panel">${ this.asideContents }</div>
 		</div>
 		`;
 	}

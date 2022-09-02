@@ -9,21 +9,20 @@
 
 	<section class="container-center">
 		<app-panels>
-				<article slot="main" class="plant-entry h-entry">
+			<article class="plant-entry h-entry">
 
-				<h1 class="plant-entry__title p-name">{{ $title }}</h1>
-				<a class="u-url" href="{{ .Permalink }}" hidden></a>
+			<h1 class="plant-entry__title p-name">{{ $title }}</h1>
+			<a class="u-url" href="{{ .Permalink }}" hidden></a>
 
-				<div class="plant-entry__content e-content">
-				{{ .Content }}
-				</div>
+			<div class="plant-entry__content e-content">
+			{{ .Content }}
+			</div>
 
-				{{ partial "backlink.html" . }}
-				{{ partial "comments.html" . }}
-				{{ partial "attributes.html" . }}
-				</article>
-			<aside slot="aside"></aside>
-		<app-panels>
+			{{ partial "backlink.html" . }}
+			{{ partial "comments.html" . }}
+			{{ partial "attributes.html" . }}
+			</article>
+		</app-panels>
 	</section>
 
   {{ partialCached "foot.html" . }}
