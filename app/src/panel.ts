@@ -8,23 +8,25 @@ export class Login extends LitElement {
 		const token = sessionStorage.getItem("token");
 
 		if (token == null) {
-			const headers = new Headers();
-			headers.append("Authorization", `Basic ${btoa("alex:example")}`);
-			fetch("http://localhost:5000/login", { headers })
+			const basicHeaders = new Headers();
+			basicHeaders.append("Authorization", `Basic ${btoa("alex:example")}`);
+			fetch("http://localhost:5000/login", { headers: basicHeaders })
 				.then((r) => (r.status === 200 ? r.json() : null))
 				.then((b) => {
-					const headers = new Headers();
-					headers.append("Authorization", `Bearer ${b.token}`);
-					fetch("http://localhost:5000/authenticate", { headers }).then((r) =>
+					const tokenHeaders = new Headers();
+					tokenHeaders.append("Authorization", `Bearer ${b.token}`);
+					fetch("http://localhost:5000/authenticate", { headers: tokenHeaders }).then((r) =>
 						r.status === 200
 							? sessionStorage.setItem("token", b.token)
 							: sessionStorage.removeItem("token")
 					);
 				});
 		} else {
-			fetch("http://localhost:5000/authenticate", { headers }).then((r) =>
+			const tokenHeaders = new Headers();
+			tokenHeaders.append("Authorization", `Bearer ${token}`);
+			fetch("http://localhost:5000/authenticate", { headers: tokenHeaders }).then((r) =>
 				r.status === 200
-					? sessionStorage.setItem("token", b.token)
+					? sessionStorage.setItem("token", token)
 					: sessionStorage.removeItem("token")
 			);
 		}
