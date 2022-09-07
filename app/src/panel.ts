@@ -3,8 +3,6 @@ import { customElement, property, state } from "lit/decorators.js";
 import { BacklinkDetail } from "./models";
 
 function authorized(token: string): Promise<boolean> {
-	if (token == null) return new Promise(() => false);
-
 	const headers = new Headers();
 	headers.append("Authorization", `Bearer ${token}`);
 	return fetch("http://localhost:5000/authenticate", { headers }).then(
@@ -24,23 +22,40 @@ function authorized(token: string): Promise<boolean> {
 }
 
 function authenticate(username: string, password: string): Promise<boolean> {
-	const token = sessionStorage.getItem("token");
-
-	return authorized(token).then((isAuthorized) => {
-		if (isAuthorized) return true;
-
-		const headers = new Headers();
-		headers.append("Authorization", `Basic ${btoa(username + ":" + password)}`);
-		return fetch("http://localhost:5000/login", { headers })
-			.then((r) => (r.status === 200 ? r.json() : null))
-			.then((b) => authorized(b.token));
-	});
+	if (!username || !password) return new Promise(() => false);
+	const headers = new Headers();
+	headers.append("Authorization", `Basic ${btoa(username + ":" + password)}`);
+	return fetch("http://localhost:5000/login", { headers })
+		.then((r) => (r.status === 200 ? r.json() : null))
+		.then((b) => (b === null ? false : authorized(b?.token)));
 }
 
 @customElement("app-login")
 export class Login extends LitElement {
-	private authenticate() {
-		return authenticate("alex", "example");
+	@state()
+	msg = "";
+
+	get _username() {
+		return (
+			(this.renderRoot?.querySelector("#username") as HTMLInputElement)
+				?.value ?? null
+		);
+	}
+
+	get _password() {
+		return (
+			(this.renderRoot?.querySelector("#password") as HTMLInputElement)
+				?.value ?? null
+		);
+	}
+
+	private _authenticate() {
+		authenticate(this._username, this._password).then(
+			(isAuthenticated) => {
+				this.msg = isAuthenticated ? "" : "login failed";
+			},
+			(err) => console.log("there was an error")
+		);
 	}
 
 	constructor() {
@@ -50,10 +65,11 @@ export class Login extends LitElement {
 	render() {
 		return html`
 			<label for="username">Username:</label>
-			<input name="username" type="text" />
+			<input id="username" name="username" type="text" />
 			<label for="password">Password:</label>
-			<input name="password" type="password" />
-			<button @click="${this.authenticate()}">Login</button>
+			<input id="password" name="password" type="password" />
+			<button @click="${this._authenticate}">Login</button>
+			<label>${this.msg}</label>
 		`;
 	}
 }
@@ -110,7 +126,7 @@ export class Panels extends LitElement {
 			? html`
 					<div class="panels">
 						<div class="panel"><slot></slot></div>
-						<div class="panel">Is Authorized ${this.asideContents}</div>
+						<div class="panel">${this.asideContents}</div>
 					</div>
 			  `
 			: html`<div class="panel"><slot></slot></div>`;
