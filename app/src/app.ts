@@ -1,2 +1,2 @@
 export { Backlink } from './backlink';
-export { Panels } from './panel';
+export { Login, Panels } from './panel';
