@@ -2,34 +2,45 @@ import { LitElement, PropertyValues, html, css } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { BacklinkDetail } from "./models";
 
+function authorized(token: string): Promise<boolean> {
+	if (token == null) return new Promise(() => false);
+
+	const headers = new Headers();
+	headers.append("Authorization", `Bearer ${token}`);
+	return fetch("http://localhost:5000/authenticate", { headers }).then(
+		(r) => {
+			if (r.status === 200) {
+				sessionStorage.setItem("token", token);
+			} else {
+				sessionStorage.removeItem("token");
+			}
+			return r.status === 200;
+		},
+		(err) => {
+			alert("Try logging in again");
+			return false;
+		}
+	);
+}
+
+function authenticate(username: string, password: string): Promise<boolean> {
+	const token = sessionStorage.getItem("token");
+
+	return authorized(token).then((isAuthorized) => {
+		if (isAuthorized) return true;
+
+		const headers = new Headers();
+		headers.append("Authorization", `Basic ${btoa(username + ":" + password)}`);
+		return fetch("http://localhost:5000/login", { headers })
+			.then((r) => (r.status === 200 ? r.json() : null))
+			.then((b) => authorized(b.token));
+	});
+}
+
 @customElement("app-login")
 export class Login extends LitElement {
-	authenticate() {
-		const token = sessionStorage.getItem("token");
-
-		if (token == null) {
-			const basicHeaders = new Headers();
-			basicHeaders.append("Authorization", `Basic ${btoa("alex:example")}`);
-			fetch("http://localhost:5000/login", { headers: basicHeaders })
-				.then((r) => (r.status === 200 ? r.json() : null))
-				.then((b) => {
-					const tokenHeaders = new Headers();
-					tokenHeaders.append("Authorization", `Bearer ${b.token}`);
-					fetch("http://localhost:5000/authenticate", { headers: tokenHeaders }).then((r) =>
-						r.status === 200
-							? sessionStorage.setItem("token", b.token)
-							: sessionStorage.removeItem("token")
-					);
-				});
-		} else {
-			const tokenHeaders = new Headers();
-			tokenHeaders.append("Authorization", `Bearer ${token}`);
-			fetch("http://localhost:5000/authenticate", { headers: tokenHeaders }).then((r) =>
-				r.status === 200
-					? sessionStorage.setItem("token", token)
-					: sessionStorage.removeItem("token")
-			);
-		}
+	private authenticate() {
+		return authenticate("alex", "example");
 	}
 
 	constructor() {
@@ -37,7 +48,13 @@ export class Login extends LitElement {
 	}
 
 	render() {
-		return html` <button @click="${this.authenticate()}">Login</button> `;
+		return html`
+			<label for="username">Username:</label>
+			<input name="username" type="text" />
+			<label for="password">Password:</label>
+			<input name="password" type="password" />
+			<button @click="${this.authenticate()}">Login</button>
+		`;
 	}
 }
 
@@ -46,10 +63,10 @@ export class Panels extends LitElement {
 	private _parser = new DOMParser();
 
 	@state()
-	asideContents: HTMLElement = null;
+	isAuthorized: boolean;
 
 	@state()
-	authenticated: boolean;
+	asideContents: HTMLElement = null;
 
 	private getContent(detail: BacklinkDetail) {
 		fetch(detail.href)
@@ -71,13 +88,10 @@ export class Panels extends LitElement {
 			this.getContent(e.detail)
 		);
 		const token = sessionStorage.getItem("token");
-		if (token != null) {
-			const headers = new Headers();
-			headers.append("Authorization", `Bearer ${token}`);
-			fetch("http://localhost:5000/authenticate", { headers }).then(
-				(r) => (this.authenticated = r.status === 200)
-			);
-		}
+		authorized(token).then((isAuthorized) => {
+			this.isAuthorized = isAuthorized;
+			this.requestUpdate();
+		});
 	}
 
 	static styles = css`
@@ -92,11 +106,13 @@ export class Panels extends LitElement {
 	`;
 
 	render() {
-		return html`
-			<div class="panels">
-				<div class="panel"><slot></slot></div>
-				<div class="panel">${this.asideContents}</div>
-			</div>
-		`;
+		return this.isAuthorized
+			? html`
+					<div class="panels">
+						<div class="panel"><slot></slot></div>
+						<div class="panel">Is Authorized ${this.asideContents}</div>
+					</div>
+			  `
+			: html`<div class="panel"><slot></slot></div>`;
 	}
 }
