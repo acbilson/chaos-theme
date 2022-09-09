@@ -10,6 +10,7 @@
 		"dev": "microbundle watch"
 	},
 	"devDependencies": {
+		"chaos-auth": "file:../../../packages/chaos-auth-0.0.2.tar",
 		"lit": "^2.3.1",
 		"lit-html": "^2.3.1",
 		"microbundle": "^0.15.1"
