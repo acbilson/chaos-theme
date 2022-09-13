@@ -2,6 +2,10 @@
 build:
 	npm run build
 
+# install the chaos-auth package
+install VERSION:
+	npm install ~/packages/chaos-auth-{{ VERSION }}.tar
+
 # watch and deploy on update
 serve:
 	find ./src | entr -s 'npm run build && cp dist/app.modern.js ../assets/js/app/'

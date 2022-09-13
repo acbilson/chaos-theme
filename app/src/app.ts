@@ -1,3 +1,3 @@
 export { Backlink } from "./backlink";
 export { Panels } from "./panel";
-export { AuthAuthorized } from "chaos-auth";
+export { AuthLogin, AuthLogout, AuthAuthorized } from "chaos-auth";

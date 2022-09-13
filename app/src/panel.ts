@@ -1,4 +1,5 @@
 import { LitElement, PropertyValues, html, css } from "lit";
+import { classMap } from "lit/directives/class-map.js";
 import { customElement, property, state } from "lit/decorators.js";
 import { BacklinkDetail } from "./models";
 
@@ -37,16 +38,18 @@ export class Panels extends LitElement {
 			flex-flow: row nowrap;
 			justify-content: space-between;
 		}
+
 		.panel {
 			width: 45%;
 		}
 	`;
 
 	render() {
+		const panneledClassMap = classMap({ panel: this.asideContents !== null });
 		return html`
 			<div class="panels">
-				<div class="panel"><slot></slot></div>
-				<div class="panel">
+				<div class="${panneledClassMap}"><slot></slot></div>
+				<div class="${panneledClassMap}">
 					<auth-authorized>${this.asideContents}</auth-authorized>
 				</div>
 			</div>

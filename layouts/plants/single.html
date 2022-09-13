@@ -8,7 +8,13 @@
   {{ partialCached "nav-bar.html" . }}
 
 	<section class="container-center">
+		<div>
 		<auth-login><p>No login</p></auth-login>
+		<auth-logout><p>No logout</p></auth-logout>
+		<auth-authorized>
+			<p>This will only be seen if you are authorized to see it.</p>
+		</auth-authorized>
+		</div>
 		<app-panels>
 			<article class="plant-entry h-entry">
 
