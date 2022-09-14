@@ -1,5 +1,9 @@
+# cleans the build artifacts
+clean:
+	rm -rf dist/*
+
 # build the bundle to /dist
-build:
+build: clean
 	npm run build
 
 # install the chaos-auth package
