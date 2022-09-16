@@ -16,4 +16,4 @@ serve:
 
 # deploys the app bundle for Hugo to pick up in theme/assets/js/app
 deploy: build
-	cp dist/app.modern.js /Users/alexbilson/source/chaos-theme/assets/js/app
+	cp dist/index.modern.js /Users/alexbilson/source/chaos-theme/assets/js/app/app.modern.js
