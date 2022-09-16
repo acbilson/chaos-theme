@@ -43,8 +43,12 @@ export class Panel extends LitElement {
 
 	private _edit(e) {
 		const payload = this._editPayload;
+		const headers = new Headers();
+		console.log(this._auth);
+		headers.append("Authorization", `Bearer ${this._auth.token}`);
 		fetch(
-			`http://localhost:5000/read?type=${payload.fileType}&name=${payload.fileName}`
+			`http://localhost:5000/read?type=${payload.fileType}&name=${payload.fileName}`,
+			{ headers }
 		)
 			.then((r) => (r.status === 200 ? r.json() : null))
 			.then((b) => {
