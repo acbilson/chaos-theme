@@ -8,28 +8,20 @@
   {{ partialCached "nav-bar.html" . }}
 
 	<section class="container-center">
-		<div>
-		<auth-login><p>No login</p></auth-login>
-		<auth-logout><p>No logout</p></auth-logout>
-		<auth-authorized>
-			<p>This will only be seen if you are authorized to see it.</p>
-		</auth-authorized>
+		<article class="plant-entry h-entry">
+
+		<h1 class="plant-entry__title p-name">{{ $title }}</h1>
+		<a class="u-url" href="{{ .Permalink }}" hidden></a>
+
+		<div class="plant-entry__content e-content">
+		{{ .Content }}
 		</div>
-		<app-panels>
-			<article class="plant-entry h-entry">
 
-			<h1 class="plant-entry__title p-name">{{ $title }}</h1>
-			<a class="u-url" href="{{ .Permalink }}" hidden></a>
-
-			<div class="plant-entry__content e-content">
-			{{ .Content }}
-			</div>
-
-			{{ partial "backlink.html" . }}
-			{{ partial "comments.html" . }}
-			{{ partial "attributes.html" . }}
-			</article>
-		</app-panels>
+		{{ partial "backlink.html" . }}
+		{{ partial "comments.html" . }}
+		{{ partial "attributes.html" . }}
+		</article>
+		<app-panel></app-panel>
 	</section>
 
   {{ partialCached "foot.html" . }}

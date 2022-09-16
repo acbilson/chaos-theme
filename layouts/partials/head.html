@@ -23,6 +23,9 @@
   <!-- adds PWA manifest -->
   <link rel="manifest" href="{{ .Site.BaseURL }}/manifest.json">
 
+  <!-- adds authentication endpoint -->
+  <link rel="authentication" href="http://locahost:7000">
+
   <!-- adds supported RSS feeds -->
   {{ range .AlternativeOutputFormats -}}
   <link rel="{{ .Rel }}" type="{{ .MediaType.Type | html }}" href="{{ $.Site.BaseURL }}/logs/index.xml" title="{{ $.Site.Title }} - Ship's Log" />

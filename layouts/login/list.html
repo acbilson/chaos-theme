@@ -1,0 +1,20 @@
+{{- $darkmodejs := resources.Get "js/darkmode.js" -}}
+{{- $navbarjs := resources.Get "js/nav-bar.js" -}}
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="{{ .Site.Params.defaultColorMode }}">
+{{ partialCached "head.html" . }}
+<body class="container">
+  {{ partialCached "nav-bar.html" . }}
+
+  <section class="container-full">
+  <h1>{{ .Title }}</h1>
+  		<div style="text-align: center">
+			<auth-login><p>No login</p></auth-login>
+			<auth-logout><p>No logout</p></auth-logout>
+  		</div>
+  </section>
+
+  {{ partialCached "foot.html" . }}
+  {{ partialCached "scripts.html" . }}
+</body>
+</html>
