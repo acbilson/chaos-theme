@@ -12,7 +12,7 @@ install VERSION:
 
 # watch and deploy on update
 serve:
-	find ./src | entr -s 'npm run build && cp dist/app.modern.js ../assets/js/app/'
+	find ./components | entr -s 'npm run build && cp dist/index.modern.js ../assets/js/app/app.modern.js'
 
 # deploys the app bundle for Hugo to pick up in theme/assets/js/app
 deploy: build
