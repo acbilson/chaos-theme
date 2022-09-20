@@ -15,14 +15,15 @@
 	],
 	"scripts": {
 		"build": "microbundle",
-		"dev": "microbundle watch"
+		"dev": "microbundle watch",
+		"serve": "web-dev-server --node-resolve --open demo/ --watch"
 	},
 	"devDependencies": {
-		"chaos-auth": "file:../../../packages/chaos-auth-0.0.4.tar",
 		"lit": "^2.3.1",
 		"lit-html": "^2.3.1"
 	},
 	"dependencies": {
-		"microbundle": "^0.15.1"
+		"microbundle": "^0.15.1",
+		"@web/dev-server": "^0.1.34"
 	}
 }

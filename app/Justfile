@@ -10,6 +10,10 @@ build: clean
 install VERSION:
 	npm install ~/packages/chaos-auth-{{ VERSION }}.tar
 
+# serve demo app locally
+watch:
+	npm run serve
+
 # watch and deploy on update
 serve:
 	find ./components | entr -s 'npm run build && cp dist/index.modern.js ../assets/js/app/app.modern.js'

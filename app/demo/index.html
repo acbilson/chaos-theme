@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="authentication" href="http://localhost:7000" />
+		<link rel="publish" href="http://localhost:5000" />
+	</head>
+	<body>
+		<auth-login><p>No login</p></auth-login>
+		<auth-logout><p>No Logout</p></auth-logout>
+
+		<auth-authorized>
+			<p>
+				I can't see this content unless I'm authorized to see it, unless this
+				isn't working at all
+			</p>
+		</auth-authorized>
+
+		<auth-example><p>Should never see this</p></auth-example>
+
+		<app-panel>There is no panel here, oops</app-panel>
+
+		<script type="module" src="../dist/index.modern.js"></script>
+	</body>
+</html>

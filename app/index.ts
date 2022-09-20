@@ -1,3 +1,7 @@
-//export { Backlink } from "./components/backlink";
-export { Panel } from "./components/panel";
-export { AuthLogin, AuthLogout } from "./node_modules/chaos-auth/dist/index.modern.js";
+// Authentication
+export { AuthLogin } from "./components/auth/auth-login";
+export { AuthLogout } from "./components/auth/auth-logout";
+
+// Editing
+export { Panel } from "./components/file/panel";
+
