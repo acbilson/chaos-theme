@@ -1,7 +1,14 @@
 import { LitElement, PropertyValues, TemplateResult, html, css } from "lit";
 import { classMap } from "lit/directives/class-map.js";
 import { customElement, property, state } from "lit/decorators.js";
-import { Response, ChangeResult, ReadResult, PanelStatus } from "./models";
+import {
+	Response,
+	ChangeResult,
+	ChangeOption,
+	ReadResult,
+	PanelStatus,
+} from "./models";
+import { PanelOption } from "./panel-option";
 import { AuthController } from "../auth/auth-controller";
 import { PublishController } from "./publish-controller";
 
@@ -24,17 +31,22 @@ export class Panel extends LitElement {
 
 	private get _options() {
 		const slot = this.renderRoot.querySelector("slot");
-		const elements = slot?.assignedElements({ flatten: true });
-		if (elements && elements.length > 0)
-			return elements[0].querySelectorAll("app-panel-option");
+		const slots = slot?.assignedElements({ flatten: true });
+		if (slots && slots.length > 0) {
+			const elements = slots[0].querySelectorAll("app-panel-option");
+			return Array.from(elements).map((x) => {
+				const option = <PanelOption>x;
+				return option.getModel();
+			});
+		}
 	}
 
 	private get _changeResult(): ChangeResult {
 		const el = this.renderRoot?.querySelector("#content") as HTMLInputElement;
 		const content = el?.value ?? null;
 		return <ChangeResult>{
-			filePath: this.filePath,
-			content: content,
+			content,
+			options: this._options,
 		};
 	}
 
@@ -57,8 +69,13 @@ export class Panel extends LitElement {
 	}
 
 	private _update() {
-		this._pub.update(this._auth.token, this._changeResult).then((r) => {
-			if (r.result?.filePath != null && r.result?.content != null) {
+		const result = this._changeResult;
+		result.options.push(<ChangeOption>{
+			name: "File Path",
+			value: this._filePath,
+		});
+		this._pub.update(this._auth.token, result).then((r) => {
+			if (r.result?.content != null) {
 				this.editContents = r.result.content;
 			}
 		});
@@ -66,7 +83,7 @@ export class Panel extends LitElement {
 
 	private _create() {
 		this._pub.create(this._auth.token, this._changeResult).then((r) => {
-			if (r.result?.filePath != null && r.result?.content != null) {
+			if (r.result?.content != null) {
 				this.editContents = r.result.content;
 			}
 		});
@@ -139,6 +156,7 @@ ${this.editContents}</textarea
 		if (!this._auth.isAuthorized)
 			return html`<p>Not authorized to view panel</p>`;
 			*/
+		console.log(this._changeResult);
 
 		return html`
 			<details>

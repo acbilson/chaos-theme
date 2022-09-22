@@ -1,5 +1,6 @@
 import { LitElement, PropertyValues, TemplateResult, html, css } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
+import { ChangeOption } from "./models";
 
 @customElement("app-panel-option")
 export class PanelOption extends LitElement {
@@ -8,6 +9,18 @@ export class PanelOption extends LitElement {
 
 	@property()
 	label: string;
+
+	getModel(): ChangeOption {
+		return <ChangeOption>{
+			name: this.label,
+			value: this._value,
+		};
+	}
+
+	private get _value(): string {
+		const el = this.renderRoot?.querySelector("input") as HTMLInputElement;
+		return el?.value ?? null;
+	}
 
 	static styles = [
 		css`

@@ -5,8 +5,13 @@ export interface Response<T> {
 }
 
 export interface ChangeResult {
-	filePath: string;
 	content: string;
+	options: ChangeOption[];
+}
+
+export interface ChangeOption {
+	name: string;
+	value: string;
 }
 
 export interface ReadResult {
