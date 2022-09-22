@@ -12,6 +12,7 @@ export interface ChangeResult {
 export interface ChangeOption {
 	name: string;
 	value: string;
+	required: boolean;
 }
 
 export interface ReadResult {

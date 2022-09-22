@@ -8,12 +8,16 @@ export class PanelOption extends LitElement {
 	inputType: string;
 
 	@property()
+	required: boolean;
+
+	@property()
 	label: string;
 
 	getModel(): ChangeOption {
 		return <ChangeOption>{
-			name: this.label,
+			name: this.label.toLowerCase().replace(" ", ""),
 			value: this._value,
+			required: this.required,
 		};
 	}
 
@@ -25,10 +29,21 @@ export class PanelOption extends LitElement {
 	static styles = [
 		css`
 			.panel-option {
-				width: 30%;
+				width: 50%;
 				display: flex;
 				flex-flow: row nowrap;
 				justify-content: space-between;
+			}
+			.panel-label {
+				white-space: nowrap;
+				margin-right: 12px;
+			}
+			.panel-input {
+				width: 100%;
+			}
+			.required {
+				color: red;
+				margin-left: 12px;
 			}
 		`,
 	];
@@ -36,8 +51,15 @@ export class PanelOption extends LitElement {
 	render() {
 		return html`
 			<div class="panel-option">
-				<label for="${this.label}">${this.label}</label>
-				<input name="${this.label}" type="${this.inputType}" />
+				<label class="panel-label" for="${this.label}">${this.label}</label>
+				<input
+					class="panel-input"
+					name="${this.label}"
+					type="${this.inputType}"
+				/>
+				${this.required
+					? html`<span class="required">(required)</span>`
+					: html`<span></span>`}
 			</div>
 		`;
 	}

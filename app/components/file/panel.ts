@@ -26,6 +26,9 @@ export class Panel extends LitElement {
 	@state()
 	status: PanelStatus = PanelStatus.CREATING;
 
+	@state()
+	message: string;
+
 	private get _options(): ChangeOption[] {
 		const slot = this.renderRoot.querySelector("slot");
 		const slots = slot?.assignedElements({ flatten: true });
@@ -49,12 +52,17 @@ export class Panel extends LitElement {
 	}
 
 	private _startUpdate() {
-		this._pub.read(this._auth.token, this._filePath).then((r) => {
-			if (r.success) {
-				this.editContents = r.result.content;
-				this.status = PanelStatus.EDITING;
-			}
-		});
+		this._pub.read(this._auth.token, this._filePath).then(
+			(r) => {
+				if (r.success) {
+					this.editContents = r.result.content;
+					this.status = PanelStatus.EDITING;
+				} else {
+					this.message = r.message;
+				}
+			},
+			(e) => (this.message = e.toString())
+		);
 	}
 
 	private _startCreate() {
@@ -73,11 +81,16 @@ export class Panel extends LitElement {
 					},
 				]),
 			})
-			.then((r) => {
-				if (r.success) {
-					this.editContents = r.result.content;
-				}
-			});
+			.then(
+				(r) => {
+					if (r.success) {
+						this.editContents = r.result.content;
+					} else {
+						this.message = r.message;
+					}
+				},
+				(e) => (this.message = e.toString())
+			);
 	}
 
 	private _create() {
@@ -86,14 +99,25 @@ export class Panel extends LitElement {
 				content: this._content,
 				options: this._options,
 			})
-			.then((r) => {
-				if (r.success) {
-					this.editContents = r.result.content;
-				}
-			});
+			.then(
+				(r) => {
+					if (r.success) {
+						this.editContents = r.result.content;
+					} else {
+						this.message = r.message;
+					}
+				},
+				(e) => (this.message = e.toString())
+			);
 	}
 
 	private _save() {
+		// validate
+		if (this._options.filter((x) => x.required).some((x) => !x.value)) {
+			this.message = "Not all required fields have values";
+			return;
+		}
+
 		switch (this.status) {
 			case PanelStatus.CREATING:
 				this._create();
@@ -120,6 +144,9 @@ export class Panel extends LitElement {
 			.edit-content {
 				width: 100%;
 				height: -webkit-fill-available;
+			}
+			.error {
+				color: red;
 			}
 		`,
 	];
@@ -159,7 +186,7 @@ ${this.editContents}</textarea
 		/*
 		if (!this._auth.isAuthorized)
 			return html`<p>Not authorized to view panel</p>`;
-			*/
+		*/
 
 		return html`
 			<details>
@@ -169,6 +196,7 @@ ${this.editContents}</textarea
 					name="options"
 					?hidden=${this.status !== PanelStatus.CREATING}
 				></slot>
+				<p class="error" ?hidden="${!this.message}">${this.message}</p>
 				${this._renderEditor()}
 				<button @click="${this._save}" ?disabled="${!this.canSave}">
 					Save
