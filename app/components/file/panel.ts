@@ -24,30 +24,24 @@ export class Panel extends LitElement {
 	canSave: boolean = false;
 
 	@state()
-	filePath: string;
-
-	@state()
 	status: PanelStatus = PanelStatus.CREATING;
 
-	private get _options() {
+	private get _options(): ChangeOption[] {
 		const slot = this.renderRoot.querySelector("slot");
 		const slots = slot?.assignedElements({ flatten: true });
-		if (slots && slots.length > 0) {
-			const elements = slots[0].querySelectorAll("app-panel-option");
-			return Array.from(elements).map((x) => {
-				const option = <PanelOption>x;
-				return option.getModel();
-			});
-		}
+		if (!slots || slots.length === 0) return [];
+
+		const optionSlot = Array.from(slots).find((x) => x.slot === "options");
+		const elements = optionSlot.querySelectorAll("app-panel-option");
+		return Array.from(elements).map((x) => {
+			const option = <PanelOption>x;
+			return option.getModel();
+		});
 	}
 
-	private get _changeResult(): ChangeResult {
+	private get _content(): string {
 		const el = this.renderRoot?.querySelector("#content") as HTMLInputElement;
-		const content = el?.value ?? null;
-		return <ChangeResult>{
-			content,
-			options: this._options,
-		};
+		return el?.value ?? null;
 	}
 
 	private get _filePath(): string {
@@ -56,37 +50,47 @@ export class Panel extends LitElement {
 
 	private _startUpdate() {
 		this._pub.read(this._auth.token, this._filePath).then((r) => {
-			this.editContents = r.result.content;
-			this.filePath = r.result.filePath;
-			this.status = PanelStatus.EDITING;
+			if (r.success) {
+				this.editContents = r.result.content;
+				this.status = PanelStatus.EDITING;
+			}
 		});
 	}
 
 	private _startCreate() {
 		this.editContents = "";
-		this.filePath = "";
 		this.status = PanelStatus.CREATING;
 	}
 
 	private _update() {
-		const result = this._changeResult;
-		result.options.push(<ChangeOption>{
-			name: "File Path",
-			value: this._filePath,
-		});
-		this._pub.update(this._auth.token, result).then((r) => {
-			if (r.result?.content != null) {
-				this.editContents = r.result.content;
-			}
-		});
+		this._pub
+			.update(this._auth.token, <ChangeResult>{
+				content: this._content,
+				options: this._options.concat([
+					<ChangeOption>{
+						name: "File Path",
+						value: this._filePath,
+					},
+				]),
+			})
+			.then((r) => {
+				if (r.success) {
+					this.editContents = r.result.content;
+				}
+			});
 	}
 
 	private _create() {
-		this._pub.create(this._auth.token, this._changeResult).then((r) => {
-			if (r.result?.content != null) {
-				this.editContents = r.result.content;
-			}
-		});
+		this._pub
+			.create(this._auth.token, <ChangeResult>{
+				content: this._content,
+				options: this._options,
+			})
+			.then((r) => {
+				if (r.success) {
+					this.editContents = r.result.content;
+				}
+			});
 	}
 
 	private _save() {
@@ -156,7 +160,6 @@ ${this.editContents}</textarea
 		if (!this._auth.isAuthorized)
 			return html`<p>Not authorized to view panel</p>`;
 			*/
-		console.log(this._changeResult);
 
 		return html`
 			<details>
