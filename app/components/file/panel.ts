@@ -14,10 +14,20 @@ export class Panel extends LitElement {
 	editContents: string;
 
 	@state()
+	canSave: boolean = false;
+
+	@state()
 	filePath: string;
 
 	@state()
-	status: PanelStatus;
+	status: PanelStatus = PanelStatus.CREATING;
+
+	private get _options() {
+		const slot = this.renderRoot.querySelector("slot");
+		const elements = slot?.assignedElements({ flatten: true });
+		if (elements && elements.length > 0)
+			return elements[0].querySelectorAll("app-panel-option");
+	}
 
 	private get _changeResult(): ChangeResult {
 		const el = this.renderRoot?.querySelector("#content") as HTMLInputElement;
@@ -78,6 +88,14 @@ export class Panel extends LitElement {
 
 	static styles = [
 		css`
+			.panel-types {
+				list-style: none;
+				display: flex;
+				flex-flow: row nowrap;
+			}
+			.selected {
+				background-color: blue;
+			}
 			.edit-content {
 				width: 100%;
 				height: -webkit-fill-available;
@@ -85,44 +103,56 @@ export class Panel extends LitElement {
 		`,
 	];
 
-	private _renderBtns(): TemplateResult {
-		const saveBtn =
-			this.status === PanelStatus.BLANK
-				? html`<span hidden>Not editing</span>`
-				: html`<button @click=${this._save}>Save</button>`;
-
-		return html`<div class="buttons">
-					<button @click="${this._startUpdate}">Update</button>
-					<button @click="${this._startCreate}>Create</button>
-					${saveBtn}
-				</div>`;
+	private _changeType(e) {
+		this.status = PanelStatus[e.target.id];
 	}
 
-	private _renderConfig(): TemplateResult {
-		const pathInput =
-			this.status === PanelStatus.BLANK
-				? html`<span hidden>Not editing</span`
-				: html`<input id="file-path" type="text" value="${this.filePath}" />`;
+	private _renderPanelType(): TemplateResult {
+		const items = Object.keys(PanelStatus).map((k) => {
+			return html`<li
+				class="${classMap({ selected: this.status == PanelStatus[k] })}"
+			>
+				<button id="${k}">${PanelStatus[k]}</button>
+			</li>`;
+		});
+		return html`<ul @click="${this._changeType}" class="panel-types">
+			${items}
+		</ul>`;
+	}
 
-		return html`<div class="config">${pathInput}</div>`;
+	private _change(e) {
+		this.canSave = e.target.value.length > 0;
 	}
 
 	private _renderEditor(): TemplateResult {
-		return this.status === PanelStatus.BLANK
-			? html`<span hidden>Nothing to edit</span>`
-			: html`<textarea id="content" class="edit-content">
+		return html`<textarea
+			@keyup="${this._change}"
+			id="content"
+			class="edit-content"
+		>
 ${this.editContents}</textarea
-			  >`;
+		>`;
 	}
 
 	render() {
+		/*
 		if (!this._auth.isAuthorized)
 			return html`<p>Not authorized to view panel</p>`;
+			*/
 
 		return html`
-			<aside>
-				${this._renderBtns()} ${this._renderConfig()} ${this._renderEditor()}
-			</aside>
+			<details>
+				<summary>Admin Panel</summary>
+				${this._renderPanelType()}
+				<slot
+					name="options"
+					?hidden=${this.status !== PanelStatus.CREATING}
+				></slot>
+				${this._renderEditor()}
+				<button @click="${this._save}" ?disabled="${!this.canSave}">
+					Save
+				</button>
+			</details>
 		`;
 	}
 }

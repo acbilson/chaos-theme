@@ -4,4 +4,5 @@ export { AuthLogout } from "./components/auth/auth-logout";
 
 // Editing
 export { Panel } from "./components/file/panel";
+export { PanelOption } from "./components/file/panel-option";
 

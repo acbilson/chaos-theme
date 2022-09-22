@@ -15,7 +15,6 @@ export interface ReadResult {
 }
 
 export enum PanelStatus {
-	BLANK = 1,
-	CREATING,
-	EDITING,
+	CREATING = "Create",
+	EDITING = "Edit",
 }

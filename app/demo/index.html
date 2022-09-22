@@ -17,7 +17,12 @@
 
 		<auth-example><p>Should never see this</p></auth-example>
 
-		<app-panel>There is no panel here, oops</app-panel>
+		<app-panel
+			><div slot="options">
+				<app-panel-option label="File Path" input-type="text"></app-panel-option>
+				<app-panel-option label="Tags" input-type="text"></app-panel-option>
+		</div
+		></app-panel>
 
 		<script type="module" src="../dist/index.modern.js"></script>
 	</body>
