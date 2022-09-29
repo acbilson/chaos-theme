@@ -19,7 +19,7 @@ function t(t,e,s,i){var n,r=arguments.length,o=r<3?e:null===i?i=Object.getOwnPro
 ${0}</textarea
 		>`),this.editing,this.editContents)}render(){return this._auth.isAuthorized?R(xt||(xt=Nt`
 			<details>
-				<summary>Admin Panel</summary>
+				<summary>Admin Panel - ${0}</summary>
 				${0}
 				<slot name="options"></slot>
 				<p
@@ -33,7 +33,7 @@ ${0}</textarea
 					Save
 				</button>
 			</details>
-		`),this.renderPanelType(),!this.message,At({color:"success"===this.message?"green":"red"}),this.message,this.renderEditor(),this.saveFile,!this.canSave):R(Ot||(Ot=Nt`<span hidden>Not authorized to view panel</span>`))}},Ct.styles=[o(Ut||(Ut=Nt`
+		`),this.panelType,this.renderPanelType(),!this.message,At({color:"success"===this.message?"green":"red"}),this.message,this.renderEditor(),this.saveFile,!this.canSave):R(Ot||(Ot=Nt`<span hidden>Not authorized to view panel</span>`))}},Ct.styles=[o(Ut||(Ut=Nt`
 			.panel-types {
 				list-style: none;
 				display: flex;

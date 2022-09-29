@@ -289,7 +289,7 @@ ${this.editContents}</textarea
 
 		return html`
 			<details>
-				<summary>Admin Panel</summary>
+				<summary>Admin Panel - ${this.panelType}</summary>
 				${this.renderPanelType()}
 				<slot name="options"></slot>
 				<p
