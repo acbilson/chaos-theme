@@ -1,23 +1,45 @@
 import { LitElement, PropertyValues, TemplateResult, html, css } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
-import { ChangeOption } from "./models";
+import { ChangeOption, PanelOptionType } from "./models";
 
 @customElement("app-panel-option")
 export class PanelOption extends LitElement {
-	@property({ attribute: "input-type" })
-	inputType: string;
-
 	@property()
 	required: boolean;
 
 	@property()
 	label: string;
 
+	@property()
+	type: PanelOptionType;
+
+	private get _inputType() {
+		switch (this.type) {
+			case PanelOptionType.TEXT:
+			case PanelOptionType.LIST:
+			default:
+				return "text";
+		}
+	}
+
+	private valueByType() {
+		switch (this.type) {
+			case PanelOptionType.TEXT:
+			default:
+				return this._value;
+			case PanelOptionType.LIST:
+				return this._value.includes(",")
+					? this._value.replaceAll(" ", "").split(",")
+					: [this._value.trim()];
+		}
+	}
+
 	getModel(): ChangeOption {
 		return <ChangeOption>{
 			name: this.label.toLowerCase().replaceAll(" ", ""),
-			value: this._value,
+			value: this.valueByType(),
 			required: this.required,
+			type: this.type,
 		};
 	}
 
@@ -55,7 +77,7 @@ export class PanelOption extends LitElement {
 				<input
 					class="panel-input"
 					name="${this.label}"
-					type="${this.inputType}"
+					type="${this._inputType}"
 				/>
 				${this.required
 					? html`<span class="required">(required)</span>`

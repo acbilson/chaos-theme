@@ -1,7 +1,7 @@
 export interface Response<T> {
 	success: boolean;
 	message: string;
-	result: T;
+	content: T;
 }
 
 export interface ChangeResult {
@@ -13,6 +13,7 @@ export interface ChangeResult {
 export interface ChangeOption {
 	name: string;
 	value: string;
+	type: PanelOptionType;
 	required: boolean;
 }
 
@@ -25,4 +26,9 @@ export interface ReadResult {
 export enum PanelStatus {
 	CREATING = "Create",
 	EDITING = "Edit",
+}
+
+export enum PanelOptionType {
+	TEXT = "text",
+	LIST = "list",
 }

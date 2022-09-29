@@ -1,5 +1,6 @@
 import { LitElement, PropertyValues, TemplateResult, html, css } from "lit";
 import { classMap } from "lit/directives/class-map.js";
+import { styleMap } from "lit/directives/style-map.js";
 import { customElement, property, state } from "lit/decorators.js";
 import {
 	Response,
@@ -63,7 +64,7 @@ export class Panel extends LitElement {
 		this._pub.read(this._auth.token, this._filePath).then(
 			(r) => {
 				if (r.success) {
-					this.editContents = r.result.body;
+					this.editContents = r.content.body;
 					this.status = PanelStatus.EDITING;
 				} else {
 					this.message = r.message;
@@ -90,7 +91,8 @@ export class Panel extends LitElement {
 			.then(
 				(r) => {
 					if (r.success) {
-						this.editContents = r.result.body;
+						this.editContents = r.content.body;
+						this.message = "success";
 					} else {
 						this.message = r.message;
 					}
@@ -108,6 +110,7 @@ export class Panel extends LitElement {
 
 		const filepath = frontmatter["filepath"];
 		delete frontmatter["filepath"];
+		console.log({ frontmatter });
 
 		this._pub
 			.create(this._auth.token, <ChangeResult>{
@@ -119,6 +122,7 @@ export class Panel extends LitElement {
 				(r) => {
 					if (r.success) {
 						this.editContents = r.content.body;
+						this.message = "success";
 					} else {
 						this.message = r.message;
 					}
@@ -160,9 +164,6 @@ export class Panel extends LitElement {
 			.edit-content {
 				width: 100%;
 				height: -webkit-fill-available;
-			}
-			.error {
-				color: red;
 			}
 		`,
 	];
@@ -210,7 +211,14 @@ ${this.editContents}</textarea
 					name="options"
 					?hidden=${this.status !== PanelStatus.CREATING}
 				></slot>
-				<p class="error" ?hidden="${!this.message}">${this.message}</p>
+				<p
+					?hidden="${!this.message}"
+					style="${styleMap({
+						color: this.message === "success" ? "green" : "red",
+					})}"
+				>
+					${this.message}
+				</p>
 				${this._renderEditor()}
 				<button @click="${this._save}" ?disabled="${!this.canSave}">
 					Save
