@@ -79,13 +79,13 @@ export class Panel extends LitElement {
 	}
 
 	private _update() {
-		const filepath = this._frontmatter["filepath"]
+		const frontmatter = this._frontmatter;
 
 		this._pub
 			.update(this._auth.token, <ChangeResult>{
-				path: filepath,
+				path: this._filePath,
 				body: this._content,
-				frontmatter: this._frontmatter,
+				frontmatter,
 			})
 			.then(
 				(r) => {
@@ -100,18 +100,25 @@ export class Panel extends LitElement {
 	}
 
 	private _create() {
-		const filepath = this._frontmatter["filepath"]
+		const frontmatter = this._frontmatter;
+		if ("filepath" in frontmatter == false) {
+			this.message = "File path is a required panel option";
+			return;
+		}
+
+		const filepath = frontmatter["filepath"];
+		delete frontmatter["filepath"];
 
 		this._pub
 			.create(this._auth.token, <ChangeResult>{
 				path: filepath,
 				body: this._content,
-				frontmatter: this._frontmatter,
+				frontmatter: frontmatter,
 			})
 			.then(
 				(r) => {
 					if (r.success) {
-						this.editContents = r.result.body;
+						this.editContents = r.content.body;
 					} else {
 						this.message = r.message;
 					}
