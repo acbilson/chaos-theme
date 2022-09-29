@@ -15,7 +15,7 @@ export class PanelOption extends LitElement {
 
 	getModel(): ChangeOption {
 		return <ChangeOption>{
-			name: this.label.toLowerCase().replace(" ", ""),
+			name: this.label.toLowerCase().replaceAll(" ", ""),
 			value: this._value,
 			required: this.required,
 		};

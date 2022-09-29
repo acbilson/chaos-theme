@@ -21,3 +21,11 @@ serve:
 # deploys the app bundle for Hugo to pick up in theme/assets/js/app
 deploy: build
 	cp dist/index.modern.js /Users/alexbilson/source/chaos-theme/assets/js/app/app.modern.js
+
+# launches a tmux session with everything I need to interactively develop
+develop:
+	tmux new-session -s hugo -n watch -d   'just watch';
+	tmux new-window  -t hugo:1 -n serve    'just serve';
+	tmux new-window  -t hugo:2 -n micropub 'cd ~/source/chaos-micropub; just start';
+	tmux new-window  -t hugo:3 -n edit     'nvim index.ts';
+	tmux attach

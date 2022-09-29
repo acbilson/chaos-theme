@@ -41,6 +41,14 @@ export class Panel extends LitElement {
 			return option.getModel();
 		});
 	}
+	private get _frontmatter(): object {
+		return this._options.reduce((prev, curr) => {
+			if (curr?.name && curr?.value) {
+				prev[curr.name] = curr.value;
+			}
+			return prev;
+		}, {});
+	}
 
 	private get _content(): string {
 		const el = this.renderRoot?.querySelector("#content") as HTMLInputElement;
@@ -55,7 +63,7 @@ export class Panel extends LitElement {
 		this._pub.read(this._auth.token, this._filePath).then(
 			(r) => {
 				if (r.success) {
-					this.editContents = r.result.content;
+					this.editContents = r.result.body;
 					this.status = PanelStatus.EDITING;
 				} else {
 					this.message = r.message;
@@ -71,20 +79,18 @@ export class Panel extends LitElement {
 	}
 
 	private _update() {
+		const filepath = this._frontmatter["filepath"]
+
 		this._pub
 			.update(this._auth.token, <ChangeResult>{
-				content: this._content,
-				options: this._options.concat([
-					<ChangeOption>{
-						name: "File Path",
-						value: this._filePath,
-					},
-				]),
+				path: filepath,
+				body: this._content,
+				frontmatter: this._frontmatter,
 			})
 			.then(
 				(r) => {
 					if (r.success) {
-						this.editContents = r.result.content;
+						this.editContents = r.result.body;
 					} else {
 						this.message = r.message;
 					}
@@ -94,15 +100,18 @@ export class Panel extends LitElement {
 	}
 
 	private _create() {
+		const filepath = this._frontmatter["filepath"]
+
 		this._pub
 			.create(this._auth.token, <ChangeResult>{
-				content: this._content,
-				options: this._options,
+				path: filepath,
+				body: this._content,
+				frontmatter: this._frontmatter,
 			})
 			.then(
 				(r) => {
 					if (r.success) {
-						this.editContents = r.result.content;
+						this.editContents = r.result.body;
 					} else {
 						this.message = r.message;
 					}
@@ -183,10 +192,8 @@ ${this.editContents}</textarea
 	}
 
 	render() {
-		/*
 		if (!this._auth.isAuthorized)
 			return html`<p>Not authorized to view panel</p>`;
-		*/
 
 		return html`
 			<details>

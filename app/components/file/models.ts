@@ -5,8 +5,9 @@ export interface Response<T> {
 }
 
 export interface ChangeResult {
-	content: string;
-	options: ChangeOption[];
+	path: string;
+	body: string;
+	frontmatter: object;
 }
 
 export interface ChangeOption {
@@ -16,8 +17,9 @@ export interface ChangeOption {
 }
 
 export interface ReadResult {
-	filePath: string;
-	content: string;
+	filepath: string;
+	frontmatter: object;
+	body: string;
 }
 
 export enum PanelStatus {
