@@ -43,12 +43,14 @@ export class Panel extends LitElement {
 		});
 	}
 	private get _frontmatter(): object {
-		return this._options.reduce((prev, curr) => {
+		const fm = this._options.reduce((prev, curr) => {
 			if (curr?.name && curr?.value) {
 				prev[curr.name] = curr.value;
 			}
 			return prev;
 		}, {});
+		fm["date"] = new Date().toISOString();
+		return fm;
 	}
 
 	private get _content(): string {
