@@ -5,10 +5,13 @@ import { ChangeOption, PanelOptionType } from "./models";
 @customElement("app-panel-option")
 export class PanelOption extends LitElement {
 	@property()
-	required: boolean;
+	key: string;
 
 	@property()
 	label: string;
+
+	@property()
+	required: boolean;
 
 	@property()
 	type: PanelOptionType;
@@ -36,7 +39,8 @@ export class PanelOption extends LitElement {
 
 	getModel(): ChangeOption {
 		return <ChangeOption>{
-			name: this.label.toLowerCase().replaceAll(" ", ""),
+			key: this.key,
+			name: this.label,
 			value: this.valueByType(),
 			required: this.required,
 			type: this.type,

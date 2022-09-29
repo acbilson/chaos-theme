@@ -43,14 +43,12 @@ export class Panel extends LitElement {
 		});
 	}
 	private get _frontmatter(): object {
-		const fm = this._options.reduce((prev, curr) => {
-			if (curr?.name && curr?.value) {
-				prev[curr.name] = curr.value;
+		return this._options.reduce((prev, curr) => {
+			if (curr?.key && curr?.value) {
+				prev[curr.key] = curr.value;
 			}
 			return prev;
 		}, {});
-		fm["date"] = new Date().toISOString();
-		return fm;
 	}
 
 	private get _content(): string {
@@ -59,7 +57,8 @@ export class Panel extends LitElement {
 	}
 
 	private get _filePath(): string {
-		return document.location.pathname;
+		//return document.location.pathname;
+		return "/plants/writing/how-to-get-started-writing-online";
 	}
 
 	private _startUpdate() {
@@ -83,6 +82,7 @@ export class Panel extends LitElement {
 
 	private _update() {
 		const frontmatter = this._frontmatter;
+		frontmatter["lastmod"] = new Date().toISOString();
 
 		this._pub
 			.update(this._auth.token, <ChangeResult>{
@@ -105,20 +105,22 @@ export class Panel extends LitElement {
 
 	private _create() {
 		const frontmatter = this._frontmatter;
-		if ("filepath" in frontmatter == false) {
+		if ("path" in frontmatter == false) {
 			this.message = "File path is a required panel option";
 			return;
 		}
 
-		const filepath = frontmatter["filepath"];
-		delete frontmatter["filepath"];
-		console.log({ frontmatter });
+		const path = frontmatter["path"];
+		delete frontmatter["path"];
+		const now = new Date().toISOString();
+		frontmatter["date"] = now;
+		frontmatter["lastmod"] = now;
 
 		this._pub
 			.create(this._auth.token, <ChangeResult>{
-				path: filepath,
 				body: this._content,
-				frontmatter: frontmatter,
+				frontmatter,
+				path,
 			})
 			.then(
 				(r) => {
@@ -171,7 +173,17 @@ export class Panel extends LitElement {
 	];
 
 	private _changeType(e) {
-		this.status = PanelStatus[e.target.id];
+		const status = PanelStatus[e.target.id];
+		switch (status) {
+			case PanelStatus.CREATING:
+			default:
+				this._startCreate();
+				break;
+			case PanelStatus.EDITING:
+				this._startUpdate();
+				break;
+		}
+		this.status = status;
 	}
 
 	private _renderPanelType(): TemplateResult {

@@ -11,6 +11,7 @@ export interface ChangeResult {
 }
 
 export interface ChangeOption {
+	key: string;
 	name: string;
 	value: string;
 	type: PanelOptionType;
