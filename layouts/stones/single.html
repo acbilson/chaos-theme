@@ -23,7 +23,45 @@
       <div class="stone-entry__content e-content">{{- .Content -}}</div>
       {{ partial "citation.html" . }}
   </article>
+
   {{ partial "backlink.html" . }}
+
+		<app-panel panel-type="stone"
+			><div slot="options">
+				<app-panel-option
+					key="path"
+					label="File Path"
+					type="text"
+					required="true"
+				></app-panel-option>
+				<app-panel-option
+					key="authors"
+					label="Authors"
+					type="list"
+					required="true"
+				></app-panel-option>
+				<app-panel-option
+					key="tags"
+					label="Tags"
+					type="list"
+					required="true"
+				></app-panel-option>
+				<app-panel-option
+					key="copyright"
+					label="Copyright"
+					type="text"
+					required="true"
+				></app-panel-option>
+				<app-panel-option key="page" label="Page" type="text" required="true"
+					><app-panel-option
+						key="source"
+						label="Source"
+						type="text"
+						required="true"
+					></app-panel-option>
+				</app-panel-option></div
+				><p>Not displaying for some reason</p></app-panel>
+
   </section>
 
   {{ partialCached "foot.html" . }}

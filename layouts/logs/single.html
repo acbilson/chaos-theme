@@ -12,8 +12,11 @@
 	{{ partial "comments.html" . }}
 	{{ partial "attributes.html" . }}
       </article>
+
+		<app-panel panel-type="log"><p>Not displaying for some reason</p></app-panel>
     </section>
 
     {{ partialCached "foot.html" . }}
+  {{ partialCached "scripts.html" . }}
 </body>
 </html>
