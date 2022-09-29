@@ -11,12 +11,18 @@ export class PanelOption extends LitElement {
 	label: string;
 
 	@property()
+	value: string;
+
+	@property()
 	required: boolean;
 
 	@property()
 	type: PanelOptionType;
 
-	private get _inputType() {
+	@property()
+	readonly: boolean;
+
+	private get _inputType(): string {
 		switch (this.type) {
 			case PanelOptionType.TEXT:
 			case PanelOptionType.LIST:
@@ -25,7 +31,12 @@ export class PanelOption extends LitElement {
 		}
 	}
 
-	private valueByType() {
+	private get _value(): string {
+		const el = this.renderRoot?.querySelector("input") as HTMLInputElement;
+		return el?.value ?? null;
+	}
+
+	valueByType(): string | string[] {
 		switch (this.type) {
 			case PanelOptionType.TEXT:
 			default:
@@ -45,11 +56,6 @@ export class PanelOption extends LitElement {
 			required: this.required,
 			type: this.type,
 		};
-	}
-
-	private get _value(): string {
-		const el = this.renderRoot?.querySelector("input") as HTMLInputElement;
-		return el?.value ?? null;
 	}
 
 	static styles = [
@@ -82,6 +88,8 @@ export class PanelOption extends LitElement {
 					class="panel-input"
 					name="${this.label}"
 					type="${this._inputType}"
+					value="${this.value}"
+					?disabled="${this.readonly}"
 				/>
 				${this.required
 					? html`<span class="required">(required)</span>`

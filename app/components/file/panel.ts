@@ -2,13 +2,7 @@ import { LitElement, PropertyValues, TemplateResult, html, css } from "lit";
 import { classMap } from "lit/directives/class-map.js";
 import { styleMap } from "lit/directives/style-map.js";
 import { customElement, property, state } from "lit/decorators.js";
-import {
-	Response,
-	ChangeResult,
-	ChangeOption,
-	ReadResult,
-	PanelStatus,
-} from "./models";
+import { Response, ChangeResult, ChangeOption, PanelStatus } from "./models";
 import { PanelOption } from "./panel-option";
 import { AuthController } from "../auth/auth-controller";
 import { PublishController } from "./publish-controller";
@@ -30,20 +24,18 @@ export class Panel extends LitElement {
 	@state()
 	message: string;
 
-	private get _options(): ChangeOption[] {
+	private get _panelOptions(): PanelOption[] {
 		const slot = this.renderRoot.querySelector("slot");
 		const slots = slot?.assignedElements({ flatten: true });
-		if (!slots || slots.length === 0) return [];
-
+		if (!slots) return null;
 		const optionSlot = Array.from(slots).find((x) => x.slot === "options");
-		const elements = optionSlot.querySelectorAll("app-panel-option");
-		return Array.from(elements).map((x) => {
-			const option = <PanelOption>x;
-			return option.getModel();
-		});
+		return <PanelOption[]>(
+			Array.from(optionSlot.querySelectorAll("app-panel-option"))
+		);
 	}
+
 	private get _frontmatter(): object {
-		return this._options.reduce((prev, curr) => {
+		return this._panelOptions?.reduce((prev, curr) => {
 			if (curr?.key && curr?.value) {
 				prev[curr.key] = curr.value;
 			}
@@ -57,31 +49,54 @@ export class Panel extends LitElement {
 	}
 
 	private get _filePath(): string {
-		//return document.location.pathname;
-		return "/plants/writing/how-to-get-started-writing-online";
+		return document.location.pathname;
 	}
 
-	private _startUpdate() {
-		this._pub.read(this._auth.token, this._filePath).then(
-			(r) => {
-				if (r.success) {
-					this.editContents = r.content.body;
-					this.status = PanelStatus.EDITING;
-				} else {
-					this.message = r.message;
-				}
-			},
-			(e) => (this.message = e.toString())
-		);
+	updatePanelOptions(path: string, frontmatter: object) {
+		const options = this._panelOptions;
+		if (!options) return;
+
+		// update path
+		const pathOption = options.find((o) => o.key === "path");
+		pathOption.value = path;
+		pathOption.readonly = true;
+
+		// update front matter options
+		Object.keys(frontmatter).forEach((k) => {
+			const o = options.find((o) => o.key === k);
+			if (o) {
+				o.value = frontmatter[k];
+			}
+		});
 	}
 
-	private _startCreate() {
+	clearPanelOptions() {
+		const options = this._panelOptions;
+		if (!options) return;
+		options.forEach((o) => (o.value = null));
+	}
+
+	startUpdate() {
+		this._pub.read(this._auth.token, this._filePath).then((r) => {
+			if (r.success) {
+				this.editContents = r.content.body;
+				this.updatePanelOptions(r.content.path, r.content.frontmatter);
+				this.status = PanelStatus.EDITING;
+			} else {
+				this.message = r.message;
+			}
+		});
+	}
+
+	startCreate() {
 		this.editContents = "";
+		this.clearPanelOptions();
 		this.status = PanelStatus.CREATING;
 	}
 
-	private _update() {
+	updateFile() {
 		const frontmatter = this._frontmatter;
+		if (!frontmatter) return;
 		frontmatter["lastmod"] = new Date().toISOString();
 
 		this._pub
@@ -103,8 +118,9 @@ export class Panel extends LitElement {
 			);
 	}
 
-	private _create() {
+	_create() {
 		const frontmatter = this._frontmatter;
+		if (!frontmatter) return;
 		if ("path" in frontmatter == false) {
 			this.message = "File path is a required panel option";
 			return;
@@ -126,6 +142,7 @@ export class Panel extends LitElement {
 				(r) => {
 					if (r.success) {
 						this.editContents = r.content.body;
+						this.updatePanelOptions(r.content.path, r.content.frontmatter);
 						this.message = "success";
 					} else {
 						this.message = r.message;
@@ -135,9 +152,10 @@ export class Panel extends LitElement {
 			);
 	}
 
-	private _save() {
-		// validate
-		if (this._options.filter((x) => x.required).some((x) => !x.value)) {
+	saveFile() {
+		const options = this._panelOptions;
+		if (!options) return;
+		if (options.filter((x) => x.required).some((x) => !x.value)) {
 			this.message = "Not all required fields have values";
 			return;
 		}
@@ -147,12 +165,30 @@ export class Panel extends LitElement {
 				this._create();
 				break;
 			case PanelStatus.EDITING:
-				this._update();
+				this.updateFile();
 				break;
 			default:
 				console.log(`Not saving, status was ${this.status}`);
 				break;
 		}
+	}
+
+	setStatus(e) {
+		const status = PanelStatus[e.target.id];
+		switch (status) {
+			case PanelStatus.CREATING:
+			default:
+				this.startCreate();
+				break;
+			case PanelStatus.EDITING:
+				this.startUpdate();
+				break;
+		}
+		this.status = status;
+	}
+
+	editing(e) {
+		this.canSave = e.target.value.length > 0;
 	}
 
 	static styles = [
@@ -172,21 +208,7 @@ export class Panel extends LitElement {
 		`,
 	];
 
-	private _changeType(e) {
-		const status = PanelStatus[e.target.id];
-		switch (status) {
-			case PanelStatus.CREATING:
-			default:
-				this._startCreate();
-				break;
-			case PanelStatus.EDITING:
-				this._startUpdate();
-				break;
-		}
-		this.status = status;
-	}
-
-	private _renderPanelType(): TemplateResult {
+	renderPanelType(): TemplateResult {
 		const items = Object.keys(PanelStatus).map((k) => {
 			return html`<li
 				class="${classMap({ selected: this.status == PanelStatus[k] })}"
@@ -194,18 +216,14 @@ export class Panel extends LitElement {
 				<button id="${k}">${PanelStatus[k]}</button>
 			</li>`;
 		});
-		return html`<ul @click="${this._changeType}" class="panel-types">
+		return html`<ul @click="${this.setStatus}" class="panel-types">
 			${items}
 		</ul>`;
 	}
 
-	private _change(e) {
-		this.canSave = e.target.value.length > 0;
-	}
-
-	private _renderEditor(): TemplateResult {
+	renderEditor(): TemplateResult {
 		return html`<textarea
-			@keyup="${this._change}"
+			@keyup="${this.editing}"
 			id="content"
 			class="edit-content"
 		>
@@ -220,11 +238,8 @@ ${this.editContents}</textarea
 		return html`
 			<details>
 				<summary>Admin Panel</summary>
-				${this._renderPanelType()}
-				<slot
-					name="options"
-					?hidden=${this.status !== PanelStatus.CREATING}
-				></slot>
+				${this.renderPanelType()}
+				<slot name="options"></slot>
 				<p
 					?hidden="${!this.message}"
 					style="${styleMap({
@@ -233,8 +248,8 @@ ${this.editContents}</textarea
 				>
 					${this.message}
 				</p>
-				${this._renderEditor()}
-				<button @click="${this._save}" ?disabled="${!this.canSave}">
+				${this.renderEditor()}
+				<button @click="${this.saveFile}" ?disabled="${!this.canSave}">
 					Save
 				</button>
 			</details>

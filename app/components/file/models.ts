@@ -18,12 +18,6 @@ export interface ChangeOption {
 	required: boolean;
 }
 
-export interface ReadResult {
-	filepath: string;
-	frontmatter: object;
-	body: string;
-}
-
 export enum PanelStatus {
 	CREATING = "Create",
 	EDITING = "Edit",

@@ -1,11 +1,11 @@
 import { ReactiveController, ReactiveControllerHost } from "lit";
-import { Response, ChangeResult, ReadResult } from "./models";
+import { Response, ChangeResult } from "./models";
 import { BaseUrls } from "../shared/base-urls";
 
 export class PublishController implements ReactiveController {
 	private _host: ReactiveControllerHost;
 
-	read(token: string, filePath: string): Promise<Response<ReadResult>> {
+	read(token: string, filePath: string): Promise<Response<ChangeResult>> {
 		if (token == null) new Promise(() => null);
 		const headers = new Headers();
 		headers.append("Authorization", `Bearer ${token}`);
@@ -13,7 +13,7 @@ export class PublishController implements ReactiveController {
 			headers,
 		})
 			.then((r) => (r.status === 200 ? r.json() : null))
-			.then((b) => <Response<ReadResult>>b);
+			.then((b) => <Response<ChangeResult>>b);
 	}
 
 	update(
