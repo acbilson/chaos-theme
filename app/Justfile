@@ -1,0 +1,31 @@
+# cleans the build artifacts
+clean:
+	rm -rf dist/*
+
+# build the bundle to /dist
+build: clean
+	npm run build
+
+# install the chaos-auth package
+install VERSION:
+	npm install ~/packages/chaos-auth-{{ VERSION }}.tar
+
+# serve demo app locally
+watch:
+	npm run serve
+
+# watch and deploy on update
+serve:
+	find ./components | entr -s 'npm run build && cp dist/index.modern.js ../assets/js/app/app.modern.js'
+
+# deploys the app bundle for Hugo to pick up in theme/assets/js/app
+deploy: build
+	cp dist/index.modern.js /Users/alexbilson/source/chaos-theme/assets/js/app/app.modern.js
+
+# launches a tmux session with everything I need to interactively develop
+develop:
+	tmux new-session -s hugo -n watch -d   'just watch';
+	tmux new-window  -t hugo:1 -n serve    'just serve';
+	tmux new-window  -t hugo:2 -n micropub 'cd ~/source/chaos-micropub; just start';
+	tmux new-window  -t hugo:3 -n edit     'nvim index.ts';
+	tmux attach
