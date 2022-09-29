@@ -27,3 +27,10 @@ export enum PanelOptionType {
 	TEXT = "text",
 	LIST = "list",
 }
+
+export enum PanelType {
+	PLANT = "plant",
+	QUIP = "quip",
+	LOG = "log",
+	STONE = "stone",
+}

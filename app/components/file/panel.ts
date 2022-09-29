@@ -2,7 +2,13 @@ import { LitElement, PropertyValues, TemplateResult, html, css } from "lit";
 import { classMap } from "lit/directives/class-map.js";
 import { styleMap } from "lit/directives/style-map.js";
 import { customElement, property, state } from "lit/decorators.js";
-import { Response, ChangeResult, ChangeOption, PanelStatus } from "./models";
+import {
+	Response,
+	ChangeResult,
+	ChangeOption,
+	PanelStatus,
+	PanelType,
+} from "./models";
 import { PanelOption } from "./panel-option";
 import { AuthController } from "../auth/auth-controller";
 import { PublishController } from "./publish-controller";
@@ -11,6 +17,11 @@ import { PublishController } from "./publish-controller";
 export class Panel extends LitElement {
 	private _auth = new AuthController(this, "app-panel");
 	private _pub = new PublishController(this);
+
+	private _typesWithOptions = [PanelType.PLANT, PanelType.STONE];
+
+	@property({ attribute: "panel-type" })
+	panelType: PanelType = PanelType.PLANT;
 
 	@state()
 	editContents: string;
@@ -27,20 +38,24 @@ export class Panel extends LitElement {
 	private get _panelOptions(): PanelOption[] {
 		const slot = this.renderRoot.querySelector("slot");
 		const slots = slot?.assignedElements({ flatten: true });
-		if (!slots) return null;
 		const optionSlot = Array.from(slots).find((x) => x.slot === "options");
-		return <PanelOption[]>(
-			Array.from(optionSlot.querySelectorAll("app-panel-option"))
-		);
+		return optionSlot
+			? <PanelOption[]>(
+					Array.from(optionSlot.querySelectorAll("app-panel-option"))
+			  )
+			: [];
 	}
 
 	private get _frontmatter(): object {
-		return this._panelOptions?.reduce((prev, curr) => {
-			if (curr?.key && curr?.value) {
-				prev[curr.key] = curr.value;
-			}
-			return prev;
-		}, {});
+		return this._panelOptions.length === 0
+			? {}
+			: this._panelOptions.reduce((prev, curr) => {
+					const m = curr.getModel();
+					if (m?.key && m?.value) {
+						prev[m.key] = m.value;
+					}
+					return prev;
+			  }, {});
 	}
 
 	private get _content(): string {
@@ -52,14 +67,20 @@ export class Panel extends LitElement {
 		return document.location.pathname;
 	}
 
+	private get _shouldHaveOptions(): boolean {
+		return this._typesWithOptions.includes(this.panelType);
+	}
+
 	updatePanelOptions(path: string, frontmatter: object) {
+		if (!this._shouldHaveOptions) return;
 		const options = this._panelOptions;
-		if (!options) return;
 
 		// update path
 		const pathOption = options.find((o) => o.key === "path");
-		pathOption.value = path;
-		pathOption.readonly = true;
+		if (pathOption) {
+			pathOption.value = path;
+			pathOption.readonly = true;
+		}
 
 		// update front matter options
 		Object.keys(frontmatter).forEach((k) => {
@@ -71,8 +92,8 @@ export class Panel extends LitElement {
 	}
 
 	clearPanelOptions() {
+		if (!this._shouldHaveOptions) return;
 		const options = this._panelOptions;
-		if (!options) return;
 		options.forEach((o) => (o.value = null));
 	}
 
@@ -96,7 +117,6 @@ export class Panel extends LitElement {
 
 	updateFile() {
 		const frontmatter = this._frontmatter;
-		if (!frontmatter) return;
 		frontmatter["lastmod"] = new Date().toISOString();
 
 		this._pub
@@ -118,16 +138,45 @@ export class Panel extends LitElement {
 			);
 	}
 
-	_create() {
+	_getFilePathByDate(): string {
+		const prependZero = (x) => (x < 10 ? `0${x}` : x.toString());
+		const now = new Date();
+		const y = now.getFullYear().toString();
+		const m = prependZero(now.getMonth() + 1);
+		const d = now.getDate();
+		const h = prependZero(now.getHours());
+		const mi = prependZero(now.getMinutes());
+		const s = prependZero(now.getSeconds());
+
+		return this.panelType === PanelType.LOG
+			? `/logs/${y}/${m}/${y}${m}${d}-${h}${mi}${s}`
+			: `/quips/${y}${m}${d}-${h}${mi}${s}`;
+	}
+
+	_getFilePath(): string {
+		switch (this.panelType) {
+			case PanelType.PLANT:
+			case PanelType.STONE:
+			default:
+				return this._filePath;
+			case PanelType.QUIP:
+			case PanelType.LOG:
+				return this._getFilePathByDate();
+		}
+	}
+
+	createFile() {
 		const frontmatter = this._frontmatter;
-		if (!frontmatter) return;
-		if ("path" in frontmatter == false) {
-			this.message = "File path is a required panel option";
-			return;
+
+		// sets the path based on type
+		let path: string;
+		if ("path" in frontmatter) {
+			path = frontmatter["path"];
+			delete frontmatter["path"];
+		} else {
+			path = this._getFilePath();
 		}
 
-		const path = frontmatter["path"];
-		delete frontmatter["path"];
 		const now = new Date().toISOString();
 		frontmatter["date"] = now;
 		frontmatter["lastmod"] = now;
@@ -154,21 +203,24 @@ export class Panel extends LitElement {
 
 	saveFile() {
 		const options = this._panelOptions;
-		if (!options) return;
-		if (options.filter((x) => x.required).some((x) => !x.value)) {
+		const missingRequiredValues = options
+			.filter((x) => x.required)
+			.some((x) => !x.value);
+
+		if (this._shouldHaveOptions && !missingRequiredValues) {
 			this.message = "Not all required fields have values";
 			return;
 		}
 
 		switch (this.status) {
 			case PanelStatus.CREATING:
-				this._create();
+				this.createFile();
 				break;
 			case PanelStatus.EDITING:
 				this.updateFile();
 				break;
 			default:
-				console.log(`Not saving, status was ${this.status}`);
+				this.message = `Not saving, status was ${this.status}`;
 				break;
 		}
 	}
@@ -233,7 +285,7 @@ ${this.editContents}</textarea
 
 	render() {
 		if (!this._auth.isAuthorized)
-			return html`<p>Not authorized to view panel</p>`;
+			return html`<span hidden>Not authorized to view panel</span>`;
 
 		return html`
 			<details>
