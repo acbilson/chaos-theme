@@ -207,8 +207,9 @@ export class Panel extends LitElement {
 			.filter((x) => x.required)
 			.some((x) => !x.value);
 
-		if (this._shouldHaveOptions && !missingRequiredValues) {
+		if (this._shouldHaveOptions && missingRequiredValues) {
 			this.message = "Not all required fields have values";
+			console.log({ options });
 			return;
 		}
 
