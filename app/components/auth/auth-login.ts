@@ -33,9 +33,9 @@ export class AuthLogin extends LitElement {
 	render() {
 		return html`
 			<label for="username">Username:</label>
-			<input id="username" name="username" type="text" />
+			<input id="username" name="username" autocomplete="username" type="text" />
 			<label for="password">Password:</label>
-			<input id="password" name="password" type="password" />
+			<input id="password" name="password" autocomplete="password" type="password" />
 			<button @click="${this._authenticate}">Login</button>
 			<label>${this.msg}</label>
 		`;
