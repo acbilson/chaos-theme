@@ -22,10 +22,20 @@ serve:
 deploy: build
 	cp dist/index.modern.js /Users/alexbilson/source/chaos-theme/assets/js/app/app.modern.js
 
+hugo:
+	find ./components | entr -s 'podman run -it --rm \
+	-p 1313:1313 \
+	-v /Users/alexbilson/source/chaos-content:/mnt/hugo/content \
+	-v /Users/alexbilson/source/chaos-theme:/mnt/hugo/themes/chaos \
+	--name hugo \
+	acbilson/hugo:latest'
+
+
 # launches a tmux session with everything I need to interactively develop
 develop:
-	tmux new-session -s hugo -n watch -d   'just watch';
-	tmux new-window  -t hugo:1 -n serve    'just serve';
-	tmux new-window  -t hugo:2 -n micropub 'cd ~/source/chaos-micropub; just start';
-	tmux new-window  -t hugo:3 -n edit     'nvim index.ts';
+	tmux new-session -s theme -n watch -d   'just watch';
+	tmux new-window  -t theme:1 -n hugo    'just hugo';
+	tmux new-window  -t theme:2 -n serve    'just serve';
+	tmux new-window  -t theme:3 -n micropub 'cd ~/source/chaos-micropub; just start';
+	tmux new-window  -t theme:4 -n edit     'nvim index.ts';
 	tmux attach

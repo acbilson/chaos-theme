@@ -202,7 +202,7 @@ export class Panel extends LitElement {
 	}
 
 	saveFile() {
-		const options = this._panelOptions;
+		const options = this._panelOptions.map((x) => x.getModel());
 		const missingRequiredValues = options
 			.filter((x) => x.required)
 			.some((x) => !x.value);
