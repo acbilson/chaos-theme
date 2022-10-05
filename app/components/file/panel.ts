@@ -117,6 +117,16 @@ export class Panel extends LitElement {
 
 	updateFile() {
 		const frontmatter = this._frontmatter;
+		//
+		// sets the path based on type
+		let path: string;
+		if ("path" in frontmatter) {
+			path = frontmatter["path"];
+			delete frontmatter["path"];
+		} else {
+			path = this._getFilePath();
+		}
+
 		frontmatter["lastmod"] = new Date().toISOString();
 
 		this._pub
@@ -153,6 +163,14 @@ export class Panel extends LitElement {
 			: `/quips/${y}${m}${d}-${h}${mi}${s}`;
 	}
 
+	_getSimpleDate(now: Date): string {
+		const prependZero = (x) => (x < 10 ? `0${x}` : x.toString());
+		const y = now.getFullYear();
+		const m = prependZero(now.getMonth() + 1);
+		const d = now.getDate();
+		return [y, m, d].join("-");
+	}
+
 	_getFilePath(): string {
 		switch (this.panelType) {
 			case PanelType.PLANT:
@@ -177,9 +195,9 @@ export class Panel extends LitElement {
 			path = this._getFilePath();
 		}
 
-		const now = new Date().toISOString();
-		frontmatter["date"] = now;
-		frontmatter["lastmod"] = now;
+		const now = new Date();
+		frontmatter["date"] = this._getSimpleDate(now);
+		frontmatter["lastmod"] = now.toISOString();
 
 		this._pub
 			.create(this._auth.token, <ChangeResult>{
