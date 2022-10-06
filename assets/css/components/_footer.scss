@@ -1,6 +1,6 @@
 footer {
-	margin-top: 10%;
 	width: 80%;
+	height: 100%;
 
 	hr {
 		color: var(--color-stroke);
@@ -21,4 +21,10 @@ footer {
 		padding: 0;
 	}
 
+	@media screen and (max-width: $breakpoint-md) {
+		.attribution {
+			flex-flow: column nowrap;
+			//justify-content: space-between;
+		}
+	}
 }
