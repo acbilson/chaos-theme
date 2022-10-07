@@ -1,0 +1,34 @@
+{{- $stones := sort .Pages "Lastmod" "desc" -}}
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="{{ .Site.Params.defaultColorMode }}">
+{{ partialCached "head.html" . }}
+	<body class="container">
+	{{ partialCached "nav-bar.html" . }}
+
+	<section class="stone-page container-full">
+
+		<h1 class="stone-page__title">{{- .Title -}}</h1>
+		<div class="stone-page__content">{{- .Content -}}</div>
+
+		<ul id="notes-list" class="stone-page__list">
+			{{- range $stones -}}
+			{{- $title := .Title -}}{{- if eq $title "" -}}{{- $title = humanize .File.BaseFileName -}}{{- end -}}
+			<li>
+			<div class="stone-card">
+				<div class="stone-card__attr">[
+					<span>{{- .Date.Format "2/1/06" -}}</span>
+					<span hidden>{{- .Lastmod.Format "2/1/06" -}}</span>
+					<span>{{- .ReadingTime -}} m</span>]
+				</div>
+				<div><a class="stone-card__link" href="{{- .Permalink -}}">{{- $title -}}</a></div>
+			</div>
+			</li>
+			{{- end -}}
+		</ul>
+
+	</section>
+
+	{{ partialCached "foot.html" . }}
+	{{ partialCached "scripts.html" . }}
+	</body>
+</html>
