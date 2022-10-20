@@ -1,0 +1,128 @@
+/* @link https://utopia.fyi/type/calculator?c=320,16,1.2,1440,24,1.25,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l */
+
+:root {
+	--step--2: clamp(0.69rem, calc(0.62rem + 0.38vw), 0.96rem);
+	--step--1: clamp(0.83rem, calc(0.73rem + 0.52vw), 1.2rem);
+	--step-0: clamp(1rem, calc(0.86rem + 0.71vw), 1.5rem);
+	--step-1: clamp(1.2rem, calc(1.01rem + 0.96vw), 1.88rem);
+	--step-2: clamp(1.44rem, calc(1.18rem + 1.29vw), 2.34rem);
+	--step-3: clamp(1.73rem, calc(1.38rem + 1.72vw), 2.93rem);
+	--step-4: clamp(2.07rem, calc(1.62rem + 2.27vw), 3.66rem);
+	--step-5: clamp(2.49rem, calc(1.89rem + 2.98vw), 4.58rem);
+
+	--space-3xs: clamp(0.25rem, calc(0.21rem + 0.18vw), 0.38rem);
+	--space-2xs: clamp(0.5rem, calc(0.43rem + 0.36vw), 0.75rem);
+	--space-xs: clamp(0.75rem, calc(0.64rem + 0.54vw), 1.13rem);
+	--space-s: clamp(1rem, calc(0.86rem + 0.71vw), 1.5rem);
+	--space-m: clamp(1.5rem, calc(1.29rem + 1.07vw), 2.25rem);
+	--space-l: clamp(2rem, calc(1.71rem + 1.43vw), 3rem);
+	--space-xl: clamp(3rem, calc(2.57rem + 2.14vw), 4.5rem);
+	--space-2xl: clamp(4rem, calc(3.43rem + 2.86vw), 6rem);
+	--space-3xl: clamp(6rem, calc(5.14rem + 4.29vw), 9rem);
+
+	/* One-up pairs */
+	--space-3xs-2xs: clamp(0.25rem, calc(0.11rem + 0.71vw), 0.75rem);
+	--space-2xs-xs: clamp(0.5rem, calc(0.32rem + 0.89vw), 1.13rem);
+	--space-xs-s: clamp(0.75rem, calc(0.54rem + 1.07vw), 1.5rem);
+	--space-s-m: clamp(1rem, calc(0.64rem + 1.79vw), 2.25rem);
+	--space-m-l: clamp(1.5rem, calc(1.07rem + 2.14vw), 3rem);
+	--space-l-xl: clamp(2rem, calc(1.29rem + 3.57vw), 4.5rem);
+	--space-xl-2xl: clamp(3rem, calc(2.14rem + 4.29vw), 6rem);
+	--space-2xl-3xl: clamp(4rem, calc(2.57rem + 7.14vw), 9rem);
+
+	/* Custom pairs */
+	--space-s-l: clamp(1rem, calc(0.43rem + 2.86vw), 3rem);
+}
+
+:root[color-mode="minimal"] {
+	--color-eggshell: rgb(255, 255, 252);
+	--color-midnight: rgb(22, 22, 26);
+	--color-royalty: rgb(39, 35, 67);
+	--color-navy-blue: navy;
+
+	--color-primary: var(--color-royalty);
+	--color-secondary: var(--color-eggshell);
+	--color-tertiary: var(--color-navy-blue);
+	--color-stroke: var(--color-midnight);
+}
+
+/* baseline */
+
+* {
+	font-size: var(--step-0);
+	color: var(--color-primary);
+	background-color: var(--color-secondary);
+	border-color: var(--color-stroke);
+	margin: 0;
+}
+
+h1 {
+	font-size: var(--step-5);
+}
+h2 {
+	font-size: var(--step-4);
+}
+h3 {
+	font-size: var(--step-3);
+}
+h4 {
+	font-size: var(--step-2);
+}
+h5 {
+	font-size: var(--step-1);
+}
+
+h2 > a {
+	font-size: var(--step-4);
+}
+h3 > a {
+	font-size: var(--step-3);
+}
+h4 > a {
+	font-size: var(--step-2);
+}
+h5 > a {
+	font-size: var(--step-1);
+}
+
+body > * + * {
+	margin-top: var(--space-l);
+}
+
+main > * + * {
+	margin-top: var(--space-l);
+}
+
+section > * + * {
+	margin-top: var(--space-m);
+}
+
+article > * + * {
+	margin-top: var(--space-s);
+}
+
+header > * + * {
+	margin-top: var(--space-s);
+}
+
+footer > * + * {
+	margin-top: var(--space-s);
+}
+
+form > * + * {
+	margin-top: var(--space-s);
+}
+
+/* Utilities */
+
+.flow-l > * + * {
+	margin-top: var(--space-l);
+}
+
+.flow-m > * + * {
+	margin-top: var(--space-m);
+}
+
+.flow-s > * + * {
+	margin-top: var(--space-s);
+}
