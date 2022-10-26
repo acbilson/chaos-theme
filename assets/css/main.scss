@@ -1,5 +1,6 @@
-/* @link https://utopia.fyi/type/calculator?c=320,16,1.2,1440,24,1.25,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l */
 :root {
+	/* @link https://utopia.fyi/type/calculator?c=320,16,1.2,1440,24,1.25,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l */
+
 	// font steps
 	--step--2: clamp(0.69rem, calc(0.62rem + 0.38vw), 0.96rem);
 	--step--1: clamp(0.83rem, calc(0.73rem + 0.52vw), 1.2rem);
@@ -126,7 +127,6 @@ select {
 * {
 	font-size: var(--step-0);
 	color: var(--color-primary);
-	background-color: var(--color-secondary);
 	border-color: var(--color-stroke);
 }
 
@@ -163,6 +163,11 @@ p,
 li,
 ul {
 	max-width: var(--char-0);
+}
+
+:focus {
+  outline: 3px dotted currentColor;
+  outline-offset: 0.2rem;
 }
 
 /* Base styles */
