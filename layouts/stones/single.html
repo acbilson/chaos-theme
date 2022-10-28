@@ -3,25 +3,25 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="{{ .Site.Params.defaultColorMode }}">
 {{ partialCached "head.html" . }}
-<body class="container">
-  {{ partialCached "nav-bar.html" . }}
-  <section class="container-center">
-    <article class="stone-entry h-entry">
-      <h1 class="stone-entry__title p-name">{{- $title -}}</h1>
+<body class="flow-l">
+	{{ partialCached "nav-bar.html" . }}
+	<article class="wrapper flow-m e-content">
+      <h1 id="jump">{{- $title -}}</h1>
+		<a class="u-url" href="{{ .Permalink }}" hidden></a>
 
-      <!-- Adds tags to the post if they exist -->
-      {{- if isset .Params $taxo -}}
-        <div class="stone-entry__tags">
-          {{- range $name := .Param $taxo -}}
-            {{- with $.Site.GetPage (printf "/%s/%s" $taxo ( $name | urlize)) -}}
-          <a class="stone-entry__link p-category" href="{{ .Permalink }}">{{- $name -}}</a>
-            {{- end -}}
-          {{- end -}}
-        </div>
-      {{- end -}}
-      <a class="u-url" href="{{ .Permalink }}" hidden></a>
-      <div class="stone-entry__content e-content">{{- .Content -}}</div>
-      {{ partial "citation.html" . }}
+		<!-- Adds tags to the post if they exist -->
+		{{- if isset .Params $taxo -}}
+		<div class="spread narrow-spread">
+		{{- range $name := .Param $taxo -}}
+			{{- with $.Site.GetPage (printf "/%s/%s" $taxo ( $name | urlize)) -}}
+			<a class="p-category" href="{{ .Permalink }}">{{- $name -}}</a>
+			{{- end -}}
+		{{- end -}}
+		</div>
+		{{- end -}}
+
+		{{- .Content -}}
+		{{ partial "citation.html" . }}
   </article>
 
   {{ partial "backlink.html" . }}
@@ -61,8 +61,6 @@
 					></app-panel-option>
 				</app-panel-option></div
 				><p>Not displaying for some reason</p></app-panel>
-
-  </section>
 
   {{ partialCached "foot.html" . }}
   {{ partialCached "scripts.html" . }}
