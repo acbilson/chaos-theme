@@ -1,0 +1,47 @@
+/* Utilities */
+
+$size-map: (
+	large: "l",
+	medium: "m",
+	small: "s",
+);
+
+/* flow utility */
+
+@each $k, $v in $size-map {
+	.flow-#{$v} > * + * {
+		margin-top: var(--flow-space, 1em);
+	}
+}
+
+.hidden {
+	display: none;
+}
+
+/* spread utility */
+.spread {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	column-gap: 1em;
+}
+
+.spread-btwn {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.spread-down {
+	display: flex;
+	flex-flow: column nowrap;
+	row-gap: 0.125rem;
+}
+
+/* wrapper utility */
+.wrapper {
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: 1.25rem;
+	padding-right: 1.25rem;
+}

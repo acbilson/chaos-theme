@@ -68,8 +68,8 @@ export class ChaosFilter extends HTMLElement {
 		// only adds query params if any exist
 		const newUrl =
 			Array.from(params.entries()).length > 0
-				? `${window.location.origin}/?${params.toString()}`
-				: window.location.origin;
+				? `${window.location.origin}${window.location.pathname}?${params.toString()}`
+				: `${window.location.origin}${window.location.pathname}`;
 
 		window.history.pushState({ path: newUrl }, "", newUrl);
 	}

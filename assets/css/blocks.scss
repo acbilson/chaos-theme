@@ -1,0 +1,19 @@
+.card {
+	border: 1px solid var(--color-stroke);
+	border-radius: var(--radius);
+	width: fit-content;
+	padding-top: var(--flow-space, 1em);
+	padding-bottom: var(--flow-space, 1em);
+}
+
+.filter-wide {
+	li {
+		@extend .spread-btwn;
+	}
+}
+
+.filter-narrow {
+	li {
+		@extend .spread-down;
+	}
+}

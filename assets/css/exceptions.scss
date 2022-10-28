@@ -1,0 +1,18 @@
+/* overrides width restrictions for a list and it's children */
+.fill-list {
+	max-width: 100%;
+	> * {
+		max-width: 100%;
+	}
+}
+
+// overrides wrapper centering
+.wrapper-no-center {
+	margin-left: unset;
+}
+
+// overrides top/bottom margin
+.no-v-margin {
+	margin-top: unset;
+	margin-bottom: unset;
+}

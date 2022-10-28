@@ -6,73 +6,65 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="{{ .Site.Params.defaultColorMode }}">
 {{ partialCached "head.html" . }}
-<body class="container">
-  {{ partialCached "nav-bar.html" . }}
+<body class="container flow-l">
+	{{ partialCached "nav-bar.html" . }}
 
-  <section class="plant-page container-full">
+	<article class="wrapper flow-m">
+		<h1 id="jump">{{- .Title -}}</h1>
+		{{- .Content -}}
 
-    <h1 class="plant-page__title">{{- .Title -}}</h1>
-    <div class="plant-page__content">{{- .Content -}}</div>
+		<chaos-filter>
+			<form slot="chaos-filter-form" action='http://localhost:8000' method=get>
+				<select data-match="epistemic">
+					<option value="all">All ({{- len $everyPlant -}})</option>
+					<option value="🌲">Evergreen 🌲 ({{- len $evergreens -}})</option>
+					<option value="🪴">Plant 🪴 ({{- len $plants -}})</option>
+					<option value="🌿">Sprout 🌿 ({{- len $sprouts -}})</option>
+					<option value="🌱">Seedling 🌱 ({{- len $seedlings -}})</option>
+				</select>
+				<select data-match="folder">
+					<option value="all">All</option>
+					<option value="business">Business</option>
+					<option value="culture">Culture</option>
+					<option value="entrepreneurship">Entrepreneurship</option>
+					<option value="faith">Faith</option>
+					<option value="identity">Identity</option>
+					<option value="leadership">Leadership</option>
+					<option value="parenting">Parenting</option>
+					<option value="technology">Technology</option>
+					<option value="writing">Writing</option>
+				</select>
+				<input type="submit" value="Filter"/>
+			</form>
 
-      <form id="note-form" name="notesForm" class="plant-page__form" action='{{ with .GetPage "/plants" }}{{ .Permalink }}{{ end }}' method=get>
-      <select name="epistemic">
-	<option value="all">All ({{- len $everyPlant -}})</option>
-	<option value="🌲">Evergreen 🌲 ({{- len $evergreens -}})</option>
-	<option value="🪴">Plant 🪴 ({{- len $plants -}})</option>
-	<option value="🌿">Sprout 🌿 ({{- len $sprouts -}})</option>
-	<option value="🌱">Seedling 🌱 ({{- len $seedlings -}})</option>
-      </select>
-  <select name="category">
-	<option value="all">All</option>
-	<option value="business">Business</option>
-	<option value="culture">Culture</option>
-	<option value="entrepreneurship">Entrepreneurship</option>
-	<option value="faith">Faith</option>
-	<option value="identity">Identity</option>
-	<option value="leadership">Leadership</option>
-	<option value="parenting">Parenting</option>
-	<option value="technology">Technology</option>
-	<option value="writing">Writing</option>
-      </select>
-      <input type="submit" value="Filter"/>
-      </form>
-
-    <!-- adds event handler to handle form -->
-    {{- $notepagejs := resources.Get "js/note-page.js" -}}
-    <script src="{{ $notepagejs.Permalink }}"></script>
-
-    <ul id="notes-list" class="plant-page__list">
-    {{- range $everyPlant -}}
-      {{- if not .Draft -}}
-	{{- $epVal := "🌱" -}}
-	{{- if eq .Params.epistemic "sprout" -}}
-	    {{- $epVal = "🌿" -}}
-	{{- else if eq .Params.epistemic "plant" -}}
-	    {{- $epVal = "🪴" -}}
-	{{- else if eq .Params.epistemic "evergreen" -}}
-	    {{- $epVal = "🌲" -}}
-	{{- end -}}
-
+		<chaos-resizer slot="chaos-filter-fields">
+		<ul class="fill-list filter-wide" role="list">
+		{{- range $everyPlant -}}
+			{{- if not .Draft -}}
+		{{- $epVal := "🌱" -}}
+		{{- if eq .Params.epistemic "sprout" -}}
+			{{- $epVal = "🌿" -}}
+		{{- else if eq .Params.epistemic "plant" -}}
+			{{- $epVal = "🪴" -}}
+		{{- else if eq .Params.epistemic "evergreen" -}}
+			{{- $epVal = "🌲" -}}
+		{{- end -}}
 	{{- $title := .Title -}}{{- if eq $title "" -}}{{- $title = humanize .File.BaseFileName -}}{{- end -}}
 	{{- $topFolder := index (split .RelPermalink "/") 2 -}}
-	<li data-epistemic="{{- $epVal -}}" data-folder="{{- $topFolder -}}">
-	  <div class="plant-card">
-	    <div class="plant-card__attr">[<span>{{- $epVal -}}</span>
-	      <span>{{- .Date.Format "2/1/06" -}}</span>
-	      <span hidden>{{- .Lastmod.Format "2/1/06" -}}</span>
-	      <span>{{- substr $topFolder 0 5 -}}</span>
-	      <span>{{- .ReadingTime -}} m</span>]
-		 </div>
-	    <div><a class="plant-card__link" href="{{- .Permalink -}}">{{- $title -}}</a></div>
-	  </div>
-	</li>
-      {{- end -}}
-    {{- end -}}
-    </ul>
-
-  </section>
-
-  {{ partialCached "foot.html" . }}
-  {{ partialCached "scripts.html" . }}
+			<li data-epistemic="{{- $epVal -}}" data-folder="{{- $topFolder -}}">
+				<div>[<span>{{- $epVal -}}</span>
+					<span>{{- .Date.Format "2/1/06" -}}</span>
+					<span hidden>{{- .Lastmod.Format "2/1/06" -}}</span>
+					<span>{{- substr $topFolder 0 5 -}}</span>
+					<span>{{- .ReadingTime -}} m</span>]
+				</div>
+				<div><a href="{{- .Permalink -}}">{{- $title -}}</a></div>
+			</li>
+			{{- end -}}
+		{{- end -}}
+		</ul>
+	</article>
+{{ partialCached "foot.html" . }}
+{{ partialCached "scripts.html" . }}
 </body>
 </html>
