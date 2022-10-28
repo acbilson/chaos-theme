@@ -1,6 +1,24 @@
 import { authorized } from "../shared/operators";
 import { BaseUrls } from "../shared/base-urls";
 
+export class Notified {
+	private _subscribers: Map<string, Function> = new Map<string, Function>();
+
+	subscribe(subscriber: string, callback: Function): string {
+		const sub = `${subscriber}-${Math.random()}`;
+		this._subscribers.set(sub, callback);
+		return sub;
+	}
+
+	unsubscribe(sub: string) {
+		delete this._subscribers[sub];
+	}
+
+	notify() {
+		this._subscribers.forEach((callback, sub) => callback());
+	}
+}
+
 export class Observed<T> {
 	private _subscribers: Map<string, Function> = new Map<string, Function>();
 	private _value: T;
@@ -29,11 +47,14 @@ export class Observed<T> {
 	}
 }
 
-export class AuthStore {
+export class Store {
+	// authentication
 	public isAuthorized$ = new Observed<boolean>();
 	public get token(): string {
 		return sessionStorage.getItem("token");
 	}
+
+	public onFieldFilter$ = new Notified();
 
 	constructor() {
 		// page load sets initial authorized state

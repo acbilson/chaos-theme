@@ -1,3 +1,3 @@
-import { AuthStore } from "./store";
+import { Store } from "./store";
 
-export default new AuthStore();
+export default new Store();
