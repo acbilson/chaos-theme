@@ -1,59 +1,29 @@
-<header class="container-header">
-	<nav id="navbar" class="nav-bar">
-	  <div>
-		 <a class="nav-bar__link" href="{{ .Site.BaseURL }}">Home</a>
-	  </div>
-	  <div>
-		 <a class="nav-bar__link" href="{{ .Site.BaseURL }}/gardens/">Gardens</a>
-	  </div>
-	  <div>
-		 <a class="nav-bar__link" href="{{ .Site.BaseURL }}/plants/">Plants</a>
-	  </div>
-	  <div>
-		 <a class="nav-bar__link" href="{{ .Site.BaseURL }}/stones/">Stones</a>
-	  </div>
-	  <div>
-		 <a class="nav-bar__link" href="{{ .Site.BaseURL }}/logs/">Logs</a>
-	  </div>
-	  <div>
-		 <a class="nav-bar__link" href="{{ .Site.BaseURL }}/blogroll/">Roll</a>
-	  </div>
-	  <div>
-		 <a class="nav-bar__link" href="{{ .Site.BaseURL }}/resume/">Resumé</a>
-	  </div>
-	  <div>
-		 <a class="nav-bar__link" href="{{ .Site.BaseURL }}/about/">About</a>
-	  </div>
-	  <div>
-		 <a class="nav-bar__link" href="{{ .Site.BaseURL }}/network/">Network</a>
-	  </div>
-	  <div>
-		 <a class="nav-bar__link" href="{{ .Site.BaseURL }}/tags/">Tags</a>
-	  </div>
-	  <div>
-		 <a class="nav-bar__link" href="{{ .Site.BaseURL }}/authors/">Authors</a>
-	  </div>
-	  <div>
-		 <a class="nav-bar__link" href="{{ .Site.BaseURL }}/quips/">Quips</a>
-	  </div>
-	  <div>
-		 <a class="nav-bar__link" href="{{ .Site.BaseURL }}/search/">Search</a>
-	  </div>
-	  <div>
-		 <a class="nav-bar__link" href="{{ .Site.BaseURL }}/style/">Style</a>
-	  </div>
-	  <div>
-		 <a class="nav-bar__link" href="{{ .Site.BaseURL }}/login/">Login</a>
-	  </div>
+<header class="wrapper">
+	<nav>
+		<ul role="list" class="spread">
+			<li><a href="{{ .Site.BaseURL }}">Home</a></li>
+			<li><a href="{{ .Site.BaseURL }}/gardens/">Gardens</a></li>
+			<li><a href="{{ .Site.BaseURL }}/plants/">Plants</a></li>
+			<li><a href="{{ .Site.BaseURL }}/stones/">Stones</a></li>
+			<li><a href="{{ .Site.BaseURL }}/logs/">Logs</a></li>
+			<li><a href="{{ .Site.BaseURL }}/blogroll/">Roll</a></li>
+			<li><a href="{{ .Site.BaseURL }}/resume/">Resumé</a></li>
+			<li><a href="{{ .Site.BaseURL }}/about/">About</a></li>
+			<li><a href="{{ .Site.BaseURL }}/network/">Network</a></li>
+			<li><a href="{{ .Site.BaseURL }}/tags/">Tags</a></li>
+			<li><a href="{{ .Site.BaseURL }}/authors/">Authors</a></li>
+			<li><a href="{{ .Site.BaseURL }}/quips/">Quips</a></li>
+			<li><a href="{{ .Site.BaseURL }}/search/">Search</a></li>
+			<li><a href="{{ .Site.BaseURL }}/login/">Login</a></li>
 
-	  {{- $themes := (slice "jungle" "void" "fall" "minimal") -}}
-	  <div>
-		 <select id="nav-switch" class="nav-bar__select">
-		  {{- range $themes -}}
-			  <option value="{{ . }}">{{ . | title }}</option>
-		  {{- end -}}
-		 </select>
-	  </div>
-		<button id="navtoggle" type="button" class="nav-bar__btn">MENU</button>
+		  {{- $themes := (slice "jungle" "void" "fall" "minimal") -}}
+		  <li>
+			 <select id="nav-switch" class="nav-bar__select">
+			  {{- range $themes -}}
+				  <option value="{{ . }}">{{ . | title }}</option>
+			  {{- end -}}
+			 </select>
+		  </li>
+		</ul>
 	</nav>
 </header>
