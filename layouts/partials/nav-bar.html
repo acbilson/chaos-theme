@@ -1,4 +1,4 @@
-<header class="wrapper">
+<header class="wrapper navigation">
 	<nav>
 		<ul role="list" class="spread">
 			<li><a href="{{ .Site.BaseURL }}">Home</a></li>
@@ -15,15 +15,9 @@
 			<li><a href="{{ .Site.BaseURL }}/quips/">Quips</a></li>
 			<li><a href="{{ .Site.BaseURL }}/search/">Search</a></li>
 			<li><a href="{{ .Site.BaseURL }}/login/">Login</a></li>
-
-		  {{- $themes := (slice "jungle" "void" "fall" "minimal") -}}
-		  <li>
-			 <select id="nav-switch" class="nav-bar__select">
-			  {{- range $themes -}}
-				  <option value="{{ . }}">{{ . | title }}</option>
-			  {{- end -}}
-			 </select>
-		  </li>
+			<li><chaos-color-switch>
+					<select><option>Minimal</option></select>
+				</chaos-color-switch></li>
 		</ul>
 	</nav>
 </header>

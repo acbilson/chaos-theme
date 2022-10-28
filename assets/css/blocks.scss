@@ -1,9 +1,43 @@
+.navigation {
+	background-color: var(--color-tertiary);
+	padding-bottom: 0.5em;
+	a,
+	select {
+		color: var(--color-secondary);
+		text-decoration: none;
+	}
+}
+
+.credits {
+	background-color: var(--color-tertiary);
+	padding-top: 0.5em;
+	* {
+		color: var(--color-secondary);
+	}
+}
+
 .card {
-	border: 1px solid var(--color-stroke);
+	border-width: 0.25em;
+	border-style: double;
+	border-color: var(--color-stroke);
 	border-radius: var(--radius);
 	width: fit-content;
 	padding-top: var(--flow-space, 1em);
 	padding-bottom: var(--flow-space, 1em);
+}
+
+.previous-cards {
+	background-color: var(--color-tertiary);
+	border-radius: var(--radius);
+	padding-top: var(--flow-space, 1em);
+	padding-bottom: var(--flow-space, 1em);
+	> :not(button) {
+		background-color: var(--color-secondary);
+	}
+
+	> button {
+		@extend .invert-color;
+	}
 }
 
 .filter-wide {

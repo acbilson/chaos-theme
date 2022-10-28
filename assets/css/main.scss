@@ -32,9 +32,47 @@
 
 	// other
 	--radius: 1rem;
+	--flow-space: 1em;
 }
 
-:root[color-mode="minimal"] {
+:root[theme="void"] {
+	--color-eggshell: rgb(255, 255, 252);
+	--color-magenta: rgb(127, 90, 240);
+	--color-pitch-black: rgb(1, 1, 1);
+	--color-slate: rgb(148, 161, 178);
+
+	--color-primary: var(--color-eggshell);
+	--color-secondary: var(--color-pitch-black);
+	--color-tertiary: var(--color-slate);
+	--color-stroke: var(--color-magenta);
+}
+
+:root[theme="fall"] {
+	--color-pumpkin-orange: rgb(255, 107, 18);
+	--color-navy-blue: navy;
+	--color-cream: rgb(245, 240, 196);
+	--color-maroon: maroon;
+
+	--color-primary: var(--color-pumpkin-orange);
+	--color-secondary: var(--color-cream);
+	--color-tertiary: var(--color-navy-blue);
+	--color-stroke: var(--color-maroon);
+}
+
+
+:root[theme="jungle"] {
+	--color-forest-green: rgb(0, 70, 67);
+	--color-teal: rgb(171, 209, 198);
+	--color-faded-orange: rgb(249, 188, 96);
+	--color-eggshell: rgb(255, 255, 252);
+
+	--color-primary: var(--color-forest-green);
+	--color-secondary: var(--color-eggshell);
+	--color-tertiary: var(--color-teal);
+	--color-stroke: var(--color-faded-orange);
+}
+
+:root[theme="minimal"] {
 	// colors
 	--color-eggshell: rgb(255, 255, 252);
 	--color-midnight: rgb(22, 22, 26);
@@ -134,6 +172,17 @@ select {
 	border-color: var(--color-stroke);
 }
 
+body {
+	background-color: var(--color-secondary);
+}
+
+button,
+select {
+	color: var(--color-secondary);
+	background-color: var(--color-tertiary);
+	border-radius: 0.25rem;
+}
+
 /* generates headers on a scale */
 @for $i from 1 through 6 {
 	h#{6 - $i} {
@@ -149,10 +198,6 @@ select {
 			display: none;
 		}
 	}
-}
-
-h1 {
-	text-transform: capitalize;
 }
 
 /* gives paragraphs default spacing */
@@ -192,10 +237,10 @@ pre {
 }
 
 :focus {
-	outline: 3px dotted currentColor;
+	outline: 3px dotted var(--color-primary);
 	outline-offset: 0.2rem;
 }
 
-@import "utilities.scss";
-@import "exceptions.scss";
-@import "blocks.scss";
+@import "./utilities.scss";
+@import "./exceptions.scss";
+@import "./blocks.scss";

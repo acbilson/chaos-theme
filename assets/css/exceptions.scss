@@ -26,3 +26,9 @@
 a.no-underline {
 	text-decoration: none;
 }
+
+// inverts the color on an element
+.invert-color {
+	background-color: var(--color-primary);
+	color: var(--color-secondary);
+}
