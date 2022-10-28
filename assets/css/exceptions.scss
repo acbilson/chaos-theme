@@ -21,3 +21,8 @@
 .narrow-spread {
 	column-gap: .25em;
 }
+
+// removes link underline
+a.no-underline {
+	text-decoration: none;
+}
