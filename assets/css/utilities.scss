@@ -38,6 +38,16 @@ $size-map: (
 	row-gap: 0.125rem;
 }
 
+/* grid utility */
+
+@for $i from 2 through 5 {
+	.grid-#{$i} {
+		display: grid;
+		grid-row-gap: 0.5em;
+		grid-template-columns: repeat(#{$i}, auto);
+	}
+}
+
 /* wrapper utility */
 .wrapper {
 	margin-left: auto;
