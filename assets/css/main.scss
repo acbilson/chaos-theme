@@ -1,5 +1,177 @@
-/* Base styles */
+:root {
+	/* @link https://utopia.fyi/type/calculator?c=320,16,1.2,1440,24,1.25,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l */
 
+	// font steps
+	--step--2: clamp(0.69rem, calc(0.62rem + 0.38vw), 0.96rem);
+	--step--1: clamp(0.83rem, calc(0.73rem + 0.52vw), 1.2rem);
+	--step-0: clamp(1rem, calc(0.86rem + 0.71vw), 1.5rem);
+	--step-1: clamp(1.2rem, calc(1.01rem + 0.96vw), 1.88rem);
+	--step-2: clamp(1.44rem, calc(1.18rem + 1.29vw), 2.34rem);
+	--step-3: clamp(1.73rem, calc(1.38rem + 1.72vw), 2.93rem);
+	--step-4: clamp(2.07rem, calc(1.62rem + 2.27vw), 3.66rem);
+	--step-5: clamp(2.49rem, calc(1.89rem + 2.98vw), 4.58rem);
+
+	// spacing steps
+	--space-3xs: clamp(0.25rem, calc(0.21rem + 0.18vw), 0.38rem);
+	--space-2xs: clamp(0.5rem, calc(0.43rem + 0.36vw), 0.75rem);
+	--space-xs: clamp(0.75rem, calc(0.64rem + 0.54vw), 1.13rem);
+	--space-s: clamp(1rem, calc(0.86rem + 0.71vw), 1.5rem);
+	--space-m: clamp(1.5rem, calc(1.29rem + 1.07vw), 2.25rem);
+	--space-l: clamp(2rem, calc(1.71rem + 1.43vw), 3rem);
+	--space-xl: clamp(3rem, calc(2.57rem + 2.14vw), 4.5rem);
+	--space-2xl: clamp(4rem, calc(3.43rem + 2.86vw), 6rem);
+	--space-3xl: clamp(6rem, calc(5.14rem + 4.29vw), 9rem);
+
+	// character steps
+	--char-0: 60ch;
+	--char-1: 35ch;
+	--char-2: 30ch;
+	--char-3: 25ch;
+	--char-4: 20ch;
+	--char-5: 15ch;
+}
+
+:root[color-mode="minimal"] {
+	// colors
+	--color-eggshell: rgb(255, 255, 252);
+	--color-midnight: rgb(22, 22, 26);
+	--color-royalty: rgb(39, 35, 67);
+	--color-navy-blue: navy;
+
+	--color-primary: var(--color-royalty);
+	--color-secondary: var(--color-eggshell);
+	--color-tertiary: var(--color-navy-blue);
+	--color-stroke: var(--color-midnight);
+}
+
+/* reset.css @link https://github.com/hankchizljaw/modern-css-reset/blob/master/src/reset.css */
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+figure,
+blockquote,
+dl,
+dd {
+	margin: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role="list"],
+ol[role="list"] {
+	list-style: none;
+}
+
+/* Set core root defaults */
+html:focus-within {
+	scroll-behavior: smooth;
+}
+
+/* Set core body defaults */
+body {
+	min-height: 100vh;
+	text-rendering: optimizeSpeed;
+	line-height: 1.5;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+	text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+	max-width: 100%;
+	display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+	font: inherit;
+}
+
+/* Remove all animations and transitions for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+	html:focus-within {
+		scroll-behavior: auto;
+	}
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+}
+
+/* my baseline */
+
+* {
+	font-size: var(--step-0);
+	color: var(--color-primary);
+	border-color: var(--color-stroke);
+}
+
+/* generates headers on a scale */
+@for $i from 1 through 6 {
+	h#{6 - $i} {
+		font-size: var(--step-#{$i});
+		line-height: var(--step-#{$i});
+		/* sets headers to a pleasing width */
+		max-width: var(--char-#{$i});
+		> a {
+			font-size: inherit;
+		}
+		/* hides local nav header links */
+		> a[href^="#"] {
+			display: none;
+		}
+	}
+}
+
+/* gives paragraphs default spacing */
+p + p {
+	margin-top: var(--space-2xs);
+}
+
+/* makes abbreviations stand out */
+abbr {
+	text-decoration: underline;
+	text-decoration-style: dotted;
+}
+
+/* makes text pleasingly wide */
+p,
+li,
+ul {
+	max-width: var(--char-0);
+}
+
+:focus {
+  outline: 3px dotted currentColor;
+  outline-offset: 0.2rem;
+}
+
+/* Base styles */
+/*
 @import "./base/_vars.scss";
 @import "./base/_mixins.scss";
 @import "./base/_base.scss";
@@ -7,8 +179,9 @@
 @import "./base/_layout.scss";
 @import "./base/_typography.scss";
 @import "./base/_state.scss";
-
+*/
 /* Base Component styles */
+/*
 @import "./components/_about.scss";
 @import "./components/_basic.scss";
 @import "./components/_home.scss";
@@ -20,8 +193,9 @@
 @import "./components/attributes.scss";
 @import "./components/node.scss";
 @import "./components/search.scss";
-
+*/
 /* Entries Component styles */
+/*
 @import "./components/art.scss";
 @import "./components/backref.scss";
 @import "./components/bible.scss";
@@ -30,3 +204,4 @@
 @import "./components/plant.scss";
 @import "./components/stone.scss";
 @import "./components/terms.scss";
+*/
