@@ -16,3 +16,8 @@
 	margin-top: unset;
 	margin-bottom: unset;
 }
+
+// reduces spread amount
+.narrow-spread {
+	column-gap: .25em;
+}

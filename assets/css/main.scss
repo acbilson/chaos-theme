@@ -151,6 +151,10 @@ select {
 	}
 }
 
+h1 {
+	text-transform: capitalize;
+}
+
 /* gives paragraphs default spacing */
 p + p {
 	margin-top: var(--space-2xs);
