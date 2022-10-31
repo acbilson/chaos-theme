@@ -3,6 +3,7 @@ import store from "../state/index";
 interface Filter {
 	key: string;
 	value: string;
+	comparator: "eq" | "gt";
 }
 
 export class ChaosFilter extends HTMLElement {
@@ -29,16 +30,22 @@ export class ChaosFilter extends HTMLElement {
 				return <Filter>{
 					key: x.dataset.match,
 					value: x.options[x.selectedIndex].value,
+					comparator: x.dataset.comparator ?? "eq",
 				};
 			})
 			.filter((x) => x.value !== "all");
 	}
 
-	// the first unordered list inside the chaos-filter-fields slot content
+	// the first unordered list inside the chaos-filter-fields slot content, if
+	// the slot isn't already an unordered list
 	private get fieldsElement(): HTMLUListElement {
-		return this.querySelector("[slot='chaos-filter-fields']").querySelector(
-			"ul"
-		) as HTMLUListElement;
+		const slot = this.querySelector(
+			"[slot='chaos-filter-fields']"
+		) as HTMLElement;
+
+		return slot.tagName === "UL"
+			? (slot as HTMLUListElement)
+			: (slot.querySelector("ul") as HTMLUListElement);
 	}
 
 	// all of the fields available for sort
@@ -52,7 +59,12 @@ export class ChaosFilter extends HTMLElement {
 	// and minimum width
 	filterFields() {
 		const filteredFields = this.originalFields.filter((field) =>
-			this.filters.every((x) => field.dataset[x.key] === x.value)
+			this.filters.every((x) => {
+				if (x.comparator === "eq") return field.dataset[x.key] === x.value;
+				if (x.comparator === "gt")
+					return Number(field.dataset[x.key]) > Number(x.value);
+				return false;
+			})
 		);
 
 		this.fieldsElement.replaceChildren(...filteredFields);
@@ -68,7 +80,9 @@ export class ChaosFilter extends HTMLElement {
 		// only adds query params if any exist
 		const newUrl =
 			Array.from(params.entries()).length > 0
-				? `${window.location.origin}${window.location.pathname}?${params.toString()}`
+				? `${window.location.origin}${
+						window.location.pathname
+				  }?${params.toString()}`
 				: `${window.location.origin}${window.location.pathname}`;
 
 		window.history.pushState({ path: newUrl }, "", newUrl);

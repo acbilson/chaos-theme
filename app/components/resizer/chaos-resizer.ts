@@ -29,7 +29,6 @@ export class ChaosResizer extends HTMLElement {
 			widestField.attr.scrollWidth + widestField.title.scrollWidth;
 
 		this.widestField = widestField.parent;
-		console.log({ width: this.minimumWidth, wideField: this.widestField });
 	}
 
 	constructor() {
@@ -44,8 +43,6 @@ export class ChaosResizer extends HTMLElement {
 			for (const entry of entries) {
 				const parentWidth = entry.contentBoxSize[0].inlineSize;
 				const tooSmall = parentWidth <= this.minimumWidth;
-
-				console.log({width: this.minimumWidth, parent: parentWidth, tooSmall});
 
 				if (tooSmall && this.fieldList.classList.contains("filter-wide")) {
 					this.fieldList.classList.remove("filter-wide");

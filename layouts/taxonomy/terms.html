@@ -11,7 +11,7 @@
 		{{- if ne $root "authors" -}}
 		<chaos-filter>
 		<form slot="chaos-filter-form" action='{{ with .GetPage "/tags" }}{{ .Permalink }}{{ end }}' method=get>
-			<select data-match="minimum">
+			<select data-match="minimum" data-comparator="gt">
 				<option value="0">&gt; 0 (All)</option>
 				<option value="1">&gt; 1</option>
 				<option value="3">&gt; 3</option>
@@ -22,7 +22,7 @@
 		 </form>
 	  {{- end -}}
 
-    <ul slot="chaos-filter-fields" class="grid-5" role="list">
+    <ul slot="chaos-filter-fields" class="tags" role="list">
 
     <!-- retrieves every tag, ordered alphabetically -->
     {{- range $term := .Data.Terms.Alphabetical -}}

@@ -28,7 +28,6 @@ export class ChaosColorSwitch extends HTMLElement {
 	}
 
 	onThemeChange(e: InputEvent) {
-		console.log("changing theme");
 		const select = e.target as HTMLSelectElement;
 		this.theme = select.options[select.selectedIndex].value;
 	}
@@ -46,7 +45,6 @@ export class ChaosColorSwitch extends HTMLElement {
 	}
 
 	connectedCallback() {
-		console.log("rendering");
 		this.render();
 		this.addEventListener(
 			"change",
@@ -54,7 +52,6 @@ export class ChaosColorSwitch extends HTMLElement {
 			false
 		);
 
-		console.log(`current theme is ${this.theme}`);
 		// sets the selector to initial attribute value
 		this.themeSelector.selectedIndex = this.themeOptions.findIndex(
 			(x) => x.value === this.theme

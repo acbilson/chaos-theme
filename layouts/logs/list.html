@@ -38,10 +38,5 @@
 
 {{ partialCached "foot.html" . }}
 {{ partialCached "scripts.html" . }}
-
-<!-- adds event handler to display an on this day -->
-{{- $onthisdayjs := resources.Get "js/on-this-day.js" -}}
-<script src="{{ $onthisdayjs.Permalink }}"></script>
-
 </body>
 </html>

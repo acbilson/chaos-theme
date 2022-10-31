@@ -14,7 +14,7 @@
 		{{- .Content -}}
 
 		<chaos-filter>
-			<form slot="chaos-filter-form" action='http://localhost:8000' method=get>
+			<form slot="chaos-filter-form" action='{{ .Site.BaseURL }}' method=get>
 				<select data-match="epistemic">
 					<option value="all">All ({{- len $everyPlant -}})</option>
 					<option value="🌲">Evergreen 🌲 ({{- len $evergreens -}})</option>

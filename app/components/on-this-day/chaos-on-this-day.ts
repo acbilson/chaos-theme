@@ -4,8 +4,9 @@ export class ChaosOnThisDay extends HTMLElement {
 	articles: HTMLElement[];
 
 	get logFeedUrl(): URL {
-		//return new URL(this.location.href + "index.xml");
-		return new URL("http://localhost:8000/" + "logs.xml");
+		return new URL(
+			window.location.origin + window.location.pathname + "index.xml"
+		);
 	}
 
 	get container(): HTMLElement {

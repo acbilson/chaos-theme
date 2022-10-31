@@ -59,7 +59,6 @@
 	--color-stroke: var(--color-maroon);
 }
 
-
 :root[theme="jungle"] {
 	--color-forest-green: rgb(0, 70, 67);
 	--color-teal: rgb(171, 209, 198);
@@ -176,6 +175,7 @@ body {
 	background-color: var(--color-secondary);
 }
 
+input[type="submit"],
 button,
 select {
 	color: var(--color-secondary);
