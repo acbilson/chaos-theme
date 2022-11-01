@@ -3,16 +3,15 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="{{ .Site.Params.defaultColorMode }}">
 {{ partialCached "head.html" . }}
-<body class="container">
+<body class="flow-l">
   {{ partialCached "nav-bar.html" . }}
 
-  <section class="container-full">
-  <h1>{{ .Title }}</h1>
-  		<div style="text-align: center">
-			<auth-login><p>No login</p></auth-login>
-			<auth-logout><p>No logout</p></auth-logout>
+  <article class="wrapper flow-m">
+  <h1 id="jump">{{ .Title }}</h1>
+  		<div class="spread">
+			<chaos-login class="spread-down"><p>No login</p></chaos-login>
   		</div>
-  </section>
+  </article>
 
   {{ partialCached "foot.html" . }}
   {{ partialCached "scripts.html" . }}
