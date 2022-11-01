@@ -1,3 +1,22 @@
+table.two-column {
+	tr,
+	td {
+		width: 50%;
+	}
+}
+
+.timeline {
+	h5 {
+		text-align: center;
+	}
+	ul {
+		@extend .flow-s;
+	}
+	.quote {
+		text-align: center;
+	}
+}
+
 .tags {
 	display: flex;
 	flex-wrap: wrap;

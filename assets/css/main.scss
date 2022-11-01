@@ -243,13 +243,34 @@ pre {
 
 /* defines a better meter */
 meter::-webkit-meter-optimum-value {
-  box-shadow: 0 5px 5px -5px #999 inset;
-  background-image: linear-gradient(
-    90deg,
-	 var(--color-secondary),
-	 var(--color-primary),
-  );
-  background-size: 100% 100%;
+	box-shadow: 0 5px 5px -5px #999 inset;
+	background-image: linear-gradient(
+		90deg,
+		var(--color-secondary),
+		var(--color-primary)
+	);
+	background-size: 100% 100%;
+}
+
+/* gives some shape to tables */
+table {
+	--border-size: 0.125rem;
+	border: var(--border-size) solid var(--color-stroke);
+	border-collapse: collapse;
+	border-spacing: 0;
+
+	th {
+		border: var(--border-size) solid var(--color-stroke);
+	}
+
+	td {
+		border: calc(var(--border-size) / 3) solid var(--color-stroke);
+	}
+
+	td,
+	th {
+		padding: 0.75rem;
+	}
 }
 
 @import "./utilities.scss";
