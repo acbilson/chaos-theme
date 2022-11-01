@@ -33,6 +33,7 @@
 	// other
 	--radius: 1rem;
 	--flow-space: 1em;
+	--border-size: 0.125rem;
 }
 
 :root[theme="void"] {
@@ -226,13 +227,13 @@ nav {
 	}
 }
 
-/* ensures that code blocks horizontally scroll
-   and invert colors */
+/* ensures code blocks horizontally scroll and keep their default colors */
 pre {
 	overflow-x: auto;
+	padding-left: 1ch;
+	padding-right: 1ch;
 	> * {
-		background-color: var(--color-primary);
-		color: var(--color-secondary);
+		color: unset;
 	}
 }
 
@@ -254,7 +255,6 @@ meter::-webkit-meter-optimum-value {
 
 /* gives some shape to tables */
 table {
-	--border-size: 0.125rem;
 	border: var(--border-size) solid var(--color-stroke);
 	border-collapse: collapse;
 	border-spacing: 0;

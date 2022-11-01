@@ -1,15 +1,49 @@
-.portrait {
-		margin-left: auto;
-		margin-right: auto;
-		> img {
-			border-radius: 50%;
+// comes from Hugo toc
+#TableOfContents {
+	width: fit-content;
+	margin-left: auto;
+	margin-right: auto;
+	> ul {
+		list-style-type: upper-roman;
+		li > ul {
+			list-style-type: upper-alpha;
+			li > ul {
+				list-style-type: lower-roman;
+				li > ul {
+					list-style-type: lower-alpha;
+				}
+			}
 		}
 	}
+}
+
+.notice {
+	width: fit-content;
+	border-top: calc(var(--border-size) / 2) solid var(--color-stroke);
+	border-bottom: var(--border-size) solid var(--color-stroke);
+	padding-left: 1ch;
+
+	p:first-of-type {
+		text-align: center;
+		font-size: var(--step-3);
+	}
+	p:last-of-type {
+		text-align: center;
+	}
+}
+
+.portrait {
+	margin-left: auto;
+	margin-right: auto;
+	> img {
+		border-radius: 50%;
+	}
+}
 
 // a network diagram node
 .diagram-node {
 	> circle {
-    stroke: var(--color-stroke);
+		stroke: var(--color-stroke);
 	}
 	> a > text {
 		font-size: var(--step--2);

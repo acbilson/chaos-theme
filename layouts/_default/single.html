@@ -10,12 +10,9 @@
     <a class="u-url" href="{{ .Permalink }}" hidden></a>
 
     <!-- Post Table of Contents -->
-    {{ if isset .Params "toc" -}}
-      <div class="basic__toc">
-        <h2>Contents</h2>
-        {{ .TableOfContents }}
-      </div>
-    {{- end }}
+	{{ if isset .Params "toc" -}}
+		{{ .TableOfContents }}
+	{{- end }}
 
   {{ .Content }}
   </article>
