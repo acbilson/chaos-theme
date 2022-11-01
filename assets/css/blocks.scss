@@ -1,3 +1,42 @@
+.outref {
+	border-bottom: 1px solid var(--color-stroke);
+}
+
+.poetry {
+	width: fit-content;
+	h3 {
+		text-align: center;
+	}
+	p {
+		font-style: italic;
+		text-align: center;
+	}
+}
+
+// for styles page
+.style-circles {
+	li {
+		border: 1px solid black;
+		border-radius: 50%;
+		width: 100px;
+		height: 100px;
+		margin-left: -25px;
+		margin-right: -25px;
+	}
+	[title="primary"] {
+		background-color: var(--color-primary);
+	}
+	[title="secondary"] {
+		background-color: var(--color-secondary);
+	}
+	[title="tertiary"] {
+		background-color: var(--color-tertiary);
+	}
+	[title="stroke"] {
+		background-color: var(--color-stroke);
+	}
+}
+
 // for the todderish page
 .vocab {
 	h5 {
@@ -52,6 +91,8 @@
 .portrait {
 	margin-left: auto;
 	margin-right: auto;
+	// overrides the fit-content default
+	width: initial;
 	> img {
 		border-radius: 50%;
 	}

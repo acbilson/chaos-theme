@@ -1,9 +1,11 @@
 {{- $author := "Alex Bilson" -}}{{- if isset .Params "author" -}}{{- $author = .Params.author -}}{{- end -}}
-<article class="wrapper wrapper-no-center | card">
-	<ul class="spread" role="list">
+<article class="wrapper wrapper-no-center | flow-m | card">
+	<header class="center">
+	<ul class="spread narrow-spread" role="list">
 		<li><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time></li>
 		<li><a rel="author" class="p-author">{{- $author -}}</a></li>
 		<li><a class="no-underline" href="{{ .Permalink }}" rel="bookmark">⚓</a></li>
 	</ul>
+	</header>
 	{{- .Content -}}
 </article>

@@ -216,7 +216,8 @@ abbr {
 p,
 li,
 ul,
-pre {
+pre,
+figcaption {
 	max-width: var(--char-0);
 }
 
@@ -270,6 +271,25 @@ table {
 	td,
 	th {
 		padding: 0.75rem;
+	}
+}
+
+// makes block quotes stand out a little
+blockquote {
+	padding-left: 1ch;
+}
+
+// makes images more beautiful
+img {
+	border-radius: var(--radius);
+}
+
+figure {
+	width: fit-content;
+
+	figcaption {
+		font-style: italic;
+		text-align: center;
 	}
 }
 

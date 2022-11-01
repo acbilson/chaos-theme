@@ -75,6 +75,7 @@ export class ChaosOnThisDay extends HTMLElement {
 		noLogs.innerText = `No previous logs on this date (${
 			today.getMonth() + 1
 		}/${today.getDate()})`;
+		noLogs.classList.add("wrapper");
 
 		return fetch(this.logFeedUrl)
 			.then((x) => x.text())
@@ -112,7 +113,7 @@ export class ChaosOnThisDay extends HTMLElement {
 	render() {
 		this.innerHTML = `
 			<aside>
-				<button type="button" class="center">Show On This Day</button>
+				<button type="button">Show On This Day</button>
 				<div id="on-this-day" class="wrapper no-h-padding | flow-m previous-cards" hidden>
 				</div>
 			</aside>
