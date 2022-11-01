@@ -18,6 +18,14 @@ $size-map: (
 	display: none;
 }
 
+.center {
+	text-align: center;
+}
+
+.fill {
+	width: 100%;
+}
+
 /* spread utility */
 .spread {
 	display: flex;

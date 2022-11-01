@@ -12,7 +12,7 @@ export class ChaosLogout extends HTMLElement {
 
 	constructor() {
 		super();
-		this.innerHTML = `<button type="button">Logout</button>`;
+		this.innerHTML = `<button type="button" class="fill">Logout</button>`;
 	}
 
 	connectedCallback() {
@@ -20,8 +20,8 @@ export class ChaosLogout extends HTMLElement {
 			"chaos-logout",
 			(isAuth) => {
 				this.innerHTML = isAuth
-					? `<button type="button" style="width: 100%;">Logout</button>`
-					: `<button type="button" style="width: 100%;" hidden>Logout</button>`;
+					? `<button type="button" class="fill">Logout</button>`
+					: `<button type="button" class="fill" hidden>Logout</button>`;
 			}
 		);
 		this.addEventListener("click", (e: MouseEvent) => this.onClick(e), false);
