@@ -1,3 +1,12 @@
+.portrait {
+		margin-left: auto;
+		margin-right: auto;
+		> img {
+			border-radius: 50%;
+		}
+	}
+
+// a network diagram node
 .diagram-node {
 	> circle {
     stroke: var(--color-stroke);
@@ -7,10 +16,12 @@
 	}
 }
 
+// the lines between nodes
 .diagram-link {
 	stroke: var(--color-stroke);
 }
 
+// used on resumé page
 table.two-column {
 	tr,
 	td {
@@ -18,6 +29,7 @@ table.two-column {
 	}
 }
 
+// used on resumé page
 .timeline {
 	h5 {
 		text-align: center;
