@@ -1,0 +1,46 @@
+/* overrides width restrictions for a list and it's children */
+.fill-list {
+	max-width: 100%;
+	> * {
+		max-width: 100%;
+	}
+}
+
+// overrides wrapper centering
+.wrapper-no-center {
+	margin-left: unset;
+}
+
+// overrides top/bottom margin
+.no-v-margin {
+	margin-top: unset;
+	margin-bottom: unset;
+}
+
+// reduces spread amount
+.narrow-spread {
+	column-gap: 0.25em;
+}
+
+// removes link underline
+a.no-underline {
+	text-decoration: none;
+}
+
+// inverts the color on an element
+.invert-color {
+	background-color: var(--color-primary);
+	color: var(--color-secondary);
+}
+
+// fixes font size to keep positioning
+.garden-font {
+	font-size: 18px;
+}
+
+// makes an object unselectable
+.no-select {
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+}

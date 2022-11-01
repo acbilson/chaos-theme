@@ -11,16 +11,14 @@
   {{- $length = "long" -}}
 {{- end -}}
 
-<div class="notice notice--is-{{$length}}">
-  <hr class="notice__top"/>
-  <p class="notice__header">{{$icon}}</p>
-  <p class="notice__text">{{- .Inner -}}</p>
+<div class="notice">
+  <p>{{$icon}}</p>
+  <p>{{- .Inner -}}</p>
   {{- if ne $name "" -}}
     {{- if ne $src "" -}}
-    <p class="notice__ref"><a href="{{$src}}">{{- $name -}}</a></p>
+    <p><a href="{{$src}}">{{- $name -}}</a></p>
     {{- else -}}
-    <p class="notice__ref">{{- $name -}}</p>
+    <p>{{- $name -}}</p>
     {{- end -}}
   {{- end -}}
-  <hr class="notice__bottom"/>
 </div>

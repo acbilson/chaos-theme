@@ -1,0 +1,201 @@
+.outref {
+	border-bottom: 1px solid var(--color-stroke);
+}
+
+.poetry {
+	width: fit-content;
+	h3 {
+		text-align: center;
+	}
+	p {
+		font-style: italic;
+		text-align: center;
+	}
+}
+
+// for styles page
+.style-circles {
+	li {
+		border: 1px solid black;
+		border-radius: 50%;
+		width: 100px;
+		height: 100px;
+		margin-left: -25px;
+		margin-right: -25px;
+	}
+	[title="primary"] {
+		background-color: var(--color-primary);
+	}
+	[title="secondary"] {
+		background-color: var(--color-secondary);
+	}
+	[title="tertiary"] {
+		background-color: var(--color-tertiary);
+	}
+	[title="stroke"] {
+		background-color: var(--color-stroke);
+	}
+}
+
+// for the todderish page
+.vocab {
+	h5 {
+		display: inline;
+		font-weight: 400;
+	}
+	.term {
+		font-variant: small-caps;
+	}
+	.example {
+		font-style: italic;
+	}
+	p:last-of-type {
+		margin-left: 1ch;
+	}
+}
+
+// comes from Hugo toc
+#TableOfContents {
+	width: fit-content;
+	margin-left: auto;
+	margin-right: auto;
+	> ul {
+		list-style-type: upper-roman;
+		li > ul {
+			list-style-type: upper-alpha;
+			li > ul {
+				list-style-type: lower-roman;
+				li > ul {
+					list-style-type: lower-alpha;
+				}
+			}
+		}
+	}
+}
+
+.notice {
+	width: fit-content;
+	border-top: calc(var(--border-size) / 2) solid var(--color-stroke);
+	border-bottom: var(--border-size) solid var(--color-stroke);
+	padding-left: 1ch;
+
+	p:first-of-type {
+		text-align: center;
+		font-size: var(--step-3);
+	}
+	p:last-of-type {
+		text-align: center;
+	}
+}
+
+.portrait {
+	margin-left: auto;
+	margin-right: auto;
+	// overrides the fit-content default
+	width: initial;
+	> img {
+		border-radius: 50%;
+	}
+}
+
+// a network diagram node
+.diagram-node {
+	> circle {
+		stroke: var(--color-stroke);
+	}
+	> a > text {
+		font-size: var(--step--2);
+	}
+}
+
+// the lines between nodes
+.diagram-link {
+	stroke: var(--color-stroke);
+}
+
+// used on resumé page
+table.two-column {
+	tr,
+	td {
+		width: 50%;
+	}
+}
+
+// used on resumé page
+.timeline {
+	h5 {
+		text-align: center;
+	}
+	ul {
+		@extend .flow-s;
+	}
+	.quote {
+		text-align: center;
+	}
+}
+
+.tags {
+	display: flex;
+	flex-wrap: wrap;
+	column-gap: 1em;
+
+	li {
+		width: 17ch;
+		white-space: nowrap;
+		overflow: hidden;
+	}
+}
+
+.navigation {
+	background-color: var(--color-tertiary);
+	padding-bottom: 0.5em;
+	a,
+	select {
+		color: var(--color-secondary);
+		text-decoration: none;
+	}
+}
+
+.credits {
+	background-color: var(--color-tertiary);
+	padding-top: 0.5em;
+	* {
+		color: var(--color-secondary);
+	}
+}
+
+.card {
+	border-width: 0.25em;
+	border-style: double;
+	border-color: var(--color-stroke);
+	border-radius: var(--radius);
+	width: fit-content;
+	padding-top: var(--flow-space, 1em);
+	padding-bottom: var(--flow-space, 1em);
+}
+
+.previous-cards {
+	background-color: var(--color-tertiary);
+	border-radius: var(--radius);
+	padding-top: var(--flow-space, 1em);
+	padding-bottom: var(--flow-space, 1em);
+	> :not(button) {
+		background-color: var(--color-secondary);
+	}
+
+	> button {
+		@extend .invert-color;
+	}
+}
+
+.filter-wide {
+	li {
+		@extend .spread-btwn;
+	}
+}
+
+.filter-narrow {
+	li {
+		@extend .spread-down;
+	}
+}

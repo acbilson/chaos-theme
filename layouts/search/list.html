@@ -3,25 +3,21 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="{{ .Site.Params.defaultColorMode }}">
 {{ partialCached "head.html" . }}
-<body class="container">
+<body class="flow-l">
   {{ partialCached "nav-bar.html" . }}
 
-  <section class="container-full">
-  <div class="search-bar">
+  <article class="wrapper flow-m">
   {{ partial "search-form.html" . }}
-  </div>
 
-  <ul id="results">
+  <ul id="results" class="flow-s" role="list">
       <li>
           Enter a keyword above to search this site.
 
-          <p>
-          Kudos to Victoria Drake for the <a href="https://victoria.dev/blog/add-search-to-hugo-static-sites-with-lunr/">help</a>!
-          </p>
       </li>
   </ul>
+	<p>Kudos to Victoria Drake for the <a href="https://victoria.dev/blog/add-search-to-hugo-static-sites-with-lunr/">help</a>!</p>
   {{ partial "search-index.html" . }}
-  </section>
+  </article>
   {{ partialCached "foot.html" . }}
 </body>
 <script src="{{ $navbarjs.Permalink }}"></script>

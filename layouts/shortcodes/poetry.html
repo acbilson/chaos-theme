@@ -1,8 +1,7 @@
 {{- $title := .Get "title" -}}
 {{- $src := .Get "src" -}}
-<div class="poetry">
-  {{- with $title -}}<h3 class="poetry__title">{{- . -}}</h3>{{- end -}}
-  <div class="poetry__content">
+<div class="poetry flow-s">
+  {{- with $title -}}<h3>{{- . -}}</h3>{{- end -}}
     {{- $lines := split .Inner "\n" -}}
     {{- range $lines -}}
       {{- if ne . "" -}}
@@ -12,5 +11,4 @@
     {{- with $src -}}
       <p>- ({{- . -}})</p>
     {{- end -}}
-  </div>
 </div>

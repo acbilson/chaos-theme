@@ -1,6 +1,6 @@
 {{- $title := .Title -}}{{- if eq $title "" -}}{{- $title = humanize .File.BaseFileName -}}{{- end -}}
-<article class="art-card">
-  <h2 class="art-card__title"><a class="art-card__link" href="{{ .Permalink }}">{{- $title -}}</a></h2>
-  <p class="art-card__content">{{- .Content -}}</p>
+<article class="flow-m">
+  <h2><a href="{{ .Permalink }}">{{- $title -}}</a></h2>
+  {{- .Content -}}
   {{ partial "citation.html" . }}
 </article>

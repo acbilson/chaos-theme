@@ -2,21 +2,17 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="{{ .Site.Params.defaultColorMode }}">
 {{ partialCached "head.html" . }}
-<body class="container">
+<body class="flow-l">
     {{ partialCached "nav-bar.html" . }}
 
-    <section class="container-center">
-      <article class="log-entry h-entry">
-	<div class="log-entry__content">{{- .Content -}}</div>
+	<article class="wrapper flow-m e-content">
+	{{- .Content -}}
 
 	{{ partial "comments.html" . }}
 	{{ partial "attributes.html" . }}
-      </article>
+	</article>
 
-		<app-panel panel-type="log"><p>Not displaying for some reason</p></app-panel>
-    </section>
-
-    {{ partialCached "foot.html" . }}
-  {{ partialCached "scripts.html" . }}
+{{ partialCached "foot.html" . }}
+{{ partialCached "scripts.html" . }}
 </body>
 </html>

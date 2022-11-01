@@ -1,32 +1,298 @@
-/* Base styles */
+:root {
+	/* @link https://utopia.fyi/type/calculator?c=320,16,1.2,1440,24,1.25,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l */
 
-@import "./base/_vars.scss";
-@import "./base/_mixins.scss";
-@import "./base/_base.scss";
-@import "./base/_fonts.scss";
-@import "./base/_layout.scss";
-@import "./base/_typography.scss";
-@import "./base/_state.scss";
+	// font steps
+	--step--2: clamp(0.69rem, calc(0.62rem + 0.38vw), 0.96rem);
+	--step--1: clamp(0.83rem, calc(0.73rem + 0.52vw), 1.2rem);
+	--step-0: clamp(1rem, calc(0.86rem + 0.71vw), 1.5rem);
+	--step-1: clamp(1.2rem, calc(1.01rem + 0.96vw), 1.88rem);
+	--step-2: clamp(1.44rem, calc(1.18rem + 1.29vw), 2.34rem);
+	--step-3: clamp(1.73rem, calc(1.38rem + 1.72vw), 2.93rem);
+	--step-4: clamp(2.07rem, calc(1.62rem + 2.27vw), 3.66rem);
+	--step-5: clamp(2.49rem, calc(1.89rem + 2.98vw), 4.58rem);
 
-/* Base Component styles */
-@import "./components/_about.scss";
-@import "./components/_basic.scss";
-@import "./components/_home.scss";
-@import "./components/_footer.scss";
-@import "./components/_misc.scss";
-@import "./components/_nav-bar.scss";
-@import "./components/_shortcodes.scss";
-@import "./components/_style.scss";
-@import "./components/attributes.scss";
-@import "./components/node.scss";
-@import "./components/search.scss";
+	// spacing steps
+	--space-3xs: clamp(0.25rem, calc(0.21rem + 0.18vw), 0.38rem);
+	--space-2xs: clamp(0.5rem, calc(0.43rem + 0.36vw), 0.75rem);
+	--space-xs: clamp(0.75rem, calc(0.64rem + 0.54vw), 1.13rem);
+	--space-s: clamp(1rem, calc(0.86rem + 0.71vw), 1.5rem);
+	--space-m: clamp(1.5rem, calc(1.29rem + 1.07vw), 2.25rem);
+	--space-l: clamp(2rem, calc(1.71rem + 1.43vw), 3rem);
+	--space-xl: clamp(3rem, calc(2.57rem + 2.14vw), 4.5rem);
+	--space-2xl: clamp(4rem, calc(3.43rem + 2.86vw), 6rem);
+	--space-3xl: clamp(6rem, calc(5.14rem + 4.29vw), 9rem);
 
-/* Entries Component styles */
-@import "./components/art.scss";
-@import "./components/backref.scss";
-@import "./components/bible.scss";
-@import "./components/garden.scss";
-@import "./components/log.scss";
-@import "./components/plant.scss";
-@import "./components/stone.scss";
-@import "./components/terms.scss";
+	// character steps
+	--char-0: 60ch;
+	--char-1: 35ch;
+	--char-2: 30ch;
+	--char-3: 25ch;
+	--char-4: 20ch;
+	--char-5: 15ch;
+
+	// other
+	--radius: 1rem;
+	--flow-space: 1em;
+	--border-size: 0.125rem;
+}
+
+:root[theme="void"] {
+	--color-eggshell: rgb(255, 255, 252);
+	--color-magenta: rgb(127, 90, 240);
+	--color-pitch-black: rgb(1, 1, 1);
+	--color-slate: rgb(148, 161, 178);
+
+	--color-primary: var(--color-eggshell);
+	--color-secondary: var(--color-pitch-black);
+	--color-tertiary: var(--color-slate);
+	--color-stroke: var(--color-magenta);
+}
+
+:root[theme="fall"] {
+	--color-pumpkin-orange: rgb(255, 107, 18);
+	--color-navy-blue: navy;
+	--color-cream: rgb(245, 240, 196);
+	--color-maroon: maroon;
+
+	--color-primary: var(--color-pumpkin-orange);
+	--color-secondary: var(--color-cream);
+	--color-tertiary: var(--color-navy-blue);
+	--color-stroke: var(--color-maroon);
+}
+
+:root[theme="jungle"] {
+	--color-forest-green: rgb(0, 70, 67);
+	--color-teal: rgb(171, 209, 198);
+	--color-faded-orange: rgb(249, 188, 96);
+	--color-eggshell: rgb(255, 255, 252);
+
+	--color-primary: var(--color-forest-green);
+	--color-secondary: var(--color-eggshell);
+	--color-tertiary: var(--color-teal);
+	--color-stroke: var(--color-faded-orange);
+}
+
+:root[theme="minimal"] {
+	// colors
+	--color-eggshell: rgb(255, 255, 252);
+	--color-midnight: rgb(22, 22, 26);
+	--color-royalty: rgb(39, 35, 67);
+	--color-navy-blue: navy;
+
+	--color-primary: var(--color-royalty);
+	--color-secondary: var(--color-eggshell);
+	--color-tertiary: var(--color-navy-blue);
+	--color-stroke: var(--color-midnight);
+}
+
+/* reset.css @link https://github.com/hankchizljaw/modern-css-reset/blob/master/src/reset.css */
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+figure,
+blockquote,
+dl,
+dd {
+	margin: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role="list"],
+ol[role="list"] {
+	list-style: none;
+	padding-left: 0;
+}
+
+/* Set core root defaults */
+html:focus-within {
+	scroll-behavior: smooth;
+}
+
+/* Set core body defaults */
+body {
+	min-height: 100vh;
+	text-rendering: optimizeSpeed;
+	line-height: 1.5;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+	text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+	max-width: 100%;
+	display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+	font: inherit;
+}
+
+/* Remove all animations and transitions for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+	html:focus-within {
+		scroll-behavior: auto;
+	}
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+}
+
+/* my baseline */
+
+* {
+	font-size: var(--step-0);
+	color: var(--color-primary);
+	border-color: var(--color-stroke);
+}
+
+body {
+	background-color: var(--color-secondary);
+}
+
+input[type="submit"],
+button,
+select {
+	color: var(--color-secondary);
+	background-color: var(--color-tertiary);
+	border-radius: 0.25rem;
+}
+
+/* generates headers on a scale */
+@for $i from 1 through 6 {
+	h#{6 - $i} {
+		font-size: var(--step-#{$i});
+		line-height: var(--step-#{$i});
+		/* sets headers to a pleasing width */
+		max-width: var(--char-#{$i});
+		> a {
+			font-size: inherit;
+		}
+		/* hides local nav header links */
+		> a[href^="#"] {
+			display: none;
+		}
+	}
+}
+
+/* gives paragraphs default spacing */
+p + p {
+	margin-top: var(--space-2xs);
+}
+
+/* makes abbreviations stand out */
+abbr {
+	text-decoration: underline;
+	text-decoration-style: dotted;
+}
+
+/* makes text pleasingly wide */
+p,
+li,
+ul,
+pre,
+figcaption {
+	max-width: var(--char-0);
+}
+
+/* ensures nav contents don't stretch container */
+nav {
+	> * {
+		margin: 0;
+	}
+}
+
+/* ensures code blocks horizontally scroll and keep their default colors */
+pre {
+	overflow-x: auto;
+	padding-left: 1ch;
+	padding-right: 1ch;
+	> * {
+		color: unset;
+	}
+}
+
+:focus {
+	outline: 3px dotted var(--color-primary);
+	outline-offset: 0.2rem;
+}
+
+/* defines a better meter */
+meter::-webkit-meter-optimum-value {
+	box-shadow: 0 5px 5px -5px #999 inset;
+	background-image: linear-gradient(
+		90deg,
+		var(--color-secondary),
+		var(--color-primary)
+	);
+	background-size: 100% 100%;
+}
+
+/* gives some shape to tables */
+table {
+	border: var(--border-size) solid var(--color-stroke);
+	border-collapse: collapse;
+	border-spacing: 0;
+
+	th {
+		border: var(--border-size) solid var(--color-stroke);
+	}
+
+	td {
+		border: calc(var(--border-size) / 3) solid var(--color-stroke);
+	}
+
+	td,
+	th {
+		padding: 0.75rem;
+	}
+}
+
+// makes block quotes stand out a little
+blockquote {
+	padding-left: 1ch;
+}
+
+// makes images more beautiful
+img {
+	border-radius: var(--radius);
+}
+
+figure {
+	width: fit-content;
+
+	figcaption {
+		font-style: italic;
+		text-align: center;
+	}
+}
+
+@import "./utilities.scss";
+@import "./exceptions.scss";
+@import "./blocks.scss";
