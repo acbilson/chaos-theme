@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="{{ .Site.Params.defaultColorMode }}">
 {{ partialCached "head.html" . }}
-<body class="container">
+<body class="flow-l">
   {{ partialCached "nav-bar.html" . }}
 
   {{- $title := .Title -}}{{- if eq $title "" -}}{{- $title = humanize .File.BaseFileName -}}{{- end -}}
-  <section class="container-center">
-  <article class="basic h-entry">
-    <h1 class="basic__title p-name">{{ $title }}</h1>
+  <article class="wrapper flow-m e-content">
+    <h1 id="jump">{{ $title }}</h1>
     <a class="u-url" href="{{ .Permalink }}" hidden></a>
 
     <!-- Post Table of Contents -->
@@ -18,11 +17,8 @@
       </div>
     {{- end }}
 
-    <div class="basic__content e-content">
-        {{ .Content }}
-    </div>
+  {{ .Content }}
   </article>
-  </section>
   {{ partialCached "foot.html" . }}
   {{ partialCached "scripts.html" . }}
 </body>

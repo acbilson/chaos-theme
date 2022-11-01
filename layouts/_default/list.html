@@ -1,28 +1,23 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="{{ .Site.Params.defaultColorMode }}">
 {{ partialCached "head.html" . }}
-<body class="container">
+<body class="flow-l">
   {{ partialCached "nav-bar.html" . }}
 
-  {{- $class := "basic-page" -}}{{- if .IsHome -}}{{- $class = "home" -}}{{- end -}}
-  <section class="{{ $class }} container-center">
+  <article class="wrapper flow-m">
   {{- with .Title -}}
-    <h1 class="basic-page__title">{{- . -}}</h1>
+    <h1 id="jump">{{- . -}}</h1>
   {{- end -}}
   {{- with .Content -}}
-    <div class="home-page__content">
-		 <p>{{- . -}}</p>
-	 </div>
+	 {{- . -}}
   {{- end -}}
 
   {{- if not .IsHome -}}
-    <div class="basic-page__content">
     {{- range .Pages -}}
       {{- .Render "li" -}}
     {{- end -}}
-    </div>
   {{- end -}}
-  </section>
+  </article>
 
   {{ partialCached "foot.html" . }}
   {{ partialCached "scripts.html" . }}
