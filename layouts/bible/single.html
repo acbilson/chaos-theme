@@ -8,8 +8,8 @@
 
   <article class="wrapper flow-m e-content">
       <h1 id="jump">{{- $title -}}</h1>
+      <h3>({{- $version -}}, {{ .Params.ref }})</h3>
       <a href="{{ .Permalink }}" hidden></a>
-      <h3>(<span>{{- $version -}}</span>, {{ .Params.ref }})</h3>
       {{- .Content -}}
     </article>
   {{ partial "backlink.html" . }}
