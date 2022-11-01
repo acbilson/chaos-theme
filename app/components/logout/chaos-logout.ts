@@ -6,11 +6,13 @@ export class ChaosLogout extends HTMLElement {
 
 	onClick(e: MouseEvent) {
 		e.preventDefault();
+		e.stopPropagation();
 		AuthService.unauthenticate();
 	}
 
 	constructor() {
 		super();
+		this.innerHTML = `<button type="button">Logout</button>`;
 	}
 
 	connectedCallback() {
@@ -18,8 +20,8 @@ export class ChaosLogout extends HTMLElement {
 			"chaos-logout",
 			(isAuth) => {
 				this.innerHTML = isAuth
-					? `<button type="button">Logout</button>`
-					: `<button type="button" hidden>Logout</button>`;
+					? `<button type="button" style="width: 100%;">Logout</button>`
+					: `<button type="button" style="width: 100%;" hidden>Logout</button>`;
 			}
 		);
 		this.addEventListener("click", (e: MouseEvent) => this.onClick(e), false);

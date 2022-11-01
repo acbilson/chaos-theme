@@ -3,11 +3,6 @@ import store from "../../state/index";
 
 export class AuthService {
 	private _subscription: string;
-	private _isAuthorized: boolean;
-
-	public get isAuthorized(): boolean {
-		return this._isAuthorized;
-	}
 
 	public get token(): string {
 		return store.token;
@@ -27,6 +22,7 @@ export class AuthService {
 
 	public unauthenticate() {
 		sessionStorage.removeItem("token");
+		console.log({ token: sessionStorage.getItem("token") });
 		store.isAuthorized$.value = false;
 	}
 }

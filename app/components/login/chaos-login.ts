@@ -15,6 +15,7 @@ export class ChaosLogin extends HTMLElement {
 
 	onClick(e: MouseEvent) {
 		e.preventDefault();
+		e.stopPropagation();
 		AuthService.authenticate(this.username?.value, this.password?.value).then(
 			(msg) => (this.errors.innerText = msg)
 		);
@@ -37,7 +38,9 @@ export class ChaosLogin extends HTMLElement {
 				type="password"
 			/>
 			<button type="button">Login</button>
-			<label id="errors"></label>`;
+			<chaos-logout><p>No logout</p></chaos-logout>
+			<label id="errors"></label>
+			`;
 	}
 
 	constructor() {
