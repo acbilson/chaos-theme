@@ -1,5 +1,5 @@
 import { authenticate, authorized } from "../../shared/operators";
-import authstore from "../../state/index";
+import store from "../../state/index";
 
 export class AuthService {
 	private _subscription: string;
@@ -10,13 +10,13 @@ export class AuthService {
 	}
 
 	public get token(): string {
-		return authstore.token;
+		return store.token;
 	}
 
 	public authenticate(username: string, password: string): Promise<string> {
 		return authenticate(username, password).then(
 			(isAuthenticated) => {
-				authstore.isAuthorized$.value = isAuthenticated;
+				store.isAuthorized$.value = isAuthenticated;
 				return "";
 			},
 			(err) => {
@@ -27,6 +27,6 @@ export class AuthService {
 
 	public unauthenticate() {
 		sessionStorage.removeItem("token");
-		authstore.isAuthorized$.value = false;
+		store.isAuthorized$.value = false;
 	}
 }

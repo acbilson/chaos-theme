@@ -1,60 +1,18 @@
 import { authorized } from "../shared/operators";
 import { BaseUrls } from "../shared/base-urls";
-
-export class Notified {
-	private _subscribers: Map<string, Function> = new Map<string, Function>();
-
-	subscribe(subscriber: string, callback: Function): string {
-		const sub = `${subscriber}-${Math.random()}`;
-		this._subscribers.set(sub, callback);
-		return sub;
-	}
-
-	unsubscribe(sub: string) {
-		delete this._subscribers[sub];
-	}
-
-	notify() {
-		this._subscribers.forEach((callback, sub) => callback());
-	}
-}
-
-export class Observed<T> {
-	private _subscribers: Map<string, Function> = new Map<string, Function>();
-	private _value: T;
-
-	public get value(): T {
-		return this._value;
-	}
-
-	public set value(v: T) {
-		this._value = v;
-		this.notify();
-	}
-
-	subscribe(subscriber: string, callback: Function): string {
-		const sub = `${subscriber}-${Math.random()}`;
-		this._subscribers.set(sub, callback);
-		return sub;
-	}
-
-	unsubscribe(sub: string) {
-		delete this._subscribers[sub];
-	}
-
-	notify() {
-		this._subscribers.forEach((callback, sub) => callback(this._value));
-	}
-}
+import { Notified } from "./notified";
+import { Observed } from "./observed";
 
 export class Store {
 	// authentication
 	public isAuthorized$ = new Observed<boolean>();
+
+	// filtering
+	public onFieldFilter$ = new Notified();
+
 	public get token(): string {
 		return sessionStorage.getItem("token");
 	}
-
-	public onFieldFilter$ = new Notified();
 
 	constructor() {
 		// page load sets initial authorized state

@@ -1,5 +1,5 @@
 import AuthService from "../../services/auth-service/index";
-import authstore from "../../state/index";
+import store from "../../state/index";
 
 export class ChaosLogout extends HTMLElement {
 	private _subscription: string;
@@ -14,7 +14,7 @@ export class ChaosLogout extends HTMLElement {
 	}
 
 	connectedCallback() {
-		this._subscription = authstore.isAuthorized$.subscribe(
+		this._subscription = store.isAuthorized$.subscribe(
 			"chaos-logout",
 			(isAuth) => {
 				this.innerHTML = isAuth
@@ -26,7 +26,7 @@ export class ChaosLogout extends HTMLElement {
 	}
 
 	disconnectedCallback() {
-		authstore.isAuthorized$.unsubscribe(this._subscription);
+		store.isAuthorized$.unsubscribe(this._subscription);
 		this.removeEventListener(
 			"click",
 			(e: MouseEvent) => this.onClick(e),
