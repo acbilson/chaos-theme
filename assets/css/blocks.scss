@@ -1,3 +1,20 @@
+// for the todderish page
+.vocab {
+	h5 {
+		display: inline;
+		font-weight: 400;
+	}
+	.term {
+		font-variant: small-caps;
+	}
+	.example {
+		font-style: italic;
+	}
+	p:last-of-type {
+		margin-left: 1ch;
+	}
+}
+
 // comes from Hugo toc
 #TableOfContents {
 	width: fit-content;
