@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="{{ .Site.Params.defaultColorMode }}">
 {{ partialCached "head.html" . }}
-<body class="container">
+<body class="flow-l">
   {{ partialCached "nav-bar.html" . }}
 
-  <section class="garden-page container-full">
-	  <div class="garden-page__content">{{ .Content }}</div>
+  <article class="wrapper flow-m">
+	  {{ .Content }}
 
     <!-- for debug purpose only -->
     {{- $stroke := "none" -}}
 
     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0, 0, 1275, 1200">
-      <image class="garden-page__background" width="1275" height="1200" href="/data/img/garden-background.png"></image>
+      <image class="no-select" width="1275" height="1200" href="/data/img/garden-background.png"></image>
 
     {{- range .Pages -}}
       {{- $title := .Title -}}{{- if eq $title "" -}}{{- $title = humanize .File.BaseFileName -}}{{- end -}}
@@ -39,10 +39,9 @@
           fill="transparent"
         />
       {{- end -}}
-      <a class="garden-page__link" href="{{ .Permalink }}">
+      <a href="{{ .Permalink }}">
       {{- if eq $vertical true -}}
         <rect
-	  class="garden-page__box"
           x="{{ sub $startX (div $bend 2) }}"
           y="{{ sub $startY (div $bend 2) }}"
           width="{{ add $bend $bend }}"
@@ -52,7 +51,6 @@
         />
       {{- else -}}
         <rect
-	  class="garden-page__box"
           x="{{ sub $startX (div $bend 2) }}"
           y="{{ sub $startY (mul $bend 1.5) }}"
           width="{{ add (add $step $step) $bend }}"
@@ -62,7 +60,7 @@
         />
       {{- end -}}
         <text>
-          <textPath xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#{{- .File.BaseFileName -}}">
+          <textPath class="garden-font" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#{{- .File.BaseFileName -}}">
             {{ $title }}
           </textPath>
         </text>
@@ -70,7 +68,7 @@
     {{- end -}}
   {{- end -}}
     </svg>
-  </section>
+  </article>
   {{ partialCached "foot.html" . }}
   {{ partialCached "scripts.html" . }}
 </body>

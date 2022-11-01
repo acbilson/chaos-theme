@@ -19,7 +19,7 @@
 
 // reduces spread amount
 .narrow-spread {
-	column-gap: .25em;
+	column-gap: 0.25em;
 }
 
 // removes link underline
@@ -31,4 +31,16 @@ a.no-underline {
 .invert-color {
 	background-color: var(--color-primary);
 	color: var(--color-secondary);
+}
+
+// fixes font size to keep positioning
+.garden-font {
+	font-size: 18px;
+}
+
+// makes an object unselectable
+.no-select {
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
 }
