@@ -1,4 +1,4 @@
-import store from "../state/index";
+import store from "../../state/index";
 
 // resizes a list where each list item has two children
 export class ChaosResizer extends HTMLElement {

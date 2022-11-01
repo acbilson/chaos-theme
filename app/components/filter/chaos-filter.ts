@@ -1,4 +1,4 @@
-import store from "../state/index";
+import store from "../../state/index";
 
 interface Filter {
 	key: string;
