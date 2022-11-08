@@ -1,10 +1,22 @@
 <footer class="wrapper credits">
-	<ul class="spread" role="list">
-		<li>Built with <a href="https://gohugo.io">Hugo</a></li>
-		<li>Interactive with <a href="https://lit.dev">Lit</a></li>
-		<li>Encrypted by <a href="https://letsencrypt.org">Let's Encrypt</a></li>
-		<li>Deployed with <a href="https://github.com/adnanh/webhook">webhook</a></li>
-		<li>Monitored with <a href="https://updown.io">updown.io</a></li>
-	</ul>
+	<div class="spread">
+		<div>
+			<h4>Links</h4>
+			<ul class="spread" role="list">
+				{{- range sort .Site.Menus.main -}}
+				<li><a href="{{ .URL }}">{{- .Name -}}</a></li>
+				{{- end -}}
+			</ul>
+		</div>
+		<div>
+			<h4>Tools</h4>
+			<ul class="spread" role="list">
+				<li>Built with <a href="https://gohugo.io">Hugo</a></li>
+				<li>Encrypted by <a href="https://letsencrypt.org">Let's Encrypt</a></li>
+				<li>Deployed with <a href="https://github.com/adnanh/webhook">webhook</a></li>
+				<li>Monitored with <a href="https://updown.io">updown.io</a></li>
+			</ul>
+		</div>
+	<div>
 	<p class="copyright">&#169; 2020 Alex Bilson</p>
 </footer>
