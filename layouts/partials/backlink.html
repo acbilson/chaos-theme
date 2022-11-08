@@ -6,16 +6,14 @@
 {{- range $backlink, $backrefs := $response.results -}}
   {{- if eq $path $backlink -}}
   <h3>Backlinks</h3>
-  <div class="backref-card">
-    {{- range $backrefs -}}
-    <div class="backref-card__card">
-      <div class="backref-card__attr">
-        <a class="backref-card__link" href="{{ $.Site.BaseURL }}{{ . }}/#{{ $anchor }}">⚓</a>
-        <span class="backref-card__title">{{- humanize (path.Base .) -}}</span>
-      </div>
-    </div>
-    {{- end -}}
-  </div>
+ {{- range $backrefs -}}
+<div class="wrapper wrapper-no-center | card">
+	<ul class="spread narrow-spread" role="list">
+		<li><a class="no-underline" href="{{ $.Site.BaseURL }}{{ . }}/#{{ $anchor }}">⚓</a></li>
+		<li>{{- humanize (path.Base .) -}}</li>
+	</ul>
+</div>
+ {{- end -}}
   {{- end -}}
 {{- end -}}
 
