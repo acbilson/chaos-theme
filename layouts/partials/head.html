@@ -24,6 +24,9 @@
   <!-- adds publish endpoint -->
   <link rel="publish" href="https://pub.alexbilson.dev">
 
+  <!-- adds reference back to Mastodon -->
+<a rel="me" href="https://indieweb.social/@acbilson">Mastodon</a>
+
   <!-- adds supported RSS feeds -->
   {{ range .AlternativeOutputFormats -}}
   <link rel="{{ .Rel }}" type="{{ .MediaType.Type | html }}" href="{{ $.Site.BaseURL }}/logs/index.xml" title="{{ $.Site.Title }} - Ship's Log" />
