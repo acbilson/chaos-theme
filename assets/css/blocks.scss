@@ -1,3 +1,18 @@
+.panel-option {
+	width: 50%;
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;
+	label {
+		white-space: nowrap;
+		padding-right: 3ch;
+	}
+	.required {
+		color: var(--color-stroke);
+		margin-left: 3ch;
+	}
+}
+
 .outref {
 	border-bottom: 1px solid var(--color-stroke);
 }

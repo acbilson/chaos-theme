@@ -294,6 +294,12 @@ figure {
 	}
 }
 
+// textareas should fill their container by default
+textarea {
+	width: 100%;
+	height: -webkit-fill-available;
+}
+
 @import "./utilities.scss";
 @import "./exceptions.scss";
 @import "./blocks.scss";

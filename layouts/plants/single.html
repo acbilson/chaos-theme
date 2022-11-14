@@ -14,44 +14,44 @@
 		{{ partial "comments.html" . }}
 		{{ partial "attributes.html" . }}
 	</article>
-		<app-panel
-			><div slot="options">
-				<app-panel-option
-					key="date"
-					label="Date"
-					type="text"
-					readonly="true"
-				></app-panel-option>
-				<app-panel-option
-					key="path"
-					label="File Path"
-					type="text"
-					required="true"
-				></app-panel-option>
-				<app-panel-option
-					key="author"
-					label="Author"
-					type="text"
-					required="true"
-				></app-panel-option>
-				<app-panel-option
-					key="tags"
-					label="Tags"
-					type="list"
-					required="true"
-				></app-panel-option>
-				<app-panel-option
-					key="epistemic"
-					label="Epistemic"
-					type="text"
-					required="true"
-				></app-panel-option>
-				<app-panel-option
-					key="in-reply-to"
-					label="In Reply To"
-					type="text"
-				></app-panel-option></div
-		></app-panel>
+		<chaos-panel data-panel-type="plant"
+			><ul role="list">
+				<chaos-panel-option
+					data-key="date"
+					data-label="Date"
+					data-type="text"
+					data-readonly="true"
+				></chaos-panel-option>
+				<chaos-panel-option
+					data-key="path"
+					data-label="File Path"
+					data-type="text"
+					data-required="true"
+				></chaos-panel-option>
+				<chaos-panel-option
+					data-key="author"
+					data-label="Author"
+					data-type="text"
+					data-required="true"
+				></chaos-panel-option>
+				<chaos-panel-option
+					data-key="tags"
+					data-label="Tags"
+					data-type="list"
+					data-required="true"
+				></chaos-panel-option>
+				<chaos-panel-option
+					data-key="epistemic"
+					data-label="Epistemic"
+					data-type="text"
+					data-required="true"
+				></chaos-panel-option>
+				<chaos-panel-option
+					data-key="in-reply-to"
+					data-label="In Reply To"
+					data-type="text"
+				></chaos-panel-option></ul
+		></chaos-panel>
 {{ partialCached "foot.html" . }}
 {{ partialCached "scripts.html" . }}
 </body>
