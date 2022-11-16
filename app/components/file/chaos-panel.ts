@@ -222,7 +222,7 @@ export class ChaosPanel extends HTMLElement {
 			.join("");
 
 		return `
-			<form>
+			<form class="wrapper">
 				<fieldset id="panel-buttons">
 					${panelButtons}
 				</fieldset>

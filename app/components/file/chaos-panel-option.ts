@@ -37,12 +37,7 @@ export class ChaosPanelOption extends HTMLElement {
 
 	get type(): PanelOptionType {
 		const type = this.getAttribute("data-type");
-		switch (type) {
-			case PanelOptionType.TEXT:
-			case PanelOptionType.LIST:
-			default:
-				return PanelOptionType.TEXT;
-		}
+		return PanelOptionType[type];
 	}
 
 	valueByType(): string | string[] {
@@ -67,34 +62,17 @@ export class ChaosPanelOption extends HTMLElement {
 		};
 	}
 
-	static styles = `
-			.panel-label {
-				white-space: nowrap;
-				margin-right: 12px;
-			}
-			.panel-input {
-				width: 100%;
-			}
-			.required {
-				color: red;
-				margin-left: 12px;
-			}
-		`;
-
 	render() {
-		const requiredEl = this.required
-			? `<span class="required">(required)</span>`
-			: "";
 		this.innerHTML = `
-			<li class="panel-option">
+			<li class="panel-option spread-btwn${this.required ? " required" : ""}">
 				<label for="${this.label}">${this.label}</label>
+				<span>${this.required ? "(required)" : ""}
 				<input
-					name="${this.label}"
-					type="${this.type}"
-					value="${this.value}"
+					${this.label ? 'name="this.label"' : ""}
+					${this.type ? 'type="this.type"' : ""}
+					${this.value ? 'value="this.value"' : ""}
 					${this.readonly ? "disabled" : ""}
-				/>
-				${requiredEl}
+				/></span>
 			</li>
 		`;
 	}
