@@ -1,4 +1,7 @@
-import { ChangeOption, PanelOptionType } from "./models";
+import {
+	ChangeOption,
+	PanelOptionType,
+} from "../../services/publish-service/models";
 
 export class ChaosPanelOption extends HTMLElement {
 	get key(): string {
