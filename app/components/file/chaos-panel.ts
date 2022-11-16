@@ -19,14 +19,31 @@ export class ChaosPanel extends HTMLElement {
 	private _subscription: string;
 	private _typesWithOptions = [PanelType.PLANT, PanelType.STONE];
 	private _initialMarkup;
-	isNew = true;
+	_isNew = true;
+
+	get isNew(): boolean {
+		return this._isNew;
+	}
+
+	set isNew(v: boolean) {
+		this._isNew = v;
+		const editBtn = this.getButton(PanelStatus.EDITING);
+		const createBtn = this.getButton(PanelStatus.CREATING);
+		if (v) {
+			editBtn.classList.remove("selected-panel-type");
+			createBtn.classList.add("selected-panel-type");
+		} else {
+			editBtn.classList.add("selected-panel-type");
+			createBtn.classList.remove("selected-panel-type");
+		}
+	}
 
 	get panelType(): PanelType {
 		return <PanelType>this.getAttribute("data-panel-type");
 	}
 
-	get saveBtn(): HTMLButtonElement {
-		return <HTMLButtonElement>this.querySelector("button[type='submit']");
+	getButton(status: PanelStatus) {
+		return <HTMLButtonElement>this.querySelector(`button#${status}`);
 	}
 
 	get panelOptions(): ChaosPanelOption[] {
@@ -72,7 +89,7 @@ export class ChaosPanel extends HTMLElement {
 	}
 
 	updateChaosPanelOptions(path: string, frontmatter: object) {
-		if (!this.shouldHaveOptions) return;
+		//if (!this.shouldHaveOptions) return;
 		const options = this.panelOptions;
 		const optionByAttr = (a) =>
 			options.find((x) => x.getAttribute("data-key") === a);
@@ -215,7 +232,7 @@ export class ChaosPanel extends HTMLElement {
 	render() {
 		const panelButtons = Object.keys(PanelStatus)
 			.map((k) => {
-				return `<button id="${k}"
+				return `<button id="${PanelStatus[k]}"
 				${PanelStatus[k] == PanelStatus.SAVING ? 'type="submit" disabled' : ""}
 				>${PanelStatus[k]}</button>`;
 			})
@@ -236,7 +253,7 @@ export class ChaosPanel extends HTMLElement {
 	onButtonClick(e: SubmitEvent) {
 		e.preventDefault();
 		const btn = <HTMLButtonElement>e.submitter;
-		const status = PanelStatus[btn.id];
+		const status = btn.id as PanelStatus;
 		switch (status) {
 			case PanelStatus.CREATING:
 				this.startCreate();
@@ -261,7 +278,7 @@ export class ChaosPanel extends HTMLElement {
 	onKeyUp(e: KeyboardEvent) {
 		e.preventDefault();
 		const el = <HTMLTextAreaElement>e.target;
-		this.saveBtn.disabled = el.value.length <= 0;
+		this.getButton(PanelStatus.SAVING).disabled = el.value.length <= 0;
 	}
 
 	constructor() {
@@ -270,7 +287,6 @@ export class ChaosPanel extends HTMLElement {
 	}
 
 	connectedCallback() {
-		/*
 		this._subscription = store.isAuthorized$.subscribe(
 			"chaos-panel",
 			(isAuth) => {
@@ -281,8 +297,6 @@ export class ChaosPanel extends HTMLElement {
 				}
 			}
 		);
-		*/
-		this.innerHTML = this.render();
 		this.addEventListener("submit", (e) => this.onButtonClick(e));
 		this.addEventListener("keyup", (e) => this.onKeyUp(e));
 	}

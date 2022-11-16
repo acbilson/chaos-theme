@@ -190,6 +190,11 @@ input {
 	padding-left: 1ch;
 }
 
+/*  greys out disabled elements */
+button[disabled] {
+	background-color: grey;
+}
+
 input[readonly],
 input[disabled] {
 	color: grey;
