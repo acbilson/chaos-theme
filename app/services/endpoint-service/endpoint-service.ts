@@ -7,7 +7,7 @@ export class EndpointService {
 	}
 
 	public get publish(): string {
-		return "http://localhost:5000";//this._getUrlFromHead("publish");
+		this._getUrlFromHead("publish");
 	}
 
 	public get auth(): string {
