@@ -21,6 +21,7 @@ export interface ChangeOption {
 export enum PanelStatus {
 	CREATING = "Create",
 	EDITING = "Edit",
+	SAVING = "Save",
 }
 
 export enum PanelOptionType {

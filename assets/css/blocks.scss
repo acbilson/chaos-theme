@@ -1,3 +1,15 @@
+.panel-option {
+	label {
+		white-space: nowrap;
+		padding-right: 3ch;
+	}
+}
+
+.selected-panel-type {
+	outline: 3px dashed var(--color-primary);
+	outline-offset: 0.1rem;
+}
+
 .outref {
 	border-bottom: 1px solid var(--color-stroke);
 }
