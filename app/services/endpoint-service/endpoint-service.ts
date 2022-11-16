@@ -7,7 +7,7 @@ export class EndpointService {
 	}
 
 	public get publish(): string {
-		this._getUrlFromHead("publish");
+		return this._getUrlFromHead("publish");
 	}
 
 	public get auth(): string {
