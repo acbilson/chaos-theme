@@ -83,6 +83,7 @@
 	--color-secondary: var(--color-eggshell);
 	--color-tertiary: var(--color-navy-blue);
 	--color-stroke: var(--color-midnight);
+	//--color-muted: hsl(248°, 31.4%, 60.0%);
 }
 
 /* reset.css @link https://github.com/hankchizljaw/modern-css-reset/blob/master/src/reset.css */
@@ -104,6 +105,7 @@ h5,
 h6,
 p,
 figure,
+fieldset,
 blockquote,
 dl,
 dd {
@@ -182,6 +184,20 @@ select {
 	color: var(--color-secondary);
 	background-color: var(--color-tertiary);
 	border-radius: 0.25rem;
+}
+
+input {
+	padding-left: 1ch;
+}
+
+/*  greys out disabled elements */
+button[disabled] {
+	background-color: grey;
+}
+
+input[readonly],
+input[disabled] {
+	color: grey;
 }
 
 /* generates headers on a scale */
@@ -292,6 +308,26 @@ figure {
 		font-style: italic;
 		text-align: center;
 	}
+}
+
+// textareas should fill their container by default
+textarea {
+	width: 100%;
+	height: -webkit-fill-available;
+}
+
+// a better field set
+fieldset {
+	// unsets min-width to make it play better with sizing
+	min-width: unset;
+	border-color: var(--color-stroke);
+	margin-inline-start: unset;
+	margin-inline-end: unset;
+	padding-block-start: unset;
+	padding-inline-start: unset;
+	padding-inline-end: unset;
+	padding-block-end: unset;
+	border: none;
 }
 
 @import "./utilities.scss";

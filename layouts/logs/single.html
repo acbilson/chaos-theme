@@ -11,6 +11,20 @@
 	{{ partial "comments.html" . }}
 	{{ partial "attributes.html" . }}
 	</article>
+	 <chaos-panel>
+		<chaos-panel-option
+			data-key="date"
+			data-label="Date"
+			data-type="text"
+			data-readonly="true"
+		></chaos-panel-option>
+		<chaos-panel-option
+			data-key="path"
+			data-label="File Path"
+			data-type="text"
+			data-required="true"
+		></chaos-panel-option>
+	 </chaos-panel>
 
 {{ partialCached "foot.html" . }}
 {{ partialCached "scripts.html" . }}
