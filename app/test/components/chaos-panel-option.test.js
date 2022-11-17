@@ -13,6 +13,11 @@ describe("chaos-panel-option", () => {
 		expect(el).to.be.an.instanceOf(ChaosPanelOption);
 	});
 
+	it("renders nothing if not authorized", () => {
+		const el = fixture(`<chaos-panel></chaos-panel>`);
+		expect(el.innerHTML).to.equal("");
+	});
+
 	it("sets props from attrs", () => {
 		const expected = {
 			key: "testkey",

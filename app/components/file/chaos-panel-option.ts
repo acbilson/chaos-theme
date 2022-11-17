@@ -50,7 +50,6 @@ export class ChaosPanelOption extends HTMLElement {
 	}
 
 	valueByType(): string | string[] {
-		console.log(this.type);
 		switch (this.type) {
 			case PanelOptionType.TEXT:
 			default:

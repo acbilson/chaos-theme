@@ -290,6 +290,7 @@ export class ChaosPanel extends HTMLElement {
 	constructor() {
 		super();
 		this._initialMarkup = this.innerHTML;
+		this.innerHTML = "";
 	}
 
 	connectedCallback() {
