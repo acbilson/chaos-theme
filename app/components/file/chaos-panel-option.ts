@@ -46,10 +46,11 @@ export class ChaosPanelOption extends HTMLElement {
 
 	get type(): PanelOptionType {
 		const type = this.getAttribute("data-type");
-		return PanelOptionType[type];
+		return type ? PanelOptionType[type.toUpperCase()] : PanelOptionType.TEXT;
 	}
 
 	valueByType(): string | string[] {
+		console.log(this.type);
 		switch (this.type) {
 			case PanelOptionType.TEXT:
 			default:
