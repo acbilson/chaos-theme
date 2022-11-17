@@ -46,4 +46,5 @@ develop:
 	tmux new-window  -t theme:2 -n serve    'just serve';
 	tmux new-window  -t theme:3 -n micropub 'cd ~/source/chaos-micropub; just start';
 	tmux new-window  -t theme:4 -n edit     'nvim index.ts';
+	tmux new-window  -t theme:5 -n test     'nvim testwatch';
 	tmux attach
