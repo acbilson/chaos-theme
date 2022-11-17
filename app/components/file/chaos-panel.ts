@@ -184,7 +184,7 @@ export class ChaosPanel extends HTMLElement {
 
 		// sets the path based on type
 		let path: string;
-		if ("path" in frontmatter) {
+		if ("path" in frontmatter && this.shouldHaveOptions) {
 			path = frontmatter["path"];
 			delete frontmatter["path"];
 		} else {

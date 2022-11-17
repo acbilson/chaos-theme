@@ -1,9 +1,12 @@
+import store from "../../state/index";
 import {
 	ChangeOption,
 	PanelOptionType,
 } from "../../services/publish-service/models";
 
 export class ChaosPanelOption extends HTMLElement {
+	private _subscription: string;
+
 	get key(): string {
 		return this.getAttribute("data-key");
 	}
@@ -66,7 +69,7 @@ export class ChaosPanelOption extends HTMLElement {
 	}
 
 	render() {
-		this.innerHTML = `
+		return `
 			<li class="panel-option spread-btwn${this.required ? " required" : ""}">
 				<label for="${this.label}">${this.label}</label>
 				<span>${this.required ? "(required)" : ""}
@@ -82,6 +85,22 @@ export class ChaosPanelOption extends HTMLElement {
 
 	constructor() {
 		super();
-		this.render();
+	}
+
+	connectedCallback() {
+		this._subscription = store.isAuthorized$.subscribe(
+			"chaos-panel",
+			(isAuth) => {
+				if (isAuth) {
+					this.innerHTML = this.render();
+				} else {
+					this.innerHTML = `<span hidden>Not authorized to view panel option</span>`;
+				}
+			}
+		);
+	}
+
+	disconnectedCallback() {
+		store.isAuthorized$.unsubscribe(this._subscription);
 	}
 }
