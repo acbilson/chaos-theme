@@ -1,10 +1,13 @@
-import store from "../../state/index";
+import { Store } from "../../state/store";
 import {
-	ChangeOption,
-	PanelOptionType,
-} from "../../services/publish-service/models";
+	InjectionRequest,
+	Instances,
+	buildRequest,
+} from "../../state/injector";
+import { ChangeOption, PanelOptionType } from "../../services/models";
 
 export class ChaosPanelOption extends HTMLElement {
+	private _store: Store;
 	private _subscription: string;
 
 	get key(): string {
@@ -88,7 +91,14 @@ export class ChaosPanelOption extends HTMLElement {
 	}
 
 	connectedCallback() {
-		this._subscription = store.isAuthorized$.subscribe(
+		const getStore = buildRequest(<InjectionRequest>{
+			instance: Instances.STORE,
+			callback: (e) => (this._store = e),
+		});
+
+		this.dispatchEvent(getStore);
+
+		this._subscription = this._store.isAuthorized$.subscribe(
 			"chaos-panel",
 			(isAuth) => {
 				if (isAuth) {
@@ -101,6 +111,6 @@ export class ChaosPanelOption extends HTMLElement {
 	}
 
 	disconnectedCallback() {
-		store.isAuthorized$.unsubscribe(this._subscription);
+		this._store.isAuthorized$.unsubscribe(this._subscription);
 	}
 }
