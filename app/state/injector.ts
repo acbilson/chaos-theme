@@ -11,6 +11,10 @@ export enum Instances {
 export const InjectorMap = new Map<string, object>([
 	[Instances.PUBLISH, new PublishService()],
 	[Instances.AUTH, new AuthService()],
+
+	// I use the runtime store instead of a new implementation
+	// because services have internal dependencies on store and
+	// I don't want them to require injection right now
 	[Instances.STORE, store],
 ]);
 
