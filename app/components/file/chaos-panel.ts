@@ -5,7 +5,7 @@ import {
 	ChangeOption,
 	PanelStatus,
 	PanelType,
-} from "../../services/publish-service/models";
+} from "../../services/models";
 import {
 	mapClass,
 	getSimpleDate,
@@ -14,7 +14,6 @@ import {
 import { PublishService } from "../../services/publish-service/publish-service";
 import { Store } from "../../state/store";
 import {
-	InjectorMap,
 	InjectionRequest,
 	Instances,
 	buildRequest,
@@ -301,24 +300,22 @@ export class ChaosPanel extends HTMLElement {
 
 		const getStore = buildRequest(<InjectionRequest>{
 			instance: Instances.STORE,
-			callback: (e) => {
-				this._store = <Store>e;
-				this._subscription = this._store.isAuthorized$.subscribe(
-					"chaos-panel",
-					(isAuth) => {
-						console.log({ isAuth });
-						if (isAuth) {
-							this.innerHTML = this.render();
-						} else {
-							this.innerHTML = `<span hidden>Not authorized to view panel</span>`;
-						}
-					}
-				);
-			},
+			callback: (e) => (this._store = e),
 		});
 
 		this.dispatchEvent(getPublish);
 		this.dispatchEvent(getStore);
+
+		this._subscription = this._store.isAuthorized$.subscribe(
+			"chaos-panel",
+			(isAuth) => {
+				if (isAuth) {
+					this.innerHTML = this.render();
+				} else {
+					this.innerHTML = `<span hidden>Not authorized to view panel</span>`;
+				}
+			}
+		);
 
 		this.addEventListener("submit", (e) => this.onButtonClick(e));
 		this.addEventListener("keyup", (e) => this.onKeyUp(e));

@@ -1,5 +1,5 @@
 import { BaseUrls } from "./base-urls";
-import { PanelType } from "../services/publish-service/models";
+import { PanelType } from "../services/models";
 
 export function getFilePathByDate(panelType: PanelType): string {
 	const prependZero = (x) => (x < 10 ? `0${x}` : x.toString());
@@ -29,7 +29,7 @@ export function mapClass(args: string[]): string {
 }
 
 export function authorized(token: string): Promise<boolean> {
-	if (token == null || BaseUrls.auth == null) return new Promise(() => false);
+	if (token == null || BaseUrls.auth == null) return new Promise((resolve, reject) => resolve(false));
 
 	const headers = new Headers();
 	headers.append("Authorization", `Bearer ${token}`);
@@ -61,3 +61,11 @@ export function authenticate(
 		.then((r) => (r.status === 200 ? r.json() : null))
 		.then((b) => (b === null ? false : authorized(b?.token)));
 }
+
+export function getUriFromHead(rel: string): string {
+	const link = Array.from(document.head.children).find(
+		(x) => (x as HTMLAnchorElement).rel === rel
+	);
+	return (link as HTMLAnchorElement)?.href;
+}
+
