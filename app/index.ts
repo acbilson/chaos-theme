@@ -6,13 +6,12 @@ import { ChaosOnThisDay } from "./components/on-this-day/chaos-on-this-day";
 import { ChaosColorSwitch } from "./components/color-switch/chaos-color-switch";
 import { ChaosPanel } from "./components/file/chaos-panel";
 import { ChaosPanelOption } from "./components/file/chaos-panel-option";
-import { Injector, InjectionRequest, Instances } from "./state/injector";
-
-const injector = new Injector();
+import { InjectorMap, InjectionRequest, Instances } from "./state/injector";
 
 document.addEventListener("chaos-request", (e: CustomEvent) => {
 	const request = <InjectionRequest>e.detail;
-	injector.get(request);
+	const instance = InjectorMap.get(request.instance);
+	request.callback(instance);
 });
 
 customElements.define("chaos-login", ChaosLogin);

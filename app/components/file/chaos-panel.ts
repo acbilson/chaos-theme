@@ -6,16 +6,23 @@ import {
 	PanelStatus,
 	PanelType,
 } from "../../services/publish-service/models";
-import store from "../../state/index";
-import publishService from "../../services/publish-service/index";
-import authService from "../../services/auth-service/index";
 import {
 	mapClass,
 	getSimpleDate,
 	getFilePathByDate,
 } from "../../shared/operators";
+import { PublishService } from "../../services/publish-service/publish-service";
+import { Store } from "../../state/store";
+import {
+	InjectorMap,
+	InjectionRequest,
+	Instances,
+	buildRequest,
+} from "../../state/injector";
 
 export class ChaosPanel extends HTMLElement {
+	private _pub: PublishService;
+	private _store: Store;
 	private _subscription: string;
 	private _typesWithOptions = [PanelType.PLANT, PanelType.STONE];
 	private _initialMarkup;
@@ -117,7 +124,7 @@ export class ChaosPanel extends HTMLElement {
 	}
 
 	startUpdate() {
-		publishService.read(authService.token, this.filePath).then((r) => {
+		this._pub.read(this._store.token, this.filePath).then((r) => {
 			if (r.success) {
 				this.contents = r.content.body;
 				this.updateChaosPanelOptions(r.content.path, r.content.frontmatter);
@@ -148,8 +155,8 @@ export class ChaosPanel extends HTMLElement {
 
 		frontmatter["lastmod"] = new Date().toISOString();
 
-		publishService
-			.update(authService.token, <ChangeResult>{
+		this._pub
+			.update(this._store.token, <ChangeResult>{
 				path: this.filePath,
 				body: this.contents,
 				frontmatter,
@@ -195,8 +202,8 @@ export class ChaosPanel extends HTMLElement {
 		frontmatter["date"] = getSimpleDate(now);
 		frontmatter["lastmod"] = now.toISOString();
 
-		publishService
-			.create(authService.token, <ChangeResult>{
+		this._pub
+			.create(this._store.token, <ChangeResult>{
 				body: this.contents,
 				frontmatter,
 				path,
@@ -287,22 +294,38 @@ export class ChaosPanel extends HTMLElement {
 	}
 
 	connectedCallback() {
-		this._subscription = store.isAuthorized$.subscribe(
-			"chaos-panel",
-			(isAuth) => {
-				if (isAuth) {
-					this.innerHTML = this.render();
-				} else {
-					this.innerHTML = `<span hidden>Not authorized to view panel</span>`;
-				}
-			}
-		);
+		const getPublish = buildRequest(<InjectionRequest>{
+			instance: Instances.PUBLISH,
+			callback: (e) => (this._pub = e),
+		});
+
+		const getStore = buildRequest(<InjectionRequest>{
+			instance: Instances.STORE,
+			callback: (e) => {
+				this._store = <Store>e;
+				this._subscription = this._store.isAuthorized$.subscribe(
+					"chaos-panel",
+					(isAuth) => {
+						console.log({ isAuth });
+						if (isAuth) {
+							this.innerHTML = this.render();
+						} else {
+							this.innerHTML = `<span hidden>Not authorized to view panel</span>`;
+						}
+					}
+				);
+			},
+		});
+
+		this.dispatchEvent(getPublish);
+		this.dispatchEvent(getStore);
+
 		this.addEventListener("submit", (e) => this.onButtonClick(e));
 		this.addEventListener("keyup", (e) => this.onKeyUp(e));
 	}
 
 	disconnectedCallback() {
-		store.isAuthorized$.unsubscribe(this._subscription);
+		this._store.isAuthorized$.unsubscribe(this._subscription);
 		this.removeEventListener("submit", (e) => this.onButtonClick(e));
 		this.removeEventListener("keyup", (e) => this.onKeyUp(e));
 	}
