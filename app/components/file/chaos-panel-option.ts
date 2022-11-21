@@ -99,7 +99,7 @@ export class ChaosPanelOption extends HTMLElement {
 		this.dispatchEvent(getStore);
 
 		this._subscription = this._store.isAuthorized$.subscribe(
-			"chaos-panel",
+			"chaos-panel-option",
 			(isAuth) => {
 				if (isAuth) {
 					this.innerHTML = this.render();
