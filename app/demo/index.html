@@ -5,95 +5,10 @@
 		<link rel="publish" href="http://localhost:5000" />
 	</head>
 	<body>
-		<auth-login><p>No login</p></auth-login>
-		<auth-logout><p>No Logout</p></auth-logout>
-
-		<auth-authorized>
-			<p>
-				I can't see this content unless I'm authorized to see it, unless this
-				isn't working at all
-			</p>
-		</auth-authorized>
-
-		<auth-example><p>Should never see this</p></auth-example>
-
-		<app-panel
-			><div slot="options">
-				<app-panel-option
-					key="path"
-					label="File Path"
-					type="text"
-					required="true"
-				></app-panel-option>
-				<app-panel-option
-					key="author"
-					label="Author"
-					type="text"
-					required="true"
-				></app-panel-option>
-				<app-panel-option
-					key="date"
-					label="Date"
-					type="text"
-					readonly="true"
-				></app-panel-option>
-				<app-panel-option
-					key="tags"
-					label="Tags"
-					type="list"
-					required="true"
-				></app-panel-option>
-				<app-panel-option
-					key="epistemic"
-					label="Epistemic"
-					type="text"
-					required="true"
-				></app-panel-option>
-				<app-panel-option
-					key="in-reply-to"
-					label="In Reply To"
-					type="text"
-				></app-panel-option></div
-		></app-panel>
-
-		<app-panel panel-type="stone"
-			><div slot="options">
-				<app-panel-option
-					key="path"
-					label="File Path"
-					type="text"
-					required="true"
-				></app-panel-option>
-				<app-panel-option
-					key="authors"
-					label="Authors"
-					type="list"
-					required="true"
-				></app-panel-option>
-				<app-panel-option
-					key="tags"
-					label="Tags"
-					type="list"
-					required="true"
-				></app-panel-option>
-				<app-panel-option
-					key="copyright"
-					label="Copyright"
-					type="text"
-					required="true"
-				></app-panel-option>
-				<app-panel-option key="page" label="Page" type="text" required="true"
-					><app-panel-option
-						key="source"
-						label="Source"
-						type="text"
-						required="true"
-					></app-panel-option>
-				</app-panel-option></div
-		></app-panel>
-
-		<app-panel panel-type="log"></app-panel>
-		<app-panel panel-type="quip"></app-panel>
+		<chaos-login><p>No login</p></chaos-login>
+		<chaos-logout><p>No Logout</p></chaos-logout>
+		<chaos-panel panel-type="log"></chaos-panel>
+		<chaos-inject><p>Nothing injected yet</p></chaos-inject>
 
 		<script type="module" src="../dist/index.modern.js"></script>
 	</body>
