@@ -46,7 +46,7 @@ export class ChaosPanelOption extends HTMLElement {
 
 	get type(): PanelOptionType {
 		const type = this.getAttribute("data-type");
-		return PanelOptionType[type];
+		return type ? PanelOptionType[type.toUpperCase()] : PanelOptionType.TEXT;
 	}
 
 	valueByType(): string | string[] {
@@ -99,7 +99,7 @@ export class ChaosPanelOption extends HTMLElement {
 		this.dispatchEvent(getStore);
 
 		this._subscription = this._store.isAuthorized$.subscribe(
-			"chaos-panel",
+			"chaos-panel-option",
 			(isAuth) => {
 				if (isAuth) {
 					this.innerHTML = this.render();

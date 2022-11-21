@@ -95,7 +95,6 @@ export class ChaosPanel extends HTMLElement {
 	}
 
 	updateChaosPanelOptions(path: string, frontmatter: object) {
-		//if (!this.shouldHaveOptions) return;
 		const options = this.panelOptions;
 		const optionByAttr = (a) =>
 			options.find((x) => x.getAttribute("data-key") === a);
@@ -117,13 +116,12 @@ export class ChaosPanel extends HTMLElement {
 	}
 
 	clearChaosPanelOptions() {
-		if (!this.shouldHaveOptions) return;
 		const options = this.panelOptions;
 		options.forEach((o) => (o.value = null));
 	}
 
 	startUpdate() {
-		this._pub.read(this._store.token, this.filePath).then((r) => {
+		return this._pub.read(this._store.token, this.filePath).then((r) => {
 			if (r.success) {
 				this.contents = r.content.body;
 				this.updateChaosPanelOptions(r.content.path, r.content.frontmatter);
@@ -149,14 +147,14 @@ export class ChaosPanel extends HTMLElement {
 			path = frontmatter["path"];
 			delete frontmatter["path"];
 		} else {
-			path = this.getFilePath();
+			if (!this.shouldHaveOptions) path = this.getFilePath();
 		}
 
 		frontmatter["lastmod"] = new Date().toISOString();
 
-		this._pub
+		return this._pub
 			.update(this._store.token, <ChangeResult>{
-				path: this.filePath,
+				path,
 				body: this.contents,
 				frontmatter,
 			})
@@ -290,6 +288,7 @@ export class ChaosPanel extends HTMLElement {
 	constructor() {
 		super();
 		this._initialMarkup = this.innerHTML;
+		this.innerHTML = "";
 	}
 
 	connectedCallback() {
