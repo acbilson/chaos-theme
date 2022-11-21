@@ -96,6 +96,8 @@ export class ChaosPanelOption extends HTMLElement {
 			callback: (e) => (this._store = e),
 		});
 
+		this.dispatchEvent(getStore);
+
 		this._subscription = this._store.isAuthorized$.subscribe(
 			"chaos-panel",
 			(isAuth) => {
@@ -106,8 +108,6 @@ export class ChaosPanelOption extends HTMLElement {
 				}
 			}
 		);
-
-		this.dispatchEvent(getStore);
 	}
 
 	disconnectedCallback() {
