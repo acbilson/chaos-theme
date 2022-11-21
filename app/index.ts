@@ -6,31 +6,13 @@ import { ChaosOnThisDay } from "./components/on-this-day/chaos-on-this-day";
 import { ChaosColorSwitch } from "./components/color-switch/chaos-color-switch";
 import { ChaosPanel } from "./components/file/chaos-panel";
 import { ChaosPanelOption } from "./components/file/chaos-panel-option";
-import {
-	ChaosInject,
-	TestAPI,
-	InjectRequest,
-	InjectionInstance,
-} from "./components/inject/inject";
+import { Injector, InjectionRequest, Instances } from "./state/injector";
 
-const instanceMap = new Map<string, object>();
+const injector = new Injector();
 
-const buildInstance = (request: InjectRequest) => {
-	switch (request.instance) {
-		case InjectionInstance.TEST:
-			request.callback(new TestAPI("switch"));
-			break;
-		default:
-			console.log("d/i could not match instance");
-			break;
-	}
-};
-
-document.addEventListener("chaos-request", (e) => {
-	const request = (<CustomEvent>e).detail;
-	instanceMap.has(request.instance)
-		? request.callback(instanceMap[request.instance])
-		: buildInstance(request);
+document.addEventListener("chaos-request", (e: CustomEvent) => {
+	const request = <InjectionRequest>e.detail;
+	injector.get(request);
 });
 
 customElements.define("chaos-login", ChaosLogin);
@@ -41,4 +23,3 @@ customElements.define("chaos-on-this-day", ChaosOnThisDay);
 customElements.define("chaos-color-switch", ChaosColorSwitch);
 customElements.define("chaos-panel", ChaosPanel);
 customElements.define("chaos-panel-option", ChaosPanelOption);
-customElements.define("chaos-inject", ChaosInject);
