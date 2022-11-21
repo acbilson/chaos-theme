@@ -1,10 +1,13 @@
-import store from "../../state/index";
+import { Store } from "../../state/store";
 import {
-	ChangeOption,
-	PanelOptionType,
-} from "../../services/publish-service/models";
+	InjectionRequest,
+	Instances,
+	buildRequest,
+} from "../../state/injector";
+import { ChangeOption, PanelOptionType } from "../../services/models";
 
 export class ChaosPanelOption extends HTMLElement {
+	private _store: Store;
 	private _subscription: string;
 
 	get key(): string {
@@ -43,7 +46,7 @@ export class ChaosPanelOption extends HTMLElement {
 
 	get type(): PanelOptionType {
 		const type = this.getAttribute("data-type");
-		return PanelOptionType[type];
+		return type ? PanelOptionType[type.toUpperCase()] : PanelOptionType.TEXT;
 	}
 
 	valueByType(): string | string[] {
@@ -88,8 +91,15 @@ export class ChaosPanelOption extends HTMLElement {
 	}
 
 	connectedCallback() {
-		this._subscription = store.isAuthorized$.subscribe(
-			"chaos-panel",
+		const getStore = buildRequest(<InjectionRequest>{
+			instance: Instances.STORE,
+			callback: (e) => (this._store = e),
+		});
+
+		this.dispatchEvent(getStore);
+
+		this._subscription = this._store.isAuthorized$.subscribe(
+			"chaos-panel-option",
 			(isAuth) => {
 				if (isAuth) {
 					this.innerHTML = this.render();
@@ -101,6 +111,6 @@ export class ChaosPanelOption extends HTMLElement {
 	}
 
 	disconnectedCallback() {
-		store.isAuthorized$.unsubscribe(this._subscription);
+		this._store.isAuthorized$.unsubscribe(this._subscription);
 	}
 }

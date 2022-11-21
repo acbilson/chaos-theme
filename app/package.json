@@ -9,6 +9,7 @@
 	"module": "dist/index.module.js",
 	"unpkg": "dist/index.umd.js",
 	"types": "dist/index.d.ts",
+	"type": "module",
 	"files": [
 		"dist/**.js*",
 		"dist/**/*.ts"
@@ -16,10 +17,16 @@
 	"scripts": {
 		"build": "microbundle",
 		"dev": "microbundle watch",
-		"serve": "web-dev-server --node-resolve --open demo/ --watch"
+		"serve": "web-dev-server --node-resolve --open demo/ --watch",
+		"test": "wtr test/**/*.test.js --node-resolve --playwright --browsers webkit",
+		"testwatch": "wtr test/**/*.test.js --node-resolve --playwright --browsers webkit --watch"
 	},
-	"dependencies": {
-		"microbundle": "^0.15.1",
-		"@web/dev-server": "^0.1.34"
+	"devDependencies": {
+		"@esm-bundle/chai": "^4.3.4-fix.0",
+		"@web/dev-server": "^0.1.34",
+		"@web/dev-server-esbuild": "^0.3.3",
+		"@web/test-runner": "^0.15.0",
+		"@web/test-runner-playwright": "^0.9.0",
+		"microbundle": "^0.15.1"
 	}
 }

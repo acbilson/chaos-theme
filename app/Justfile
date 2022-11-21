@@ -18,6 +18,14 @@ watch:
 serve:
 	find ./components | entr -s 'npm run build && cp dist/index.modern.js ../assets/js/app/app.modern.js'
 
+# run all tests
+test:
+	npm run test
+
+# run all tests in watch mode
+testwatch:
+	npm run testwatch
+
 # deploys the app bundle for Hugo to pick up in theme/assets/js/app
 deploy: build
 	cp dist/index.modern.js /Users/alexbilson/source/chaos-theme/assets/js/app/app.modern.js
@@ -38,4 +46,5 @@ develop:
 	tmux new-window  -t theme:2 -n serve    'just serve';
 	tmux new-window  -t theme:3 -n micropub 'cd ~/source/chaos-micropub; just start';
 	tmux new-window  -t theme:4 -n edit     'nvim index.ts';
+	tmux new-window  -t theme:5 -n test     'nvim testwatch';
 	tmux attach

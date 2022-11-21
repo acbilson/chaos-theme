@@ -1,6 +1,13 @@
-import AuthService from "../../services/auth-service/index";
+import { AuthService } from "../../services/index";
+import {
+	InjectionRequest,
+	Instances,
+	buildRequest,
+} from "../../state/injector";
 
 export class ChaosLogin extends HTMLElement {
+	private _auth: AuthService;
+
 	get username(): HTMLInputElement {
 		return <HTMLInputElement>this.querySelector("#username");
 	}
@@ -16,9 +23,9 @@ export class ChaosLogin extends HTMLElement {
 	onClick(e: MouseEvent) {
 		e.preventDefault();
 		e.stopPropagation();
-		AuthService.authenticate(this.username?.value, this.password?.value).then(
-			(msg) => (this.errors.innerText = msg)
-		);
+		this._auth
+			.authenticate(this.username?.value, this.password?.value)
+			.then((msg) => (this.errors.innerText = msg));
 	}
 
 	render() {
@@ -49,6 +56,13 @@ export class ChaosLogin extends HTMLElement {
 
 	connectedCallback() {
 		this.render();
+
+		const getAuth = buildRequest(<InjectionRequest>{
+			instance: Instances.AUTH,
+			callback: (e) => (this._auth = e),
+		});
+		this.dispatchEvent(getAuth);
+
 		this.addEventListener("click", (e: MouseEvent) => this.onClick(e), false);
 	}
 
