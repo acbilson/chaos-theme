@@ -71,6 +71,12 @@ export class ChaosPanelOption extends HTMLElement {
 		};
 	}
 
+	onEdit(e) {
+		e.preventDefault();
+		console.log({ cur: this.value, new: e.target.value });
+		this.value = e.target.value;
+	}
+
 	render() {
 		return `
 			<li class="panel-option spread-btwn${this.required ? " required" : ""}">
@@ -108,9 +114,12 @@ export class ChaosPanelOption extends HTMLElement {
 				}
 			}
 		);
+
+		this.addEventListener("keyup", (e) => this.onEdit(e));
 	}
 
 	disconnectedCallback() {
 		this._store.isAuthorized$.unsubscribe(this._subscription);
+		this.removeEventListener("keyup", (e) => this.onEdit(e));
 	}
 }
