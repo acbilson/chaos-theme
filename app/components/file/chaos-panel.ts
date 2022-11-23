@@ -210,10 +210,9 @@ export class ChaosPanel extends HTMLElement {
 					if (r.success) {
 						this.contents = r.content.body;
 						this.updateChaosPanelOptions(r.content.path, r.content.frontmatter);
-						this.errorMsg = "success";
-					} else {
 						this.errorMsg = r.message;
 					}
+					this.errorMsg = r.message;
 				},
 				(e) => (this.errorMsg = e.toString())
 			);
