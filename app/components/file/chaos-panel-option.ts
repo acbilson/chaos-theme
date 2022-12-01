@@ -73,7 +73,6 @@ export class ChaosPanelOption extends HTMLElement {
 
 	onEdit(e) {
 		e.preventDefault();
-		console.log({ cur: this.value, new: e.target.value });
 		this.value = e.target.value;
 	}
 
