@@ -26,6 +26,10 @@ export class AuthService {
 	public authenticateMastodon(): Promise<any> {
 		return authenticateMastodon(store.token)
 			.then((r) => (r.status === 200 ? r.json() : null))
-			.then((r) => window.open(r.authentication_url, "_blank"));
+			.then((r) => {
+				const uri = r["authentication_url"];
+				console.log({ uri });
+				window.open(uri, "_blank");
+			});
 	}
 }
