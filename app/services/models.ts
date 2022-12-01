@@ -8,7 +8,7 @@ export interface ChangeResult {
 	path: string;
 	body: string;
 	frontmatter: object;
-	mastotoken: string
+	mastotoken: string;
 }
 
 export interface ChangeOption {
