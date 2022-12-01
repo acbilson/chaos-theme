@@ -2,6 +2,7 @@ import {
 	authenticate,
 	authorized,
 	authenticateMastodon,
+	getMastodonToken,
 } from "../../shared/operators";
 import store from "../../state/index";
 
@@ -31,5 +32,9 @@ export class AuthService {
 				console.log({ uri });
 				window.open(uri, "_blank");
 			});
+	}
+
+	public getMastodonToken(code: string) {
+		return getMastodonToken(store.token, code).then((r) => console.log(r));
 	}
 }
