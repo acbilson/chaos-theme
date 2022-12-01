@@ -1,4 +1,8 @@
-import { authenticate, authorized } from "../../shared/operators";
+import {
+	authenticate,
+	authorized,
+	authenticateMastodon,
+} from "../../shared/operators";
 import store from "../../state/index";
 
 export class AuthService {
@@ -17,5 +21,9 @@ export class AuthService {
 	public unauthenticate() {
 		sessionStorage.removeItem("token");
 		store.isAuthorized$.value = false;
+	}
+
+	public authenticateMastodon(): Promise<any> {
+		return authenticateMastodon();
 	}
 }
