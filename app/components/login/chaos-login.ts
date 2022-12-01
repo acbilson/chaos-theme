@@ -23,9 +23,22 @@ export class ChaosLogin extends HTMLElement {
 	onClick(e: MouseEvent) {
 		e.preventDefault();
 		e.stopPropagation();
-		this._auth
-			.authenticate(this.username?.value, this.password?.value)
-			.then((msg) => (this.errors.innerText = msg));
+		const id = (<HTMLButtonElement>e.target).id;
+
+		switch (id) {
+			case "login":
+				this._auth
+					.authenticate(this.username?.value, this.password?.value)
+					.then((msg) => (this.errors.innerText = msg));
+				break;
+
+			case "mastodon":
+				this._auth.authenticateMastodon().then((r) => console.log(r));
+				break;
+
+			default:
+				console.log(`button with id ${id} not supported`);
+		}
 	}
 
 	render() {
@@ -44,8 +57,9 @@ export class ChaosLogin extends HTMLElement {
 				autocomplete="password"
 				type="password"
 			/>
-			<button type="button">Login</button>
+			<button id="login" type="button">Login</button>
 			<chaos-logout><p>No logout</p></chaos-logout>
+			<button id="mastodon" type="button">Authenticate Mastodon</button>
 			<label id="errors"></label>
 			`;
 	}

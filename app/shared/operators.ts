@@ -29,7 +29,8 @@ export function mapClass(args: string[]): string {
 }
 
 export function authorized(token: string): Promise<boolean> {
-	if (token == null || BaseUrls.auth == null) return new Promise((resolve, reject) => resolve(false));
+	if (token == null || BaseUrls.auth == null)
+		return new Promise((resolve, reject) => resolve(false));
 
 	const headers = new Headers();
 	headers.append("Authorization", `Bearer ${token}`);
@@ -62,10 +63,13 @@ export function authenticate(
 		.then((b) => (b === null ? false : authorized(b?.token)));
 }
 
+export function authenticateMastodon(): Promise<any> {
+	return fetch(new URL("mastoauth", BaseUrls.auth)).then((r) => console.log(r));
+}
+
 export function getUriFromHead(rel: string): string {
 	const link = Array.from(document.head.children).find(
 		(x) => (x as HTMLAnchorElement).rel === rel
 	);
 	return (link as HTMLAnchorElement)?.href;
 }
-
