@@ -35,6 +35,12 @@ export class AuthService {
 	}
 
 	public getMastodonToken(code: string) {
-		return getMastodonToken(store.token, code).then((r) => console.log(r));
+		return getMastodonToken(store.token, code)
+			.then((r) => (r.status === 200 ? r.json() : null))
+			.then((r) => {
+				const token = r["mastotoken"];
+				console.log({ setMastoTokenTo: token });
+				sessionStorage.setItem("mastotoken", token);
+			});
 	}
 }
