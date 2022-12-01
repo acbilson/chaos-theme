@@ -67,9 +67,7 @@ export function authenticateMastodon(token: string): Promise<any> {
 	const headers = new Headers();
 	headers.append("Authorization", `Bearer ${token}`);
 	headers.append("Content-Type", "application/json; charset=UTF-8");
-	return fetch(new URL("mastoauth", BaseUrls.auth), { headers }).then((r) =>
-		console.log(r)
-	);
+	return fetch(new URL("mastoauth", BaseUrls.auth), { headers });
 }
 
 export function getUriFromHead(rel: string): string {
