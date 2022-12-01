@@ -63,8 +63,13 @@ export function authenticate(
 		.then((b) => (b === null ? false : authorized(b?.token)));
 }
 
-export function authenticateMastodon(): Promise<any> {
-	return fetch(new URL("mastoauth", BaseUrls.auth)).then((r) => console.log(r));
+export function authenticateMastodon(token: string): Promise<any> {
+	const headers = new Headers();
+	headers.append("Authorization", `Bearer ${token}`);
+	headers.append("Content-Type", "application/json; charset=UTF-8");
+	return fetch(new URL("mastoauth", BaseUrls.auth), { headers }).then((r) =>
+		console.log(r)
+	);
 }
 
 export function getUriFromHead(rel: string): string {

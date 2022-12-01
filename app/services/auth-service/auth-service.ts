@@ -24,6 +24,6 @@ export class AuthService {
 	}
 
 	public authenticateMastodon(): Promise<any> {
-		return authenticateMastodon();
+		return authenticateMastodon(store.token);
 	}
 }
