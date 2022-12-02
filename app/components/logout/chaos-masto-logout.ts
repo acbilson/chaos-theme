@@ -6,7 +6,7 @@ import {
 	buildRequest,
 } from "../../state/injector";
 
-export class MastoChaosLogout extends HTMLElement {
+export class ChaosMastoLogout extends HTMLElement {
 	private _mastoauth: MastoAuthService;
 	private _store: Store;
 	private _subscription: string;
@@ -15,7 +15,10 @@ export class MastoChaosLogout extends HTMLElement {
 	onClick(e: MouseEvent) {
 		e.preventDefault();
 		e.stopPropagation();
-		this._mastoauth.unauthenticate();
+		this._mastoauth.unauthenticate(
+			this._store.token,
+			this._store.mastodonToken
+		);
 	}
 
 	constructor() {
@@ -39,6 +42,7 @@ export class MastoChaosLogout extends HTMLElement {
 			})
 		);
 
+		// TODO: figure out how to subscribe to both authentication observers combineLatest-style
 		this._subscription = this._store.isAuthorized$.subscribe(
 			"chaos-panel",
 			(isAuth) => {
