@@ -14,11 +14,6 @@ export class AuthService {
 			return new Promise((resolve) =>
 				resolve("missing authentication uri in head")
 			);
-		console.log({
-			baseUri,
-			url: new URL("token", baseUri),
-			heads: document.head.children,
-		});
 
 		const headers = new Headers();
 		headers.append("Authorization", `Basic ${btoa(username + ":" + password)}`);
