@@ -21,6 +21,7 @@ export class ChaosLogin extends HTMLElement {
 	}
 
 	onClick(e: MouseEvent) {
+		if ((<HTMLButtonElement>e.target)?.type != 'button') return;
 		e.preventDefault();
 		e.stopPropagation();
 		const id = (<HTMLButtonElement>e.target).id;
