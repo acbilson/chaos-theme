@@ -8,6 +8,19 @@
 		<li>Posted: <time class="dt-published" datetime="{{ .Date.Format "2006-01-02" }}">{{- .Date.Format "Jan 2, 2006" -}}</time></li>
 		<li>Modified: <time datetime="{{ .Lastmod.Format "2006-01-02" }}">{{- .Lastmod.Format "Jan 2, 2006" -}}</time></li>
 	{{- end -}}
+	{{- if isset .Params "syndicated" -}}
+	<li class="spread spread-narrow"><span>Syndicated:</span>
+		<ul class="spread narrow-spread" role="list">
+		{{- range $syndicate, $href := .Param "syndicated" -}}
+			{{- $icon := "🐘" -}}
+			{{- if eq $syndicate "mastodon" -}}
+				{{- $icon := "🐘" -}}
+			{{- end -}}
+			<li><a class="no-underline" href="{{ $href }}">{{ $icon }}</a></li>
+		{{- end -}}
+		</ul>
+		</li>
+	{{- end -}}
 
 	<!-- adds second set of attrs if they exist -->
 	{{- if (or ( isset .Params "epistemic" ) ( isset .Params "tags" )) -}}

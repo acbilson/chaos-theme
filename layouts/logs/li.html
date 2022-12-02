@@ -4,7 +4,20 @@
 	<ul class="spread narrow-spread" role="list">
 		<li><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time></li>
 		<li><a rel="author" class="p-author">{{- $author -}}</a></li>
-		<li><a class="no-underline" href="{{ .Permalink }}" rel="bookmark">⚓</a></li>
+		<li>
+			<ul class="spread narrow-spread" role="list">
+				<li><a class="no-underline" href="{{ .Permalink }}" rel="bookmark">⚓</a></li>
+				{{- if isset .Params "syndicated" -}}
+					{{- range $syndicate, $href := .Param "syndicated" -}}
+						{{- $icon := "🐘" -}}
+						{{- if eq $syndicate "mastodon" -}}
+							{{- $icon := "🐘" -}}
+						{{- end -}}
+					<li><a class="no-underline" href="{{ $href }}">{{ $icon }}</a></li>
+					{{- end -}}
+				{{- end -}}
+			</ul>
+		</li>
 	</ul>
 	</header>
 	{{- .Content -}}
