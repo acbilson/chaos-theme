@@ -36,12 +36,9 @@ export function authorized(token: string): Promise<boolean> {
 	headers.append("Authorization", `Bearer ${token}`);
 	return fetch(new URL("auth", BaseUrls.auth), { headers }).then(
 		(r) => {
-			if (r.status === 200) {
-				sessionStorage.setItem("token", token);
-			} else {
-				sessionStorage.removeItem("token");
-			}
-			return r.status === 200;
+			if (r.status !== 200) return false;
+			sessionStorage.setItem("token", token);
+			return true;
 		},
 		(err) => {
 			return false;
@@ -70,13 +67,25 @@ export function authenticateMastodon(token: string): Promise<any> {
 	return fetch(new URL("mastoauth", BaseUrls.auth), { headers });
 }
 
-export function getMastodonToken(token: string, code: string): Promise<any> {
+export function mastodonAuthorized(
+	token: string,
+	code: string
+): Promise<boolean> {
 	const headers = new Headers();
 	headers.append("Authorization", `Bearer ${token}`);
 	headers.append("Content-Type", "application/json; charset=UTF-8");
 	return fetch(new URL(`masto_redirect?code=${code}`, BaseUrls.auth), {
 		headers,
-	});
+	}).then(
+		(r) => {
+			if (r.status !== 200) return false;
+			sessionStorage.setItem("mastotoken", token);
+			return true;
+		},
+		(err) => {
+			return false;
+		}
+	);
 }
 
 export function getUriFromHead(rel: string): string {

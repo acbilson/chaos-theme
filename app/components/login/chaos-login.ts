@@ -21,12 +21,12 @@ export class ChaosLogin extends HTMLElement {
 	}
 
 	onClick(e: MouseEvent) {
-		if ((<HTMLButtonElement>e.target)?.type != 'button') return;
+		const target = <HTMLButtonElement>e.target;
+		if (target?.type !== 'button') return;
 		e.preventDefault();
 		e.stopPropagation();
-		const id = (<HTMLButtonElement>e.target).id;
 
-		switch (id) {
+		switch (target.id) {
 			case "login":
 				this._auth
 					.authenticate(this.username?.value, this.password?.value)
@@ -38,7 +38,7 @@ export class ChaosLogin extends HTMLElement {
 				break;
 
 			default:
-				console.log(`button with id ${id} not supported`);
+				console.log(`button with id ${target.id} not supported`);
 		}
 	}
 
@@ -79,11 +79,6 @@ export class ChaosLogin extends HTMLElement {
 		this.dispatchEvent(getAuth);
 
 		this.addEventListener("click", (e: MouseEvent) => this.onClick(e), false);
-
-		const params = new URLSearchParams(document.location.search);
-		if (params.has("code")) {
-			this._auth.getMastodonToken(params.get('code')).then((x) => console.log(x));
-		}
 	}
 
 	disconnectedCallback() {

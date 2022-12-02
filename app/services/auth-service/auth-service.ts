@@ -1,8 +1,7 @@
 import {
 	authenticate,
 	authorized,
-	authenticateMastodon,
-	getMastodonToken,
+	authenticateMastodon
 } from "../../shared/operators";
 import store from "../../state/index";
 
@@ -31,16 +30,6 @@ export class AuthService {
 				const uri = r["authentication_url"];
 				console.log({ uri });
 				window.open(uri, "_blank");
-			});
-	}
-
-	public getMastodonToken(code: string) {
-		return getMastodonToken(store.token, code)
-			.then((r) => (r.status === 200 ? r.json() : null))
-			.then((r) => {
-				const token = r["mastotoken"];
-				console.log({ setMastoTokenTo: token });
-				sessionStorage.setItem("mastotoken", token);
 			});
 	}
 }
