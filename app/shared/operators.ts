@@ -1,5 +1,5 @@
 import { BaseUrls } from "./base-urls";
-import { PanelType } from "../services/models";
+import { AuthResult, PanelType } from "../services/models";
 
 export function getFilePathByDate(panelType: PanelType): string {
 	const prependZero = (x) => (x < 10 ? `0${x}` : x.toString());
@@ -36,12 +36,9 @@ export function authorized(token: string): Promise<boolean> {
 	headers.append("Authorization", `Bearer ${token}`);
 	return fetch(new URL("auth", BaseUrls.auth), { headers }).then(
 		(r) => {
-			if (r.status === 200) {
-				sessionStorage.setItem("token", token);
-			} else {
-				sessionStorage.removeItem("token");
-			}
-			return r.status === 200;
+			if (r.status !== 200) return false;
+			sessionStorage.setItem("token", token);
+			return true;
 		},
 		(err) => {
 			return false;
@@ -49,34 +46,35 @@ export function authorized(token: string): Promise<boolean> {
 	);
 }
 
-export function authenticate(
-	username: string,
-	password: string
+export function mastodonAuthorized(
+	token: string,
+	code: string,
+	redirect: string
 ): Promise<boolean> {
-	if (username == null || password == null || BaseUrls.auth == null)
-		return new Promise(() => false);
-
 	const headers = new Headers();
-	headers.append("Authorization", `Basic ${btoa(username + ":" + password)}`);
-	return fetch(new URL("token", BaseUrls.auth), { headers })
+	headers.append("Authorization", `Bearer ${token}`);
+	headers.append("Content-Type", "application/json; charset=UTF-8");
+	return fetch(
+		new URL(
+			`mastodon/redirect?code=${code}&redirect=${redirect}`,
+			BaseUrls.auth
+		),
+		{
+			headers,
+		}
+	)
 		.then((r) => (r.status === 200 ? r.json() : null))
-		.then((b) => (b === null ? false : authorized(b?.token)));
-}
-
-export function authenticateMastodon(token: string): Promise<any> {
-	const headers = new Headers();
-	headers.append("Authorization", `Bearer ${token}`);
-	headers.append("Content-Type", "application/json; charset=UTF-8");
-	return fetch(new URL("mastoauth", BaseUrls.auth), { headers });
-}
-
-export function getMastodonToken(token: string, code: string): Promise<any> {
-	const headers = new Headers();
-	headers.append("Authorization", `Bearer ${token}`);
-	headers.append("Content-Type", "application/json; charset=UTF-8");
-	return fetch(new URL(`masto_redirect?code=${code}`, BaseUrls.auth), {
-		headers,
-	});
+		.then((r) => <AuthResult>r)
+		.then(
+			(r) => {
+				if (r?.token == null) return false;
+				sessionStorage.setItem("mastotoken", r.token);
+				return true;
+			},
+			(err) => {
+				return false;
+			}
+		);
 }
 
 export function getUriFromHead(rel: string): string {
