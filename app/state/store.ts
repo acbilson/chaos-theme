@@ -40,9 +40,12 @@ export class Store {
 		// if Mastodon has redirected a code from its OAuth flow, use the code to retrieve a token
 		const params = new URLSearchParams(document.location.search);
 		if (params.has("code")) {
-			mastodonAuthorized(this.token, params.get("code")).then((isAuth) => {
-				this.isMastodonAuthorized$.value = isAuth;
-			});
+			const origin = document.location.origin;
+			mastodonAuthorized(this.token, params.get("code"), origin).then(
+				(isAuth) => {
+					this.isMastodonAuthorized$.value = isAuth;
+				}
+			);
 		}
 	}
 }

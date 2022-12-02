@@ -48,14 +48,21 @@ export function authorized(token: string): Promise<boolean> {
 
 export function mastodonAuthorized(
 	token: string,
-	code: string
+	code: string,
+	redirect: string
 ): Promise<boolean> {
 	const headers = new Headers();
 	headers.append("Authorization", `Bearer ${token}`);
 	headers.append("Content-Type", "application/json; charset=UTF-8");
-	return fetch(new URL(`mastodon/redirect?code=${code}`, BaseUrls.auth), {
-		headers,
-	})
+	return fetch(
+		new URL(
+			`mastodon/redirect?code=${code}&redirect${redirect}`,
+			BaseUrls.auth
+		),
+		{
+			headers,
+		}
+	)
 		.then((r) => (r.status === 200 ? r.json() : null))
 		.then((r) => <AuthResult>r)
 		.then(
