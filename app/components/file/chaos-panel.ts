@@ -198,12 +198,14 @@ export class ChaosPanel extends HTMLElement {
 		const now = new Date();
 		frontmatter["date"] = getSimpleDate(now);
 		frontmatter["lastmod"] = now.toISOString();
+		const mastotoken = sessionStorage.getItem('mastotoken');
 
 		this._pub
 			.create(this._store.token, <ChangeResult>{
 				body: this.contents,
 				frontmatter,
 				path,
+				mastotoken
 			})
 			.then(
 				(r) => {
