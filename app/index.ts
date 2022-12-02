@@ -1,5 +1,7 @@
 import { ChaosLogin } from "./components/login/chaos-login";
 import { ChaosLogout } from "./components/logout/chaos-logout";
+import { ChaosMastoLogin } from "./components/login/chaos-masto-login";
+import { ChaosMastoLogout } from "./components/logout/chaos-masto-logout";
 import { ChaosFilter } from "./components/filter/chaos-filter";
 import { ChaosResizer } from "./components/resizer/chaos-resizer";
 import { ChaosOnThisDay } from "./components/on-this-day/chaos-on-this-day";
@@ -20,6 +22,8 @@ document.addEventListener("chaos-request", (e: CustomEvent) => {
 
 customElements.define("chaos-login", ChaosLogin);
 customElements.define("chaos-logout", ChaosLogout);
+customElements.define("chaos-masto-login", ChaosMastoLogin);
+customElements.define("chaos-masto-logout", ChaosMastoLogout);
 customElements.define("chaos-filter", ChaosFilter);
 customElements.define("chaos-resizer", ChaosResizer);
 customElements.define("chaos-on-this-day", ChaosOnThisDay);

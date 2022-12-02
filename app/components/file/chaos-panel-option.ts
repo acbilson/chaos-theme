@@ -4,7 +4,11 @@ import {
 	Instances,
 	buildRequest,
 } from "../../state/injector";
-import { ChangeOption, PanelOptionType } from "../../services/models";
+import {
+	ChangeOption,
+	PanelOptionType,
+	SupportedPanelTypes,
+} from "../../services/models";
 
 export class ChaosPanelOption extends HTMLElement {
 	private _store: Store;
@@ -22,13 +26,25 @@ export class ChaosPanelOption extends HTMLElement {
 		return <HTMLInputElement>this.querySelector("input");
 	}
 
-	get value(): string {
-		return this.getAttribute("data-value") || "";
+	get value(): SupportedPanelTypes {
+		const value = this.getAttribute("data-value") || "";
+
+		switch (this.type) {
+			case PanelOptionType.TEXT:
+			default:
+				return value;
+			case PanelOptionType.LIST:
+				return value.includes(",")
+					? value.replaceAll(" ", "").split(",")
+					: [value.trim()];
+			case PanelOptionType.BOOLEAN:
+				return ["true", "yes"].includes(value.toLowerCase());
+		}
 	}
 
-	set value(v: string) {
-		this.setAttribute("data-value", v);
-		this.input.value = v;
+	set value(v: SupportedPanelTypes) {
+		this.setAttribute("data-value", String(v));
+		this.input.value = String(v);
 	}
 
 	get required(): boolean {
@@ -49,23 +65,11 @@ export class ChaosPanelOption extends HTMLElement {
 		return type ? PanelOptionType[type.toUpperCase()] : PanelOptionType.TEXT;
 	}
 
-	valueByType(): string | string[] {
-		switch (this.type) {
-			case PanelOptionType.TEXT:
-			default:
-				return this.value;
-			case PanelOptionType.LIST:
-				return this.value.includes(",")
-					? this.value.replaceAll(" ", "").split(",")
-					: [this.value.trim()];
-		}
-	}
-
 	getModel(): ChangeOption {
 		return <ChangeOption>{
 			key: this.key,
 			name: this.label,
-			value: this.valueByType(),
+			value: this.value,
 			required: this.required,
 			type: this.type,
 		};
@@ -82,9 +86,8 @@ export class ChaosPanelOption extends HTMLElement {
 				<label for="${this.label}">${this.label}</label>
 				<span>${this.required ? "(required)" : ""}
 				<input
-					${this.label ? 'name="this.label"' : ""}
-					${this.type ? 'type="this.type"' : ""}
-					${this.value ? 'value="this.value"' : ""}
+					${this.label ? `name="${this.label}"` : ""}
+					${this.value ? `value="${this.value}"` : ""}
 					${this.readonly ? "disabled" : ""}
 				/></span>
 			</li>

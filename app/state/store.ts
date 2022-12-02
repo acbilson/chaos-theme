@@ -1,4 +1,8 @@
-import { authorized, getUriFromHead } from "../shared/operators";
+import {
+	authorized,
+	mastodonAuthorized,
+	getUriFromHead,
+} from "../shared/operators";
 import { BaseUrls } from "../shared/base-urls";
 import { Notified } from "./notified";
 import { Observed } from "./observed";
@@ -6,12 +10,17 @@ import { Observed } from "./observed";
 export class Store {
 	// authentication
 	public isAuthorized$ = new Observed<boolean>();
+	public isMastodonAuthorized$ = new Observed<boolean>();
 
 	// filtering
 	public onFieldFilter$ = new Notified();
 
 	public get token(): string {
 		return sessionStorage.getItem("token");
+	}
+
+	public get mastodonToken(): string {
+		return sessionStorage.getItem("mastotoken");
 	}
 
 	public get publishUri(): string {
@@ -27,5 +36,25 @@ export class Store {
 		authorized(this.token).then((isAuth) => {
 			this.isAuthorized$.value = isAuth;
 		});
+
+		// responds to messages sent from the second window
+		window.addEventListener("message", (ev) => {
+			const e = <MessageEvent>ev;
+			if (e.isTrusted && e.data) {
+				const redirect = document.location.href;
+				mastodonAuthorized(this.token, e.data, redirect).then((isAuth) => {
+					this.isMastodonAuthorized$.value = isAuth;
+				});
+			}
+		});
+
+		// if Mastodon has redirected a code from its OAuth flow, use the code to retrieve a token
+		const params = new URLSearchParams(document.location.search);
+		console.log({ params, search: document.location.search });
+		if (params.has("code")) {
+			// sends code back to original window that made the authorization request
+			window.opener.postMessage(params.get("code"), document.location.origin);
+			window.close();
+		}
 	}
 }

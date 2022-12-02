@@ -21,24 +21,14 @@ export class ChaosLogin extends HTMLElement {
 	}
 
 	onClick(e: MouseEvent) {
+		const target = <HTMLButtonElement>e.target;
+		if (target?.type !== "button") return;
 		e.preventDefault();
 		e.stopPropagation();
-		const id = (<HTMLButtonElement>e.target).id;
 
-		switch (id) {
-			case "login":
-				this._auth
-					.authenticate(this.username?.value, this.password?.value)
-					.then((msg) => (this.errors.innerText = msg));
-				break;
-
-			case "mastodon":
-				this._auth.authenticateMastodon().then((r) => console.log(r));
-				break;
-
-			default:
-				console.log(`button with id ${id} not supported`);
-		}
+		this._auth
+			.authenticate(this.username?.value, this.password?.value)
+			.then((msg) => (this.errors.innerText = msg));
 	}
 
 	render() {
@@ -59,9 +49,8 @@ export class ChaosLogin extends HTMLElement {
 			/>
 			<button id="login" type="button">Login</button>
 			<chaos-logout><p>No logout</p></chaos-logout>
-			<button id="mastodon" type="button">Authenticate Mastodon</button>
 			<label id="errors"></label>
-			`;
+		`;
 	}
 
 	constructor() {
@@ -71,18 +60,14 @@ export class ChaosLogin extends HTMLElement {
 	connectedCallback() {
 		this.render();
 
-		const getAuth = buildRequest(<InjectionRequest>{
-			instance: Instances.AUTH,
-			callback: (e) => (this._auth = e),
-		});
-		this.dispatchEvent(getAuth);
+		this.dispatchEvent(
+			buildRequest(<InjectionRequest>{
+				instance: Instances.AUTH,
+				callback: (e) => (this._auth = e),
+			})
+		);
 
 		this.addEventListener("click", (e: MouseEvent) => this.onClick(e), false);
-
-		const params = new URLSearchParams(document.location.search);
-		if (params.has("code")) {
-			this._auth.getMastodonToken(params.get('code')).then((x) => console.log(x));
-		}
 	}
 
 	disconnectedCallback() {

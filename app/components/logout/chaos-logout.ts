@@ -22,6 +22,7 @@ export class ChaosLogout extends HTMLElement {
 	}
 
 	connectedCallback() {
+		// placeholder
 		this.innerHTML = `<button type="button" class="fill" hidden>Logout</button>`;
 
 		const getAuth = buildRequest(<InjectionRequest>{
@@ -38,7 +39,7 @@ export class ChaosLogout extends HTMLElement {
 		this.dispatchEvent(getStore);
 
 		this._subscription = this._store.isAuthorized$.subscribe(
-			"chaos-panel",
+			"chaos-logout",
 			(isAuth) => {
 				this.innerHTML = isAuth
 					? `<button type="button" class="fill">Logout</button>`

@@ -88,6 +88,17 @@ describe("chaos-panel-option", () => {
 				data-value="test,me,please"
 			></chaos-panel-option>`
 		);
-		expect(el.valueByType()).to.have.all.members(expected);
+		expect(el.value).to.have.all.members(expected);
+	});
+
+	it("parses boolean value", () => {
+		const expected = true;
+		const el = fixture(
+			`<chaos-panel-option
+				data-type="boolean"
+				data-value="true"
+			></chaos-panel-option>`
+		);
+		expect(el.value).to.equal(expected);
 	});
 });

@@ -4,20 +4,36 @@ export interface Response<T> {
 	content: T;
 }
 
+export interface MastoAuthResult {
+	authenticationUri: string;
+}
+
+export interface AuthResult {
+	token: string;
+}
+
+export interface ChangeRequest {
+	path: string;
+	body: string;
+	frontmatter: object;
+	token: string;
+}
+
 export interface ChangeResult {
 	path: string;
 	body: string;
 	frontmatter: object;
-	mastotoken: string;
 }
 
 export interface ChangeOption {
 	key: string;
 	name: string;
-	value: string;
+	value: SupportedPanelTypes;
 	type: PanelOptionType;
 	required: boolean;
 }
+
+export type SupportedPanelTypes = string | string[] | boolean;
 
 export enum PanelStatus {
 	CREATING = "Create",
@@ -28,6 +44,7 @@ export enum PanelStatus {
 export enum PanelOptionType {
 	TEXT = "text",
 	LIST = "list",
+	BOOLEAN = "boolean",
 }
 
 export enum PanelType {
