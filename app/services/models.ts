@@ -12,11 +12,17 @@ export interface AuthResult {
 	token: string;
 }
 
-export interface ChangeResult {
+export interface ChangeRequest {
 	path: string;
 	body: string;
 	frontmatter: object;
 	mastotoken: string;
+}
+
+export interface ChangeResult {
+	path: string;
+	body: string;
+	frontmatter: object;
 }
 
 export interface ChangeOption {

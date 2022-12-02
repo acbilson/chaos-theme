@@ -1,7 +1,7 @@
 import { ChaosPanelOption } from "./chaos-panel-option";
 import {
 	Response,
-	ChangeResult,
+	ChangeRequest,
 	ChangeOption,
 	PanelStatus,
 	PanelType,
@@ -153,9 +153,10 @@ export class ChaosPanel extends HTMLElement {
 		frontmatter["lastmod"] = new Date().toISOString();
 
 		return this._pub
-			.update(this._store.token, <ChangeResult>{
-				path,
+			.update(this._store.token, <ChangeRequest>{
 				body: this.contents,
+				token: this._store.mastodonToken,
+				path,
 				frontmatter,
 			})
 			.then(
@@ -198,14 +199,13 @@ export class ChaosPanel extends HTMLElement {
 		const now = new Date();
 		frontmatter["date"] = getSimpleDate(now);
 		frontmatter["lastmod"] = now.toISOString();
-		const mastotoken = sessionStorage.getItem('mastotoken');
 
 		this._pub
-			.create(this._store.token, <ChangeResult>{
+			.create(this._store.token, <ChangeRequest>{
 				body: this.contents,
+				token: this._store.mastodonToken,
 				frontmatter,
 				path,
-				mastotoken
 			})
 			.then(
 				(r) => {
