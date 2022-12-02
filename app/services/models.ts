@@ -4,6 +4,14 @@ export interface Response<T> {
 	content: T;
 }
 
+export interface MastoAuthResult {
+	authenticationUri: string;
+}
+
+export interface AuthResult {
+	token: string;
+}
+
 export interface ChangeResult {
 	path: string;
 	body: string;

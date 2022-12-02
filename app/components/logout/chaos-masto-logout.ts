@@ -1,4 +1,4 @@
-import { AuthService } from "../../services/index";
+import { MastoAuthService } from "../../services/index";
 import { Store } from "../../state/store";
 import {
 	InjectionRequest,
@@ -6,15 +6,16 @@ import {
 	buildRequest,
 } from "../../state/injector";
 
-export class ChaosLogout extends HTMLElement {
-	private _auth: AuthService;
+export class MastoChaosLogout extends HTMLElement {
+	private _mastoauth: MastoAuthService;
 	private _store: Store;
 	private _subscription: string;
+	private _defaultHTML = `<button type="button" class="fill" hidden>Logout</button>`;
 
 	onClick(e: MouseEvent) {
 		e.preventDefault();
 		e.stopPropagation();
-		this._auth.unauthenticate();
+		this._mastoauth.unauthenticate();
 	}
 
 	constructor() {
@@ -22,28 +23,28 @@ export class ChaosLogout extends HTMLElement {
 	}
 
 	connectedCallback() {
-		// placeholder
-		this.innerHTML = `<button type="button" class="fill" hidden>Logout</button>`;
+		this.innerHTML = this._defaultHTML;
 
-		const getAuth = buildRequest(<InjectionRequest>{
-			instance: Instances.AUTH,
-			callback: (e) => (this._auth = e),
-		});
+		this.dispatchEvent(
+			buildRequest(<InjectionRequest>{
+				instance: Instances.MASTOAUTH,
+				callback: (e) => (this._mastoauth = e),
+			})
+		);
 
-		const getStore = buildRequest(<InjectionRequest>{
-			instance: Instances.STORE,
-			callback: (e) => (this._store = e),
-		});
-
-		this.dispatchEvent(getAuth);
-		this.dispatchEvent(getStore);
+		this.dispatchEvent(
+			buildRequest(<InjectionRequest>{
+				instance: Instances.STORE,
+				callback: (e) => (this._store = e),
+			})
+		);
 
 		this._subscription = this._store.isAuthorized$.subscribe(
-			"chaos-logout",
+			"chaos-panel",
 			(isAuth) => {
 				this.innerHTML = isAuth
 					? `<button type="button" class="fill">Logout</button>`
-					: `<button type="button" class="fill" hidden>Logout</button>`;
+					: this._defaultHTML;
 			}
 		);
 

@@ -1,35 +1,34 @@
-import {
-	authenticate,
-	authorized,
-	authenticateMastodon
-} from "../../shared/operators";
+import { BaseUrls } from "../../shared/base-urls";
+import { authorized } from "../../shared/operators";
+import { AuthResult } from "../models";
 import store from "../../state/index";
 
 export class AuthService {
 	public authenticate(username: string, password: string): Promise<string> {
-		return authenticate(username, password).then(
-			(isAuthenticated) => {
-				store.isAuthorized$.value = isAuthenticated;
-				return "";
-			},
-			(err) => {
-				return "there was a login error";
-			}
-		);
+		if (username == null || password == null || BaseUrls.auth == null)
+			return new Promise((resolve) =>
+				resolve("missing authentication arguments")
+			);
+
+		const headers = new Headers();
+		headers.append("Authorization", `Basic ${btoa(username + ":" + password)}`);
+		return fetch(new URL("token", BaseUrls.auth), { headers })
+			.then((r) => (r.status === 200 ? r.json() : null))
+			.then((r) => <AuthResult>r)
+			.then(
+				(r) => {
+					if (r?.token === null) return "there was a login error";
+					return authorized(r.token).then((isAuthorized) => {
+						store.isAuthorized$.value = isAuthorized;
+						return "";
+					});
+				},
+				(err) => "there was a login error"
+			);
 	}
 
 	public unauthenticate() {
 		sessionStorage.removeItem("token");
 		store.isAuthorized$.value = false;
-	}
-
-	public authenticateMastodon(): Promise<any> {
-		return authenticateMastodon(store.token)
-			.then((r) => (r.status === 200 ? r.json() : null))
-			.then((r) => {
-				const uri = r["authentication_url"];
-				console.log({ uri });
-				window.open(uri, "_blank");
-			});
 	}
 }

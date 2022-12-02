@@ -46,27 +46,6 @@ export function authorized(token: string): Promise<boolean> {
 	);
 }
 
-export function authenticate(
-	username: string,
-	password: string
-): Promise<boolean> {
-	if (username == null || password == null || BaseUrls.auth == null)
-		return new Promise(() => false);
-
-	const headers = new Headers();
-	headers.append("Authorization", `Basic ${btoa(username + ":" + password)}`);
-	return fetch(new URL("token", BaseUrls.auth), { headers })
-		.then((r) => (r.status === 200 ? r.json() : null))
-		.then((b) => (b === null ? false : authorized(b?.token)));
-}
-
-export function authenticateMastodon(token: string): Promise<any> {
-	const headers = new Headers();
-	headers.append("Authorization", `Bearer ${token}`);
-	headers.append("Content-Type", "application/json; charset=UTF-8");
-	return fetch(new URL("mastoauth", BaseUrls.auth), { headers });
-}
-
 export function mastodonAuthorized(
 	token: string,
 	code: string
