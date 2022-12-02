@@ -1,5 +1,5 @@
 import { BaseUrls } from "./base-urls";
-import { PanelType } from "../services/models";
+import { AuthResult, PanelType } from "../services/models";
 
 export function getFilePathByDate(panelType: PanelType): string {
 	const prependZero = (x) => (x < 10 ? `0${x}` : x.toString());

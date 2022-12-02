@@ -19,6 +19,10 @@ export class ChaosMastoLogin extends HTMLElement {
 		return <HTMLLabelElement>this.querySelector("#errors");
 	}
 
+	get redirectUri(): string {
+		return document.location.origin;
+	}
+
 	onClick(e: MouseEvent) {
 		const target = <HTMLButtonElement>e.target;
 		if (target?.type !== "button") return;
@@ -26,7 +30,7 @@ export class ChaosMastoLogin extends HTMLElement {
 		e.stopPropagation();
 
 		this._mastoauth
-			.authenticate(this._store.token)
+			.authenticate(this._store.token, this.redirectUri)
 			.then((msg) => (this.errors.innerText = msg));
 	}
 

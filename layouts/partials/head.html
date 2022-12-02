@@ -18,11 +18,9 @@
   <!-- adds PWA manifest -->
   <link rel="manifest" href="{{ .Site.BaseURL }}/manifest.json">
 
-  <!-- adds authentication endpoint -->
-  <link rel="authentication" href="https://pub.alexbilson.dev">
-
-  <!-- adds publish endpoint -->
-  <link rel="publish" href="https://pub.alexbilson.dev">
+  <!-- adds authentication and publish endpoints -->
+  <link rel="authentication" href="{{ .Site.Params.AuthenticationUri }}">
+  <link rel="publish" href="{{ .Site.Params.PublishUri }}">
 
 	<!-- adds reference back to Mastodon -->
 	<link rel="me" href="https://indieweb.social/@acbilson">

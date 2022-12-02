@@ -3,15 +3,15 @@ import { Response, MastoAuthResult } from "../models";
 import store from "../../state/index";
 
 export class MastoAuthService {
-	public authenticate(token: string): Promise<string> {
-		if (token == null)
+	public authenticate(token: string, redirect: string): Promise<string> {
+		if (token == null || redirect == null)
 			return new Promise((resolve) =>
 				resolve("missing authentication arguments")
 			);
 
 		const headers = new Headers();
 		headers.append("Authorization", `Bearer ${token}`);
-		return fetch(new URL("mastodon/auth", BaseUrls.auth), { headers })
+		return fetch(new URL(`mastodon/auth?redirect=${redirect}`, BaseUrls.auth), { headers })
 			.then((r) => (r.status === 200 ? r.json() : null))
 			.then((r) => <MastoAuthResult>r)
 			.then((r) => {
