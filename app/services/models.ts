@@ -28,10 +28,12 @@ export interface ChangeResult {
 export interface ChangeOption {
 	key: string;
 	name: string;
-	value: string;
+	value: SupportedPanelTypes;
 	type: PanelOptionType;
 	required: boolean;
 }
+
+export type SupportedPanelTypes = string | string[] | boolean;
 
 export enum PanelStatus {
 	CREATING = "Create",
@@ -42,6 +44,7 @@ export enum PanelStatus {
 export enum PanelOptionType {
 	TEXT = "text",
 	LIST = "list",
+	BOOLEAN = "boolean",
 }
 
 export enum PanelType {
