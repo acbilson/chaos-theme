@@ -40,7 +40,7 @@ export class MastoAuthService {
 			headers,
 		})
 			.then((r) => (r.status === 200 ? r.json() : null))
-			.then((r) => <Response>r)
+			.then((r) => <Response<any>>r)
 			.then((r) => {
 				if (!r.success) return r.message;
 				sessionStorage.removeItem("mastotoken");

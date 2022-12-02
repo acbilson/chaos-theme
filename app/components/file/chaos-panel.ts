@@ -22,7 +22,10 @@ import {
 export class ChaosPanel extends HTMLElement {
 	private _pub: PublishService;
 	private _store: Store;
-	private _subscription: string;
+	private _subscriptions = {
+		auth: null,
+		mastodon: null,
+	};
 	private _typesWithOptions = [PanelType.PLANT, PanelType.STONE];
 	private _initialMarkup;
 	_isNew = true;
@@ -56,6 +59,10 @@ export class ChaosPanel extends HTMLElement {
 		return <ChaosPanelOption[]>(
 			Array.from(this.querySelectorAll("chaos-panel-option") || [])
 		);
+	}
+
+	get syndicateOption(): ChaosPanelOption {
+		return this.panelOptions.find((x) => x.key === "syndicate");
 	}
 
 	get contents(): string {
@@ -306,7 +313,7 @@ export class ChaosPanel extends HTMLElement {
 		this.dispatchEvent(getPublish);
 		this.dispatchEvent(getStore);
 
-		this._subscription = this._store.isAuthorized$.subscribe(
+		this._subscriptions.auth = this._store.isAuthorized$.subscribe(
 			"chaos-panel",
 			(isAuth) => {
 				if (isAuth) {
@@ -317,12 +324,23 @@ export class ChaosPanel extends HTMLElement {
 			}
 		);
 
+		// if syndication is an available option, make it readonly if
+		// I don't currently have authorization
+		if (this.syndicateOption) {
+			this._subscriptions.mastodon =
+				this._store.isMastodonAuthorized$.subscribe(
+					"chaos-panel",
+					(isAuth) => (this.syndicateOption.readonly = !isAuth)
+				);
+		}
+
 		this.addEventListener("submit", (e) => this.onButtonClick(e));
 		this.addEventListener("keyup", (e) => this.onKeyUp(e));
 	}
 
 	disconnectedCallback() {
-		this._store.isAuthorized$.unsubscribe(this._subscription);
+		this._store.isAuthorized$.unsubscribe(this._subscriptions.auth);
+		this._store.isMastodonAuthorized$.unsubscribe(this._subscriptions.mastodon);
 		this.removeEventListener("submit", (e) => this.onButtonClick(e));
 		this.removeEventListener("keyup", (e) => this.onKeyUp(e));
 	}

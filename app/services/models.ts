@@ -16,7 +16,7 @@ export interface ChangeRequest {
 	path: string;
 	body: string;
 	frontmatter: object;
-	mastotoken: string;
+	token: string;
 }
 
 export interface ChangeResult {
