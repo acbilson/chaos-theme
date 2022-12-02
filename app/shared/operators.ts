@@ -53,18 +53,21 @@ export function mastodonAuthorized(
 	const headers = new Headers();
 	headers.append("Authorization", `Bearer ${token}`);
 	headers.append("Content-Type", "application/json; charset=UTF-8");
-	return fetch(new URL(`masto_redirect?code=${code}`, BaseUrls.auth), {
+	return fetch(new URL(`mastodon/redirect?code=${code}`, BaseUrls.auth), {
 		headers,
-	}).then(
-		(r) => {
-			if (r.status !== 200) return false;
-			sessionStorage.setItem("mastotoken", token);
-			return true;
-		},
-		(err) => {
-			return false;
-		}
-	);
+	})
+		.then((r) => (r.status === 200 ? r.json() : null))
+		.then((r) => <AuthResult>r)
+		.then(
+			(r) => {
+				if (r?.token == null) return false;
+				sessionStorage.setItem("mastotoken", r.token);
+				return true;
+			},
+			(err) => {
+				return false;
+			}
+		);
 }
 
 export function getUriFromHead(rel: string): string {
