@@ -86,9 +86,8 @@ export class ChaosPanelOption extends HTMLElement {
 				<label for="${this.label}">${this.label}</label>
 				<span>${this.required ? "(required)" : ""}
 				<input
-					${this.label ? 'name="this.label"' : ""}
-					${this.type ? 'type="this.type"' : ""}
-					${this.value ? 'value="this.value"' : ""}
+					${this.label ? `name="${this.label}"` : ""}
+					${this.value ? `value="${this.value}"` : ""}
 					${this.readonly ? "disabled" : ""}
 				/></span>
 			</li>
