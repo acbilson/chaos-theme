@@ -12,7 +12,9 @@ export class AuthService {
 
 		const headers = new Headers();
 		headers.append("Authorization", `Basic ${btoa(username + ":" + password)}`);
-		return fetch(new URL("token", BaseUrls.auth), { headers })
+		const url = new URL("token", BaseUrls.auth);
+		console.log({ url });
+		return fetch(url, { headers })
 			.then((r) => (r.status === 200 ? r.json() : null))
 			.then((r) => <AuthResult>r)
 			.then(
