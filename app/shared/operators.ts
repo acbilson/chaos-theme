@@ -83,10 +83,3 @@ export function mastodonAuthorized(
 			}
 		);
 }
-
-export function getUriFromHead(rel: string): string {
-	const link = Array.from(document.head.children).find(
-		(x) => (x as HTMLAnchorElement).rel === rel
-	);
-	return (link as HTMLAnchorElement)?.href;
-}
