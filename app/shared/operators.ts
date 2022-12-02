@@ -56,7 +56,7 @@ export function mastodonAuthorized(
 	headers.append("Content-Type", "application/json; charset=UTF-8");
 	return fetch(
 		new URL(
-			`mastodon/redirect?code=${code}&redirect${redirect}`,
+			`mastodon/redirect?code=${code}&redirect=${redirect}`,
 			BaseUrls.auth
 		),
 		{

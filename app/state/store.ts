@@ -37,15 +37,24 @@ export class Store {
 			this.isAuthorized$.value = isAuth;
 		});
 
+		// responds to messages sent from the second window
+		window.addEventListener("message", (ev) => {
+			const e = <MessageEvent>ev;
+			if (e.isTrusted && e.data) {
+				const redirect = document.location.href;
+				mastodonAuthorized(this.token, e.data, redirect).then((isAuth) => {
+					this.isMastodonAuthorized$.value = isAuth;
+				});
+			}
+		});
+
 		// if Mastodon has redirected a code from its OAuth flow, use the code to retrieve a token
 		const params = new URLSearchParams(document.location.search);
+		console.log({ params, search: document.location.search });
 		if (params.has("code")) {
-			const origin = document.location.origin;
-			mastodonAuthorized(this.token, params.get("code"), origin).then(
-				(isAuth) => {
-					this.isMastodonAuthorized$.value = isAuth;
-				}
-			);
+			// sends code back to original window that made the authorization request
+			window.opener.postMessage(params.get("code"), document.location.origin);
+			window.close();
 		}
 	}
 }

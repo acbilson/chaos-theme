@@ -20,7 +20,7 @@ export class ChaosMastoLogin extends HTMLElement {
 	}
 
 	get redirectUri(): string {
-		return document.location.origin;
+		return document.location.href;
 	}
 
 	onClick(e: MouseEvent) {
