@@ -1,9 +1,4 @@
-import {
-	authorized,
-	mastodonAuthorized,
-	getUriFromHead,
-} from "../shared/operators";
-import { BaseUrls } from "../shared/base-urls";
+import { authorized, mastodonAuthorized } from "../shared/operators";
 import { Notified } from "./notified";
 import { Observed } from "./observed";
 
@@ -21,14 +16,6 @@ export class Store {
 
 	public get mastodonToken(): string {
 		return sessionStorage.getItem("mastotoken");
-	}
-
-	public get publishUri(): string {
-		return getUriFromHead("publish");
-	}
-
-	public get authUri(): string {
-		return getUriFromHead("authentication");
 	}
 
 	constructor() {

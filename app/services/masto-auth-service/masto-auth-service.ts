@@ -1,4 +1,4 @@
-import { BaseUrls } from "../../shared/base-urls";
+import { getUrlFromHead } from "../../shared/operators";
 import { Response, MastoAuthResult } from "../models";
 import store from "../../state/index";
 
@@ -9,9 +9,17 @@ export class MastoAuthService {
 				resolve("missing authentication arguments")
 			);
 
+		const baseUri = getUrlFromHead("authentication");
+		if (!baseUri)
+			return new Promise((resolve) =>
+				resolve("missing authentication uri in head")
+			);
+
 		const headers = new Headers();
 		headers.append("Authorization", `Bearer ${token}`);
-		return fetch(new URL(`mastodon/auth?redirect=${redirect}`, BaseUrls.auth), { headers })
+		return fetch(new URL(`mastodon/auth?redirect=${redirect}`, baseUri), {
+			headers,
+		})
 			.then((r) => (r.status === 200 ? r.json() : null))
 			.then((r) => <MastoAuthResult>r)
 			.then((r) => {
@@ -30,11 +38,17 @@ export class MastoAuthService {
 				resolve("missing authentication arguments")
 			);
 
+		const baseUri = getUrlFromHead("authentication");
+		if (!baseUri)
+			return new Promise((resolve) =>
+				resolve("missing authentication uri in head")
+			);
+
 		const payload = { token: mastotoken };
 		const headers = new Headers();
 		headers.append("Authorization", `Bearer ${token}`);
 		headers.append("Content-Type", "application/json; charset=UTF-8");
-		return fetch(new URL("mastodon/revoke", BaseUrls.auth), {
+		return fetch(new URL("mastodon/revoke", baseUri), {
 			method: "POST",
 			body: JSON.stringify(payload),
 			headers,

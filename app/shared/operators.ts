@@ -1,5 +1,11 @@
-import { BaseUrls } from "./base-urls";
 import { AuthResult, PanelType } from "../services/models";
+
+export function getUrlFromHead(rel: string): string {
+	const match = Array.from(document.head.children).find(
+		(x) => (x as HTMLAnchorElement).rel === rel
+	);
+	return (<HTMLAnchorElement>match).href;
+}
 
 export function getFilePathByDate(panelType: PanelType): string {
 	const prependZero = (x) => (x < 10 ? `0${x}` : x.toString());
@@ -29,12 +35,13 @@ export function mapClass(args: string[]): string {
 }
 
 export function authorized(token: string): Promise<boolean> {
-	if (token == null || BaseUrls.auth == null)
+	const baseUri = getUrlFromHead("publish");
+	if (token == null || !baseUri)
 		return new Promise((resolve, reject) => resolve(false));
 
 	const headers = new Headers();
 	headers.append("Authorization", `Bearer ${token}`);
-	return fetch(new URL("auth", BaseUrls.auth), { headers }).then(
+	return fetch(new URL("auth", baseUri), { headers }).then(
 		(r) => {
 			if (r.status !== 200) return false;
 			sessionStorage.setItem("token", token);
@@ -51,14 +58,14 @@ export function mastodonAuthorized(
 	code: string,
 	redirect: string
 ): Promise<boolean> {
+	const baseUri = getUrlFromHead("publish");
+	if (!baseUri) return new Promise((resolve, reject) => resolve(false));
+
 	const headers = new Headers();
 	headers.append("Authorization", `Bearer ${token}`);
 	headers.append("Content-Type", "application/json; charset=UTF-8");
 	return fetch(
-		new URL(
-			`mastodon/redirect?code=${code}&redirect=${redirect}`,
-			BaseUrls.auth
-		),
+		new URL(`mastodon/redirect?code=${code}&redirect=${redirect}`, baseUri),
 		{
 			headers,
 		}

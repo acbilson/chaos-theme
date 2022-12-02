@@ -1,18 +1,24 @@
-import { BaseUrls } from "../../shared/base-urls";
-import { authorized } from "../../shared/operators";
+import { authorized, getUrlFromHead } from "../../shared/operators";
 import { AuthResult } from "../models";
 import store from "../../state/index";
 
 export class AuthService {
 	public authenticate(username: string, password: string): Promise<string> {
-		if (username == null || password == null || BaseUrls.auth == null)
+		if (username == null || password == null)
 			return new Promise((resolve) =>
 				resolve("missing authentication arguments")
 			);
 
+		const baseUri = getUrlFromHead("authentication");
+
+		if (!baseUri)
+			return new Promise((resolve) =>
+				resolve("missing authentication uri in head")
+			);
+
 		const headers = new Headers();
 		headers.append("Authorization", `Basic ${btoa(username + ":" + password)}`);
-		const url = new URL("token", BaseUrls.auth);
+		const url = new URL("token", baseUri);
 		console.log({ url });
 		return fetch(url, { headers })
 			.then((r) => (r.status === 200 ? r.json() : null))
