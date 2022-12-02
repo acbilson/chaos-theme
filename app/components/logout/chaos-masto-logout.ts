@@ -42,9 +42,8 @@ export class ChaosMastoLogout extends HTMLElement {
 			})
 		);
 
-		// TODO: figure out how to subscribe to both authentication observers combineLatest-style
-		this._subscription = this._store.isAuthorized$.subscribe(
-			"chaos-panel",
+		this._subscription = this._store.isMastodonAuthorized$.subscribe(
+			"chaos-masto-logout",
 			(isAuth) => {
 				this.innerHTML = isAuth
 					? `<button type="button" class="fill">Logout</button>`
@@ -56,7 +55,7 @@ export class ChaosMastoLogout extends HTMLElement {
 	}
 
 	disconnectedCallback() {
-		this._store.isAuthorized$.unsubscribe(this._subscription);
+		this._store.isMastodonAuthorized$.unsubscribe(this._subscription);
 		this.removeEventListener(
 			"click",
 			(e: MouseEvent) => this.onClick(e),
