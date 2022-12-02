@@ -50,7 +50,6 @@ export class Store {
 
 		// if Mastodon has redirected a code from its OAuth flow, use the code to retrieve a token
 		const params = new URLSearchParams(document.location.search);
-		console.log({ params, search: document.location.search });
 		if (params.has("code")) {
 			// sends code back to original window that made the authorization request
 			window.opener.postMessage(params.get("code"), document.location.origin);
