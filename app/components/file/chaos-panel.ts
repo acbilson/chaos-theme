@@ -55,6 +55,10 @@ export class ChaosPanel extends HTMLElement {
 		return <HTMLButtonElement>this.querySelector(`button#${status}`);
 	}
 
+	getCharacterCount(): HTMLElement {
+		return <HTMLElement>this.querySelector("#character-count");
+	}
+
 	get panelOptions(): ChaosPanelOption[] {
 		return <ChaosPanelOption[]>(
 			Array.from(this.querySelectorAll("chaos-panel-option") || [])
@@ -256,7 +260,10 @@ export class ChaosPanel extends HTMLElement {
 					${panelButtons}
 				</fieldset>
 				<fieldset>${this._initialMarkup}</fieldset>
-				<p id="error-message"></p>
+				<div>
+					<p><span id="character-count">0</span> characters</p>
+					<p id="error-message"></p>
+				</div>
 				<textarea>${this.contents}</textarea>
 			</form>
 		`;
@@ -291,6 +298,7 @@ export class ChaosPanel extends HTMLElement {
 		e.preventDefault();
 		const el = <HTMLTextAreaElement>e.target;
 		this.getButton(PanelStatus.SAVING).disabled = el.value.length <= 0;
+		this.getCharacterCount().innerText = el.value.length.toString();
 	}
 
 	constructor() {
