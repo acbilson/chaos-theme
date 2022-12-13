@@ -28,7 +28,6 @@ testwatch:
 
 # deploys the app bundle for Hugo to pick up in theme/assets/js/app
 deploy: build
-	cp dist/index.modern.js.map /Users/alexbilson/source/chaos-theme/assets/js/app/index.modern.js.map
 	cp dist/index.modern.js /Users/alexbilson/source/chaos-theme/assets/js/app/app.modern.js
 
 hugo:
