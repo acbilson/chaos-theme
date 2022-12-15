@@ -1,18 +1,48 @@
 {{- $anchor := .File.BaseFileName -}}
-{{- $path := strings.TrimSuffix ".md" (printf "/%s" .File.Path) -}}
-{{- $response := getJSON "http://chaos-theme-service/backrefs" -}}
-{{- $backlinkjs := resources.Get "js/backlink.js" -}}
+{{- $path := printf "/%s" .File.Path -}}
 
-{{- range $backlink, $backrefs := $response.results -}}
-  {{- if eq $path $backlink -}}
-  <h3>Backlinks</h3>
- {{- range $backrefs -}}
-<div class="wrapper wrapper-no-center | card">
-	<ul class="spread narrow-spread" role="list">
-		<li><a class="no-underline" href="{{ $.Site.BaseURL }}{{ . }}/#{{ $anchor }}">⚓</a></li>
-		<li>{{- humanize (path.Base .) -}}</li>
-	</ul>
-</div>
- {{- end -}}
-  {{- end -}}
+{{- if isset .Params "tags" -}}
+<aside class="wrapper">
+	<h3>Related Tags</h3>
+	<div class="spread-btwn">
+	{{- range $tagName := .Params.tags -}}
+		{{- with $.Site.GetPage (printf "/%s/%s" "tags" ( $tagName | urlize)) -}}
+		{{- $tagPage := index .Site.Taxonomies.tags $tagName -}}
+		<div>
+			<p><a href="{{ .Permalink }}">{{- $tagName -}}</a><sup>{{- $tagPage.Count -}}</sup></p>
+		{{- end -}}
+		<ul class="spread narrow-spread" role="list">
+		{{- range where $.Site.Data.tags "referrer" "eq" . -}}
+			{{- if gt (len .sources) 0 -}}
+				{{- range $sourceTagName := .sources -}}
+					{{- with $.Site.GetPage (printf "/%s/%s" "tags" ( $sourceTagName | urlize)) -}}
+					{{- $sourceTagPage := index .Site.Taxonomies.tags $sourceTagName -}}
+						<li><a href="{{ .Permalink }}">{{- $sourceTagName -}}</a><sup>{{- $sourceTagPage.Count -}}</sup></li>
+					{{- end -}}
+				{{- end -}}
+			{{- else -}}
+				<li>No related tags</li>
+			{{- end -}}
+		{{- end -}}
+		</ul>
+		</div>
+	{{- end -}}
+	</div>
 {{- end -}}
+</aside>
+
+<aside class="wrapper">
+	<h3>References To This Page</h3>
+	<ul class="spread" role="list">
+		{{- range where $.Site.Data.backrefs "referrer" "eq" $path -}}
+			{{- if gt (len .sources) 0 -}}
+				{{- range .sources -}}
+					{{- with $.Site.GetPage . -}}
+					{{- $title := .Title -}}{{- if eq $title "" -}}{{- $title = humanize .File.BaseFileName -}}{{- end -}}
+					<li><a href="{{ .Permalink }}">{{ $title }}</a></li>
+					{{- end -}}
+				{{- end -}}
+			{{- end -}}
+		{{- end -}}
+	</ul>
+</aside>

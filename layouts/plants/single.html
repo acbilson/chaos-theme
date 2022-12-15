@@ -10,10 +10,11 @@
 		<h1 id="jump">{{ $title }}</h1>
 		<a class="u-url" href="{{ .Permalink }}" hidden></a>
 		{{ .Content }}
-		{{ partial "backlink.html" . }}
+
 		{{ partial "comments.html" . }}
 		{{ partial "attributes.html" . }}
 	</article>
+		{{ partial "backlink.html" . }}
 		<chaos-panel data-panel-type="plant"
 			><ul role="list">
 				<chaos-panel-option
