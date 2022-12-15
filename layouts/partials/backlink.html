@@ -6,11 +6,24 @@
 <aside class="wrapper">
 	<h3>References To This Page</h3>
 	<ul class="spread" role="list">
-		{{- range .sources -}}
-			{{- with $.Site.GetPage . -}}
-			{{- $title := .Title -}}{{- if eq $title "" -}}{{- $title = humanize .File.BaseFileName -}}{{- end -}}
-			<li><a href="{{ .Permalink }}">{{ $title }}</a></li>
+		{{- range $source := .sources -}}
+			{{- $sourcePage := $.Site.GetPage $source -}}
+			{{- $sourceTitle := $sourcePage.Title -}}{{- if eq $sourceTitle "" -}}{{- $sourceTitle = humanize $sourcePage.File.BaseFileName -}}{{- end -}}
+			<li class="spread"><a href="{{ $sourcePage.Permalink }}">{{ $sourceTitle }}</a>
+
+				<!-- second-level backrefs if available -->
+			{{- range where $.Site.Data.backrefs "referrer" "eq" $source -}}
+				{{- if gt (len .sources) 0 -}}
+				--> <ul role="list">
+						{{- range $subSource := .sources -}}
+							{{- $subSourcePage := $.Site.GetPage $subSource -}}
+							{{- $subSourceTitle := $subSourcePage.Title -}}{{- if eq $subSourceTitle "" -}}{{- $subSourceTitle = humanize $subSourcePage.File.BaseFileName -}}{{- end -}}
+							<li><a href="{{ $subSourcePage.Permalink }}">{{ $subSourceTitle }}</a></li>
+						{{- end -}}
+
+				{{- end -}}
 			{{- end -}}
+			</li>
 		{{- end -}}
 	</ul>
 </aside>
