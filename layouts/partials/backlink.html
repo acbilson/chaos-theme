@@ -5,16 +5,16 @@
 	{{- if gt (len .sources) 0 -}}
 <aside class="wrapper">
 	<h3>References To This Page</h3>
-	<ul class="spread" role="list">
+	<ul class="spread-down" role="list">
 		{{- range $source := .sources -}}
 			{{- $sourcePage := $.Site.GetPage $source -}}
 			{{- $sourceTitle := $sourcePage.Title -}}{{- if eq $sourceTitle "" -}}{{- $sourceTitle = humanize $sourcePage.File.BaseFileName -}}{{- end -}}
-			<li class="spread"><a href="{{ $sourcePage.Permalink }}">{{ $sourceTitle }}</a>
+			<li class="spread"><a style="max-width: 20ch;" href="{{ $sourcePage.Permalink }}">{{ $sourceTitle }}</a>
 
 				<!-- second-level backrefs if available -->
 			{{- range where $.Site.Data.backrefs "referrer" "eq" $source -}}
 				{{- if gt (len .sources) 0 -}}
-				--> <ul role="list">
+				<span>--></span> <ul class="spread-down" style="max-width: 20ch; margin: 0px;" role="list">
 						{{- range $subSource := .sources -}}
 							{{- $subSourcePage := $.Site.GetPage $subSource -}}
 							{{- $subSourceTitle := $subSourcePage.Title -}}{{- if eq $subSourceTitle "" -}}{{- $subSourceTitle = humanize $subSourcePage.File.BaseFileName -}}{{- end -}}

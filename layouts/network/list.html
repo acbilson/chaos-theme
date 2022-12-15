@@ -6,15 +6,41 @@
 {{ partialCached "head.html" . }}
 <body class="flow-l">
   {{ partialCached "nav-bar.html" . }}
+
+  <article class="wrapper flow-m">
+		<h1 id="jump">{{- .Title -}}</h1>
+	  {{- .Content -}}
+  </article>
+  <!--
   <article class="wrapper flow-m">
   <h1 id="jump">{{ .Title }}</h1>
   <svg class="diagram-svg" viewbox="0 0 1200 1200"></svg>
+  </article>
+  -->
+  <article class="wrapper flow-l">
+	{{- range $.Site.Data.backrefs -}}
+		{{- if gt (len .sources) 0 -}}
+		{{- $referrerPage := $.Site.GetPage .referrer -}}
+		{{- $referrerTitle := $referrerPage.Title -}}{{- if eq $referrerTitle "" -}}{{- $referrerTitle = humanize $referrerPage.BaseFileName -}}{{- end -}}
+		<div class="spread">
+		<a style="max-width: 40ch;" href="{{ $referrerPage.Permalink }}">{{- $referrerTitle -}}</a>
+		<span>--></span> <ul class="spread-down" style="max-width: 40ch; margin: 0;" role="list">
+				{{- range $source := .sources -}}
+				{{- $sourcePage := $.Site.GetPage $source -}}
+				{{- $sourceTitle := $sourcePage.Title -}}{{- if eq $sourceTitle "" -}}{{- $sourceTitle = humanize $sourcePage.File.BaseFileName -}}{{- end -}}
+				<li><a href="{{ $sourcePage.Permalink }}">{{- $sourceTitle -}}</a></li>
+				{{- end -}}
+			</ul>
+		</div>
+		{{- end -}}
+	{{- end -}}
   </article>
   {{ partialCached "foot.html" . }}
 </body>
 
 <!-- this displays the tags cloud diagram after other scripts load. I've done it this way so that I can use Hugo
 to pass along the path to the JSON file. -->
+<!--
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     display_diagram("/network/diagram.json");
@@ -22,4 +48,5 @@ to pass along the path to the JSON file. -->
 </script>
 <script src="{{ $diagramjs.Permalink }}"></script>
 <script src="https://d3js.org/d3.v5.min.js"></script>
+-->
 </html>
