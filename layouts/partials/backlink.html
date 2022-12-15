@@ -1,48 +1,18 @@
 {{- $anchor := .File.BaseFileName -}}
 {{- $path := printf "/%s" .File.Path -}}
 
-{{- if isset .Params "tags" -}}
-<aside class="wrapper">
-	<h3>Related Tags</h3>
-	<div class="spread-btwn">
-	{{- range $tagName := .Params.tags -}}
-		{{- with $.Site.GetPage (printf "/%s/%s" "tags" ( $tagName | urlize)) -}}
-		{{- $tagPage := index .Site.Taxonomies.tags $tagName -}}
-		<div>
-			<p><a href="{{ .Permalink }}">{{- $tagName -}}</a><sup>{{- $tagPage.Count -}}</sup></p>
-		{{- end -}}
-		<ul class="spread narrow-spread" role="list">
-		{{- range where $.Site.Data.tags "referrer" "eq" . -}}
-			{{- if gt (len .sources) 0 -}}
-				{{- range $sourceTagName := .sources -}}
-					{{- with $.Site.GetPage (printf "/%s/%s" "tags" ( $sourceTagName | urlize)) -}}
-					{{- $sourceTagPage := index .Site.Taxonomies.tags $sourceTagName -}}
-						<li><a href="{{ .Permalink }}">{{- $sourceTagName -}}</a><sup>{{- $sourceTagPage.Count -}}</sup></li>
-					{{- end -}}
-				{{- end -}}
-			{{- else -}}
-				<li>No related tags</li>
-			{{- end -}}
-		{{- end -}}
-		</ul>
-		</div>
-	{{- end -}}
-	</div>
-{{- end -}}
-</aside>
-
+{{- range where $.Site.Data.backrefs "referrer" "eq" $path -}}
+	{{- if gt (len .sources) 0 -}}
 <aside class="wrapper">
 	<h3>References To This Page</h3>
 	<ul class="spread" role="list">
-		{{- range where $.Site.Data.backrefs "referrer" "eq" $path -}}
-			{{- if gt (len .sources) 0 -}}
-				{{- range .sources -}}
-					{{- with $.Site.GetPage . -}}
-					{{- $title := .Title -}}{{- if eq $title "" -}}{{- $title = humanize .File.BaseFileName -}}{{- end -}}
-					<li><a href="{{ .Permalink }}">{{ $title }}</a></li>
-					{{- end -}}
-				{{- end -}}
+		{{- range .sources -}}
+			{{- with $.Site.GetPage . -}}
+			{{- $title := .Title -}}{{- if eq $title "" -}}{{- $title = humanize .File.BaseFileName -}}{{- end -}}
+			<li><a href="{{ .Permalink }}">{{ $title }}</a></li>
 			{{- end -}}
 		{{- end -}}
 	</ul>
 </aside>
+	{{- end -}}
+{{- end -}}
