@@ -1,30 +1,20 @@
-{{- if eq .path nil -}}
-<p> path is nil </p>
-{{- else if eq .backrefs nil -}}
-<p> backrefs is nil </p>
-{{- else if eq .site nil -}}
-<p> site is nil </p>
-{{- else -}}
+{{- $path := .path -}}
+{{- $backrefs := .backrefs -}}
+{{- $site := .site -}}
 
 <!-- will not enter if there is no referrer match -->
-{{- range where .backrefs "referrer" "eq" .path -}}
+{{- range where $backrefs "referrer" "eq" $path -}}
 
 <!-- only creates lists where referrer has sources -->
 {{- if gt (len .sources) 0 -}}
 
-<ul role="list">
-{{- partial "backlink-recurse.html" (dict "depth" 1 "referrer" .referrer "sources" .sources "backrefs" .backrefs "site" .site) -}}
+<h3>References To This Page</h3>
+<ul class="spread backrefs" role="list">
+{{- partial "backlink-recurse.html" (dict "depth" 1 "referrer" .referrer "sources" .sources "backrefs" $backrefs "site" $site) -}}
 </ul>
 
 <!-- end if sources > 1 -->
-{{- else -}}
-<p> no sources </p>
 {{- end -}}
 
 <!-- end backrefs range -->
-{{- else -}}
-<p> no backrefs </p>
-{{- end -}}
-
-<!-- end nil check -->
 {{- end -}}
