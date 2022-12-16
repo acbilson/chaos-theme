@@ -1,34 +1,30 @@
-{{- $anchor := .File.BaseFileName -}}
-{{- $path := printf "/%s" .File.Path -}}
+{{- if eq .path nil -}}
+<p> path is nil </p>
+{{- else if eq .backrefs nil -}}
+<p> backrefs is nil </p>
+{{- else if eq .site nil -}}
+<p> site is nil </p>
+{{- else -}}
 
-{{- range where $.Site.Data.backrefs "referrer" "eq" $path -}}
-	{{- if gt (len .sources) 0 -}}
-	{{- $referrer := .referrer -}}
-<aside class="wrapper flow-s">
-	<h3>References To This Page</h3>
-	<p>These show all the pages that refer to this page. If there is an arrow next to a link, it points to pages that link to <i>that</i> page.</p>
-	<ul class="spread-down" role="list">
-		{{- range $source := .sources -}}
-			{{- $sourcePage := $.Site.GetPage $source -}}
-			{{- $sourceTitle := $sourcePage.Title -}}{{- if eq $sourceTitle "" -}}{{- $sourceTitle = humanize $sourcePage.File.BaseFileName -}}{{- end -}}
-			<li class="spread"><a style="max-width: 20ch;" href="{{ $sourcePage.Permalink }}" data-referrer="{{ $referrer }}">{{ $sourceTitle }}</a>
+<!-- will not enter if there is no referrer match -->
+{{- range where .backrefs "referrer" "eq" .path -}}
 
-				<!-- second-level backrefs if available -->
-			{{- range where $.Site.Data.backrefs "referrer" "eq" $source -}}
-				{{- if gt (len .sources) 0 -}}
-				{{- $referrer := .referrer -}}
-				<span>--></span> <ul class="spread-down" style="max-width: 20ch; margin: 0px;" role="list">
-						{{- range $subSource := .sources -}}
-							{{- $subSourcePage := $.Site.GetPage $subSource -}}
-							{{- $subSourceTitle := $subSourcePage.Title -}}{{- if eq $subSourceTitle "" -}}{{- $subSourceTitle = humanize $subSourcePage.File.BaseFileName -}}{{- end -}}
-							<li><a style="max-width: 20ch;" href="{{ $subSourcePage.Permalink }}" data-referrer="{{ $referrer }}">{{ $subSourceTitle }}</a></li>
-						{{- end -}}
+<!-- only creates lists where referrer has sources -->
+{{- if gt (len .sources) 0 -}}
 
-				{{- end -}}
-			{{- end -}}
-			</li>
-		{{- end -}}
-	</ul>
-</aside>
-	{{- end -}}
+<ul role="list">
+{{- partial "backlink-recurse.html" (dict "depth" 1 "referrer" .referrer "sources" .sources "backrefs" .backrefs "site" .site) -}}
+</ul>
+
+<!-- end if sources > 1 -->
+{{- else -}}
+<p> no sources </p>
+{{- end -}}
+
+<!-- end backrefs range -->
+{{- else -}}
+<p> no backrefs </p>
+{{- end -}}
+
+<!-- end nil check -->
 {{- end -}}
