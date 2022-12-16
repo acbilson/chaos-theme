@@ -215,3 +215,20 @@ table.two-column {
 		@extend .spread-down;
 	}
 }
+
+.backrefs {
+	text-align: center;
+
+	> li > a {
+		font-weight: 600;
+	}
+
+	> li {
+		max-width: 250px;
+	}
+
+	li, ul {
+		align-items: center;
+	}
+
+}

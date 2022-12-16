@@ -1,11 +1,12 @@
+{{- $maxDepth := 3 -}}
 {{- $depth := .depth -}}
 {{- $referrer := .referrer -}}
 {{- $sources := .sources -}}
 {{- $backrefs := .backrefs -}}
 {{- $site := .site -}}
 
-<!-- maxing out at 3 children deep -->
-{{- if lt $depth 4 -}}
+<!-- maxing out at 3 children deep to prevent infinite recursion -->
+{{- if le $depth $maxDepth -}}
 
 {{- range .sources -}}
 
@@ -21,8 +22,14 @@
 
 	<li class="spread-down" data-referrer="{{ $referrer }}">
 		<a href="{{ $page.Permalink }}">{{- $title -}}</a>
-		<span>{{- printf "L%d" $depth -}}</span>
-		<ul>
+			{{- if ne $depth $maxDepth -}}
+			{{- if eq $depth (sub $maxDepth 1) -}}
+				<span>⏫</span>
+			{{- else -}}
+				<span>⬆️</span>
+			{{- end -}}
+			{{- end -}}
+		<ul class="spread-down" role="list" data-depth="{{ $depth }}" data-source-count="{{ len .sources }}">
 			{{- partial "backlink-recurse.html" (dict "depth" (add $depth 1) "referrer" $path "sources" .sources "backrefs" $backrefs "site" $site) -}}
 		</ul>
 	</li>
