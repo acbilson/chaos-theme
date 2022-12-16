@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="{{ .Site.Params.defaultColorMode }}">
+{{ partialCached "head.html" . }}
+<body class="flow-l">
+  {{ partialCached "nav-bar.html" . }}
+
+{{- $stoneCount := 0 -}}
+{{- $plantCount := 0 -}}
+{{- with index .Site.Taxonomies.tags .Title -}}
+	{{- range .Pages -}}
+		{{ if hasPrefix .File.Dir "stones" }}{{- $stoneCount = add 1 $stoneCount -}}{{- end -}}
+		{{ if hasPrefix .File.Dir "plants" }}{{- $plantCount = add 1 $plantCount -}}{{- end -}}
+	{{- end -}}
+{{- end -}}
+
+  <article class="wrapper flow-m">
+  {{- with .Title -}}
+  <h1 id="jump">{{- . -}}<sup>({{- $plantCount -}}/{{- $stoneCount -}})</sup></h1>
+  {{- end -}}
+  {{- with .Content -}}
+	 {{- . -}}
+  {{- end -}}
+
+  {{- range where $.Site.Data.tags "referrer" "eq" .Title -}}
+		{{- if gt (len .sources) 0 -}}
+	  <aside>
+		  <h3>Related Tags</h3>
+		  <ul class="spread" role="list">
+		  {{- range .sources -}}
+			{{- $tagPage := index $.Site.Taxonomies.tags . -}}
+			{{- with $.Site.GetPage (printf "/%s/%s" "tags" ( . | urlize)) -}}
+			<li><a href="{{ .Permalink }}">{{- .Title -}}<sup>({{- $tagPage.Count -}})</sup></a></li>
+		   {{- end -}}
+		  {{- end -}}
+		  </ul>
+	  </aside>
+	  {{- end -}}
+  {{- end -}}
+
+    {{- range .Pages -}}
+      {{- .Render "li" -}}
+    {{- end -}}
+  </article>
+
+  {{ partialCached "foot.html" . }}
+  {{ partialCached "scripts.html" . }}
+</body>
+</html>

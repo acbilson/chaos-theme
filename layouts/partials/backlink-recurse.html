@@ -1,0 +1,52 @@
+{{- $maxDepth := 3 -}}
+{{- $depth := .depth -}}
+{{- $referrer := .referrer -}}
+{{- $sources := .sources -}}
+{{- $backrefs := .backrefs -}}
+{{- $site := .site -}}
+
+<!-- maxing out at 3 children deep to prevent infinite recursion -->
+{{- if le $depth $maxDepth -}}
+
+{{- range .sources -}}
+
+	{{- $page := $site.GetPage . -}}
+	{{- $path := (printf "/%s" $page.Path) -}}
+	{{- $title := $page.Title -}}{{- if eq $title "" -}}{{- $title = humanize $page.File.BaseFileName -}}{{- end -}}
+
+	<!-- will not enter if there is no referrer match -->
+	{{- range where $backrefs "referrer" "eq" $path -}}
+
+	<!-- only creates lists where referrer has sources -->
+	{{- if gt (len .sources) 0 -}}
+
+	<li class="spread-down" data-referrer="{{ $referrer }}">
+		<a href="{{ $page.Permalink }}">{{- $title -}}</a>
+			{{- if ne $depth $maxDepth -}}
+			{{- if eq $depth (sub $maxDepth 1) -}}
+				<span>⏫</span>
+			{{- else -}}
+				<span>⬆️</span>
+			{{- end -}}
+			{{- end -}}
+		<ul class="spread-down" role="list" data-depth="{{ $depth }}" data-source-count="{{ len .sources }}">
+			{{- partial "backlink-recurse.html" (dict "depth" (add $depth 1) "referrer" $path "sources" .sources "backrefs" $backrefs "site" $site) -}}
+		</ul>
+	</li>
+	<!-- end if sources > 1 -->
+	{{- else -}}
+		<!-- backref terminus -->
+		<li data-referrer="{{ $referrer }}"><a href="{{ $page.Permalink }}">{{- $title -}}</a></li>
+	{{- end -}}
+
+	<!-- end backrefs range -->
+	{{- else -}}
+		<!-- backref terminus -->
+		<li data-referrer="{{ $referrer }}"><a href="{{ $page.Permalink }}">{{- $title -}}</a></li>
+	{{- end -}}
+
+	<!-- end sources range -->
+{{- end -}}
+
+<!-- end if depth > 4 -->
+{{- end -}}
