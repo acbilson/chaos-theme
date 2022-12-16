@@ -10,10 +10,15 @@
 		<h1 id="jump">{{ $title }}</h1>
 		<a class="u-url" href="{{ .Permalink }}" hidden></a>
 		{{ .Content }}
-		{{ partial "backlink.html" . }}
+
 		{{ partial "comments.html" . }}
 		{{ partial "attributes.html" . }}
 	</article>
+
+	<aside id="backlinks" class="wrapper flow-m">
+		{{- partial "backlink.html" (dict "path" (printf "/%s" .File.Path) "backrefs" $.Site.Data.backrefs "site" .Site) -}}
+	<aside>
+
 		<chaos-panel data-panel-type="plant"
 			><ul role="list">
 				<chaos-panel-option

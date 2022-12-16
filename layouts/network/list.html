@@ -1,20 +1,66 @@
-{{- $darkmodejs := resources.Get "js/darkmode.js" -}}
-{{- $navbarjs := resources.Get "js/nav-bar.js" -}}
 {{ $diagramjs := resources.Get "js/tag-diagram.js" }}
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="{{ .Site.Params.defaultColorMode }}">
 {{ partialCached "head.html" . }}
 <body class="flow-l">
   {{ partialCached "nav-bar.html" . }}
+
+  <article class="wrapper flow-m">
+		<h1 id="jump">{{- .Title -}}</h1>
+	  {{- .Content -}}
+  </article>
+  <!--
   <article class="wrapper flow-m">
   <h1 id="jump">{{ .Title }}</h1>
   <svg class="diagram-svg" viewbox="0 0 1200 1200"></svg>
+  </article>
+  -->
+
+	<aside id="backlinks" class="wrapper flow-m spread">
+	{{- if ne $.Site.Data.backrefs nil -}}
+
+	{{- range $.Site.Data.backrefs -}}
+
+		{{- if gt (len .sources) 0 -}}
+		<ul class="backrefs" role="list">
+
+		{{- $page := $.Site.GetPage .referrer -}}
+		{{- $path := (printf "/%s" $page.Path) -}}
+		{{- $title := $page.Title -}}{{- if eq $title "" -}}{{- $title = humanize $page.File.BaseFileName -}}{{- end -}}
+		{{- $referrer := .referrer -}}
+
+		<li class="spread-down" data-referrer="{{ $referrer }}">
+		<a href="{{ $page.Permalink }}">{{- $title -}}</a>
+		<span>⬆️</span>
+		<ul class="spread-down" role="list" data-source-count="{{ len .sources }}">
+		{{- range .sources -}}
+
+			{{- $sourcePage := $.Site.GetPage . -}}
+			{{- $sourcePath := (printf "/%s" $sourcePage.Path) -}}
+			{{- $sourceTitle := $sourcePage.Title -}}{{- if eq $sourceTitle "" -}}{{- $sourceTitle = humanize $sourcePage.File.BaseFileName -}}{{- end -}}
+
+			<li data-referrer="{{ $referrer }}"><a href="{{- $sourcePage.Permalink -}}">{{- $sourceTitle -}}</a></li>
+		{{- end -}}
+		</ul>
+		</li>
+		</ul>
+
+		<!-- ends sources > 0 -->
+		{{- end -}}
+
+	<!-- ends backrefs range -->
+	{{- end -}}
+
+	<!-- ends backrefs nil check -->
+	{{- end -}}
+	<aside>
   </article>
   {{ partialCached "foot.html" . }}
 </body>
 
 <!-- this displays the tags cloud diagram after other scripts load. I've done it this way so that I can use Hugo
 to pass along the path to the JSON file. -->
+<!--
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     display_diagram("/network/diagram.json");
@@ -22,4 +68,5 @@ to pass along the path to the JSON file. -->
 </script>
 <script src="{{ $diagramjs.Permalink }}"></script>
 <script src="https://d3js.org/d3.v5.min.js"></script>
+-->
 </html>
