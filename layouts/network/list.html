@@ -1,5 +1,3 @@
-{{- $darkmodejs := resources.Get "js/darkmode.js" -}}
-{{- $navbarjs := resources.Get "js/nav-bar.js" -}}
 {{ $diagramjs := resources.Get "js/tag-diagram.js" }}
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="{{ .Site.Params.defaultColorMode }}">
@@ -17,23 +15,45 @@
   <svg class="diagram-svg" viewbox="0 0 1200 1200"></svg>
   </article>
   -->
-  <article class="wrapper flow-l">
+
+	<aside id="backlinks" class="wrapper flow-m spread">
+	{{- if ne $.Site.Data.backrefs nil -}}
+
 	{{- range $.Site.Data.backrefs -}}
+
 		{{- if gt (len .sources) 0 -}}
-		{{- $referrerPage := $.Site.GetPage .referrer -}}
-		{{- $referrerTitle := $referrerPage.Title -}}{{- if eq $referrerTitle "" -}}{{- $referrerTitle = humanize $referrerPage.BaseFileName -}}{{- end -}}
-		<div class="spread">
-		<a style="max-width: 40ch;" href="{{ $referrerPage.Permalink }}">{{- $referrerTitle -}}</a>
-		<span>--></span> <ul class="spread-down" style="max-width: 40ch; margin: 0;" role="list">
-				{{- range $source := .sources -}}
-				{{- $sourcePage := $.Site.GetPage $source -}}
-				{{- $sourceTitle := $sourcePage.Title -}}{{- if eq $sourceTitle "" -}}{{- $sourceTitle = humanize $sourcePage.File.BaseFileName -}}{{- end -}}
-				<li><a href="{{ $sourcePage.Permalink }}">{{- $sourceTitle -}}</a></li>
-				{{- end -}}
-			</ul>
-		</div>
+		<ul class="backrefs" role="list">
+
+		{{- $page := $.Site.GetPage .referrer -}}
+		{{- $path := (printf "/%s" $page.Path) -}}
+		{{- $title := $page.Title -}}{{- if eq $title "" -}}{{- $title = humanize $page.File.BaseFileName -}}{{- end -}}
+		{{- $referrer := .referrer -}}
+
+		<li class="spread-down" data-referrer="{{ $referrer }}">
+		<a href="{{ $page.Permalink }}">{{- $title -}}</a>
+		<span>⬆️</span>
+		<ul class="spread-down" role="list" data-source-count="{{ len .sources }}">
+		{{- range .sources -}}
+
+			{{- $sourcePage := $.Site.GetPage . -}}
+			{{- $sourcePath := (printf "/%s" $sourcePage.Path) -}}
+			{{- $sourceTitle := $sourcePage.Title -}}{{- if eq $sourceTitle "" -}}{{- $sourceTitle = humanize $sourcePage.File.BaseFileName -}}{{- end -}}
+
+			<li data-referrer="{{ $referrer }}"><a href="{{- $sourcePage.Permalink -}}">{{- $sourceTitle -}}</a></li>
 		{{- end -}}
+		</ul>
+		</li>
+		</ul>
+
+		<!-- ends sources > 0 -->
+		{{- end -}}
+
+	<!-- ends backrefs range -->
 	{{- end -}}
+
+	<!-- ends backrefs nil check -->
+	{{- end -}}
+	<aside>
   </article>
   {{ partialCached "foot.html" . }}
 </body>

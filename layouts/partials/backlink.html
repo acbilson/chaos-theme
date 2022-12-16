@@ -2,6 +2,8 @@
 {{- $backrefs := .backrefs -}}
 {{- $site := .site -}}
 
+{{- if ne $backrefs nil -}}
+
 <!-- will not enter if there is no referrer match -->
 {{- range where $backrefs "referrer" "eq" $path -}}
 
@@ -20,4 +22,7 @@
 {{- end -}}
 
 <!-- end backrefs range -->
+{{- end -}}
+
+<!-- end backrefs nil check -->
 {{- end -}}
