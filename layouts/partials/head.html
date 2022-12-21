@@ -19,8 +19,8 @@
   <link rel="manifest" href="{{ .Site.BaseURL }}/manifest.json">
 
   <!-- adds authentication and publish endpoints -->
-  <link rel="authentication" href="{{ .Site.Params.AuthenticationUri }}">
-  <link rel="publish" href="{{ .Site.Params.PublishUri }}">
+  <link rel="authentication" href="{{ $.Site.Params.AuthenticationUri }}">
+  <link rel="publish" href="{{ $.Site.Params.PublishUri }}">
 
 	<!-- adds reference back to Mastodon -->
 	<link rel="me" href="https://indieweb.social/@acbilson">
