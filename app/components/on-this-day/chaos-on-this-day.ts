@@ -4,9 +4,11 @@ export class ChaosOnThisDay extends HTMLElement {
 	articles: HTMLElement[];
 
 	get logFeedUrl(): URL {
-		return new URL(
-			window.location.origin + window.location.pathname + "index.xml"
-		);
+		return new URL(window.location.origin + "/logs/index.xml");
+	}
+
+	get logUrl(): URL {
+		return new URL(window.location.origin + "/logs");
 	}
 
 	get container(): HTMLElement {
@@ -31,27 +33,56 @@ export class ChaosOnThisDay extends HTMLElement {
 		this.button.innerText = "Hide On This Day";
 	}
 
-	cloneArticle(item: any): HTMLElement {
+	fetchArticleTemplate(): Promise<HTMLElement> {
+		const parser = new DOMParser();
+
+		return fetch(this.logUrl)
+			.then((x) => x.text())
+			.then((x) => parser.parseFromString(x, "text/html"))
+			.then((logsDOM: HTMLDocument) => {
+				return <HTMLElement>logsDOM.querySelector("article").cloneNode(true);
+			});
+	}
+
+	fetchLogFeed(): Promise<XMLDocument> {
+		const parser = new DOMParser();
+		const today = new Date();
+
+		const failedParse = (xml) =>
+			xml.getElementsByTagName("parsererror")?.length !== 0;
+
+		return fetch(this.logFeedUrl)
+			.then((x) => x.text())
+			.then((x) => parser.parseFromString(x, "text/xml"))
+			.then((logsXml: XMLDocument) => {
+				if (failedParse(logsXml)) {
+					console.log(`Failed to load XML from ${this.logFeedUrl}`);
+					return null;
+				} else {
+					return logsXml;
+				}
+			});
+	}
+
+	cloneArticle(item: any, template: HTMLElement): HTMLElement {
 		const query = (s) => item.querySelector(s).firstChild.data;
 		const toDate = (s) => new Date(query(s)).toISOString().substr(0, 10);
 
-		const template = <HTMLElement>(
-			document.querySelector("article").cloneNode(true)
-		);
 		// centers the new log instead
 		template.classList.remove("wrapper-no-center");
 
-		const attr = <HTMLUListElement>template.querySelector("ul");
+		const attr = <HTMLUListElement>template.querySelector("header>ul");
+
+		// removes all children except the header
+		Array.from(template.children)
+			.filter((el) => el.tagName.toLowerCase() !== "header")
+			.forEach((el) => template.removeChild(el));
+
 		(<HTMLTimeElement>attr.querySelector("time")).innerText = toDate("pubDate");
 		(<HTMLAnchorElement>attr.querySelector("[rel='author']")).innerText =
 			query("author");
 		(<HTMLAnchorElement>attr.querySelector("[rel='bookmark']")).href =
 			query("link");
-
-		// removes all children except the attr list
-		Array.from(template.children).forEach((el) => {
-			if (el != attr) template.removeChild(el);
-		});
 
 		// appends new content
 		template.innerHTML += query("description");
@@ -59,7 +90,7 @@ export class ChaosOnThisDay extends HTMLElement {
 		return template;
 	}
 
-	getPreviousLogs(): Promise<HTMLElement[]> {
+	async getPreviousLogs(): Promise<HTMLElement[]> {
 		const parser = new DOMParser();
 		const today = new Date();
 
@@ -77,21 +108,16 @@ export class ChaosOnThisDay extends HTMLElement {
 		}/${today.getDate()})`;
 		noLogs.classList.add("wrapper");
 
-		return fetch(this.logFeedUrl)
-			.then((x) => x.text())
-			.then((x) => parser.parseFromString(x, "text/xml"))
-			.then((logsXml: XMLDocument) => {
-				if (failedParse(logsXml)) {
-					console.log(`Failed to load XML from ${this.logFeedUrl}`);
-					return;
-				}
+		const logsXml = await this.fetchLogFeed();
+		const template = await this.fetchArticleTemplate();
 
-				const articles = Array.from(logsXml.getElementsByTagName("pubDate"))
-					.filter((el) => fromPreviousYear(today, new Date(el.innerHTML)))
-					.map((el) => this.cloneArticle(el.parentNode));
+		const articles = Array.from(logsXml.getElementsByTagName("pubDate"))
+			.filter((el) => fromPreviousYear(today, new Date(el.innerHTML)))
+			.map((el) =>
+				this.cloneArticle(el.parentNode, <HTMLElement>template.cloneNode(true))
+			);
 
-				return articles.length > 0 ? articles : [noLogs];
-			});
+		return articles.length > 0 ? articles : [noLogs];
 	}
 
 	async onClick(e: MouseEvent) {
