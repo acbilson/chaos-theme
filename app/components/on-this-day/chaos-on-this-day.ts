@@ -71,17 +71,18 @@ export class ChaosOnThisDay extends HTMLElement {
 		// centers the new log instead
 		template.classList.remove("wrapper-no-center");
 
-		const attr = <HTMLUListElement>template.querySelector("ul");
+		const attr = <HTMLUListElement>template.querySelector("header>ul");
+
+		// removes all children except the header
+		Array.from(template.children)
+			.filter((el) => el.tagName.toLowerCase() !== "header")
+			.forEach((el) => template.removeChild(el));
+
 		(<HTMLTimeElement>attr.querySelector("time")).innerText = toDate("pubDate");
 		(<HTMLAnchorElement>attr.querySelector("[rel='author']")).innerText =
 			query("author");
 		(<HTMLAnchorElement>attr.querySelector("[rel='bookmark']")).href =
 			query("link");
-
-		// removes all children except the attr list
-		Array.from(template.children).forEach((el) => {
-			if (el != attr) template.removeChild(el);
-		});
 
 		// appends new content
 		template.innerHTML += query("description");
@@ -112,7 +113,9 @@ export class ChaosOnThisDay extends HTMLElement {
 
 		const articles = Array.from(logsXml.getElementsByTagName("pubDate"))
 			.filter((el) => fromPreviousYear(today, new Date(el.innerHTML)))
-			.map((el) => this.cloneArticle(el.parentNode, template));
+			.map((el) =>
+				this.cloneArticle(el.parentNode, <HTMLElement>template.cloneNode(true))
+			);
 
 		return articles.length > 0 ? articles : [noLogs];
 	}
