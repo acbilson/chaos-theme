@@ -26,7 +26,7 @@
 
 		{{- $page := $.Site.GetPage .referrer -}}
 		{{- $path := (printf "/%s" $page.Path) -}}
-		{{- $title := $page.Title -}}{{- if eq $title "" -}}{{- $title = humanize $page.File.BaseFileName -}}{{- end -}}
+		{{- $title := $page.Title -}}{{- if eq $title "" -}}{{- $title = humanize $page.BaseFileName -}}{{- end -}}
 		{{- $referrer := .referrer -}}
 
 		<li class="spread-down" data-referrer="{{ $referrer }}">
