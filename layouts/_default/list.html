@@ -12,6 +12,14 @@
 	 {{- . -}}
   {{- end -}}
 
+  {{- if .IsHome -}}
+<chaos-on-this-day>
+	<aside>
+		<button>Show On This Day</button>
+	</aside>
+</chaos-on-this-day>
+  {{- end -}}
+
   {{- if not .IsHome -}}
     {{- range .Pages -}}
       {{- .Render "li" -}}
