@@ -1,0 +1,7 @@
+{{- $icon := "" -}}
+
+{{- if eq . "mastodon" -}}
+	{{- $icon = "🐘" -}}
+{{- end -}}
+
+{{- return $icon -}}

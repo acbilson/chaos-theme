@@ -4,7 +4,7 @@
 <body class="flow-l">
   {{ partialCached "nav-bar.html" . }}
 
-  {{- $title := .Title -}}{{- if eq $title "" -}}{{- $title = humanize .File.BaseFileName -}}{{- end -}}
+  {{- $title := partial "ops/get-title.html" . -}}
   <article class="wrapper flow-m e-content">
     <h1 id="jump">{{ $title }}</h1>
     <a class="u-url" href="{{ .Permalink }}" hidden></a>

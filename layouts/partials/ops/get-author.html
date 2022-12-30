@@ -1,0 +1,5 @@
+{{- $author := "Alex Bilson" -}}
+{{- if isset .Params "author" -}}
+	{{- $author = .Params.author -}}
+{{- end -}}
+{{- return $author -}}
