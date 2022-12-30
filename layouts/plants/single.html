@@ -1,5 +1,5 @@
 {{- $author := "Alex Bilson" -}}{{- if isset .Params "author" -}}{{- $author = .Params.author -}}{{- end -}}
-{{- $title := .Title -}}{{- if eq $title "" -}}{{- $title = humanize .File.BaseFileName -}}{{- end -}}
+{{- $title := partial "ops/get-title.html" . -}}
 {{- $path := strings.TrimSuffix ".md" (printf "/%s" .File.Path) -}}
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="{{ .Site.Params.defaultColorMode }}">

@@ -1,4 +1,4 @@
-{{- $title := .Title -}}{{- if eq $title "" -}}{{- $title = humanize .File.BaseFileName -}}{{- end -}}
+{{- $title := partial "ops/get-title.html" . -}}
 {{- $version := "ESV" -}}{{- if isset .Params "version" -}}{{- $version = .Params.version -}}{{- end -}}
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="{{ .Site.Params.defaultColorMode }}">

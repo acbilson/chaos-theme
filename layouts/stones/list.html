@@ -10,7 +10,7 @@
 		<chaos-resizer>
 		<ul class="fill-list filter-wide" role="list">
 		{{- range $stones -}}
-		{{- $title := .Title -}}{{- if eq $title "" -}}{{- $title = humanize .File.BaseFileName -}}{{- end -}}
+		{{- $title := partial "ops/get-title.html" . -}}
 			<li>
 				<div>[
 					<span>{{- .Date.Format "2/1/06" -}}</span>

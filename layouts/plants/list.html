@@ -49,7 +49,7 @@
 		{{- else if eq .Params.epistemic "evergreen" -}}
 			{{- $epVal = "🌲" -}}
 		{{- end -}}
-	{{- $title := .Title -}}{{- if eq $title "" -}}{{- $title = humanize .File.BaseFileName -}}{{- end -}}
+	{{- $title := partial "ops/get-title.html" . -}}
 	{{- $topFolder := index (split .RelPermalink "/") 2 -}}
 			<li data-epistemic="{{- $epVal -}}" data-folder="{{- $topFolder -}}">
 				<div>[<span>{{- $epVal -}}</span>
