@@ -10,10 +10,7 @@
 	<li class="spread spread-narrow"><span>Syndicated:</span>
 		<ul class="spread narrow-spread" role="list">
 		{{- range $syndicate, $href := .Param "syndicated" -}}
-			{{- $icon := "🐘" -}}
-			{{- if eq $syndicate "mastodon" -}}
-				{{- $icon := "🐘" -}}
-			{{- end -}}
+			{{- $icon := partial "ops/get-syndication-icon.html" $syndicate -}}
 			<li><a class="no-underline" href="{{ $href }}">{{ $icon }}</a></li>
 		{{- end -}}
 		</ul>
