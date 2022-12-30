@@ -1,4 +1,4 @@
-{{- $author := "Alex Bilson" -}}{{- if isset .Params "author" -}}{{- $author = .Params.author -}}{{- end -}}
+{{- $author := partial "ops/get-author.html" . -}}
 <article class="wrapper wrapper-no-center | flow-m | card">
 	<header class="center">
 	<ul class="spread narrow-spread" role="list">

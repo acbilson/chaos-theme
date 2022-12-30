@@ -18,11 +18,12 @@
 
    {{- range .Pages -}}
 	{{- $title := partial "ops/get-title.html" . -}}
+	{{- $author := partial "ops/get-author.html" . -}}
     <item>
       <title>{{ $title }}</title>
       <link>{{ .Permalink }}</link>
       <pubDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
-      <author>{{ if isset .Params "author" }}{{ .Params.author }}{{ else }}Alex Bilson{{ end }}</author>
+      <author>{{- $author -}}</author>
       <guid>{{ .Permalink }}</guid>
       <description>{{ .Summary | html }}</description>
     </item>

@@ -1,9 +1,7 @@
 <div>
 	<ul class="spread" role="list">
-	{{- if isset .Params "author" -}}
-	{{- $author := "Alex Bilson" -}}{{- if isset .Params "author" -}}{{- $author = .Params.author -}}{{- end -}}
+	{{- $author := partial "ops/get-author.html" . -}}
 		<li>By: <a rel="author" class="p-author">{{- $author -}}</a></li>
-	{{- end -}}
 	{{- if isset .Params "date" -}}
 		<li>Posted: <time class="dt-published" datetime="{{ .Date.Format "2006-01-02" }}">{{- .Date.Format "Jan 2, 2006" -}}</time></li>
 		<li>Modified: <time datetime="{{ .Lastmod.Format "2006-01-02" }}">{{- .Lastmod.Format "Jan 2, 2006" -}}</time></li>
