@@ -9,37 +9,37 @@
 		<h1 id="jump">{{- .Title -}}</h1>
 	  {{- .Content -}}
   </article>
-  <!--
-  <article class="wrapper flow-m">
-  <h1 id="jump">{{ .Title }}</h1>
-  <svg class="diagram-svg" viewbox="0 0 1200 1200"></svg>
-  </article>
-  -->
 
 	<aside id="backlinks" class="wrapper flow-m spread">
 	{{- if ne $.Site.Data.backrefs nil -}}
 
-	{{- range $.Site.Data.backrefs -}}
+	{{- range $backrefs := $.Site.Data.backrefs -}}
 
-		{{- if gt (len .sources) 0 -}}
+		{{- if gt (len $backrefs.sources) 0 -}}
 		<ul class="backrefs" role="list">
 
-		{{- $page := $.Site.GetPage .referrer -}}
-		{{- $path := (printf "/%s" $page.Path) -}}
-		{{- $title := $page.Title -}}{{- if eq $title "" -}}{{- $title = humanize $page.BaseFileName -}}{{- end -}}
-		{{- $referrer := .referrer -}}
+		{{- with $.Site.GetPage $backrefs.referrer -}}
+			{{- $path := (printf "/%s" .Path) -}}
+			{{- $title := partial "ops/get-title.html" . -}}
 
-		<li class="spread-down" data-referrer="{{ $referrer }}">
-		<a href="{{ $page.Permalink }}">{{- $title -}}</a>
-		<span>⬆️</span>
-		<ul class="spread-down" role="list" data-source-count="{{ len .sources }}">
-		{{- range .sources -}}
+			<li class="spread-down" data-referrer="{{ $backrefs.referrer }}">
+			<a href="{{ .Permalink }}">{{- $title -}}</a>
+			<span>⬆️</span>
+			<ul class="spread-down" role="list" data-source-count="{{ len $backrefs.sources }}">
+			{{- range $source := $backrefs.sources -}}
 
-			{{- $sourcePage := $.Site.GetPage . -}}
-			{{- $sourcePath := (printf "/%s" $sourcePage.Path) -}}
-			{{- $sourceTitle := $sourcePage.Title -}}{{- if eq $sourceTitle "" -}}{{- $sourceTitle = humanize $sourcePage.File.BaseFileName -}}{{- end -}}
+				{{- with $.Site.GetPage $source -}}
+					{{- $sourcePath := (printf "/%s" .Path) -}}
+					{{- $sourceTitle := partial "ops/get-title.html" . -}}
 
-			<li data-referrer="{{ $referrer }}"><a href="{{- $sourcePage.Permalink -}}">{{- $sourceTitle -}}</a></li>
+					<li data-referrer="{{ $backrefs.referrer }}"><a href="{{- .Permalink -}}">{{- $sourceTitle -}}</a></li>
+				<!-- ends with source -->
+				{{- end -}}
+
+			<!-- ends sources range -->
+			{{- end -}}
+
+		<!-- ends with referrer -->
 		{{- end -}}
 		</ul>
 		</li>

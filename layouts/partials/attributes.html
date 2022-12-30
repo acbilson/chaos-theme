@@ -1,9 +1,7 @@
 <div>
 	<ul class="spread" role="list">
-	{{- if isset .Params "author" -}}
-	{{- $author := "Alex Bilson" -}}{{- if isset .Params "author" -}}{{- $author = .Params.author -}}{{- end -}}
+	{{- $author := partial "ops/get-author.html" . -}}
 		<li>By: <a rel="author" class="p-author">{{- $author -}}</a></li>
-	{{- end -}}
 	{{- if isset .Params "date" -}}
 		<li>Posted: <time class="dt-published" datetime="{{ .Date.Format "2006-01-02" }}">{{- .Date.Format "Jan 2, 2006" -}}</time></li>
 		<li>Modified: <time datetime="{{ .Lastmod.Format "2006-01-02" }}">{{- .Lastmod.Format "Jan 2, 2006" -}}</time></li>
@@ -12,10 +10,7 @@
 	<li class="spread spread-narrow"><span>Syndicated:</span>
 		<ul class="spread narrow-spread" role="list">
 		{{- range $syndicate, $href := .Param "syndicated" -}}
-			{{- $icon := "🐘" -}}
-			{{- if eq $syndicate "mastodon" -}}
-				{{- $icon := "🐘" -}}
-			{{- end -}}
+			{{- $icon := partial "ops/get-syndication-icon.html" $syndicate -}}
 			<li><a class="no-underline" href="{{ $href }}">{{ $icon }}</a></li>
 		{{- end -}}
 		</ul>
@@ -25,15 +20,8 @@
 	<!-- adds second set of attrs if they exist -->
 	{{- if (or ( isset .Params "epistemic" ) ( isset .Params "tags" )) -}}
 	 {{- if isset .Params "epistemic" -}}
-		{{- $epVal := "🌱" -}}
-		{{- with .Params.epistemic -}}
-		  {{- if eq . "sprout" -}}
-		{{- $epVal = "🌿" -}}
-		  {{- else if eq . "plant" -}}
-		{{- $epVal = "🪴" -}}
-		  {{- end -}}
-		{{- end -}}
-		<li>Epistemic: <span>{{ $epVal }}(<a href="/plants/meta/epistemic-notes-reveal-growth">{{ .Params.epistemic }}</a>)</span></li>
+		{{- $epistemic := partial "ops/get-epistemic.html" . -}}
+		<li>Epistemic: <span>{{ $epistemic }}(<a href="/plants/meta/epistemic-notes-reveal-growth">{{ .Params.epistemic }}</a>)</span></li>
 	 {{- end -}}
 
 	 {{- if isset .Params "tags" -}}
