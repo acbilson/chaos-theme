@@ -41,18 +41,11 @@
 		<ul class="fill-list filter-wide" role="list">
 		{{- range $everyPlant -}}
 			{{- if not .Draft -}}
-		{{- $epVal := "🌱" -}}
-		{{- if eq .Params.epistemic "sprout" -}}
-			{{- $epVal = "🌿" -}}
-		{{- else if eq .Params.epistemic "plant" -}}
-			{{- $epVal = "🪴" -}}
-		{{- else if eq .Params.epistemic "evergreen" -}}
-			{{- $epVal = "🌲" -}}
-		{{- end -}}
-	{{- $title := partial "ops/get-title.html" . -}}
-	{{- $topFolder := index (split .RelPermalink "/") 2 -}}
-			<li data-epistemic="{{- $epVal -}}" data-folder="{{- $topFolder -}}">
-				<div>[<span>{{- $epVal -}}</span>
+			{{- $epistemic := partial "ops/get-epistemic.html" . -}}
+			{{- $title := partial "ops/get-title.html" . -}}
+			{{- $topFolder := index (split .RelPermalink "/") 2 -}}
+			<li data-epistemic="{{- .Params.epistemic -}}" data-folder="{{- $topFolder -}}">
+				<div>[<span>{{- $epistemic -}}</span>
 					<span>{{- .Date.Format "2/1/06" -}}</span>
 					<span hidden>{{- .Lastmod.Format "2/1/06" -}}</span>
 					<span>{{- substr $topFolder 0 5 -}}</span>

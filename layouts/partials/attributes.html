@@ -23,15 +23,8 @@
 	<!-- adds second set of attrs if they exist -->
 	{{- if (or ( isset .Params "epistemic" ) ( isset .Params "tags" )) -}}
 	 {{- if isset .Params "epistemic" -}}
-		{{- $epVal := "🌱" -}}
-		{{- with .Params.epistemic -}}
-		  {{- if eq . "sprout" -}}
-		{{- $epVal = "🌿" -}}
-		  {{- else if eq . "plant" -}}
-		{{- $epVal = "🪴" -}}
-		  {{- end -}}
-		{{- end -}}
-		<li>Epistemic: <span>{{ $epVal }}(<a href="/plants/meta/epistemic-notes-reveal-growth">{{ .Params.epistemic }}</a>)</span></li>
+		{{- $epistemic := partial "ops/get-epistemic.html" . -}}
+		<li>Epistemic: <span>{{ $epistemic }}(<a href="/plants/meta/epistemic-notes-reveal-growth">{{ .Params.epistemic }}</a>)</span></li>
 	 {{- end -}}
 
 	 {{- if isset .Params "tags" -}}

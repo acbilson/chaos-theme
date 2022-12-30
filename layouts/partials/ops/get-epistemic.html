@@ -1,0 +1,15 @@
+{{- $val := "" -}}
+
+{{- with .Params.epistemic -}}
+		{{- if eq . "seedling" -}}
+			{{- $val = "🌱" -}}
+		{{- else if eq . "sprout" -}}
+			{{- $val = "🌿" -}}
+		{{- else if eq . "plant" -}}
+			{{- $val = "🪴" -}}
+		{{- else if eq . "evergreen" -}}
+			{{- $val = "🌲" -}}
+		{{- end -}}
+{{- end -}}
+
+{{- return $val -}}
