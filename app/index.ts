@@ -1,4 +1,3 @@
-import { ChaosMermaid } from "./components/mermaid/chaos-mermaid";
 import { ChaosLogin } from "./components/login/chaos-login";
 import { ChaosLogout } from "./components/logout/chaos-logout";
 import { ChaosMastoLogin } from "./components/login/chaos-masto-login";
@@ -31,4 +30,3 @@ customElements.define("chaos-on-this-day", ChaosOnThisDay);
 customElements.define("chaos-color-switch", ChaosColorSwitch);
 customElements.define("chaos-panel", ChaosPanel);
 customElements.define("chaos-panel-option", ChaosPanelOption);
-customElements.define("chaos-mermaid", ChaosMermaid);
