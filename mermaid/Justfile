@@ -17,7 +17,7 @@ watch:
 # watch and deploy on update
 serve: clean
 	find ./components | entr -s 'npm run build && \
-		cp dist/index.modern.mjs ../assets/js/app/app.modern.mjs'
+		cp dist/index.modern.mjs ../assets/js/app/mermaid.modern.mjs'
 
 # run all tests
 test:
@@ -29,7 +29,7 @@ testwatch:
 
 # deploys the app bundle for Hugo to pick up in theme/assets/js/app
 deploy: build
-	cp dist/index.modern.mjs /Users/alexbilson/source/chaos-theme/assets/js/app/app.modern.mjs
+	cp dist/index.modern.mjs /Users/alexbilson/source/chaos-theme/assets/js/app/mermaid.modern.mjs
 
 hugo:
 	find ./components | entr -s 'podman run -it --rm \

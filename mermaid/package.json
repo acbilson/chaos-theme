@@ -31,6 +31,7 @@
 		"@web/dev-server-esbuild": "^0.3.3",
 		"@web/test-runner": "^0.15.0",
 		"@web/test-runner-playwright": "^0.9.0",
-		"microbundle": "^0.15.1"
+		"microbundle": "^0.15.1",
+		"mermaid": "^9.3.0"
 	}
 }
