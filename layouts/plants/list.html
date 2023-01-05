@@ -17,10 +17,10 @@
 			<form slot="chaos-filter-form" action='{{ .Site.BaseURL }}' method=get>
 				<select data-match="epistemic">
 					<option value="all">All ({{- len $everyPlant -}})</option>
-					<option value="🌲">Evergreen 🌲 ({{- len $evergreens -}})</option>
-					<option value="🪴">Plant 🪴 ({{- len $plants -}})</option>
-					<option value="🌿">Sprout 🌿 ({{- len $sprouts -}})</option>
-					<option value="🌱">Seedling 🌱 ({{- len $seedlings -}})</option>
+					<option value="evergreen">Evergreen 🌲 ({{- len $evergreens -}})</option>
+					<option value="plant">Plant 🪴 ({{- len $plants -}})</option>
+					<option value="sprout">Sprout 🌿 ({{- len $sprouts -}})</option>
+					<option value="seedling">Seedling 🌱 ({{- len $seedlings -}})</option>
 				</select>
 				<select data-match="folder">
 					<option value="all">All</option>
