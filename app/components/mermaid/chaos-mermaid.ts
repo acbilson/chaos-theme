@@ -28,6 +28,7 @@ export class ChaosMermaid extends HTMLElement {
 			t.innerHTML = `
 				<style>
 					.container {
+						margin-top: var(--flow-space, 1em);
 						border-width: .25em;
 						border-style: double;
 						border-color: var(--color-stroke, black);
