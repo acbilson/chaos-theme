@@ -29,11 +29,6 @@ export class ChaosMermaid extends HTMLElement {
 				<style>
 					.container {
 						margin-top: var(--flow-space, 1em);
-						border-width: .25em;
-						border-style: double;
-						border-color: var(--color-stroke, black);
-						border-radius: var(--radius, 1rem);
-						padding: 1ch;
 					}
 
 					pre {
