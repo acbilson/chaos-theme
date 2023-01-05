@@ -73,6 +73,7 @@
 // comes from Hugo toc
 #TableOfContents {
 	width: fit-content;
+	margin-left: 3ch;
 	> ul {
 		list-style-type: upper-roman;
 		li > ul {
