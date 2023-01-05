@@ -1,4 +1,4 @@
-import mermaid from "mermaid/dist/mermaid.esm.mjs";
+import mermaid from "mermaid/dist/mermaid.min.js";
 
 export class MermaidService {
 	api: any;

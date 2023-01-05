@@ -1,3 +1,5 @@
-{{- $appjs := resources.Get "js/app/app.modern.js" -}}
+{{- $appjs := resources.Get "js/app/app.modern.mjs" -}}
+{{- $mermaidjs := resources.Get "js/app/mermaid/dist/mermaid.min.js" -}}
 <!-- adds my custom elements -->
 <script type="module" src="{{ $appjs.Permalink }}"></script>
+<script type="module" src="{{ $mermaidjs.Permalink }}"></script>
