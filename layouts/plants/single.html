@@ -9,6 +9,12 @@
 	<article class="wrapper flow-m e-content">
 		<h1 id="jump">{{ $title }}</h1>
 		<a class="u-url" href="{{ .Permalink }}" hidden></a>
+
+		 <!-- Post Table of Contents -->
+		{{ if isset .Params "toc" -}}
+			{{ .TableOfContents }}
+		{{- end }}
+
 		{{ .Content }}
 
 		{{ partial "comments.html" . }}
