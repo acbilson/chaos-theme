@@ -8,6 +8,7 @@ import { ChaosOnThisDay } from "./components/on-this-day/chaos-on-this-day";
 import { ChaosColorSwitch } from "./components/color-switch/chaos-color-switch";
 import { ChaosPanel } from "./components/file/chaos-panel";
 import { ChaosPanelOption } from "./components/file/chaos-panel-option";
+import { ChaosSearch } from "./components/search/chaos-search";
 import { InjectorMap, InjectionRequest, Instances } from "./state/injector";
 
 // poor man's dependency injection. Singleton objects are instantiated
@@ -30,3 +31,4 @@ customElements.define("chaos-on-this-day", ChaosOnThisDay);
 customElements.define("chaos-color-switch", ChaosColorSwitch);
 customElements.define("chaos-panel", ChaosPanel);
 customElements.define("chaos-panel-option", ChaosPanelOption);
+customElements.define("chaos-search", ChaosSearch);

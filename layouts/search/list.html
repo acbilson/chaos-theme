@@ -16,7 +16,10 @@
   </ul>
 	<p>Kudos to Victoria Drake for the <a href="https://victoria.dev/blog/add-search-to-hugo-static-sites-with-lunr/">help</a>!</p>
   {{ partial "search-index.html" . }}
+
+  <chaos-search></chaos-search>
   </article>
   {{ partialCached "foot.html" . }}
+{{ partialCached "scripts.html" . }}
 </body>
 </html>
