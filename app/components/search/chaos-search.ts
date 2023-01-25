@@ -128,7 +128,7 @@ export class ChaosSearch extends HTMLElement {
 				</table>
 			</details>
 
-			<ul id="container" class="fill-list" role="list"></ul>
+			<ul id="container" class="fill-list flow-s" role="list"></ul>
 		</div>
 		`;
 	}

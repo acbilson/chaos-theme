@@ -330,6 +330,11 @@ fieldset {
 	border: none;
 }
 
+// makes select web components fit better into the flow
+chaos-search {
+	display: block;
+}
+
 @import "./utilities.scss";
 @import "./exceptions.scss";
 @import "./blocks.scss";
