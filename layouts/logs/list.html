@@ -19,8 +19,6 @@
 	{{- if eq .CurrentSection .FirstSection -}}
 		{{- range sort .RegularPagesRecursive "Date" "desc" -}}
 		{{- if ge .Date (now.AddDate 0 -6 0) -}}
-		<h3>{{- .Date -}}</h3>
-		<h3>{{- .Lastmod -}}</h3>
 			{{ .Render "li" }}
 		{{- end -}}
 	{{- end -}}
