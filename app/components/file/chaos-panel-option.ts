@@ -52,7 +52,7 @@ export class ChaosPanelOption extends HTMLElement {
 			case PanelOptionType.BOOLEAN:
 				return ["true", "yes"].includes(value.toLowerCase());
 			case PanelOptionType.FILE:
-				return value.substring(12, value.length);
+				return `https://images.alexbilson.dev/${value.substring(12, value.length)}`;
 		}
 	}
 
