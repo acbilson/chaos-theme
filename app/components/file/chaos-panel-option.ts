@@ -26,6 +26,18 @@ export class ChaosPanelOption extends HTMLElement {
 		return <HTMLInputElement>this.querySelector("input");
 	}
 
+	get inputType(): string {
+		switch (this.type) {
+			case PanelOptionType.TEXT:
+			case PanelOptionType.LIST:
+			case PanelOptionType.BOOLEAN:
+			default:
+				return "text";
+			case PanelOptionType.FILE:
+				return "file";
+		}
+	}
+
 	get value(): SupportedPanelTypes {
 		const value = this.getAttribute("data-value") || "";
 
@@ -39,12 +51,14 @@ export class ChaosPanelOption extends HTMLElement {
 					: [value.trim()];
 			case PanelOptionType.BOOLEAN:
 				return ["true", "yes"].includes(value.toLowerCase());
+			case PanelOptionType.FILE:
+				return value.substring(12, value.length);
 		}
 	}
 
 	set value(v: SupportedPanelTypes) {
 		this.setAttribute("data-value", String(v));
-		this.input.value = String(v);
+		if (this.type !== PanelOptionType.FILE) this.input.value = String(v);
 	}
 
 	get required(): boolean {
@@ -85,10 +99,11 @@ export class ChaosPanelOption extends HTMLElement {
 			<li class="panel-option spread-btwn${this.required ? " required" : ""}">
 				<label for="${this.label}">${this.label}</label>
 				<span>${this.required ? "(required)" : ""}
-				<input
+				<input type="${this.inputType}"
 					${this.label ? `name="${this.label}"` : ""}
 					${this.value ? `value="${this.value}"` : ""}
 					${this.readonly ? "disabled" : ""}
+					${this.type == PanelOptionType.FILE ? 'accept="image/*"' : ""}
 				/></span>
 			</li>
 		`;
@@ -117,11 +132,11 @@ export class ChaosPanelOption extends HTMLElement {
 			}
 		);
 
-		this.addEventListener("keyup", (e) => this.onEdit(e));
+		this.addEventListener("input", (e) => this.onEdit(e));
 	}
 
 	disconnectedCallback() {
 		this._store.isAuthorized$.unsubscribe(this._subscription);
-		this.removeEventListener("keyup", (e) => this.onEdit(e));
+		this.removeEventListener("input", (e) => this.onEdit(e));
 	}
 }
