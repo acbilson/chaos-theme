@@ -14,7 +14,7 @@
 		{{- .Content -}}
 
 		<chaos-filter>
-			<form slot="chaos-filter-form" action='{{ .Site.BaseURL }}' method=get>
+			<form class="spread" slot="chaos-filter-form" action='{{ .Site.BaseURL }}' method=get>
 				<select data-match="epistemic">
 					<option value="all">All ({{- len $everyPlant -}})</option>
 					<option value="evergreen">Evergreen 🌲 ({{- len $evergreens -}})</option>
@@ -30,7 +30,9 @@
 					<option value="faith">Faith</option>
 					<option value="identity">Identity</option>
 					<option value="leadership">Leadership</option>
+					<option value="meta">Meta</option>
 					<option value="parenting">Parenting</option>
+					<option value="science">Science</option>
 					<option value="technology">Technology</option>
 					<option value="writing">Writing</option>
 				</select>

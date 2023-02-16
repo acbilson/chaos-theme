@@ -1,3 +1,4 @@
+{{- $title := partial "ops/get-title.html" . -}}
 {{- $author := partial "ops/get-author.html" . -}}
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="{{ .Site.Params.defaultColorMode }}">
@@ -6,7 +7,8 @@
     {{ partialCached "nav-bar.html" . }}
 
 	<article class="wrapper flow-m e-content">
-	{{- .Content -}}
+		<h1 id="jump" hidden>{{ $title }}</h1>
+		{{- .Content -}}
 
 	{{ partial "comments.html" . }}
 	{{ partial "attributes.html" . }}

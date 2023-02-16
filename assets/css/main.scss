@@ -303,6 +303,7 @@ img {
 
 figure {
 	width: fit-content;
+	max-width: 800px;
 
 	figcaption {
 		font-style: italic;
@@ -328,6 +329,11 @@ fieldset {
 	padding-inline-end: unset;
 	padding-block-end: unset;
 	border: none;
+}
+
+// makes select components fit better into the flow
+select, chaos-search {
+	display: block;
 }
 
 @import "./utilities.scss";

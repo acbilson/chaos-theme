@@ -39,6 +39,19 @@ export interface ChangeOption {
 	required: boolean;
 }
 
+export interface SearchResult {
+	id: string;
+	author: string;
+	title: string;
+	content: string;
+}
+
+export interface SiteResult {
+	author: string;
+	url: string;
+	pages: number;
+}
+
 export type SupportedPanelTypes = string | string[] | boolean;
 
 export enum PanelStatus {
