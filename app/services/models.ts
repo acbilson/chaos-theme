@@ -25,12 +25,31 @@ export interface ChangeResult {
 	frontmatter: object;
 }
 
+export interface PhotoResult {
+	fileName: string;
+	altText: string;
+	caption: string;
+}
+
 export interface ChangeOption {
 	key: string;
 	name: string;
 	value: SupportedPanelTypes;
 	type: PanelOptionType;
 	required: boolean;
+}
+
+export interface SearchResult {
+	id: string;
+	author: string;
+	title: string;
+	content: string;
+}
+
+export interface SiteResult {
+	author: string;
+	url: string;
+	pages: number;
 }
 
 export type SupportedPanelTypes = string | string[] | boolean;
@@ -45,6 +64,7 @@ export enum PanelOptionType {
 	TEXT = "text",
 	LIST = "list",
 	BOOLEAN = "boolean",
+	FILE = "file",
 }
 
 export enum PanelType {

@@ -108,6 +108,7 @@
 	margin-right: auto;
 	// overrides the fit-content default
 	width: initial;
+	max-width: 600px;
 	> img {
 		border-radius: 50%;
 	}
