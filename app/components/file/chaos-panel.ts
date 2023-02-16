@@ -2,6 +2,7 @@ import { ChaosPanelOption } from "./chaos-panel-option";
 import {
 	Response,
 	ChangeRequest,
+	PhotoResult,
 	ChangeOption,
 	PanelStatus,
 	PanelType,
@@ -67,6 +68,10 @@ export class ChaosPanel extends HTMLElement {
 
 	get syndicateOption(): ChaosPanelOption {
 		return this.panelOptions.find((x) => x.key === "syndicate");
+	}
+
+	get photoOption(): ChaosPanelOption {
+		return this.panelOptions.find((x) => x.key === "photo");
 	}
 
 	get contents(): string {
@@ -210,6 +215,16 @@ export class ChaosPanel extends HTMLElement {
 		const now = new Date();
 		frontmatter["date"] = getSimpleDate(now);
 		frontmatter["lastmod"] = now.toISOString();
+
+		// submits a photo when one has been selected
+		if (this.photoOption?.value) {
+			this._pub.createPhoto(this._store.token, this.photoOption.input).then(
+				(r) => {
+					this.errorMsg = r.message;
+				},
+				(e) => (this.errorMsg = e.toString())
+			);
+		}
 
 		this._pub
 			.create(this._store.token, <ChangeRequest>{

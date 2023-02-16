@@ -25,6 +25,12 @@ export interface ChangeResult {
 	frontmatter: object;
 }
 
+export interface PhotoResult {
+	fileName: string;
+	altText: string;
+	caption: string;
+}
+
 export interface ChangeOption {
 	key: string;
 	name: string;
@@ -58,6 +64,7 @@ export enum PanelOptionType {
 	TEXT = "text",
 	LIST = "list",
 	BOOLEAN = "boolean",
+	FILE = "file",
 }
 
 export enum PanelType {
