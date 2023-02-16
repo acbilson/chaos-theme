@@ -218,18 +218,12 @@ export class ChaosPanel extends HTMLElement {
 
 		// submits a photo when one has been selected
 		if (this.photoOption?.value) {
-			this._pub
-				.createPhoto(this._store.token, <PhotoResult>{
-					fileName: this.photoOption.value,
-					altText: this.frontmatter["photo-alt"],
-					caption: this.frontmatter["photo-cap"],
-				})
-				.then(
-					(r) => {
-						this.errorMsg = r.message;
-					},
-					(e) => (this.errorMsg = e.toString())
-				);
+			this._pub.createPhoto(this._store.token, this.photoOption.input).then(
+				(r) => {
+					this.errorMsg = r.message;
+				},
+				(e) => (this.errorMsg = e.toString())
+			);
 		}
 
 		this._pub

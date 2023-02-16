@@ -38,7 +38,7 @@ export class PublishService {
 
 	createPhoto(
 		token: string,
-		payload: PhotoResult
+		fileElement: HTMLInputElement
 	): Promise<Response<PhotoResult>> {
 		if (token == null)
 			new Promise((resolve, reject) =>
@@ -57,12 +57,14 @@ export class PublishService {
 				})
 			);
 
+		const formData = new FormData();
+		formData.append("photo", fileElement.files[0]);
+
 		const headers = new Headers();
 		headers.append("Authorization", `Bearer ${token}`);
-		headers.append("Content-Type", "application/json; charset=UTF-8");
 		return fetch(new URL("photo", baseUri), {
 			method: "POST",
-			body: JSON.stringify(payload),
+			body: formData,
 			headers,
 		})
 			.then((r) => (r.status === 200 ? r.json() : null))
