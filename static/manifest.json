@@ -7,7 +7,7 @@
   "description": "Alex Bilson's personal website",
   "icons": [{
     "src": "favicon.ico",
-    "sizes": "16x16",
+    "sizes": "any",
     "type": "image/ico"
   }]
 }
