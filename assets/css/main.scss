@@ -331,8 +331,19 @@ fieldset {
 	border: none;
 }
 
-// makes select components fit better into the flow
-select, chaos-search {
+// makes components fit better into the flow
+select,
+chaos-color-switch,
+chaos-filter,
+chaos-login,
+chaos-logout,
+chaos-masto-login,
+chaos-masto-logout,
+chaos-on-this-day,
+chaos-panel,
+chaos-panel-option,
+chaos-search,
+{
 	display: block;
 }
 
