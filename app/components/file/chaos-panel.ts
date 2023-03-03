@@ -217,13 +217,15 @@ export class ChaosPanel extends HTMLElement {
 		frontmatter["lastmod"] = now.toISOString();
 
 		// submits a photo when one has been selected
-		if (this.photoOption?.value) {
+		if (this.photoOption?.value && this.photoOption.value != "https://images.alexbilson.dev/") {
 			this._pub.createPhoto(this._store.token, this.photoOption.input).then(
 				(r) => {
 					this.errorMsg = r.message;
 				},
 				(e) => (this.errorMsg = e.toString())
 			);
+		} else {
+			delete frontmatter["photo"];
 		}
 
 		this._pub
