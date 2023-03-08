@@ -12,7 +12,7 @@ export function getFilePathByDate(panelType: PanelType): string {
 	const now = new Date();
 	const y = now.getFullYear().toString();
 	const m = prependZero(now.getMonth() + 1);
-	const d = now.getDate();
+	const d = prependZero(now.getDate());
 	const h = prependZero(now.getHours());
 	const mi = prependZero(now.getMinutes());
 	const s = prependZero(now.getSeconds());
@@ -26,7 +26,7 @@ export function getSimpleDate(now: Date): string {
 	const prependZero = (x) => (x < 10 ? `0${x}` : x.toString());
 	const y = now.getFullYear();
 	const m = prependZero(now.getMonth() + 1);
-	const d = now.getDate();
+	const d = prependZero(now.getDate());
 	return [y, m, d].join("-");
 }
 
