@@ -14,7 +14,7 @@
 		{{- .Content -}}
 
 		<chaos-filter>
-			<form class="spread" slot="chaos-filter-form" action='{{ .Site.BaseURL }}' method=get>
+			<form class="switcher" slot="chaos-filter-form" action='{{ .Site.BaseURL }}' method=get>
 				<select data-match="epistemic">
 					<option value="all">All ({{- len $everyPlant -}})</option>
 					<option value="evergreen">Evergreen 🌲 ({{- len $evergreens -}})</option>
@@ -58,6 +58,7 @@
 			{{- end -}}
 		{{- end -}}
 		</ul>
+		</chaos-resizer>
 	</article>
 {{ partialCached "foot.html" . }}
 {{ partialCached "scripts.html" . }}

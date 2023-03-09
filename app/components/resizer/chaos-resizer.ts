@@ -20,7 +20,7 @@ export class ChaosResizer extends HTMLElement {
 		const widestField = [...this.fields]
 			.map((x) => {
 				const itemPair = Array.from(x.children);
-				return { parent: x, attr: itemPair[0], title: itemPair[1] };
+				return { parent: x, attr: itemPair[1], title: itemPair[0] };
 			})
 			.sort((a, b) => a.title.scrollWidth - b.title.scrollWidth)
 			.pop();
