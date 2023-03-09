@@ -164,7 +164,7 @@ table.two-column {
 
 .navigation {
 	background-color: var(--color-tertiary);
-	padding-bottom: 0.5em;
+	padding-top: 0.5em;
 	a,
 	select {
 		color: var(--color-secondary);
@@ -174,7 +174,7 @@ table.two-column {
 
 .credits {
 	background-color: var(--color-tertiary);
-	padding-top: 0.5em;
+	padding-bottom: 0.5em;
 	* {
 		color: var(--color-secondary);
 		font-size: var(--step--2);
@@ -183,6 +183,27 @@ table.two-column {
 		max-width: 500px;
 	}
 }
+
+.navigation + .curve {
+	margin-top: unset;
+}
+
+.curve + .credits {
+	margin-top: unset;
+}
+
+.curve {
+	fill: var(--color-tertiary);
+	display: block;
+	height: 3.5em;
+	width: 100%;
+	transform: translateY(-1px);
+}
+
+.curve.reverse {
+	transform: rotate(180deg);
+}
+
 
 .card {
 	border-width: 0.25em;
