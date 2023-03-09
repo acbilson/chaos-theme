@@ -26,7 +26,7 @@
 			{{- if gt (len .sources) 0 -}}
 		  <aside>
 			  <h3>Related Tags</h3>
-			  <ul class="spread" role="list">
+			  <ul class="spread fill-list" role="list">
 			  {{- range .sources -}}
 				{{- $tagPage := index $.Site.Taxonomies.tags . -}}
 				{{- with $.Site.GetPage (printf "/%s/%s" "tags" ( . | urlize)) -}}
