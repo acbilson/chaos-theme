@@ -1,17 +1,18 @@
 /* Utilities */
 
-$size-map: (
-	large: "l",
-	medium: "m",
-	small: "s",
-);
-
 /* flow utility */
 
-@each $k, $v in $size-map {
-	.flow-#{$v} > * + * {
-		margin-top: var(--flow-space, 1em);
-	}
+.flow-l > * + * {
+	margin-top: calc(var(--flow-space, 1em) * 1);
+}
+.flow-m > * + * {
+	margin-top: calc(var(--flow-space, 1em) * 0.8);
+}
+.flow-s > * + * {
+	margin-top: calc(var(--flow-space, 1em) * 0.6);
+}
+.flow-t > * + * {
+	margin-top: calc(var(--flow-space, 1em) * 0.4);
 }
 
 .hidden {

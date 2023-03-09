@@ -4,24 +4,28 @@
 {{ partialCached "head.html" . }}
 <body class="flow-l">
 {{ partialCached "nav-bar.html" . }}
+
 	<article class="wrapper flow-m">
 		<h1 id="jump">{{- .Title -}}</h1>
 		{{- .Content -}}
-		<chaos-resizer>
-		<ul class="fill-list filter-wide" role="list">
+
+		<ul class="fill-list filter-narrow flow-t" role="list">
 		{{- range $stones -}}
 		{{- $title := partial "ops/get-title.html" . -}}
 			<li>
-				<div>[
+				<div><a href="{{- .Permalink -}}">{{- $title -}}</a></div>
+				<div>[<span>
+					{{- if isset .Params "authors" -}}
+						{{- delimit .Params.authors ", " -}}
+					{{- end -}}
+					</span>
 					<span>{{- .Date.Format "2/1/06" -}}</span>
 					<span hidden>{{- .Lastmod.Format "2/1/06" -}}</span>
 					<span>{{- .ReadingTime -}} m</span>]
 				</div>
-				<div><a href="{{- .Permalink -}}">{{- $title -}}</a></div>
 			</li>
 			{{- end -}}
 		</ul>
-		</chaos-resizer>
 	</article>
 {{ partialCached "foot.html" . }}
 {{ partialCached "scripts.html" . }}
