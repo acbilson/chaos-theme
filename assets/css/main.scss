@@ -48,30 +48,6 @@
 	--color-stroke: var(--color-magenta);
 }
 
-:root[theme="fall"] {
-	--color-pumpkin-orange: rgb(255, 107, 18);
-	--color-navy-blue: navy;
-	--color-cream: rgb(245, 240, 196);
-	--color-maroon: maroon;
-
-	--color-primary: var(--color-pumpkin-orange);
-	--color-secondary: var(--color-cream);
-	--color-tertiary: var(--color-navy-blue);
-	--color-stroke: var(--color-maroon);
-}
-
-:root[theme="jungle"] {
-	--color-forest-green: rgb(0, 70, 67);
-	--color-teal: rgb(171, 209, 198);
-	--color-faded-orange: rgb(249, 188, 96);
-	--color-eggshell: rgb(255, 255, 252);
-
-	--color-primary: var(--color-forest-green);
-	--color-secondary: var(--color-eggshell);
-	--color-tertiary: var(--color-teal);
-	--color-stroke: var(--color-faded-orange);
-}
-
 :root[theme="minimal"] {
 	// colors
 	--color-eggshell: rgb(255, 255, 252);

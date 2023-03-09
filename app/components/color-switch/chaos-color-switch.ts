@@ -1,8 +1,6 @@
 export class ChaosColorSwitch extends HTMLElement {
 	private themes = {
 		Minimal: "minimal",
-		Jungle: "jungle",
-		Fall: "fall",
 		Void: "void",
 	};
 

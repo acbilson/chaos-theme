@@ -210,9 +210,15 @@ table.two-column {
 	border-style: double;
 	border-color: var(--color-stroke);
 	border-radius: var(--radius);
-	width: fit-content;
 	padding-top: var(--flow-space, 1em);
 	padding-bottom: var(--flow-space, 1em);
+
+	// will try to fit content, but not outside of the container width
+	width: fit-content;
+	max-width: 100%;
+
+	// sometimes URLs will blow past the max width.
+	overflow: hidden;
 }
 
 .previous-cards {

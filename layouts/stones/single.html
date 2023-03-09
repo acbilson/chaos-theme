@@ -1,7 +1,7 @@
 {{- $title := partial "ops/get-title.html" . -}}
 {{- $taxo := "tags" -}}
 <!DOCTYPE html>
-<html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="{{ .Site.Params.defaultColorMode }}">
+<html lang="{{ .Site.LanguageCode }}" dir="ltr">
 {{ partialCached "head.html" . }}
 <body class="flow-l">
 	{{ partialCached "nav-bar.html" . }}

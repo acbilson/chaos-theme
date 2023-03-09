@@ -1,7 +1,7 @@
 {{- $darkmodejs := resources.Get "js/darkmode.js" -}}
 {{- $navbarjs := resources.Get "js/nav-bar.js" -}}
 <!DOCTYPE html>
-<html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="{{ .Site.Params.defaultColorMode }}">
+<html lang="{{ .Site.LanguageCode }}" dir="ltr">
 {{ partialCached "head.html" . }}
 <body class="flow-l">
   {{ partialCached "nav-bar.html" . }}

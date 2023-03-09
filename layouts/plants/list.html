@@ -4,7 +4,7 @@
 {{- $seedlings := sort (where .Pages "Params.epistemic" "seedling") "Lastmod" "desc" -}}
 {{- $everyPlant := $evergreens | append $plants | append $sprouts | append $seedlings -}}
 <!DOCTYPE html>
-<html lang="{{ .Site.LanguageCode }}" dir="ltr" color-mode="{{ .Site.Params.defaultColorMode }}">
+<html lang="{{ .Site.LanguageCode }}" dir="ltr">
 {{ partialCached "head.html" . }}
 <body class="flow-l">
 	{{ partialCached "nav-bar.html" . }}
