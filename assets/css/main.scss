@@ -162,8 +162,11 @@ select {
 	border-radius: 0.25rem;
 }
 
-input {
+select,
+input,
+button {
 	padding-left: 1ch;
+	padding-right: 1ch;
 }
 
 /*  greys out disabled elements */

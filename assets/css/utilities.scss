@@ -36,10 +36,13 @@
 
 /* spread utility */
 .spread {
+	--flex-gap: 1em;
+
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: flex-start;
-	column-gap: 1em;
+	column-gap: var(--flex-gap);
+	row-gap: calc(var(--flex-gap) / 2);
 }
 
 .spread-btwn {

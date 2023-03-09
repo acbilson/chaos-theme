@@ -138,7 +138,7 @@ export class ChaosOnThisDay extends HTMLElement {
 
 	render() {
 		this.innerHTML = `
-			<aside>
+			<aside class="flow-m">
 				<button type="button">Show On This Day</button>
 				<div id="on-this-day" class="wrapper no-h-padding | flow-m previous-cards" hidden>
 				</div>

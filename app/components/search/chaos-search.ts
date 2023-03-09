@@ -114,7 +114,7 @@ export class ChaosSearch extends HTMLElement {
 
 			<p id="error-message"></p>
 
-			<details>
+			<details class="flow-m">
 				<summary>Index Built From</summary>
 				<table>
 					<thead>
