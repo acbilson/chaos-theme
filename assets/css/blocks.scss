@@ -196,6 +196,9 @@ table.two-column {
 #backlinks {
 	background-color: var(--color-primary);
 
+	// prevents curve from cutting off backlinks
+	padding-bottom: 0.5em;
+
 	> h3 {
 		color: var(--color-secondary);
 	}
