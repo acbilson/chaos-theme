@@ -219,7 +219,7 @@ table.two-column {
 }
 
 .curve.reverse {
-	transform: rotate(180deg);
+	transform: translateY(1px) rotate(180deg);
 }
 
 .curve.backlinks {
