@@ -17,9 +17,11 @@
 		{{- $matches := where $.Site.Data.backrefs "referrer" "eq" (printf "/%s" .File.Path) -}}
 
 		{{- if gt (len $matches) 0 -}}
+		{{ partial "curve.html" (dict "Classes" "curve backlinks") }}
 		<aside id="backlinks" class="wrapper flow-m">
 			{{- partial "backlink.html" (dict "path" (printf "/%s" .File.Path) "backrefs" $.Site.Data.backrefs "site" .Site) -}}
 		</aside>
+		{{ partial "curve.html" (dict "Classes" "curve backlinks reverse") }}
 	  {{- end -}}
 
   {{- end -}}
