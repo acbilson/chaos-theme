@@ -14,7 +14,7 @@
 
 <p>Pages that directly reference this page are at the top in <b>bold</b>. Pages that refer to <i>those</i> pages are displayed below a ⬆️ arrow. And, if <i>they</i> have pages that refer to them, they'll be displayed under a ⏫ arrow.</p>
 
-<ul class="spread backrefs" role="list">
+<ul class="spread backrefs | fill-list" role="list">
 {{- partial "backlink-recurse.html" (dict "depth" 1 "referrer" .referrer "sources" .sources "backrefs" $backrefs "site" $site) -}}
 </ul>
 

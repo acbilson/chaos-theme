@@ -196,8 +196,15 @@ table.two-column {
 #backlinks {
 	background-color: var(--color-primary);
 
-	* {
+	> h3 {
 		color: var(--color-secondary);
+	}
+
+	> p {
+		color: var(--color-secondary);
+		* {
+			color: var(--color-secondary);
+		}
 	}
 }
 
@@ -269,19 +276,23 @@ table.two-column {
 }
 
 .backrefs {
-	text-align: center;
-
-	> li > a {
-		font-weight: 600;
+	* {
+		color: var(--color-primary);
 	}
 
 	> li {
-		max-width: 250px;
+		width: 10em;
+		background-color: var(--color-secondary);
+		border-width: 0.25em;
+		border-style: solid;
+		border-color: var(--color-secondary);
+		border-radius: var(--radius);
+		padding: 0.5em;
+		align-self: flex-start;
 	}
 
-	li,
-	ul {
-		align-items: center;
+	> li > a {
+		font-weight: 600;
 	}
 }
 
