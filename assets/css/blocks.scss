@@ -207,9 +207,7 @@ table.two-column {
 
 #backlinks + .curve {
 	// TODO: I don't know why there's still a gap with unset
-	margin-top: -27px;
-	// puts this behind for browsers that overlap (mobile)
-	z-index: -1;
+	margin-top: -1.25em;
 }
 
 .curve {
