@@ -25,11 +25,16 @@
   </article>
 
   {{- if ne $.Site.Data.backrefs nil -}}
-<svg class="curve reverse backlinks" preserveAspectRatio="none" viewBox="0 0 1440 96" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="m0 96 80-5.3C160 85 320 75 480 64s320-21 480-21.3c160 .3 320 10.3 400 16l80 5.3V0H0v96Z"></path></svg>
-	<aside id="backlinks" class="wrapper flow-m">
-		{{- partial "backlink.html" (dict "path" (printf "/%s" .File.Path) "backrefs" $.Site.Data.backrefs "site" .Site) -}}
-	</aside>
-<svg class="curve backlinks" preserveAspectRatio="none" viewBox="0 0 1440 96" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="m0 96 80-5.3C160 85 320 75 480 64s320-21 480-21.3c160 .3 320 10.3 400 16l80 5.3V0H0v96Z"></path></svg>
+		{{- $matches := where $.Site.Data.backrefs "referrer" "eq" (printf "/%s" .File.Path) -}}
+
+		{{- if gt (len $matches) 0 -}}
+		{{ partial "curve.html" (dict "Classes" "curve backlinks reverse") }}
+		<aside id="backlinks" class="wrapper flow-m">
+			{{- partial "backlink.html" (dict "path" (printf "/%s" .File.Path) "backrefs" $.Site.Data.backrefs "site" .Site) -}}
+		</aside>
+		{{ partial "curve.html" (dict "Classes" "curve backlinks") }}
+	  {{- end -}}
+
   {{- end -}}
 
 		<app-panel panel-type="stone"
