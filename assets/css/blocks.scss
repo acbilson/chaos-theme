@@ -199,6 +199,10 @@ table.two-column {
 	// prevents curve from cutting off backlinks
 	padding-bottom: 0.5em;
 
+	.icon {
+		margin-left: 1ch;
+	}
+
 	> h3 {
 		color: var(--color-secondary);
 	}

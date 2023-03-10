@@ -24,9 +24,9 @@
 		<a href="{{ $page.Permalink }}">{{- $title -}}</a>
 			{{- if ne $depth $maxDepth -}}
 			{{- if eq $depth (sub $maxDepth 1) -}}
-				<span>⏫</span>
+				<span class="icon">⏫</span>
 			{{- else -}}
-				<span>⬆️</span>
+				<span class="icon">⬆️</span>
 			{{- end -}}
 			{{- end -}}
 		<ul class="spread-down" role="list" data-depth="{{ $depth }}" data-source-count="{{ len .sources }}">

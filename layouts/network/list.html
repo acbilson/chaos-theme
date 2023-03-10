@@ -25,7 +25,7 @@
 
 			<li class="spread-down" data-referrer="{{ $backrefs.referrer }}">
 			<a href="{{ .Permalink }}">{{- $title -}}</a>
-			<span>⬆️</span>
+			<span class="icon">⬆️</span>
 			<ul class="spread-down" role="list" data-source-count="{{ len $backrefs.sources }}">
 			{{- range $source := $backrefs.sources -}}
 
