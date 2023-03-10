@@ -109,6 +109,7 @@ body {
 	min-height: 100vh;
 	text-rendering: optimizeSpeed;
 	line-height: var(--step-2);
+	overflow-x: hidden;
 }
 
 /* A elements that don't have a class get default styles */
