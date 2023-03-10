@@ -32,13 +32,11 @@
 
 /* spread utility */
 .spread {
-	--flex-gap: 1em;
-
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: flex-start;
-	column-gap: var(--flex-gap);
-	row-gap: calc(var(--flex-gap) / 2);
+	column-gap: var(--flow-space);
+	row-gap: calc(var(--flow-space) / 2);
 }
 
 .spread-btwn {
@@ -50,7 +48,7 @@
 .spread-down {
 	display: flex;
 	flex-flow: column nowrap;
-	row-gap: 0.125rem;
+	row-gap: calc(var(--flow-space) / 2);
 }
 
 /* grid utility */
@@ -58,7 +56,7 @@
 @for $i from 2 through 5 {
 	.grid-#{$i} {
 		display: grid;
-		grid-row-gap: 0.5em;
+		grid-row-gap: calc(var(--flow-space) / 2);
 		grid-template-columns: repeat(#{$i}, auto);
 	}
 }
@@ -67,8 +65,8 @@
 .wrapper {
 	margin-left: auto;
 	margin-right: auto;
-	padding-left: 1.25rem;
-	padding-right: 1.25rem;
+	padding-left: var(--space-s);
+	padding-right: var(--space-s);
 }
 
 .highlight {

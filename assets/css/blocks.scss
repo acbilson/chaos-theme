@@ -65,7 +65,7 @@
 		font-style: italic;
 	}
 	p:last-of-type {
-		margin-left: 1ch;
+		margin-left: var(--space-2xs);
 	}
 }
 
@@ -73,7 +73,7 @@
 #TableOfContents {
 	width: fit-content;
 	max-width: 100%;
-	margin-left: 3ch;
+	margin-left: var(--space-s);
 	> ul {
 		list-style-type: upper-roman;
 		li > ul {
@@ -93,7 +93,7 @@
 	max-width: 100%;
 	border-top: calc(var(--border-size) / 2) solid var(--color-stroke);
 	border-bottom: var(--border-size) solid var(--color-stroke);
-	padding-left: 1ch;
+	padding-left: var(--space-2xs);
 
 	p:first-of-type {
 		text-align: center;
@@ -109,7 +109,7 @@
 	margin-right: auto;
 	// overrides the fit-content default
 	width: initial;
-	max-width: 600px;
+	max-width: var(--char-3);
 	> img {
 		border-radius: 50%;
 	}
@@ -154,10 +154,10 @@ table.two-column {
 .tags {
 	display: flex;
 	flex-wrap: wrap;
-	column-gap: 1em;
+	column-gap: var(--flow-space);
 
 	li {
-		width: 17ch;
+		width: var(--char-6);
 		white-space: nowrap;
 		overflow: hidden;
 	}
@@ -165,7 +165,7 @@ table.two-column {
 
 .navigation {
 	background-color: var(--color-tertiary);
-	padding-top: 0.5em;
+	padding-top: calc(var(--flow-space) / 2);
 	a,
 	select {
 		color: var(--color-secondary);
@@ -175,13 +175,13 @@ table.two-column {
 
 .credits {
 	background-color: var(--color-tertiary);
-	padding-bottom: 0.5em;
+	padding-bottom: calc(var(--flow-space) / 2);
 	* {
 		color: var(--color-secondary);
 		font-size: var(--step--2);
 	}
 	.spread > div {
-		max-width: 500px;
+		max-width: var(--char-1);
 	}
 }
 
@@ -197,10 +197,10 @@ table.two-column {
 	background-color: var(--color-primary);
 
 	// prevents curve from cutting off backlinks
-	padding-bottom: 0.5em;
+	padding-bottom: calc(var(--flow-space) / 2);
 
 	.icon {
-		margin-left: 1ch;
+		margin-left: var(--space-2xs);
 	}
 
 	> h3 {
@@ -266,7 +266,7 @@ table.two-column {
 }
 
 .card {
-	border-width: 0.25em;
+	border-width: var(--space-3xs);
 	border-style: double;
 	border-color: var(--color-stroke);
 	border-radius: var(--radius);
@@ -323,11 +323,11 @@ table.two-column {
 	> li {
 		width: 10em;
 		background-color: var(--color-secondary);
-		border-width: 0.25em;
+		border-width: var(--space-3xs);
 		border-style: solid;
 		border-color: var(--color-secondary);
 		border-radius: var(--radius);
-		padding: 0.5em;
+		padding: calc(var(--flow-space) / 2);
 		align-self: flex-start;
 	}
 
@@ -341,7 +341,7 @@ table.two-column {
 .switcher {
 	display: flex;
 	flex-wrap: wrap;
-	gap: var(--flex-gap, 0.5em);
+	gap: var(--flow-space, 0.5em);
 }
 
 .switcher > * {

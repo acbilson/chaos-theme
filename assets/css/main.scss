@@ -31,6 +31,7 @@
 	--char-3: 35ch;
 	--char-4: 25ch;
 	--char-5: 20ch;
+	--char-6: 17ch;
 
 	// other
 	--radius: 1rem;
@@ -107,7 +108,7 @@ html:focus-within {
 body {
 	min-height: 100vh;
 	text-rendering: optimizeSpeed;
-	line-height: 1.5;
+	line-height: var(--step-2);
 }
 
 /* A elements that don't have a class get default styles */
@@ -168,8 +169,8 @@ select {
 select,
 input,
 button {
-	padding-left: 1ch;
-	padding-right: 1ch;
+	padding-left: var(--space-2xs);
+	padding-right: var(--space-2xs);
 }
 
 /*  greys out disabled elements */
@@ -201,7 +202,7 @@ input[disabled] {
 
 /* gives paragraphs default spacing */
 p + p {
-	margin-top: var(--space-2xs);
+	margin-top: var(--space-xs);
 }
 
 /* makes abbreviations stand out */
@@ -237,8 +238,8 @@ nav {
 /* ensures code blocks horizontally scroll and keep their default colors */
 pre {
 	overflow-x: auto;
-	padding-left: 1ch;
-	padding-right: 1ch;
+	padding-left: var(--space-2xs);
+	padding-right: var(--space-2xs);
 	> * {
 		color: unset;
 	}
@@ -276,14 +277,14 @@ table {
 
 	td,
 	th {
-		padding: 0.75rem;
+		padding: var(--space-2xs);
 	}
 }
 
 // makes block quotes stand out a little
 blockquote {
 	border-left: 1px solid var(--color-stroke);
-	padding-left: 1ch;
+	padding-left: var(--space-2xs);
 }
 
 // makes images more beautiful
@@ -293,7 +294,7 @@ img {
 
 figure {
 	width: fit-content;
-	max-width: 800px;
+	max-width: var(--char-0);
 
 	figcaption {
 		font-style: italic;
