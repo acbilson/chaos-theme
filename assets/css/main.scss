@@ -220,9 +220,21 @@ figcaption {
 
 /* ensures nav contents don't stretch container */
 nav {
-	> * {
+	ul {
 		margin: 0;
 		line-height: 1;
+	}
+
+	li {
+		margin-top: auto;
+		margin-bottom: auto;
+	}
+
+	// overrides default padding
+	select {
+		border: unset;
+		padding-left: 0;
+		padding-right: 0;
 	}
 }
 
