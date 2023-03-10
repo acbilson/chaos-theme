@@ -228,12 +228,15 @@ table.two-column {
 	margin-top: -1.25em;
 }
 
-@keyframes fade {
-	from {
-		fill-opacity: 1;
+@keyframes wave {
+	0% {
+		transform: translateX(0);
 	}
-	to {
-		fill-opacity: 0.53;
+	50% {
+		transform: translateX(calc(var(--wave-translation / 2)));
+	}
+	100% {
+		transform: translateX(var(--wave-translation));
 	}
 }
 
@@ -241,16 +244,20 @@ table.two-column {
 	fill: var(--color-tertiary);
 	display: block;
 	height: 3.5em;
-	width: 100%;
-	transform: translateY(1px);
+	width: 200%;
+	transform: translateX(calc(-1 * var(--wave-translation))) translateY(1px);
 
 	.outer-wave {
-		animation: fade 3s ease-in forwards;
+		animation: wave 4s ease-in-out infinite alternate;
+	}
+
+	.inner-wave {
+		animation: wave 3s ease-in-out infinite alternate;
 	}
 }
 
 .curve.reverse {
-	transform: translateY(-1px) rotate(180deg);
+	transform: translateX(calc(-1 * var(--wave-translation))) translateY(-1px) rotate(180deg);
 }
 
 .curve.backlinks {
