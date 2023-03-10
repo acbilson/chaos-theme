@@ -1,14 +1,11 @@
 {{- $title := .Get "title" -}}
 {{- $src := .Get "src" -}}
 <div class="poetry flow-s">
-  {{- with $title -}}<h3>{{- . -}}</h3>{{- end -}}
-    {{- $lines := split .Inner "\n" -}}
-    {{- range $lines -}}
-      {{- if ne . "" -}}
-        <p>{{- . -}}</p>
-      {{- end -}}
-    {{- end -}}
-    {{- with $src -}}
-      <p>- ({{- . -}})</p>
-    {{- end -}}
+{{- with $title -}}<h3>{{- . -}}</h3>{{- end -}}
+<pre>
+	{{- .Inner -}}
+</pre>
+{{- with $src -}}
+	<p>- ({{- . -}})</p>
+{{- end -}}
 </div>

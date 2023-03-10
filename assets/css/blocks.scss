@@ -20,12 +20,14 @@
 
 .poetry {
 	width: fit-content;
+
 	h3 {
 		text-align: center;
 	}
-	p {
+
+	pre {
 		font-style: italic;
-		text-align: center;
+		font-family: inherit;
 	}
 }
 

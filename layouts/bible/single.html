@@ -13,9 +13,16 @@
       {{- .Content -}}
     </article>
 
-	<aside id="backlinks" class="wrapper flow-m">
-		{{- partial "backlink.html" (dict "path" (printf "/%s" .File.Path) "backrefs" $.Site.Data.backrefs "site" .Site) -}}
-	<aside>
+  {{- if ne $.Site.Data.backrefs nil -}}
+		{{- $matches := where $.Site.Data.backrefs "referrer" "eq" (printf "/%s" .File.Path) -}}
+
+		{{- if gt (len $matches) 0 -}}
+		<aside id="backlinks" class="wrapper flow-m">
+			{{- partial "backlink.html" (dict "path" (printf "/%s" .File.Path) "backrefs" $.Site.Data.backrefs "site" .Site) -}}
+		</aside>
+	  {{- end -}}
+
+  {{- end -}}
 
   {{ partialCached "foot.html" . }}
   {{ partialCached "scripts.html" . }}
