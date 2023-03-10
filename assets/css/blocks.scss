@@ -224,12 +224,25 @@ table.two-column {
 	margin-top: -1.25em;
 }
 
+@keyframes fade {
+	from {
+		fill-opacity: 1;
+	}
+	to {
+		fill-opacity: 0.53;
+	}
+}
+
 .curve {
 	fill: var(--color-tertiary);
 	display: block;
 	height: 3.5em;
 	width: 100%;
 	transform: translateY(1px);
+
+	.outer-wave {
+		animation: fade 1s ease-in forwards;
+	}
 }
 
 .curve.reverse {
