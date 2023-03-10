@@ -48,7 +48,6 @@
 .spread-down {
 	display: flex;
 	flex-flow: column nowrap;
-	row-gap: calc(var(--flow-space) / 2);
 }
 
 /* grid utility */

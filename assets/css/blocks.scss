@@ -310,6 +310,7 @@ table.two-column {
 }
 
 .filter-narrow {
+	@extend .flow-t;
 	li {
 		@extend .spread-down;
 	}
