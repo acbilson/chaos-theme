@@ -99,6 +99,12 @@ ol[role="list"] {
 	padding-left: 0;
 }
 
+/* prevents the page from going outside the viewport for mobile  */
+html, body {
+	overflow: hidden;
+	overflow-y: auto;
+}
+
 /* Set core root defaults */
 html:focus-within {
 	scroll-behavior: smooth;
@@ -109,7 +115,6 @@ body {
 	min-height: 100vh;
 	text-rendering: optimizeSpeed;
 	line-height: 1.5em;
-	overflow-x: hidden;
 }
 
 /* A elements that don't have a class get default styles */
