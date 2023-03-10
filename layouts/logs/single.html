@@ -9,10 +9,16 @@
 	<article class="wrapper flow-m e-content">
 		<h1 id="jump" hidden>{{ $title }}</h1>
 		{{- .Content -}}
-
-	{{ partial "comments.html" . }}
-	{{ partial "attributes.html" . }}
 	</article>
+
+	{{ partial "curve.html" (dict "Classes" "curve backlinks") }}
+	{{ partial "curve.html" (dict "Classes" "curve backlinks reverse") }}
+
+	<aside class="wrapper flow-m">
+	{{ partial "attributes.html" . }}
+	{{ partial "comments.html" . }}
+	</aside>
+
 	 <chaos-panel data-panel-type="log">
 		<chaos-panel-option
 			data-key="date"

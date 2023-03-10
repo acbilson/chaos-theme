@@ -224,6 +224,10 @@ table.two-column {
 	margin-top: -1.25em;
 }
 
+.curve + .curve {
+	margin-top: -1.25em;
+}
+
 @keyframes fade {
 	from {
 		fill-opacity: 1;
