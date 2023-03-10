@@ -192,6 +192,23 @@ table.two-column {
 	margin-top: unset;
 }
 
+#backlinks {
+	background-color: var(--color-primary);
+
+	* {
+		color: var(--color-secondary);
+	}
+}
+
+.curve + #backlinks {
+	margin-top: unset;
+}
+
+#backlinks + .curve {
+	// TODO: I don't know why there's still a gap with unset
+	margin-top: -27px;
+}
+
 .curve {
 	fill: var(--color-tertiary);
 	display: block;
@@ -204,6 +221,9 @@ table.two-column {
 	transform: rotate(180deg);
 }
 
+.curve.backlinks {
+	fill: var(--color-primary);
+}
 
 .card {
 	border-width: 0.25em;
@@ -258,7 +278,8 @@ table.two-column {
 		max-width: 250px;
 	}
 
-	li, ul {
+	li,
+	ul {
 		align-items: center;
 	}
 }
@@ -266,17 +287,17 @@ table.two-column {
 // borrowed from https://every-layout.dev/layouts/switcher/
 // either flex row or flex column based on a flex-basis threshold
 .switcher {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--flex-gap, 0.5em);
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--flex-gap, 0.5em);
 }
 
 .switcher > * {
-  flex-grow: 1;
-  flex-basis: calc(( 30rem - 100%) * 999);
+	flex-grow: 1;
+	flex-basis: calc((30rem - 100%) * 999);
 }
 
-.switcher > :nth-last-child(n+ 5),
-.switcher > :nth-last-child(n+ 5) ~ * {
-  flex-basis: 100%;
+.switcher > :nth-last-child(n + 5),
+.switcher > :nth-last-child(n + 5) ~ * {
+	flex-basis: 100%;
 }
