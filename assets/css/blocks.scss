@@ -257,7 +257,8 @@ table.two-column {
 }
 
 .curve.reverse {
-	transform: translateX(calc(-1 * var(--wave-translation))) translateY(-1px) rotate(180deg);
+	transform: translateX(calc(-1 * var(--wave-translation))) translateY(-1px)
+		rotate(180deg);
 }
 
 .curve.backlinks {
@@ -297,6 +298,14 @@ table.two-column {
 .filter-wide {
 	li {
 		@extend .spread-btwn;
+	}
+
+	li div:last-of-type {
+		visibility: hidden;
+	}
+
+	li div:first-of-type:hover + div:last-of-type {
+		visibility: visible;
 	}
 }
 
