@@ -20,6 +20,7 @@
 
 .poetry {
 	width: fit-content;
+	max-width: 100%;
 
 	pre {
 		font-style: italic;
@@ -71,6 +72,7 @@
 // comes from Hugo toc
 #TableOfContents {
 	width: fit-content;
+	max-width: 100%;
 	margin-left: 3ch;
 	> ul {
 		list-style-type: upper-roman;
@@ -88,6 +90,7 @@
 
 .notice {
 	width: fit-content;
+	max-width: 100%;
 	border-top: calc(var(--border-size) / 2) solid var(--color-stroke);
 	border-bottom: var(--border-size) solid var(--color-stroke);
 	padding-left: 1ch;
