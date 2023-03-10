@@ -10,6 +10,7 @@
 	  {{- .Content -}}
   </article>
 
+	{{ partial "curve.html" (dict "Classes" "curve backlinks") }}
 	<aside id="backlinks" class="wrapper flow-m spread">
 	{{- if ne $.Site.Data.backrefs nil -}}
 
@@ -53,7 +54,8 @@
 
 	<!-- ends backrefs nil check -->
 	{{- end -}}
-	<aside>
+	</aside>
+	{{ partial "curve.html" (dict "Classes" "curve backlinks reverse") }}
   </article>
   {{ partialCached "foot.html" . }}
 </body>
