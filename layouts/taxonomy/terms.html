@@ -43,11 +43,11 @@
       {{- with $.Site.GetPage $path -}}
 		{{- if ne $root "authors" -}}
 		<li data-minimum="{{ add $plantCount $stoneCount }}">
-			<a href="{{ .Permalink }}">{{- .Title -}}<sup>({{- $plantCount -}}/{{- $stoneCount -}})</sup></a>
+			<a href="{{ .Permalink }}#jump">{{- .Title -}}<sup>({{- $plantCount -}}/{{- $stoneCount -}})</sup></a>
 		</li>
 			{{- else -}}
 		<li data-minimum="{{ $term.Count }}">
-			<a href="{{ .Permalink }}">{{- .Title -}}<sup>({{- $term.Count -}})</sup></a>
+			<a href="{{ .Permalink }}#jump">{{- .Title -}}<sup>({{- $term.Count -}})</sup></a>
 		</li>
 		{{- end -}}
 		{{- end -}}

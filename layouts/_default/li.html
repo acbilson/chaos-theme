@@ -1,5 +1,5 @@
 {{- $title := partial "ops/get-title.html" . -}}
 <article class="flow-m">
-	<h2><a href="{{- .Permalink -}}">{{- $title -}}</a></h2>
+	<h2><a href="{{- .Permalink -}}#jump">{{- $title -}}</a></h2>
 	<p>{{- .Summary | htmlUnescape -}}{{- if .Truncated -}}&mldr;{{- end -}}</p>
 </article>

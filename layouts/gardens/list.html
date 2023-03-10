@@ -39,7 +39,7 @@
           fill="transparent"
         />
       {{- end -}}
-      <a href="{{ .Permalink }}">
+      <a href="{{ .Permalink }}#jump">
       {{- if eq $vertical true -}}
         <rect
           x="{{ sub $startX (div $bend 2) }}"

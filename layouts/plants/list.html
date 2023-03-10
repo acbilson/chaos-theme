@@ -47,7 +47,7 @@
 			{{- $title := partial "ops/get-title.html" . -}}
 			{{- $topFolder := index (split .RelPermalink "/") 2 -}}
 			<li data-epistemic="{{- .Params.epistemic -}}" data-folder="{{- $topFolder -}}">
-				<div><a href="{{- .Permalink -}}">{{- $title -}}</a></div>
+				<div><a href="{{- .Permalink -}}#jump">{{- $title -}}</a></div>
 				<div>[<span>{{- $epistemic -}}</span>
 					<span>{{- .Date.Format "2/1/06" -}}</span>
 					<span hidden>{{- .Lastmod.Format "2/1/06" -}}</span>

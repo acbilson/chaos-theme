@@ -13,7 +13,7 @@
 		{{- range $stones -}}
 		{{- $title := partial "ops/get-title.html" . -}}
 			<li>
-				<div><a href="{{- .Permalink -}}">{{- $title -}}</a></div>
+				<div><a href="{{- .Permalink -}}#jump">{{- $title -}}</a></div>
 				<div>[<span>
 					{{- if isset .Params "authors" -}}
 						{{- delimit .Params.authors ", " -}}

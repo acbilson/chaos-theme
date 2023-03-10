@@ -24,7 +24,7 @@
 			{{- $title := partial "ops/get-title.html" . -}}
 
 			<li class="spread-down" data-referrer="{{ $backrefs.referrer }}">
-			<a href="{{ .Permalink }}">{{- $title -}}</a>
+			<a href="{{ .Permalink }}#jump">{{- $title -}}</a>
 			<span class="icon">⬆️</span>
 			<ul class="spread-down" role="list" data-source-count="{{ len $backrefs.sources }}">
 			{{- range $source := $backrefs.sources -}}
@@ -33,7 +33,7 @@
 					{{- $sourcePath := (printf "/%s" .Path) -}}
 					{{- $sourceTitle := partial "ops/get-title.html" . -}}
 
-					<li data-referrer="{{ $backrefs.referrer }}"><a href="{{- .Permalink -}}">{{- $sourceTitle -}}</a></li>
+					<li data-referrer="{{ $backrefs.referrer }}"><a href="{{- .Permalink -}}#jump">{{- $sourceTitle -}}</a></li>
 				<!-- ends with source -->
 				{{- end -}}
 
