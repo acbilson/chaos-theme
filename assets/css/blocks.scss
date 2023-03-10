@@ -299,20 +299,15 @@ table.two-column {
 	li {
 		@extend .spread-btwn;
 	}
-
-	li div:last-of-type {
-		visibility: hidden;
-	}
-
-	li div:first-of-type:hover + div:last-of-type {
-		visibility: visible;
-	}
 }
 
 .filter-narrow {
-	@extend .flow-t;
 	li {
 		@extend .spread-down;
+	}
+
+	li div:last-of-type {
+		@extend .hidden;
 	}
 }
 
