@@ -9,12 +9,12 @@
 		<h1 id="jump">{{- .Title -}}</h1>
 		{{- .Content -}}
 
-		<ul class="fill-list filter-narrow" role="list">
+		<ul class="fill-list" role="list">
 		{{- range $stones -}}
 		{{- $title := partial "ops/get-title.html" . -}}
 			<li>
 				<div><a href="{{- .Permalink -}}#jump">{{- $title -}}</a></div>
-				<div>[<span>
+				<div hidden>[<span>
 					{{- if isset .Params "authors" -}}
 						{{- delimit .Params.authors ", " -}}
 					{{- end -}}

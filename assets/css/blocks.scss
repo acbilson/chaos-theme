@@ -295,22 +295,6 @@ table.two-column {
 	}
 }
 
-.filter-wide {
-	li {
-		@extend .spread-btwn;
-	}
-}
-
-.filter-narrow {
-	li {
-		@extend .spread-down;
-	}
-
-	li div:last-of-type {
-		@extend .hidden;
-	}
-}
-
 .backrefs {
 	* {
 		color: var(--color-primary);
