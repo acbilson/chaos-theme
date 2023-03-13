@@ -295,6 +295,43 @@ table.two-column {
 	}
 }
 
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+.filter-fields {
+	li {
+		@extend .spread;
+	}
+
+	.attributes {
+		position: absolute;
+		right: 0;
+		background-color: var(--color-secondary);
+		padding-left: var(--space-2xs);
+		padding-right: var(--space-2xs);
+		border: 1px solid var(--color-stroke);
+		border-radius: var(--radius);
+	}
+
+	li > div:first-of-type:not(:hover) + .attributes {
+		display: none;
+		visibility: hidden;
+		opacity: 0;
+	}
+
+	li > div:first-of-type:hover + .attributes {
+		visibility: visible;
+		display: block;
+		animation: fadeIn 1.5s;
+	}
+}
+
 .backrefs {
 	* {
 		color: var(--color-primary);

@@ -39,7 +39,7 @@
 				<input type="submit" value="Filter"/>
 			</form>
 
-		<ul slot="chaos-filter-fields" class="fill-list" role="list">
+		<ul slot="chaos-filter-fields" class="filter-fields fill-list" role="list">
 		{{- range $everyPlant -}}
 			{{- if not .Draft -}}
 			{{- $epistemic := partial "ops/get-epistemic.html" . -}}
@@ -47,11 +47,11 @@
 			{{- $topFolder := index (split .RelPermalink "/") 2 -}}
 			<li data-epistemic="{{- .Params.epistemic -}}" data-folder="{{- $topFolder -}}">
 				<div><a href="{{- .Permalink -}}#jump">{{- $title -}}</a></div>
-				<div hidden>[<span>{{- $epistemic -}}</span>
+				<div class="attributes"><span>{{- $epistemic -}}</span>
 					<span>{{- .Date.Format "2/1/06" -}}</span>
 					<span hidden>{{- .Lastmod.Format "2/1/06" -}}</span>
 					<span>{{- substr $topFolder 0 5 -}}</span>
-					<span>{{- .ReadingTime -}} m</span>]
+					<span>{{- .ReadingTime -}} m</span>
 				</div>
 			</li>
 			{{- end -}}
