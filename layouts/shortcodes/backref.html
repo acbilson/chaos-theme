@@ -1,20 +1,21 @@
 {{- $src := .Get "src" -}}
 {{- $name := .Get "name" -}}
-{{- $paragraph := .Get "paragraph" -}}
-{{- $dirFile := path.Split $src -}}
-{{- $words := split $dirFile.File "-" -}}
-{{- $title := delimit $words " " -}}
-{{- if ne $paragraph "" -}}
+
+{{- $filename := (path.Split $src).File -}}
+	<!-- jumps to primary header -->
+{{- $hash := "#jump" -}}
+
+<!-- If I specify a hash in the src, strip it from the filename so it's not reflected in the title -->
+{{- if in $filename "#" -}}
+	{{- $filename = index (split $filename "#") 0 -}}
+	<!-- hash is already on $src -->
+	{{- $hash = "" -}}
+{{- end -}}
+{{- $title := delimit (split $filename "-") " " -}}
+
 <a
   class="backref"
-  data-paragraph="{{ $paragraph }}"
-  name="{{ $dirFile.File }}"
-  href="{{ ref . $src }}">
-{{- else -}}
-  <a
-    class="backref"
-    name="{{- $dirFile.File -}}"
-    href="{{ ref . $src }}">
-{{- end -}}
+  name="{{ $filename }}"
+  href="{{ ref . $src }}{{ $hash }}">
 {{- with $name -}}{{- . -}}{{- else -}}{{- $title -}}{{- end -}}</a>
 {{- print "" -}}
