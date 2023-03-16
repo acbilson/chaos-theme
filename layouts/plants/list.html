@@ -1,8 +1,7 @@
 {{- $evergreens := sort (where .Pages "Params.epistemic" "evergreen") "Lastmod" "desc" -}}
 {{- $plants := sort (where .Pages "Params.epistemic" "plant") "Lastmod" "desc" -}}
 {{- $sprouts := sort (where .Pages "Params.epistemic" "sprout") "Lastmod" "desc" -}}
-{{- $seedlings := sort (where .Pages "Params.epistemic" "seedling") "Lastmod" "desc" -}}
-{{- $everyPlant := $evergreens | append $plants | append $sprouts | append $seedlings -}}
+{{- $everyPlant := $evergreens | append $plants | append $sprouts -}}
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}" dir="ltr">
 {{ partialCached "head.html" . }}
@@ -20,7 +19,6 @@
 					<option value="evergreen">Evergreen 🌲 ({{- len $evergreens -}})</option>
 					<option value="plant">Plant 🪴 ({{- len $plants -}})</option>
 					<option value="sprout">Sprout 🌿 ({{- len $sprouts -}})</option>
-					<option value="seedling">Seedling 🌱 ({{- len $seedlings -}})</option>
 				</select>
 				<select data-match="folder">
 					<option value="all">All</option>
