@@ -312,11 +312,7 @@ table.two-column {
 	.attributes {
 		position: absolute;
 		right: 0;
-		background-color: var(--color-secondary);
-		padding-left: var(--space-2xs);
-		padding-right: var(--space-2xs);
-		border: 1px solid var(--color-stroke);
-		border-radius: var(--radius);
+		@extend .round-border;
 	}
 
 	li > div:first-of-type:not(:hover) + .attributes {
@@ -369,4 +365,39 @@ table.two-column {
 .switcher > :nth-last-child(n + 5),
 .switcher > :nth-last-child(n + 5) ~ * {
 	flex-basis: 100%;
+}
+
+@keyframes blink {
+	50% {
+		opacity: 0.2;
+	}
+}
+
+.ai {
+	@extend .spread-down;
+	border-bottom: var(--border-size) solid var(--color-stroke);
+	padding-bottom: var(--flow-space);
+
+	> p {
+		padding-left: var(--space-2xs);
+		> span {
+			font-weight: bold;
+			padding-right: var(--space-3xs);
+			animation: blink 3s linear infinite;
+		}
+	}
+
+	> div {
+		font-family: monospace;
+		width: fit-content;
+		max-width: 100%;
+
+		border-top: calc(var(--border-size) / 2) solid var(--color-stroke);
+		padding-left: var(--space-2xs);
+	}
+
+	> span {
+		align-self: center;
+		@extend .round-border;
+	}
 }

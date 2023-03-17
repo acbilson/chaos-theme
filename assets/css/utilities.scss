@@ -73,3 +73,10 @@
 	width: fit-content;
 	max-width: 100%;
 }
+
+.round-border {
+	padding-left: var(--space-2xs);
+	padding-right: var(--space-2xs);
+	border: 1px solid var(--color-stroke);
+	border-radius: var(--radius);
+}
