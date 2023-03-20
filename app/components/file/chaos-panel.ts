@@ -312,6 +312,7 @@ export class ChaosPanel extends HTMLElement {
 	}
 
 	onKeyUp(e: KeyboardEvent) {
+		if ((<HTMLElement>e.target).tagName !== 'TEXTAREA') return;
 		e.preventDefault();
 		const el = <HTMLTextAreaElement>e.target;
 		this.getButton(PanelStatus.SAVING).disabled = el.value.length <= 0;
@@ -360,13 +361,13 @@ export class ChaosPanel extends HTMLElement {
 		}
 
 		this.addEventListener("submit", (e) => this.onButtonClick(e));
-		this.querySelector("textarea").addEventListener("keyup", (e) => this.onKeyUp(e));
+		this.addEventListener("keyup", (e) => this.onKeyUp(e));
 	}
 
 	disconnectedCallback() {
 		this._store.isAuthorized$.unsubscribe(this._subscriptions.auth);
 		this._store.isMastodonAuthorized$.unsubscribe(this._subscriptions.mastodon);
 		this.removeEventListener("submit", (e) => this.onButtonClick(e));
-		this.querySelector("textarea").removeEventListener("keyup", (e) => this.onKeyUp(e));
+		this.removeEventListener("keyup", (e) => this.onKeyUp(e));
 	}
 }
