@@ -360,13 +360,13 @@ export class ChaosPanel extends HTMLElement {
 		}
 
 		this.addEventListener("submit", (e) => this.onButtonClick(e));
-		this.addEventListener("keyup", (e) => this.onKeyUp(e));
+		this.querySelector("textarea").addEventListener("keyup", (e) => this.onKeyUp(e));
 	}
 
 	disconnectedCallback() {
 		this._store.isAuthorized$.unsubscribe(this._subscriptions.auth);
 		this._store.isMastodonAuthorized$.unsubscribe(this._subscriptions.mastodon);
 		this.removeEventListener("submit", (e) => this.onButtonClick(e));
-		this.removeEventListener("keyup", (e) => this.onKeyUp(e));
+		this.querySelector("textarea").removeEventListener("keyup", (e) => this.onKeyUp(e));
 	}
 }
