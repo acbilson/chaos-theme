@@ -4,7 +4,7 @@
 {{- $everyPlant := $evergreens | append $plants | append $sprouts -}}
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}" dir="ltr">
-{{ partialCached "head.html" . }}
+{{ partial "head.html" . }}
 <body class="flow-l">
 	{{ partialCached "nav-bar.html" . }}
 

@@ -6,7 +6,8 @@
   <meta name="description" content="{{if .IsHome}}{{ $.Site.Params.description }}{{else}}{{.Description}}{{end}}" />
 
   <!-- Page Title -->
-  <title>{{- .Site.Title -}}</title>
+{{- $title := partial "ops/get-title.html" . -}}
+<title>{{- .Site.Title }}{{ if ne $title "" }} - {{ $title -}}{{ end }}</title>
 
   <!-- Page Links -->
   {{ $mainStyle := resources.Get "css/main.scss" | resources.ToCSS | minify }}
