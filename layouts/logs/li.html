@@ -1,6 +1,8 @@
 {{- $author := partial "ops/get-author.html" . -}}
+{{- $title := partial "ops/get-title.html" . -}}
+
 <article class="wrapper wrapper-no-center | flow-m | card">
-	<header class="center">
+	<header id="{{ replace $title " " "" }}" class="center">
 	<ul class="spread narrow-spread" role="list">
 		<li><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time></li>
 		<li><a rel="author" class="p-author">{{- $author -}}</a></li>
