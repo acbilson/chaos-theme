@@ -152,11 +152,11 @@ export class ChaosOnThisDay extends HTMLElement {
 
 	connectedCallback() {
 		this.render();
-		this.addEventListener("click", (e: MouseEvent) => this.onClick(e), false);
+		this.button.addEventListener("click", (e: MouseEvent) => this.onClick(e), false);
 	}
 
 	disconnectedCallback() {
-		this.removeEventListener(
+		this.button.removeEventListener(
 			"click",
 			(e: MouseEvent) => this.onClick(e),
 			false
