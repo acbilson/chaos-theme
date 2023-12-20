@@ -164,6 +164,13 @@ body {
 	background-color: var(--color-secondary);
 }
 
+// void theme fix to make inputs visible
+:root[theme="void"] {
+	input:not([type="submit"]) {
+		color: var(--color-secondary);
+	}
+}
+
 input[type="submit"],
 button,
 select {
