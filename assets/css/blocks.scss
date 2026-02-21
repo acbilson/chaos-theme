@@ -169,6 +169,9 @@ table.two-column {
 }
 
 .navigation {
+  display: flex;
+  justify-content: center;
+
 	background-color: var(--color-tertiary);
 	padding-top: calc(var(--flow-space) / 2);
 	a,
